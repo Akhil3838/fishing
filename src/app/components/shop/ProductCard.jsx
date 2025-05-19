@@ -65,7 +65,7 @@ const ProductCard = ({ product }) => {
         <a
           className="add-to-cart"
           href="#"
-                           onClick={() => handleAddToCart(product.id, product.sku_new
+           onClick={() => handleAddToCart(product.id, product.sku_new
 [0].id)}
 
         >

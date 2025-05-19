@@ -27,7 +27,7 @@ const ProductListItem = ({ product }) => {
             <p>{product.short_description}</p>
             <div className="listing-meta">
               <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-               <Link  className="view"href={`/productDetails/${product?.slug}`}>
+               <Link  className="view" href={`/productDetails/${product?.slug}`}>
           <i className="nss-eye1"></i>
           </Link>
               {/* <a href="single-product.html" className="view"></a> */}

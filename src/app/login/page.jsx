@@ -97,7 +97,7 @@ function Login() {
             </button>
           </form>
           <p className="privacy-link">
-            Don't have an account? <Link href="/register">Sign Up</Link>
+            Dont have an account? <Link href="/register">Sign Up</Link>
           </p>
         </div>
   
