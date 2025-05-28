@@ -75,8 +75,10 @@ export const addToCartApi =async(reqBody,reqHeader)=>{
 }
 //view cart items
 
-export const getCartApi =async(reqHeader)=>{
-    return await commonApi('GET',`${serverUrl}/fetch-cart`,"",reqHeader)
+export const getCartApi =async(reqBody,reqHeader)=>{
+    console.log(reqBody);
+    
+    return await commonApi('POST',`${serverUrl}/fetch-cart`,reqBody,reqHeader)
 }
 
 //remove cart
@@ -196,6 +198,20 @@ export const ContactApi =async(reqBody)=>{
 export const imageApi =async()=>{
     return await commonApi('GET',`${serverUrl}/banner-list`,"","")
 }
+
+// new products categorywise (home)
+
+export const NewproctApi =async(category)=>{
+    return await commonApi('GET',`${serverUrl}/get-categorised-product/${category}`,"","")
+}
+
+// Hot product(home)
+
+export const HotproductApi =async()=>{
+    return await commonApi('GET',`${serverUrl}/trending-products`,"","")
+}
+
+
 
 
 

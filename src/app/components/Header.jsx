@@ -1,22 +1,58 @@
-'use client'; // Required if you're using app directory in Next.js 13+
+'use client';
 
-import React, { useEffect, useState } from 'react';
-import { logoutApi } from '../services/allApi';
-import { useRouter } from 'next/navigation'; // next/router is deprecated in App Router
+import React, { useContext, useEffect, useState } from 'react';
+import { getCartApi, logoutApi } from '../services/allApi';
+import { useRouter } from 'next/navigation';
+import { addResponseContext, deleteCartResponseContext} from '../context/Contextshare';
+
 
 function Header() {
   const [token, setToken] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
   const router = useRouter();
+     const { deleteCartResponse } = useContext(deleteCartResponseContext);
+     const {addCartResponse} =useContext(addResponseContext)
+     
+ 
+  // ✅ Define cartItem function at the component level
+  const cartItem = async () => {
 
+      let browserId = localStorage.getItem("browser_id");
+  
+  if (!browserId) {
+    browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("browser_id", browserId);
+  }
+
+
+  const formData = new FormData();
+  formData.append("session_id", browserId);
+
+    const token = sessionStorage.getItem("token");
+    const reqHeader = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      const result = await getCartApi(formData,reqHeader);
+      console.log("API Response:", result.data);
+
+      setCartCount(result.data.cartItems.length); // adjust based on your API response
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
+
+  // ✅ Set token & fetch cart on mount
   useEffect(() => {
-    // Only run in the browser
     const storedToken = sessionStorage.getItem('token');
     setToken(storedToken);
-  }, []);
+    cartItem();
+  }, [deleteCartResponse,addCartResponse]);
 
+  // ✅ Logout handler
   const handleLogout = async (e) => {
     e.preventDefault();
-
     const reqHeader = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -70,7 +106,7 @@ function Header() {
               <div className="access-btn">
                 <a href="#" className="btn-search"><i className="nss-search1"></i></a>
                 <a href="/account" className="btn-user"><i className="nss-user1"></i></a>
-                <a href="/cart" className="btn-cart"><i className="nss-shopping-cart1"></i><span>1</span></a>
+                <a href="/cart" className="btn-cart"><i className="nss-shopping-cart1"></i><span>{cartCount}</span></a>
               </div>
             </nav>
           </div>

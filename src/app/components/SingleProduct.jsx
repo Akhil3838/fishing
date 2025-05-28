@@ -19,6 +19,52 @@ function SingleProduct({ product, variants }) {
     return () => clearInterval(interval);
   }, [img?.images, isAutoPlaying]);
 
+  // add to cart
+  const handleAddToCart = async (product_id, sku_id) => {
+    const token = sessionStorage.getItem("token");
+  
+    // Generate browser_id if it doesn't exist
+    if (!localStorage.getItem("browser_id")) {
+      const browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+      localStorage.setItem("browser_id", browserId);
+    }
+    const browserId = localStorage.getItem("browser_id");
+    console.log(browserId);
+    
+  
+    const formData = new FormData();
+    formData.append("product_id", product_id);
+    formData.append("quantity", 1);
+    formData.append("sku_id", sku_id);
+    formData.append("session_id", browserId);
+  
+  
+    const reqHeader = {};
+    if (token) {
+      reqHeader.Authorization = `Bearer ${token}`;
+    }
+  
+    try {
+      
+      console.log(formData);
+      
+      const result = await addToCartApi(formData, reqHeader);
+      console.log("Cart Response:", result);
+      if (result.status === 200) {
+            setAddcartResponse(result.data)
+  
+      }
+       
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart!", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "colored",
+      });
+    }
+  };
+  
   // Group variant options by attribute_name
   const groupedVariants = variants.reduce((acc, curr) => {
     if (!acc[curr.attribute_name]) {
@@ -142,13 +188,14 @@ console.log(product);
               </div>
             ))}
 
-            <div className="quantityd clearfix">
+            {/* <div className="quantityd clearfix">
               <button className="qtyBtn btnMinus"><span>-</span></button>
               <input name="qty" defaultValue="2" title="Qty" className="input-text qty text carqty" type="text" />
               <button className="qtyBtn btnPlus"><span>+</span></button>
-            </div>
+            </div> */}
             <div className="listing-meta">
-              <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
+              <a className="add-to-cart" href="/cart"   onClick={() => handleAddToCart(product.id, product.sku_new
+[0].id)}><i className="nss-shopping-cart1"></i>Add To Cart</a>
               {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
             </div>
             <div className="metatext"><span>Category:</span> <a href="#">{product?.category

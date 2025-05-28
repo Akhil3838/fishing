@@ -1,57 +1,68 @@
+import { addResponseContext } from '@/app/context/Contextshare';
 import { addToCartApi } from '@/app/services/allApi'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
 const ProductCard = ({ product }) => {
-  const [addCartResponse, setAddcartResponse] = useState(null)
-  const [pendingCartItem, setPendingCartItem] = useState(null)
+const {setAddcartResponse} =useContext(addResponseContext)
 
-  const handleAddToCart = async ( product_id, sku_id) => {
-    const token = sessionStorage.getItem("token");
+const handleAddToCart = async (product_id, sku_id) => {
+  const token = sessionStorage.getItem("token");
 
-    // if (!token) {
-    //   setPendingCartItem({ product_id, sku_id });
-    //   toast.error("Please login to add to cart!", {
-    //     position: "top-center",
-    //     autoClose: 2000,
-    //     theme: "colored",
-    //   });
-    //   return;
-    // }
+  // Generate browser_id if it doesn't exist
+  if (!localStorage.getItem("browser_id")) {
+    const browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("browser_id", browserId);
+  }
+  const browserId = localStorage.getItem("browser_id");
+  console.log(browserId);
+  
 
-    const formData = new FormData();
-    formData.append("product_id", product_id);
-    formData.append("quantity", 1);
-    formData.append("sku_id", sku_id);
+  const formData = new FormData();
+  formData.append("product_id", product_id);
+  formData.append("quantity", 1);
+  formData.append("sku_id", sku_id);
+  formData.append("session_id", browserId);
 
-    const reqHeader = {
-      Authorization: `Bearer ${token}`,
-    };
 
-    try {
-      
-      const result = await addToCartApi(formData, reqHeader);
-      console.log("Cart Response:", result);
-      if (result.status === 200) {
-        // setAddcartResponse(result.data);
-        toast.success("Item added successfully!", {
-          position: "top-center",
-          autoClose: 1000,
-          theme: "colored",
-        });
-      }
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-      toast.error("Failed to add item to cart!", {
-        position: "top-center",
-        autoClose: 3000,
-        theme: "colored",
-      });
+  const reqHeader = {};
+  if (token) {
+    reqHeader.Authorization = `Bearer ${token}`;
+  }
+
+  try {
+    
+    console.log(formData);
+    
+    const result = await addToCartApi(formData, reqHeader);
+    console.log("Cart Response:", result);
+    if (result.status === 200) {
+          setAddcartResponse(result.data)
+
+      // toast.success("Item added successfully!", {
+      //   position: "top-center",
+      //   autoClose: 3000,
+      //   theme: "colored",
+      // });
+              // setTimeout(() => router.push('/cart'), 2000);
+
+
+     
     }
-  };
+     
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    toast.error("Failed to add item to cart!", {
+      position: "top-center",
+      autoClose: 3000,
+      theme: "colored",
+    });
+  }
+};
+
 
   return (
     <div className="product-item-1 text-center">
@@ -64,7 +75,7 @@ const ProductCard = ({ product }) => {
         </div>
         <a
           className="add-to-cart"
-          href="#"
+          href="/cart"
            onClick={() => handleAddToCart(product.id, product.sku_new
 [0].id)}
 
@@ -88,7 +99,7 @@ const ProductCard = ({ product }) => {
           <span className="price"><span><span>$</span>{product?.sku_new[0].special_price.toFixed(2)}</span></span>
         </div>
       </div>
-            <ToastContainer />
+       <ToastContainer/>
 
     </div>
   );

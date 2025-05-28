@@ -6,8 +6,35 @@ import Tophead from "./components/Tophead";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import CategoryHome from "./components/CategoryHome";
+import Newproducts from "./components/Newproducts";
+import { useEffect, useState } from "react";
+import { allCategoryApi } from "./services/allApi";
+import Hotproduct from "./components/Hotproduct";
+
+
 
 export default function Home() {
+ const [category, setCategory] = useState([]);
+  const [activeCategory, setActiveCategory] = useState('');
+  
+  useEffect(() => {
+    const getCategory = async () => {
+      try {
+        const result = await allCategoryApi();
+        const categories = result.data.data || [];
+        setCategory(categories);
+        
+        // Set first category as active after categories are loaded
+        if (categories.length > 0) {
+          setActiveCategory(categories[0].slug);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    getCategory();
+  }, []);  
+  
   return (
     <>
     
@@ -94,582 +121,45 @@ export default function Home() {
 {/* Category End */}
 
 {/* <!-- Product Start --> */}
-        <section className="product-section-2">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        <h2 className="sec_titles">New Products</h2>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        {/* <!-- Product Tab Start --> */}
-                        <div className="product-tab-area">
-                            {/* <!-- Tab Title Start --> */}
-                            <ul className="product-tab-title nav nav-tabs text-center">
-                                <li><a className="active" href="#all" data-toggle="tab">All</a></li>
-                                <li><a href="#landing" data-toggle="tab">Landing Net</a></li>
-                                <li><a href="#reels" data-toggle="tab" className="">Fishing Reels</a></li>
-                                <li><a href="#baitcasting" data-toggle="tab" className="">Baitcasting</a></li>
-                                <li><a href="#pliers" data-toggle="tab">Pliers</a></li>
-                            </ul>
-                            {/* <!-- Tab Title End --> */}
-                            {/* <!-- Tab Content Start --> */}
-                            <div className="tab-content">
-                            {/* <!-- All Tab --> */}
-                         <div className="tab-pane fade show in active" id="all" role="tabpanel">
-    <div className="row">
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/1.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a>
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="/productDetails">Fishing Retractable</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>40.00</span></span></div>
-                </div>
+{/* <!-- Product Start --> */}
+  <section className="product-section-2">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 text-center">
+              <h2 className="sec_titles">New Products</h2>
             </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/2.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="/productDetails" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Fishing Reels</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>120.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/3.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Net Fishing Nets</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>10.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/4.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Telescoping Pole Handle</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>43.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/5.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Telescopic Fishing</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>67.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/6.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Fishing Foldable</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/7.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Durable Nylon Mesh</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/8.png" alt="product"/>
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Safe Fish Catching</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>34.00</span></span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-                            </div>
-                            {/* <!-- All Tab --> */}
-                              {/* <!-- Landing Tab --> */}
-                          <div className="tab-pane fade in" id="landing" role="tabpanel">
-  <div className="row">
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/5.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
           </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Telescopic Fishing</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>67.00</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/6.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Fishing Foldable</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/7.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Durable Nylon Mesh</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/8.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Safe Fish Catching</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>34.00</span></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-                        </div>
-                         {/* <!-- Landing Tab --> */}
-
-
-                                {/* <!-- Reels Tab --> */}
-                          <div className="tab-pane fade in" id="reels" role="tabpanel">
-  <div className="row">
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/1.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Fishing Retractable</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>40.00</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/2.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Fishing Reels</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>120.00</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/3.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Net Fishing Nets</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>10.00</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="product-item-1 text-center">
-        <div className="product-thumb">
-          <img src="assets/images/product/4.png" alt="product" />
-          <div className="product-meta">
-            <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-            {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-          </div>
-          <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-        </div>
-        <div className="product-details">
-          <h5><a href="single-product.html">Telescoping Pole Handle</a></h5>
-          <div className="ratings">
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <i className="icon_star_alt"></i>
-            <span>( 1 )</span>
-          </div>
-          <div className="product_price clearfix"><span className="price"><span><span>$</span>43.00</span></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-                         </div>
-                           {/* <!-- Reels Tab --> */}
-
-                               {/* <!-- Baitcasting Tab --> */}
-                         <div className="tab-pane fade in" id="baitcasting" role="tabpanel">
-    <div className="row">
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/5.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Telescopic Fishing</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>67.00</span></span></div>
-                </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="product-tab-area">
+                <ul className="product-tab-title nav nav-tabs text-center">
+                  {category.length > 0 ? (
+                    category.map((item) => (
+                      <li key={item.id || item.slug}>
+                        <a 
+                          className={activeCategory === item.slug ? "active" : ""} 
+                          href={`#${item.slug}`} 
+                          data-toggle="tab"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setActiveCategory(item.slug);
+                          }}
+                        >
+                          {item.category_name}
+                        </a>
+                      </li>
+                    ))
+                  ) : (
+                    <li><a href="/" data-toggle="tab">home</a></li>
+                  )}
+                </ul>
+                <Newproducts activeCategory={activeCategory} />
+              </div>
             </div>
+          </div>
         </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/6.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Fishing Foldable</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/7.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Durable Nylon Mesh</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/8.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Safe Fish Catching</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>34.00</span></span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-                        </div>
-                           {/* <!-- Baitcasting Tab --> */}
-
-
-                               {/* <!-- Pliers Tab --> */}
-                          <div className="tab-pane fade in" id="pliers" role="tabpanel">
-    <div className="row">
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/1.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Fishing Retractable</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>40.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/2.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Fishing Reels</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>120.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/3.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Net Fishing Nets</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix"><span className="price"><span><span>$</span>10.00</span></span></div>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-            <div className="product-item-1 text-center">
-                <div className="product-thumb">
-                    <img src="assets/images/product/4.png" alt="product" />
-                    <div className="product-meta">
-                        <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                        {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-                    </div>
-                    <a className="add-to-cart" href="cart.html"><i className="nss-shopping-cart1"></i>Add To Cart</a>
-                </div>
-                <div className="product-details">
-                    <h5><a href="single-product.html">Telescoping Pole Handle</a></h5>
-                    <div className="ratings">
-                        <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                    </div>
-                    <div className="product_price clearfix">
-                        <span className="price">
-                            <span className="woocommerce-Price-amount amount">
-                                <span className="woocommerce-Price-currencySymbol">$</span>
-                                36.00
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-                           </div>
-                         {/* <!-- Pliers Tab --> */}
-
-
-                            </div>
-                        </div>
-                        {/* <!-- Product Tab Start --> */}
-                    </div>
-                </div>
-            </div>
-        </section>
-        {/* <!-- Product End --> */}
+      </section>
+   {/* <!-- Product End --> */}
 
         {/* <!-- About Start --> */}
 <section className="about-section">
@@ -856,151 +346,14 @@ export default function Home() {
                 <h2 className="sec_titles">Hot Item</h2>
             </div>
             <div className="col-md-6 text-right">
-                <a href="shop-1.html" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
+                <a href="/shopping" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
             </div>
         </div>
-        <div className="row">
-            <div className="col-lg-12">
-                <div className="popular-slider owl-carousel">
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/1.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Fishing Retractable</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>40.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/2.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Fishing Reels</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>120.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/3.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Net Fishing Nets</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>10.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div> 
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/4.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Telescoping Pole Handle</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>43.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/5.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Telescopic Fishing</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>67.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/6.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Fishing Foldable</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/7.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Durable Nylon Mesh</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>65.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-item-2 text-center">
-                        <div className="product-thumb">
-                            <img src="assets/images/product/8.png" alt="image"/>
-                        </div>
-                        <div className="product-details">
-                            <h5><a href="single-product.html">Safe Fish Catching</a></h5>
-                            <div className="ratings">
-                                <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>
-                            </div>
-                            <div className="product_price clearfix"><span className="price"><span><span>$</span>34.00</span></span></div>
-                            <div className="product-meta">
-                                <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-                                {/* <a href="wishlist.html" className="wishlist"><i className="nss-heart1"></i></a> */}
-                                <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+<Hotproduct/>
+
+
     </div>
 </section>
 {/* <!-- Hot End --> */}

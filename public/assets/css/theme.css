@@ -3145,10 +3145,10 @@ footer .widget.widget_mc4wp_form_widget{
     position: relative;
     text-align: center;
 }
-.sp_img img{
-    max-width: 100%;
-    width: auto;
-    max-height: 500px;
+.sp_img img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
 }
 .indicator-slider {
     position: relative;
@@ -5283,10 +5283,10 @@ blockquote:after {
   display: block;
 }
 
-.sp_img img {
+/* .sp_img img {
   width: 100%;
   height: 500px;
-}
+} */
 
 .indicator-slider {
   display: flex;
@@ -5331,4 +5331,122 @@ blockquote:after {
   .indicator-slider {
     padding-bottom: 5px; /* Give space for scroll if needed */
   }
+}
+/* ................................profile....................................................................................... */
+.sidebarr {
+  max-height: 400px; /* Adjust this height as needed */
+  overflow-y: auto; /* Enables scrolling if content overflows */
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.sidebarr {
+  position: sticky;
+  top: 80px; /* Adjust based on your navbar height */
+}
+
+.profile-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.address-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.address-card .btn {
+  font-size: 1rem;
+  padding: 5px;
+  background: none;
+}
+
+.address-card .btn:hover {
+  background: none;
+  transform: scale(1.1);
+}
+
+.edit-btn {
+  background-color: #ff3366;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.edit-btn:hover {
+  background-color: #e62e5c;
+}
+.overview-card {
+  background: white;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.overview-card i {
+  font-size: 2rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+.overview-card h6 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.overview-card p {
+  font-size: 0.875rem;
+  color: gray;
+  margin: 0;
+}
+.overview-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+.address-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+.address-card h6 {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+.address-card p {
+  margin: 0;
+  color: #555;
+}
+.address-card button {
+  margin-top: 0.75rem;
+  margin-right: 0.5rem;
+}
+.nav-link {
+  color: #555;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+.nav-link.active {
+  color: #28a745;
+  font-weight: bold;
+}
+.nav-link:hover {
+  color: #28a745;
+}
+.text-danger {
+  color: #dc3545 !important;
+}
+.text-danger:hover {
+  color: #c82333 !important;
 }

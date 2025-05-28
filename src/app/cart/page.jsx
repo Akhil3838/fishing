@@ -1,45 +1,64 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CartItem from '../components/cartitem/CartItem';
 import CartSidebar from '../components/cartitem/CartSidebar';
 import { getCartApi } from '../services/allApi';
+import { deleteCartResponseContext, updateResponseContext } from '../context/Contextshare';
 
 function Cart() {
+    const { deleteCartResponse } = useContext(deleteCartResponseContext);
+      const { updateCartResponse } = useContext(updateResponseContext);
+
+
   const [cart, setCart] = useState([]);
   const [summary, setSummary] = useState({ subTotal: "", total: "" });
 
-  const cartItem = async () => {
-    const token = sessionStorage.getItem("token");
-    const reqHeader = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    };
+const cartItem = async () => {
+  let browserId = localStorage.getItem("browser_id");
+  
+  if (!browserId) {
+    browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("browser_id", browserId);
+  }
 
-    try {
-      const result = await getCartApi(reqHeader);
-      console.log("API Response:", result.data);
 
-      if (result.data && result.data.cartItems.length > 0) {
-        setCart(result.data.cartItems);
-        setSummary({ 
-          subTotal: result.data.subTotal, 
-          total: result.data.total 
-        });
-      } else {
-        setCart([]);
-        setSummary({ subTotal: "", total: "" });
-      }
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
+  const formData = new FormData();
+  formData.append("session_id", browserId);
+  
+
+  const token = sessionStorage.getItem("token");
+  const reqHeader = {
+    "Authorization": `Bearer ${token}`
+    // Remove Content-Type when sending FormData; let the browser set it
   };
+
+  try {
+    const result = await getCartApi(formData, reqHeader);
+    console.log("API Response:", result.data);
+
+    if (result.data && result.data.cartItems.length > 0) {
+      setCart(result.data.cartItems);
+      setSummary({ 
+        subTotal: result.data.subTotal, 
+        total: result.data.total 
+      });
+    } else {
+      setCart([]);
+      setSummary({ subTotal: "", total: "" });
+    }
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+  }
+};
 console.log(cart);
+console.log(summary);
+
 
   useEffect(() => {
     cartItem();
-  }, []);
+  }, [deleteCartResponse,updateCartResponse]);
 
   return (
     <>

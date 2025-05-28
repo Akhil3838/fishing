@@ -27,9 +27,20 @@ function Login() {
       toast.error('Please fill in all fields.');
       return;
     }
+      if (!localStorage.getItem("browser_id")) {
+    const browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("browser_id", browserId);
+  }
+  const session_id= localStorage.getItem("browser_id");
+  console.log(session_id);
+
 
     try {
-      const result = await loginApi({ email, password });
+
+      console.log(password);
+      
+      
+      const result = await loginApi({ email, password,session_id });
         console.log(result);
         
       if (result.status === 200) {

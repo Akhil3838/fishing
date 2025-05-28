@@ -19,12 +19,12 @@ function CategoryHome() {
 
   return (
     <>
-      <div className="row">
+      <div className="row container">
         <div className="col-lg-12">
-          <div className="cate-wrapper">
+          <div className="cate-wrapper p-5">
             {category.length > 0 ? (
               category.map((item) => (
-                <div className="cate-item-icon text-center" key={item._id}>
+                <div className="cate-item-icon text-center" key={item.id}>
                   <a href={`/shopping`} className='ct'>
                     <img src={item.icon} alt={item.category_name} style={{ width: "50px", height: "50px", objectFit: "contain" }} />
                   </a>
