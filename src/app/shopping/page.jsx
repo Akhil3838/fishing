@@ -49,6 +49,7 @@ function Shopping() {
   useEffect(() => {
     setPage(1) // Reset to first page when filters change
   }, [selectedCategories, selectedBrands])
+console.log(selectedCategories);
 
   // Fetch products when page or filters change
   useEffect(() => {
@@ -59,7 +60,13 @@ function Shopping() {
     <>
       <Header />
       <section className="shoppage-setion">
+
+
+
+        {/* Breadcrumb Section */}
         <div className="container">
+
+  
           <div className="row">
             <div className="col-lg-3 col-md-6">
               <ShopSidebar 

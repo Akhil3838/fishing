@@ -2773,14 +2773,14 @@ footer .widget.widget_mc4wp_form_widget{
     margin: 60px 0 0;
 }
 .fishto-pagination a, .fishto-pagination span {
-    font-size: 20px;
+    font-size: 15px;
     color: #0D1F35;
     letter-spacing: 0;
-    line-height: 60px;
+    line-height: 40px;
     background: #F2F7FF;
     font-weight: 500;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 5px;
     text-align: center;
     display: inline-block;
@@ -2882,7 +2882,7 @@ footer .widget.widget_mc4wp_form_widget{
     font-family: inherit;
 }
 .shop-sidebar .widget{
-    margin: 0 0 65px;
+    margin: 0 0 5px;
     padding: 0;
 }
 .shop-sidebar .widget .widget-title{
@@ -2966,9 +2966,9 @@ footer .widget.widget_mc4wp_form_widget{
     color: #282932;
     opacity: .7;
     width: 100%;
-    border-bottom: 1px solid rgba(65, 44, 197, .2);
+    /* border-bottom: 1px solid rgba(65, 44, 197, .2); */
     padding: 0 0 0;
-    margin: 0 0 16px;
+    /* margin: 0 0 5px; */
 }
 .shop-sidebar .widget ul li:first-child {
     padding-top: 1px;
@@ -5193,7 +5193,7 @@ blockquote:after {
 }
 
 .widget {
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 
 .widget-title {

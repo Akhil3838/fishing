@@ -51,7 +51,9 @@ function Login() {
           theme: 'colored',
         });
 
-        setTimeout(() => router.push('/'), 2000);
+       setTimeout(() => {
+  window.location.href = '/'; // Forces full reload of homepage
+}, 2000);
       } else {
         toast.error('Invalid password or email!', {
           position: 'top-center',
@@ -72,13 +74,13 @@ function Login() {
 <>
       <div className="container">
         <div className="login-box text-center">
-          <Link href="/">
+        
             <img
               src="assets/images/logo/log2.png"
               alt="Cabral Outdoors Logo"
               className="logo"
+               onClick={() => window.location.href = '/'}
             />
-          </Link>
           <h4 className="mb-3">Log in</h4>
           <form onSubmit={handleSubmit}>
             <div className="mb-3 text-start">

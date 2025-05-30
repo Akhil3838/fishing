@@ -63,8 +63,10 @@ function Register() {
     <>
       <div className="container">
         <div className="login-box text-center">
-          <img src="assets/images/logo/log2.png" alt="Cabral Outdoors Logo" className="logo" />
-          <h4 className="mb-3">Sign Up</h4>
+
+            <img src="assets/images/logo/log2.png" alt="Cabral Outdoors Logo" className="logo"  onClick={() => window.location.href = '/'} />
+  
+     <h4 className="mb-3">Sign Up</h4>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3 text-start">

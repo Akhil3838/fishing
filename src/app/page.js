@@ -16,7 +16,7 @@ import Hotproduct from "./components/Hotproduct";
 export default function Home() {
  const [category, setCategory] = useState([]);
   const [activeCategory, setActiveCategory] = useState('');
-  
+        
   useEffect(() => {
     const getCategory = async () => {
       try {
@@ -40,27 +40,6 @@ export default function Home() {
     
     {/* <Tophead/> */}
     <Header/>
-    {/* <!-- Popup Search Start --> */}
-<section className="popup_search_sec">
-  <div className="popup_search_overlay"></div>
-  <div className="pop_search_background">
-    <div className="middle_search">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 text-center">
-            <div className="popup_search_form">
-              <form method="get" action="#">
-                <input type="search" name="s" id="s" placeholder="Type Words and Hit Enter" />
-                <button type="submit"><i className="nss-search1"></i></button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{/* <!-- Popup Search End --> */}
 
 {/* {/* <!-- Hero Banner Start --> */}
 <Banner/>

@@ -51,11 +51,11 @@ const ShopSidebar = ({
 
       {/* Categories */}
       <aside className="widget">
-        <h3 className="widget-title">Categories</h3>
+        <h3 className="widget-title mt-3">Categories</h3>
         <ul className="category-list">
           {categories.length > 0 ? (
             categories.map((cat) => (
-              <li key={cat.id} className="category-item">
+              <li key={cat.id} className="category-item" >
                 <label className="category-label">
                   <input
                     type="checkbox"

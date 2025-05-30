@@ -38,6 +38,8 @@ export const getAllProduct = async (page = 1, category, brand, reqHeader) => {
 
 //add-review
 export const addReviewApi =async(reqBody,reqHeader)=>{
+    console.log(reqBody);
+    
     return await commonApi('POST',`${serverUrl}/add-review`,reqBody,reqHeader)
 }
 

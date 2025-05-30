@@ -71,49 +71,77 @@ function Header() {
   };
 
   return (
-    <header className="header-01 h2 head-sticky">
-      <div className="container-fluid">
+<>
+      <header className="header-01 h2 head-sticky">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-12">
+              <nav className="navbar navbar-expand-lg">
+                <a className="navbar-brand" href="/">
+                  <img src="assets/images/logo/logo01.png" alt="" />
+                </a>
+  
+                <button className="navbar-toggler" type="button">
+                  <i className="nss-bars1"></i>
+                </button>
+  
+                <div className="collapse navbar-collapse">
+                  <ul className="navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shopping">Shop</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    {token ? (
+                      <li>
+                        <a href="" onClick={handleLogout}>Logout</a>
+                      </li>
+                    ) : (
+                      <li>
+                        <a href="/login">Login</a>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+  
+                <div className="access-btn">
+                  <a href="#" className="btn-search"><i className="nss-search1"></i></a>
+  {token&& (
+    <a href="/profile" className="btn-user">
+      <i className="nss-user1"></i>
+    </a>
+  )}
+                  <a href="/cart" className="btn-cart"><i className="nss-shopping-cart1"></i><span>{cartCount}</span></a>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
+      {/* <!-- Popup Search Start --> */}
+<section className="popup_search_sec">
+  <div className="popup_search_overlay"></div>
+  <div className="pop_search_background">
+    <div className="middle_search">
+      <div className="container">
         <div className="row">
-          <div className="col-lg-12">
-            <nav className="navbar navbar-expand-lg">
-              <a className="navbar-brand" href="/">
-                <img src="assets/images/logo/logo01.png" alt="" />
-              </a>
-
-              <button className="navbar-toggler" type="button">
-                <i className="nss-bars1"></i>
-              </button>
-
-              <div className="collapse navbar-collapse">
-                <ul className="navbar-nav">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/shopping">Shop</a></li>
-                  <li><a href="/about">About</a></li>
-                  <li><a href="/blog">Blog</a></li>
-                  <li><a href="/contact">Contact</a></li>
-                  {token ? (
-                    <li>
-                      <a href="#" onClick={handleLogout}>Logout</a>
-                    </li>
-                  ) : (
-                    <li>
-                      <a href="/login">Login</a>
-                    </li>
-                  )}
-                </ul>
-              </div>
-
-              <div className="access-btn">
-                <a href="#" className="btn-search"><i className="nss-search1"></i></a>
-                <a href="/account" className="btn-user"><i className="nss-user1"></i></a>
-                <a href="/cart" className="btn-cart"><i className="nss-shopping-cart1"></i><span>{cartCount}</span></a>
-              </div>
-            </nav>
+          <div className="col-lg-12 text-center">
+            <div className="popup_search_form">
+              <form method="get" action="#">
+                <input type="search" name="s" id="s" placeholder="Type Words and Hit Enter" />
+                <button type="submit"><i className="nss-search1"></i></button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </header>
-  );
+    </div>
+  </div>
+</section>
+{/* <!-- Popup Search End --> */}
+
+</> 
+ );
 }
 
 export default Header;
