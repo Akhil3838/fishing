@@ -29,8 +29,8 @@ const ShopProducts = ({ totalPages, currentPage, onPageChange, products }) => {
           <div className="col-12 col-md-6">
             <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-md-end gap-3">
               <div className="d-flex align-items-center gap-2">
-                <span><strong>Compare</strong></span>
-                <div className="form-check form-switch">
+                {/* <span><strong>Compare</strong></span> */}
+                {/* <div className="form-check form-switch">
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -38,7 +38,7 @@ const ShopProducts = ({ totalPages, currentPage, onPageChange, products }) => {
                     id="compareSwitch"
                     defaultChecked
                   />
-                </div>
+                </div> */}
               </div>
 
               {/* View As (Click to toggle view mode) */}

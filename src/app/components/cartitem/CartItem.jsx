@@ -1,21 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
-// import { deleteCartApi, updateCartApi } from '../apis/cartApis'; // Adjust import paths accordingly
 import { toast } from 'react-toastify';
 import { deleteCartApi, updateCartApi } from '@/app/services/allApi';
 import { deleteCartResponseContext, updateResponseContext } from '@/app/context/Contextshare';
 
 function CartItem({ cart, setCart }) {
-  const [quantities, setQuantities] = useState(() => {
-    return JSON.parse(localStorage.getItem("quantities")) || {};
-  });
+  const [quantities, setQuantities] = useState({});
   const { setDeleteCartResponse } = useContext(deleteCartResponseContext);
-    const { setUpdateCartResponse } = useContext(updateResponseContext);
-
-
+  const { setUpdateCartResponse } = useContext(updateResponseContext);
   const [disabledItems, setDisabledItems] = useState([]);
   const [loadingItems, setLoadingItems] = useState([]);
 
+  // Load from localStorage on client only
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedQuantities = localStorage.getItem("quantities");
+      if (storedQuantities) {
+        setQuantities(JSON.parse(storedQuantities));
+      }
+    }
+  }, []);
+
+  // Update quantities from cart when cart changes
   useEffect(() => {
     if (cart?.length > 0) {
       const initialQuantities = {};
@@ -37,13 +43,16 @@ function CartItem({ cart, setCart }) {
 
     try {
       const result = await updateCartApi(formData, reqHeader);
-      setUpdateCartResponse(result.data)
+      setUpdateCartResponse(result.data);
       if (result.status === 200) {
         setDisabledItems(prev => prev.filter(itemId => itemId !== id));
         return true;
       } else if (result.status === 400) {
         setDisabledItems(prev => [...new Set([...prev, id])]);
-        toast.warning("Quantity limit exceeded!", { position: "bottom-center", autoClose: 1500 });
+        toast.warning("Quantity limit exceeded!", {
+          position: "bottom-center",
+          autoClose: 1500,
+        });
         return false;
       }
     } catch (error) {
@@ -92,9 +101,9 @@ function CartItem({ cart, setCart }) {
     const reqHeader = { Authorization: `Bearer ${token}` };
 
     try {
-      const result = await deleteCartApi (formData, reqHeader);
+      const result = await deleteCartApi(formData, reqHeader);
       if (result.status === 200) {
-        setDeleteCartResponse(result.data)
+        setDeleteCartResponse(result.data);
         toast.error("Deleted Successfully!", { position: "top-center", autoClose: 1000 });
         const updatedQuantities = { ...quantities };
         delete updatedQuantities[id];

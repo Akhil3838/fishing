@@ -8,57 +8,57 @@ import { getCartApi } from '../services/allApi';
 import { deleteCartResponseContext, updateResponseContext } from '../context/Contextshare';
 
 function Cart() {
-    const { deleteCartResponse } = useContext(deleteCartResponseContext);
-      const { updateCartResponse } = useContext(updateResponseContext);
-
+  const { deleteCartResponse } = useContext(deleteCartResponseContext);
+  const { updateCartResponse } = useContext(updateResponseContext);
 
   const [cart, setCart] = useState([]);
-  const [summary, setSummary] = useState({ subTotal: "", total: "" });
-
-const cartItem = async () => {
-  let browserId = localStorage.getItem("browser_id");
-  
-  if (!browserId) {
-    browserId = Date.now() + Math.random().toString(36).substr(2, 10);
-    localStorage.setItem("browser_id", browserId);
-  }
-
-
-  const formData = new FormData();
-  formData.append("session_id", browserId);
-  
-
-  const token = sessionStorage.getItem("token");
-  const reqHeader = {
-    "Authorization": `Bearer ${token}`
-    // Remove Content-Type when sending FormData; let the browser set it
-  };
-
-  try {
-    const result = await getCartApi(formData, reqHeader);
-    console.log("API Response:", result.data);
-
-    if (result.data && result.data.cartItems.length > 0) {
-      setCart(result.data.cartItems);
-      setSummary({ 
-        subTotal: result.data.subTotal, 
-        total: result.data.total 
-      });
-    } else {
-      setCart([]);
-      setSummary({ subTotal: "", total: "" });
-    }
-  } catch (error) {
-    console.error("Error fetching cart items:", error);
-  }
-};
-console.log(cart);
-console.log(summary);
-
+  const [summary, setSummary] = useState({ subTotal: '', total: '' });
+  const [browserId, setBrowserId] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    cartItem();
-  }, [deleteCartResponse,updateCartResponse]);
+    setIsClient(true);
+    if (typeof window !== 'undefined') {
+      let id = localStorage.getItem('browser_id');
+      if (!id) {
+        id = Date.now() + Math.random().toString(36).substr(2, 10);
+        localStorage.setItem('browser_id', id);
+      }
+      setBrowserId(id);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (!browserId) return;
+
+      const formData = new FormData();
+      formData.append('session_id', browserId);
+
+      const token = isClient ? sessionStorage.getItem('token') : null;
+      const reqHeader = token ? {
+        Authorization: `Bearer ${token}`,
+      } : {};
+
+      try {
+        const result = await getCartApi(formData, reqHeader);
+        if (result.data && result.data.cartItems.length > 0) {
+          setCart(result.data.cartItems);
+          setSummary({
+            subTotal: result.data.subTotal,
+            total: result.data.total,
+          });
+        } else {
+          setCart([]);
+          setSummary({ subTotal: '', total: '' });
+        }
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    };
+
+    fetchCart();
+  }, [browserId, deleteCartResponse, updateCartResponse, isClient]);
 
   return (
     <>
