@@ -42,12 +42,12 @@ const ShopSidebar = ({
   return (
     <div className="shop-sidebar">
       {/* Search */}
-      <aside className="widget widget-search">
+      {/* <aside className="widget widget-search">
         <form className="search-form" action="#" method="post">
           <input type="search" name="s" placeholder="Enter keyword" />
           <button type="submit" value="Search"><i className="nss-search"></i></button>
         </form>
-      </aside>
+      </aside> */}
 
       {/* Categories */}
       <aside className="widget">

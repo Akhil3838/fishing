@@ -4,9 +4,7 @@ import Contextshare from "./context/Contextshare";
 export const metadata = {
   title: "Scaless",
   description: "fish is the best",
-  icons: {
-    icon: "/assets/images/logo/logo01.png", // ✅ Make sure this file exists in /public/assets/images/logo/
-  },
+ 
 };
 
 export default function RootLayout({ children }) {
@@ -32,6 +30,8 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/lightcase.css" />
         <link rel="stylesheet" href="/assets/css/theme.css" />
         <link rel="stylesheet" href="/assets/css/responsive.css" />
+                <link rel="shortcut icon" type="image/x-icon" href="/assets/images/logo/logo01.png"/>
+
 
         {/* FontAwesome CDN */}
         <link

@@ -1,8 +1,5 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
 import Header from "./components/Header";
-import Tophead from "./components/Tophead";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import CategoryHome from "./components/CategoryHome";

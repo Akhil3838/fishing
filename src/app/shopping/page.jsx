@@ -60,12 +60,26 @@ console.log(selectedCategories);
     <>
       <Header />
       <section className="shoppage-setion">
+{/* Breadcrumb Section */}
+<section className="breadcrumb-section py-2">
+  <div className="container">
+    <div className="d-flex justify-content-between align-items-center">
+      {/* <h4 className="mb-0 fw-bold">Shop</h4> */}
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb mb-0">
+          <li className="breadcrumb-item"><a href="/" className="text-decoration-none">Home</a></li>
+          <li className="breadcrumb-item active" aria-current="page">Shop</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
 
 
 
         {/* Breadcrumb Section */}
         <div className="container">
-
+            
   
           <div className="row">
             <div className="col-lg-3 col-md-6">

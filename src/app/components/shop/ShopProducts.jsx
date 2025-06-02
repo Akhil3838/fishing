@@ -8,7 +8,7 @@ const ShopProducts = ({ totalPages, currentPage, onPageChange, products }) => {
 
   return (
     <>
-      <div className="bg-ligh rounded p-3 mb-3">
+      <div className="bg-ligh rounded p-3 mb-3 border-bottom border-2">
         <div className="row align-items-center gy-3">
           {/* Left Controls: Filter and Sort */}
           <div className="col-12 col-md-6">
