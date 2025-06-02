@@ -9,34 +9,34 @@ function SelectAddress({ onSelectAddress }) {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    phone: "",
-    address: "",
-    city: "",
-    pincode: "",
-    state: "",
-    country: "",
+    id: "", name: "", phone: "", address: "", city: "", pincode: "", state: "", country: "",
   });
-
-  const token = sessionStorage.getItem("token");
+  const [token, setToken] = useState(null); // ✅ state to hold token
 
   useEffect(() => {
-    fetchAddresses();
+    if (typeof window !== "undefined") {
+      const storedToken = sessionStorage.getItem("token");
+      setToken(storedToken);
+    }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      fetchAddresses();
+    }
+  }, [token]);
 
   const fetchAddresses = async () => {
     try {
       const reqHeader = { Authorization: `Bearer ${token}` };
       const response = await getAlladdressApi(reqHeader);
-//   console.log(response);
-  
+
       if (response.status === 200) {
         setAddresses(response.data.addressList);
         if (response.data.addressList.length > 0) {
           const firstAddressId = response.data.addressList[0].id;
           setSelectedAddress(firstAddressId);
-          onSelectAddress(firstAddressId); // Call onSelectAddress with the first address ID
+          onSelectAddress(firstAddressId);
         }
       }
     } catch (error) {
@@ -54,22 +54,15 @@ function SelectAddress({ onSelectAddress }) {
       const reqHeader = { Authorization: `Bearer ${token}` };
       let requestData = { ...formData };
 
-      if (isEditing) {
-        requestData.address_id = formData.id;
-      }
+      if (isEditing) requestData.address_id = formData.id;
 
-      let response;
-      if (isEditing) {
-        response = await updateAddressApi(requestData, reqHeader);
-      } else {
-        response = await addAddressApi(requestData, reqHeader);
-      }
+      const response = isEditing
+        ? await updateAddressApi(requestData, reqHeader)
+        : await addAddressApi(requestData, reqHeader);
 
       if (response.status === 200) {
         toast.success(isEditing ? "Address updated successfully!" : "Address saved successfully!", {
-          position: "top-center",
-          autoClose: 1000,
-          theme: "colored",
+          position: "top-center", autoClose: 1000, theme: "colored",
         });
         setFormData({ id: "", name: "", phone: "", address: "", city: "", pincode: "", state: "", country: "" });
         fetchAddresses();
@@ -97,14 +90,12 @@ function SelectAddress({ onSelectAddress }) {
     });
 
     setIsEditing(true);
-    const modal = new bootstrap.Modal(document.getElementById("addressModal"));
-    modal.show();
+    new bootstrap.Modal(document.getElementById("addressModal")).show();
   };
 
   const removeAddress = async (id) => {
     try {
       const reqHeader = { Authorization: `Bearer ${token}` };
-
       const formData = new FormData();
       formData.append("address_id", id);
 
@@ -124,14 +115,13 @@ function SelectAddress({ onSelectAddress }) {
 
   const handleAddressSelection = (addressId) => {
     setSelectedAddress(addressId);
-    onSelectAddress(addressId); // Call onSelectAddress with the selected address ID
+    onSelectAddress(addressId);
   };
 
   return (
     <>
       <div>
         <h4 className="fw-bold">Select Delivery Address</h4>
-
         {addresses.length > 0 ? (
           addresses.map((address, index) => (
             <div key={index} className="mb-3 p-3 border rounded">
@@ -168,7 +158,7 @@ function SelectAddress({ onSelectAddress }) {
         </div>
       </div>
 
-      {/* Bootstrap Modal for Adding/Editing Address */}
+      {/* Modal */}
       <div className="modal fade" id="addressModal" tabIndex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content p-3 rounded">
