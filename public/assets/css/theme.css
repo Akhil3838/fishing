@@ -5795,13 +5795,21 @@ blockquote:after {
     display: none;
   }
 
-  .dropdown .dropbtn::after {
+  /* .dropdown .dropbtn::after {
     content: " ▸";
     float: right;
-  }
+  } */
 
   .dropdown .dropbtn:focus + .dropdown-content,
   .dropdown .dropbtn:hover + .dropdown-content {
     display: block;
   }
+}
+
+@media (min-width: 1200px) {
+    .h2, h2 {
+        font-size: .8rem
+
+;
+    }
 }
