@@ -98,8 +98,7 @@ export default function Home() {
 </section>
 {/* Category End */}
 
-{/* <!-- Product Start --> */}
-{/* <!-- Product Start --> */}
+{/* <!-- new Product Start --> */}
   <section className="product-section-2">
         <div className="container">
           <div className="row">
@@ -234,7 +233,7 @@ export default function Home() {
       </div>
 
       {/* Product Item 1 */}
-      <div className="col-lg-3 col-md-6">
+      <div className="col-lg-3 col-md-6 ">
         <div className="product-item-2 text-center">
           <div className="product-thumb">
             <img src="assets/images/d5.png" alt="image" />

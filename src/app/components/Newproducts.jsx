@@ -37,7 +37,7 @@ function Newproducts({ activeCategory }) {
           <div className="row">
             {products.length > 0 ? (
               products.map((product, index) => (
-                <div className="col-lg-3 col-md-6" key={index}>
+                <div className="col-6 col-md-6 col-lg-3" key={index}>
                   <div className="product-item-1 text-center">
                     <div className="product-thumb">
                       <img

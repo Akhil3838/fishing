@@ -5767,6 +5767,10 @@ blockquote:after {
   left: 320px;
 }
 
+.dropdown-link{
+    font-size: 12px;
+}
+
 
 
   .nav-menu {
@@ -5854,10 +5858,10 @@ blockquote:after {
     padding-left: 2rem;
   }
   
-  .dropbtn::after {
+  /* .dropbtn::after {
     content: '▾';
     float: right;
-  }
+  } */
 }
 
 /* Search Bar Styles */

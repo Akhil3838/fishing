@@ -17,7 +17,7 @@ function Hotproduct() {
     <div className="row">
       {products.length > 0 ? (
         products.map((product, index) => (
-          <div className="col-md-3 mb-4" key={index}>
+<div className="col-6 col-md-3 mb-4" key={index}>
             <div className="product-item-2 text-center">
               <div className="product-thumb">
                 <img src={product?.icon} alt="product" className="img-fluid" />

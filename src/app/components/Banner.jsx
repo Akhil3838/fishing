@@ -14,8 +14,8 @@ function Banner() {
                 <div className="col-lg-12">
                   <div className="slider-content">
                     <h5 className="sub-title animated">Smart insurance <span></span></h5>
-                    <h2 className="animated">Education Is Important, But Fishing Is Importanter</h2>
-                    <a href="contact.html" className="fishto-btn animated">Get A Quote <i className="nss-long-arrow-right1"></i></a>
+                         <h2 className="animated">Born to Fish, Forced to Work</h2>
+                    {/* <a href="contact.html" className="fishto-btn animated">Get A Quote <i className="nss-long-arrow-right1"></i></a> */}
                     <a href="shop-1.html" className="fishto-btn sb2 animated">Shop Now <i className="nss-long-arrow-right1"></i></a>
                   </div>
                 </div>
@@ -28,8 +28,9 @@ function Banner() {
                 <div className="col-lg-12">
                   <div className="slider-content">
                     <h5 className="sub-title animated">Fish Keeper <span></span></h5>
-                    <h2 className="animated">Education Is Important, But Fishing Is Importanter</h2>
-                    <a href="contact.html" className="fishto-btn animated">Get A Quote <i className="nss-long-arrow-right1"></i></a>
+                     <h2 className="animated">Keep calm and fish on</h2>
+
+                    {/* <a href="contact.html" className="fishto-btn animated">Get A Quote <i className="nss-long-arrow-right1"></i></a> */}
                     <a href="shop-1.html" className="fishto-btn sb2 animated">Shop Now <i className="nss-long-arrow-right1"></i></a>
                   </div>
                 </div>
@@ -42,9 +43,9 @@ function Banner() {
                 <div className="col-lg-12">
                   <div className="slider-content">
                     <h5 className="sub-title animated">Smart insurance <span></span></h5>
-                    <h2 className="animated">Education Is Important, But Fishing Is Importanter</h2>
-                    {/* <a href="contact.html" className="fishto-btn animated">Get A Quote <i className="nss-long-arrow-right1"></i></a>
-                    <a href="shop-1.html" className="fishto-btn sb2 animated">Shop Now <i className="nss-long-arrow-right1"></i></a> */}
+                    <h2 className="animated">Cast. Catch. Repeat.</h2>
+                    {/* <a href="contact.html" className="fishto-btn animated">Get A Quote <i className="nss-long-arrow-right1"></i></a>*/}
+                    <a href="shop-1.html" className="fishto-btn sb2 animated">Shop Now <i className="nss-long-arrow-right1"></i></a> 
                   </div>
                 </div>
               </div>

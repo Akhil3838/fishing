@@ -36,13 +36,14 @@ function Categorybar({ menuOpen, setMenuOpen }) {
                 >
                   {category.name} ▾
                 </button>
-                <div className="dropdown-content">
+                <div className="dropdown-content bg-light">
                   {category.items.map((item, subIndex) => (
                     <Link 
                       key={subIndex} 
                       href="#" 
                       className="dropdown-link"
                       onClick={() => setMenuOpen(false)}
+                      
                     >
                       {item}
                     </Link>
