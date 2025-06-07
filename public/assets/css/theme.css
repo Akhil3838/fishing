@@ -5813,3 +5813,67 @@ blockquote:after {
 ;
     }
 }
+
+/* Mobile Menu Styles */
+@media (max-width: 991px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #1e3a5f;
+    padding: 1rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+  }
+  
+  .nav-menu.active {
+    display: flex;
+  }
+  
+  .nav-item {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .dropdown-content {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    display: none;
+    background-color: #2a4a75;
+  }
+  
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-link {
+    color: white;
+    padding-left: 2rem;
+  }
+  
+  .dropbtn::after {
+    content: '▾';
+    float: right;
+  }
+}
+
+/* Search Bar Styles */
+.search-container {
+  position: relative;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+

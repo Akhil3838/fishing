@@ -6,7 +6,7 @@ function Banner() {
   return (
     <>
       {/* <!-- Hero Banner Start --> */}
-      <section className="slider-section" style={{ height: '80vh' }}>
+      <section className="slider-section" style={{ height: '80vh',paddingTop:'135px' }}>
       <div className="hero-slider owl-carousel anim_class">
           <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s1.jpg"  style={{ height: '80vh' }}>
             <div className="container">
