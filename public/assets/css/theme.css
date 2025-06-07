@@ -49,7 +49,7 @@ body{
     letter-spacing: 0;
     font-weight: 400;
     word-break: break-word;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 h1, h2, h3, h4, h5, h6{
     font-family: 'Nunito', sans-serif;
@@ -5685,10 +5685,18 @@ blockquote:after {
   color: white;
   font-size: 1.75rem;
   cursor: pointer;
-  display: none;
-  position: relative;
-  top: -150px;
-  left: 330px;
+  display: block; /* Let media query control when it's visible */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1050; /* Make sure it's above other elements */
+}
+
+/* Hide on large screens and up */
+@media (min-width: 992px) {
+  .nav-toggle {
+    display: none;
+  }
 }
 
 .nav-menu {
