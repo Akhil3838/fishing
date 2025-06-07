@@ -114,7 +114,7 @@ function ProductDetails() {
   };
 
   if (!product) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (

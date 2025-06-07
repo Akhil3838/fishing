@@ -5,6 +5,7 @@ import { getCartApi, logoutApi, searchProductApi } from '../services/allApi';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { addResponseContext, deleteCartResponseContext } from '../context/Contextshare';
+import Categorybar from './Categorybar';
 
 function Header() {
   const [token, setToken] = useState(null);
@@ -86,6 +87,7 @@ function Header() {
       }, 500);
     } else {
       setSearchResults([]);
+      setSuggestion([]);
     }
 
     return () => clearTimeout(searchTimeout.current);
@@ -111,6 +113,7 @@ function Header() {
         !searchDropdownRef.current.contains(event.target)
       ) {
         setSearchResults([]);
+        setSuggestion([]);
       }
     };
 
@@ -121,50 +124,116 @@ function Header() {
   return (
     <>
       <header className="header-01 h2 head-sticky">
-        <div className="container-fluid">
+        <div className="container py-2">
+
           <div className="row">
             <div className="col-lg-12">
               <nav className="navbar navbar-expand-lg">
                 <Link className="navbar-brand" href="/">
-                  <img src="assets/images/logo/logo01.png" alt="" />
+                  <img src="/assets/images/logo/logo01.png" alt="" />
                 </Link>
 
-                <button className="navbar-toggler" type="button">
+                {/* <button className="navbar-toggler" type="button">
                   <i className="nss-bars1"></i>
-                </button>
+                </button> */}
 
                 <div className="collapse navbar-collapse">
-                  <ul className="navbar-nav">
-                    <li><Link href="/">Home</Link></li>
-                    <li><Link href="/shopping">Shop</Link></li>
-                    <li><Link href="/about">About</Link></li>
-                    <li><Link href="/blog">Blog</Link></li>
-                    <li><Link href="/contact">Contact</Link></li>
-                    {token ? (
-                      <li>
-                        <a href="" onClick={handleLogout}>Logout</a>
-                      </li>
-                    ) : (
-                      <li>
-                        <Link href="/login">Login</Link>
-                      </li>
-                    )}
-                  </ul>
-                </div>
+                  <div className="d-none d-lg-flex justify-content-center w-100 position-relative" ref={searchDropdownRef}>
+                    <div className="search-container" style={{ width: "100%", maxWidth: "500px" }}>
+                      <div className="search-input-wrapper relative">
+                        <input
+                          type="text"
+                          className="search-input"
+                          placeholder="Search for products, brands and more"
+                          value={searchQuery}
+                          onChange={handleSearchChange}
+                        />
+                        <button className="search-icon">
+                          <i className="fas fa-search"></i>
+                        </button>
+                      </div>
 
-                <div className="access-btn">
-                  {/* Search button modified to trigger the popup */}
-                  <a href="#" className="btn-search" onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('.popup_search_sec').style.display = 'block';
-                  }}>
-                    <i className="nss-search1"></i>
-                  </a>
-                  {token && (
-                    <Link href="/profile" className="btn-user">
+                      {/* Search Results Dropdown */}
+                      {(searchResults.length > 0 || suggestion.length > 0) && (
+                        <div className="search-dropdown">
+                          {/* Product Results Section */}
+                          {searchResults.length > 0 && (
+                            <div className="results-section">
+                              <div className="section-title">Products</div>
+                              <div className="product-list">
+                                {searchResults.map((item, index) => (
+                                  <Link
+                                    key={`product-${index}`}
+                                    href={`/productDetails/${item?.slug}`}
+                                    className="product-item"
+                                    onClick={() => {
+                                      setSearchResults([]);
+                                      setSuggestion([]);
+                                      setSearchQuery("");
+                                    }}
+                                  >
+                                    <div className="product-image">
+                                      <img
+                                        src={item.icon}
+                                        alt={item.name}
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.src = '/assets/images/placeholder-product.png';
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="product-details">
+                                      <div className="product-name">{item.product_name}</div>
+                                      <div className="product-price">{item.price}</div>
+                                      <div className="product-category">
+                                        <span>In {item.category?.category_name}</span>
+                                      </div>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Suggestions Section */}
+                          {suggestion.length > 0 && (
+                            <div className="results-section">
+                              <div className="section-title">Suggestions</div>
+                              <div className="suggestion-list">
+                                {suggestion.slice(0, 5).map((item, index) => (
+                                  <Link
+                                    key={`suggestion-${index}`}
+                                    href={`/productdetails/${item.slug}`}
+                                    className="suggestion-item"
+                                    onClick={() => {
+                                      setSearchResults([]);
+                                      setSuggestion([]);
+                                      setSearchQuery("");
+                                    }}
+                                  >
+                                    <div className="suggestion-icon">
+                                      <i className="fas fa-search"></i>
+                                    </div>
+                                    <div className="suggestion-text">
+                                      <div className="suggestion-title">{item.product_name}</div>
+                                      <div className="suggestion-hint">View product details</div>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+             
+                <div className="access-btn" style={{display:'flex'}}>
+                    <Link href="/profile" className="btn-cart">
                       <i className="nss-user1"></i>
                     </Link>
-                  )}
+         
                   <Link href="/cart" className="btn-cart">
                     <i className="nss-shopping-cart1"></i>
                     <span>{cartCount}</span>
@@ -174,159 +243,104 @@ function Header() {
             </div>
           </div>
         </div>
+{/* Categorybar */}
+<div className='container small_search'>
+                    <div className="d-block d-lg-none justify-content-center w-100 position-relative" ref={searchDropdownRef}>
+                      <div className="search-container" style={{ width: "100%", maxWidth: "500px" }}>
+                        <div className="search-input-wrapper relative">
+                          <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search for products, brands and more"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                          />
+                          <button className="search-icon">
+                            <i className="fas fa-search"></i>
+                          </button>
+                        </div>
+  
+                        {/* Search Results Dropdown */}
+                        {(searchResults.length > 0 || suggestion.length > 0) && (
+                          <div className="search-dropdown">
+                            {/* Product Results Section */}
+                            {searchResults.length > 0 && (
+                              <div className="results-section">
+                                <div className="section-title">Products</div>
+                                <div className="product-list">
+                                  {searchResults.map((item, index) => (
+                                    <Link
+                                      key={`product-${index}`}
+                                      href={`/productDetails/${item?.slug}`}
+                                      className="product-item"
+                                      onClick={() => {
+                                        setSearchResults([]);
+                                        setSuggestion([]);
+                                        setSearchQuery("");
+                                      }}
+                                    >
+                                      <div className="product-image">
+                                        <img
+                                          src={item.icon}
+                                          alt={item.name}
+                                          onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = '/assets/images/placeholder-product.png';
+                                          }}
+                                        />
+                                      </div>
+                                      <div className="product-details">
+                                        <div className="product-name">{item.product_name}</div>
+                                        <div className="product-price">{item.price}</div>
+                                        <div className="product-category">
+                                          <span>In {item.category?.category_name}</span>
+                                        </div>
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+  
+                            {/* Suggestions Section */}
+                            {suggestion.length > 0 && (
+                              <div className="results-section">
+                                <div className="section-title">Suggestions</div>
+                                <div className="suggestion-list">
+                                  {suggestion.slice(0, 5).map((item, index) => (
+                                    <Link
+                                      key={`suggestion-${index}`}
+                                      href={`/productdetails/${item.slug}`}
+                                      className="suggestion-item"
+                                      onClick={() => {
+                                        setSearchResults([]);
+                                        setSuggestion([]);
+                                        setSearchQuery("");
+                                      }}
+                                    >
+                                      <div className="suggestion-icon">
+                                        <i className="fas fa-search"></i>
+                                      </div>
+                                      <div className="suggestion-text">
+                                        <div className="suggestion-title">{item.product_name}</div>
+                                        <div className="suggestion-hint">View product details</div>
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+  
+</div>
+
+<Categorybar />
+
       </header>
-
-      {/* Modified Popup Search with the search functionality */}
-      <section className="popup_search_sec" style={{ display: 'none' }}>
-        <div className="popup_search_overlay" onClick={() => {
-          document.querySelector('.popup_search_sec').style.display = 'none';
-        }}></div>
-        <div className="pop_search_background">
-          <div className="middle_search">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12 text-center">
-                  <div className="popup_search_form" ref={searchDropdownRef}>
-                    <form onSubmit={(e) => e.preventDefault()}>
-                      <input 
-                        type="search" 
-                        name="s" 
-                        id="s" 
-                        placeholder="Type Words and Hit Enter" 
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        autoComplete="off"
-                      />
-                      <button type="submit"><i className="nss-search1"></i></button>
-                    </form>
-                    
-{searchResults.length > 0 && (
-  <div 
-    className="search-results-dropdown border mt-1 w-100"
-    style={{
-      position: 'absolute',
-      zIndex: 1000,
-      maxHeight: '400px',
-      overflowY: 'auto',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '100%',
-      maxWidth: '500px',
-      backgroundColor: '#1a1a1a',
-      borderColor: '#333',
-      borderRadius: '8px',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
-    }}
-  >
-    {searchResults.map((item, index) => (
-      <Link
-        key={index}
-       href={`/productDetails/${item?.slug}`}
-        className="search-item d-block p-3 text-decoration-none"
-        style={{ 
-          borderBottom: "1px solid #333",
-          color: '#e0e0e0',
-          transition: 'background-color 0.2s ease',
-          ':hover': {
-            backgroundColor: '#2a2a2a'
-          }
-        }}
-        onClick={() => {
-          setSearchResults([]);
-          document.querySelector('.popup_search_sec').style.display = 'none';
-        }}
-      >
-        <div className="d-flex align-items-center">
-          <img
-            src={item.icon}
-            alt={item.name}
-            style={{
-              width: "40px",
-              height: "40px",
-              marginRight: "12px",
-              borderRadius: '4px',
-              objectFit: 'cover'
-            }}
-          />
-          <div>
-            <div className="fw-bold" style={{ color: '#ffffff' }}>
-              {item.product_name}
-            </div>
-            <div className="text-muted" style={{ color: '#a0a0a0' }}>
-              {item.price}
-            </div>
-            <div style={{ fontSize: "0.85rem", color: '#4dabf7' }}>
-              <span>In </span>
-              {item.category?.category_name}
-            </div>
-          </div>
-        </div>
-      </Link>
-    ))}
-
-    {suggestion.length > 0 && (
-      <div style={{ 
-        padding: '8px 12px',
-        backgroundColor: '#252525',
-        borderBottom: '1px solid #333'
-      }}>
-        <div style={{ 
-          color: '#888',
-          fontSize: '0.8rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px'
-        }}>
-          Suggestions
-        </div>
-      </div>
-    )}
-
-    {suggestion.slice(0, 5).map((item, index) => (
-      <Link
-        key={`suggestion-${index}`}
-        href={`/productdetails/${item.slug}`}
-        className="search-items d-block p-3 text-decoration-none"
-        style={{ 
-          borderBottom: "1px solid #333",
-          color: '#e0e0e0',
-          transition: 'background-color 0.2s ease',
-          ':hover': {
-            backgroundColor: '#2a2a2a'
-          }
-        }}
-        onClick={() => {
-          setSearchResults([]);
-          document.querySelector('.popup_search_sec').style.display = 'none';
-        }}
-      >
-        <div className="d-flex align-items-center">
-          <i 
-            className="fas fa-search me-3" 
-            style={{
-              color: '#4dabf7',
-              width: '20px',
-              textAlign: 'center'
-            }}
-          ></i>
-          <div>
-            <div className="fw-bold" style={{ color: '#ffffff' }}>
-              {item.product_name}
-            </div>
-            <div style={{ fontSize: "0.8rem", color: '#888' }}>
-              Click to view product
-            </div>
-          </div>
-        </div>
-      </Link>
-    ))}
-  </div>
-)}                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+   
     </>
   );
 }

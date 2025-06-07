@@ -293,7 +293,7 @@
     }
     .access-btn {
         margin-left: 0;
-        margin-right: 60px;
+        margin-right: 50px;
     }
     .cate-item{
         margin-bottom: 30px;
@@ -827,3 +827,15 @@
         margin: 0 6px 0;
     }
 }
+
+/* Show only on small screens */
+
+/* @media (min-width: 992px) {
+  .small_search {
+    background-color: transparent;
+  }
+} */
+
+/* .small_search{
+     background-color: green;
+} */

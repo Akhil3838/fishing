@@ -13,13 +13,23 @@ function Footer() {
                         <a href="index.html">  <img src="assets/images/logo/log2.png" alt="" />
                         </a>
                         <p>Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit. Duis at<br /> est id leo luctus gravida a in ipsum.</p>
-                        <div className="ab-social">
-                            <a className="fac" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/"><i className="nss-facebook-f"></i></a>
-                            <a className="twi" target="_blank" rel="noopener noreferrer" href="https://twitter.com/"><i className="nss-twitter"></i></a>
-                            <a className="you" target="_blank" rel="noopener noreferrer" href="https://youtube.com/"><i className="nss-youtube"></i></a>
-                            <a className="ins" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/"><i className="nss-instagram"></i></a>
-                        </div>
-                    </div>
+<div className="ab-social">
+    <a className="fa" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
+        <i className="fa-brands fa-facebook-f"></i>
+    </a>
+    <a className="tw" target="_blank" rel="noopener noreferrer" href="https://twitter.com/">
+        <i className="fa-brands fa-x-twitter"></i>
+    </a>
+    <a className="yo" target="_blank" rel="noopener noreferrer" href="https://youtube.com/">
+        <i className="fa-brands fa-youtube"></i>
+    </a>
+    <a className="in" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/">
+        <i className="fa-brands fa-instagram"></i>
+    </a>
+    <a className="ti" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/">
+        <i className="fa-brands fa-tiktok"></i>
+    </a>
+</div>                    </div>
                 </aside>
             </div>
             <div className="col-lg-2 col-md-6">
