@@ -59,7 +59,7 @@ console.log(selectedCategories);
   return (
     <>
       <Header />
-      <section className="shoppage-setion">
+      <section className="shoppage-setion" style={{paddingTop:'140px'}}>
 {/* Breadcrumb Section */}
 <section className="breadcrumb-section py-2">
   <div className="container">

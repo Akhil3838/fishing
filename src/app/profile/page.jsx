@@ -47,7 +47,7 @@ console.log(user);
   return (
     <>
     <Header/>
-      <div className="container" style={{paddingTop:'100px'}}>
+      <div className="container" style={{paddingTop:'160px'}}>
         <div className="row">
           {/* Sidebar */}
           <div className="col-md-3 order-md-1 order-2">
@@ -55,10 +55,10 @@ console.log(user);
             <p className="mb-3">{user?.name}</p>
             <hr />
             <nav className="nav flex-column">
-              <button className={`nav-link btn btn-0 ${activeSection === "overview" ? "active" : ""}`} onClick={() => showSection("overview")}>Overview</button>
-              <button className={`nav-link btn btn-0 ${activeSection === "orders" ? "active" : ""}`} onClick={() => showSection("orders")}>Orders</button>
-              <button className={`nav-link btn btn-0 ${activeSection === "profile" ? "active" : ""}`} onClick={() => showSection("profile")}>Profile</button>
-              <button className={`nav-link btn btn-0 ${activeSection === "addresses" ? "active" : ""}`} onClick={() => showSection("addresses")}>Addresses</button>
+              <button className={`nav-link btn btn-0 text-dark  ${activeSection === "overview" ? "active" : ""}`} onClick={() => showSection("overview")}>Overview</button>
+              <button className={`nav-link btn btn-0 text-dark ${activeSection === "orders" ? "active" : ""}`} onClick={() => showSection("orders")}>Orders</button>
+              <button className={`nav-link btn btn-0 text-dark ${activeSection === "profile" ? "active" : ""}`} onClick={() => showSection("profile")}>Profile</button>
+              <button className={`nav-link btn btn-0 text-dark ${activeSection === "addresses" ? "active" : ""}`} onClick={() => showSection("addresses")}>Addresses</button>
               {/* <button className="nav-link text-danger" onClick={() => showSection("delete")}>Delete Account</button> */}
             </nav>
           </div>
@@ -74,7 +74,7 @@ console.log(user);
                   <div className="col-md-4 mb-3">
                     <div className="overview-card" onClick={() => showSection("orders")}>
                       <i className="bi bi-box"></i>
-                      <h6>Orders</h6>
+                      <h6 >Orders</h6>
                       <p>Check your order status</p>
                     </div>
                   </div>

@@ -236,9 +236,11 @@ function Header() {
                 </div>
              
                 <div className="access-btn" style={{display:'flex'}}>
-                    <Link href="/profile" className="btn-cart">
+                   {token? <Link href="/profile" className="btn-cart">
                       <i className="nss-user1"></i>
-                    </Link>
+                    </Link>:<Link href="/login" className="btn-cart">
+                      <i className="nss-user1"></i>
+                    </Link>}
          
                   <Link href="/cart" className="btn-cart">
                     <i className="nss-shopping-cart1"></i>

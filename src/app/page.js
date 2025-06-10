@@ -90,12 +90,12 @@ export default function Home() {
 
 
 {/* Category Start */}
-<section className="category-section-2">
+{/* <section className="category-section-2">
   <div className="container">
 
     <CategoryHome/>
   </div>
-</section>
+</section> */}
 {/* Category End */}
 
 {/* <!-- new Product Start --> */}
