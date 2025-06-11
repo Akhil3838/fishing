@@ -163,7 +163,7 @@ console.log(product);
           <div className="product-decp">
             <h4>{product?.product_name}</h4>
             <div className="product_price clearfix">
-              <span className="price"><span><span>$</span>{price}</span></span>
+              <span className="price"><span><span>₹</span>{price}</span></span>
             </div>
             <div className="ratings">
               <i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><i className="icon_star_alt"></i><span>( 1 )</span>

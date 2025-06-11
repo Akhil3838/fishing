@@ -28,7 +28,7 @@ function Categorybar({ menuOpen, setMenuOpen }) {
   };
 
   return (
-    <nav className="custom-navbar">
+    <nav className="custom-navbar pt-2">
       <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
         {categories.map((category, index) => (
           <li key={index} className="nav-item">

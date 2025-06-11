@@ -84,7 +84,7 @@ const ProductListItem = ({ product }) => {
               <span>( 1 )</span>
             </div>
             <div className="product_price clearfix">
-              <span className="price"><span><span>$</span>{product?.sku_new[0].special_price.toFixed(2)}</span></span>
+              <span className="price"><span><span>₹</span>{product?.sku_new[0].special_price.toFixed(2)}</span></span>
             </div>
             <p>{product.short_description}</p>
             <div className="listing-meta">

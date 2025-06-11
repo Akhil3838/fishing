@@ -108,19 +108,19 @@ function Header() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        searchDropdownRef.current &&
-        !searchDropdownRef.current.contains(event.target)
-      ) {
-        setSearchResults([]);
-        setSuggestion([]);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
+const handleClickOutside = (event) => {
+  if (
+    searchDropdownRef.current &&
+    !searchDropdownRef.current.contains(event.target) &&
+    !event.target.closest('.search-dropdown') // Add this line
+  ) {
+    setSearchResults([]);
+    setSuggestion([]);
+  }
+};    document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
 
   return (
     <>
@@ -172,7 +172,8 @@ function Header() {
                                     key={`product-${index}`}
                                     href={`/productDetails/${item?.slug}`}
                                     className="product-item"
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        e.stopPropagation();
                                       setSearchResults([]);
                                       setSuggestion([]);
                                       setSearchQuery("");
@@ -211,7 +212,8 @@ function Header() {
                                     key={`suggestion-${index}`}
                                     href={`/productdetails/${item.slug}`}
                                     className="suggestion-item"
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        e.stopPropagation();
                                       setSearchResults([]);
                                       setSuggestion([]);
                                       setSearchQuery("");
