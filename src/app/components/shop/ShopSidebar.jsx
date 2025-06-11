@@ -98,14 +98,14 @@ const ShopSidebar = ({
       </aside>
 
       {/* Filter */}
-      <aside className="widget">
+      {/* <aside className="widget">
         <h3 className="widget-title">Filter</h3>
         <div className="price_slider_wrapper">
           <form action="#" method="get" className="clearfix">
             <div id="slider-range"></div>
           </form>
         </div>
-      </aside>
+      </aside> */}
 
       {/* Best Sellers */}
       {/* <BestSellersWidget /> */}

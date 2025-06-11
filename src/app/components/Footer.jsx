@@ -5,6 +5,9 @@ function Footer() {
     <>
     {/* <!-- Footer Start --> */}
 <footer className="footer">
+     <a href="https://wa.me/+919946901506" target="_blank">
+            <img className="whatsapp-float" src="/assets/images/msg.png"/>
+       </a>
     <div className="container">
         <div className="row">
             <div className="col-lg-4 col-md-6">
