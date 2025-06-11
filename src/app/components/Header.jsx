@@ -130,7 +130,7 @@ function Header() {
             <div className="col-lg-12">
               <nav className="navbar navbar-expand-lg">
                 <Link className="navbar-brand" href="/">
-                  <img src="/assets/images/logo/logo01.png" alt="" />
+                  <img src="/assets/images/logo/logo01.png" alt=""  onClick={() => window.location.href = '/'} />
                 </Link>
 
                 {/* Mobile Toggle Button - Right aligned */}
@@ -235,7 +235,7 @@ function Header() {
                   </div>
                 </div>
              
-                <div className="access-btn" style={{display:'flex'}}>
+<div className="access-btn" style={{display:'flex'}}>
                    {token? <Link href="/profile" className="btn-cart">
                       <i className="nss-user1"></i>
                     </Link>:<Link href="/login" className="btn-cart">
@@ -247,7 +247,7 @@ function Header() {
                     <span>{cartCount}</span>
                   </Link>
                 </div>
-              </nav>
+ </nav>
             </div>
           </div>
         </div>

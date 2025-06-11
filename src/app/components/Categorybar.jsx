@@ -1,26 +1,30 @@
+'use client';
+
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { allCategoryApi } from '../services/allApi';
 
 function Categorybar({ menuOpen, setMenuOpen }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [categories, setCategories] = useState([]);
 
-  const categories = [
-    { name: "Lures & Baits", items: ["Soft Baits", "Hard Baits", "Jigs"] },
-    { name: "Fishing Rods", items: ["Spinning Rods", "Casting Rods", "Fly Rods"] },
-    { name: "Fishing Reels", items: ["Spinning Reels", "Baitcasting Reels", "Fly Reels"] },
-    { name: "Fishing Lines", items: ["Monofilament", "Fluorocarbon", "Braided"] },
-    { name: "Terminal Tackle", items: ["Hooks", "Sinkers", "Swivels"] },
-    { name: "Tools & Accessories", items: ["Pliers", "Nets", "Tackle Boxes"] },
-    { name: "Apparel & Clothing", items: ["Shirts", "Hats", "Rain Gear"] },
-    { name: "All Products", items: ["Product combo", "Hats", "Rain Gear"] }
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const result = await allCategoryApi();
+        if (result?.data?.data) {
+          setCategories(result.data.data);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const toggleDropdown = (index) => {
-    if (activeDropdown === index) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(index);
-    }
+    setActiveDropdown(activeDropdown === index ? null : index);
   };
 
   return (
@@ -28,35 +32,34 @@ function Categorybar({ menuOpen, setMenuOpen }) {
       <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
         {categories.map((category, index) => (
           <li key={index} className="nav-item">
-            {category.items.length > 0 ? (
+            {category.subcategories && category.subcategories.length > 0 ? (
               <div className={`dropdown ${activeDropdown === index ? 'active' : ''}`}>
                 <button 
                   className="dropbtn" 
                   onClick={() => toggleDropdown(index)}
                 >
-                  {category.name} ▾
+                  {category.category_name} ▾
                 </button>
                 <div className="dropdown-content bg-light">
-                  {category.items.map((item, subIndex) => (
+                  {category.subcategories.map((sub, subIndex) => (
                     <Link 
                       key={subIndex} 
-                      href="#" 
+                      href={`/shopping?slug=${sub.slug}`} 
                       className="dropdown-link"
                       onClick={() => setMenuOpen(false)}
-                      
                     >
-                      {item}
+                      {sub.category_name}
                     </Link>
                   ))}
                 </div>
               </div>
             ) : (
               <Link 
-                href="#" 
+                href={`/shopping?slug=${category.slug}`} 
                 className="nav-link"
                 onClick={() => setMenuOpen(false)}
               >
-                {category.name}
+                {category.category_name}
               </Link>
             )}
           </li>

@@ -101,6 +101,13 @@ export const allCategoryApi =async()=>{
     return await commonApi('GET',`${serverUrl}/get-all-categories`,"","")
 }
 
+// new products category
+
+export const newCategoryApi =async()=>{
+    return await commonApi('GET',`${serverUrl}/get-four-categories`,"","")
+}
+
+
 //shop by category
 
 export const shopByCategoyApi =async()=>{

@@ -50,7 +50,7 @@ const ShopSidebar = ({
       </aside> */}
 
       {/* Categories */}
-      <aside className="widget">
+      {/* <aside className="widget">
         <h3 className="widget-title mt-3">Categories</h3>
         <ul className="category-list">
           {categories.length > 0 ? (
@@ -71,7 +71,7 @@ const ShopSidebar = ({
             <li></li>
           )}
         </ul>
-      </aside>
+      </aside> */}
 
       {/* Brands */}
       <aside className="widget">

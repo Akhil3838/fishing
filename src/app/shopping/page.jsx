@@ -6,6 +6,8 @@ import ShopProducts from '../components/shop/ShopProducts'
 import { getAllProduct } from '../services/allApi'
 import { toast } from 'react-toastify'
 import Footer from '../components/Footer'
+import { useSearchParams } from 'next/navigation';
+
 
 function Shopping() {
   const [products, setProducts] = useState([])
@@ -14,6 +16,10 @@ function Shopping() {
   const [page, setPage] = useState(1)
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedBrands, setSelectedBrands] = useState([])
+const searchParams = useSearchParams();
+  const slug = searchParams.get('slug');
+  console.log(slug);
+  
 
   const allProducts = async (page, categories, brands) => {
     const token = sessionStorage.getItem("token")
@@ -69,6 +75,7 @@ console.log(selectedCategories);
         <ol className="breadcrumb mb-0">
           <li className="breadcrumb-item"><a href="/" className="text-decoration-none">Home</a></li>
           <li className="breadcrumb-item active" aria-current="page">Shop</li>
+           <li className="breadcrumb-item active" aria-current="page">{slug}</li>
         </ol>
       </nav>
     </div>

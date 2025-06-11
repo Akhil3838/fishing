@@ -36,11 +36,11 @@ function Footer() {
                 <aside className="widget">
                     <h3 className="widget-title">Useful Links</h3>
                     <ul>
-                        <li><a href="/productDetails">Home</a></li>
-                        <li><a href="index-2.html">User</a></li>
-                        <li><a href="index-2.html">Our Pricing</a></li>
-                        <li><a href="index-2.html">Testimonials</a></li>
-                        <li><a href="index-2.html">News</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/profile">User</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        {/* <li><a href="index-2.html">News</a></li> */}
                     </ul>
                 </aside>
             </div>
@@ -48,12 +48,12 @@ function Footer() {
                 <aside className="widget">
                     <h3 className="widget-title">Why Buy From Us</h3>
                     <ul>
-                        <li><a href="index-2.html">Shipping & Delivery</a></li>
-                        <li><a href="index-2.html">Secure Payment</a></li>
-                        <li><a href="index-2.html">Support</a></li>
-                        <li><a href="index-2.html">Stores</a></li>
-                        <li><a href="index-2.html">Services</a></li>
-                        <li><a href="index-2.html">Returns</a></li>
+                        <li><a href="/shopping">Shipping & Delivery</a></li>
+                        {/* <li><a href="index-2.html">Secure Payment</a></li> */}
+                        <li><a href="/">Support</a></li>
+                        <li><a href="/shopping">Stores</a></li>
+                        <li><a href="/">Services</a></li>
+                        {/* <li><a href="index-2.html">Returns</a></li> */}
                     </ul>
                 </aside>
             </div>
@@ -72,7 +72,7 @@ function Footer() {
         <div className="row">
             <div className="col-lg-12">
                 <div className="copyright text-center">
-                    <p>© 2021 <a href="https://psdtowpwork.com/">Nsstheme.</a> All rights reserved.</p>
+                    <p>© 2021 <a href="https://psdtowpwork.com/">Scaless</a> All rights reserved.</p>
                 </div>
             </div>
         </div>

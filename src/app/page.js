@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import CategoryHome from "./components/CategoryHome";
 import Newproducts from "./components/Newproducts";
 import { useEffect, useState } from "react";
-import { allCategoryApi } from "./services/allApi";
+import {  newCategoryApi } from "./services/allApi";
 import Hotproduct from "./components/Hotproduct";
 
 
@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const getCategory = async () => {
       try {
-        const result = await allCategoryApi();
+        const result = await newCategoryApi();
         const categories = result.data.data || [];
         setCategory(categories);
         
@@ -31,6 +31,15 @@ export default function Home() {
     };
     getCategory();
   }, []);  
+  useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const isReloaded = sessionStorage.getItem('hasReloaded');
+    if (!isReloaded) {
+      sessionStorage.setItem('hasReloaded', 'true');
+      window.location.reload();
+    }
+  }
+}, []);
   
   return (
     <>
@@ -61,12 +70,12 @@ export default function Home() {
               <span className="price">
                 <del>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>340.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>340.00
                   </span>
                 </del>
                 <ins>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>230.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>230.00
                   </span>
                 </ins>
               </span>
@@ -99,7 +108,7 @@ export default function Home() {
 {/* Category End */}
 
 {/* <!-- new Product Start --> */}
-  <section className="product-section-2">
+  <section className="product-section-2 mt-4">
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
@@ -143,8 +152,8 @@ export default function Home() {
     <div className="container">
         <div className="row">
             <div className="col-lg-6 col-md-6">
-                <div className="ab-thumb">
-                    <img src="assets/images/about/about.png" alt="about" />
+                <div className="ab-thumb ">
+                    <img src="assets/images/about/about2.jpg" alt="about" style={{borderRadius:'15px'}} />
                 </div>
             </div>
             <div className="col-lg-6 col-md-6">
@@ -214,12 +223,12 @@ export default function Home() {
               <span className="price">
                 <del>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>340.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>340.00
                   </span>
                 </del>
                 <ins>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>230.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>230.00
                   </span>
                 </ins>
               </span>
@@ -252,12 +261,12 @@ export default function Home() {
               <span className="price">
                 <del>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>240.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>240.00
                   </span>
                 </del>
                 <ins>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>330.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>330.00
                   </span>
                 </ins>
               </span>
@@ -291,12 +300,12 @@ export default function Home() {
               <span className="price">
                 <del>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>230.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>230.00
                   </span>
                 </del>
                 <ins>
                   <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">$</span>130.00
+                    <span className="woocommerce-Price-currencySymbol">₹</span>130.00
                   </span>
                 </ins>
               </span>
@@ -346,24 +355,24 @@ export default function Home() {
         <div className="row">
             <div className="gallery-slider owl-carousel">
                 <div className="gallery-item">
-                    <img src="assets/images/g1.jpg" alt="image" />
+                    <img src="assets/images/g22.jpg" alt="image" />
                     <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g1.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
+                        <a className="popup" href="assets/images/g22.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
                     </div>
                 </div>
                 <div className="gallery-item">
-                    <img src="assets/images/g2.jpg" alt="image" />
+                    <img src="assets/images/g11.jpg" alt="image" />
                     <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g2.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
+                        <a className="popup" href="assets/images/g11.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
                     </div>
                 </div>
                 <div className="gallery-item">
-                    <img src="assets/images/g3.jpg" alt="image" />
+                    <img src="assets/images/g33.jpg" alt="image" />
                     <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g3.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
+                        <a className="popup" href="assets/images/g33.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
                     </div>
                 </div>
                 <div className="gallery-item">
@@ -391,7 +400,7 @@ export default function Home() {
             <div className="col-lg-4 col-md-6">
                 <div className="blog-item-2">
                     <div className="bp-thumb">
-                        <img src="assets/images/b1.jpg" alt="image" />
+                        <img src="assets/images/b11.jpg" alt="image" />
                     </div>
                     <div className="bp-details">
                         <a href="single-blog.html" className="date"><span>calendar</span> 21 Dec. 2019</a>
@@ -406,7 +415,7 @@ export default function Home() {
             <div className="col-lg-4 col-md-6">
                 <div className="blog-item-2">
                     <div className="bp-thumb">
-                        <img src="assets/images/b2.jpg" alt="image" />
+                        <img src="assets/images/b22.jpg" alt="image" />
                     </div>
                     <div className="bp-details">
                         <a href="single-blog.html" className="date"><span>calendar</span> 21 Dec. 2019</a>
@@ -421,7 +430,7 @@ export default function Home() {
             <div className="col-lg-4 col-md-6">
                 <div className="blog-item-2">
                     <div className="bp-thumb">
-                        <img src="assets/images/b3.jpg" alt="image" />
+                        <img src="assets/images/b33.jpg" alt="image" />
                     </div>
                     <div className="bp-details">
                         <a href="single-blog.html" className="date"><span>calendar</span> 21 Dec. 2019</a>

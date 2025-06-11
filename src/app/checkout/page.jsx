@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import SelectAddress from "../components/SelectedAddress";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Checkout() {
     const [cart, setCart] = useState([]);
@@ -173,73 +175,78 @@ function Checkout() {
     };
 
     return (
-        <div className="container my-4">
-            <div className="row">
-                <div className="col-md-7">
-                    <SelectAddress onSelectAddress={setSelectedAddress} />
-                </div>
-
-                <div className="col-md-5">
-                    <div className="p-3 border">
-                        <h6 className="fw-bold">DELIVERY ESTIMATES</h6>
-                        <p className="text-muted">
-                            {cart.length > 0 &&
-                                cart.map((item, index) => (
-                                    <img
-                                        key={index}
-                                        src={item.product_items?.image}
-                                        alt="Cart Item"
-                                        width="20"
-                                        height="20"
-                                        className="me-1"
-                                    />
-                                ))}
-                            Estimated delivery by <span className="fw-bold">25 Mar 2025</span>
-                        </p>
-
-                        <h6 className="fw-bold mt-3">PRICE DETAILS ({cart.length} Items)</h6>
-                        <div className="d-flex justify-content-between">
-                            <p>Total MRP</p>
-                            <p>₹{summary.total}</p>
-                        </div>
-                        <div className="d-flex justify-content-between">
-                            <p>
-                                Discount on MRP <span className="text-primary">Know More</span>
+        
+<>
+<Header/>
+            <div className="container"style={{paddingTop:'160px'}}>
+                <div className="row">
+                    <div className="col-md-7">
+                        <SelectAddress onSelectAddress={setSelectedAddress} />
+                    </div>
+    
+                    <div className="col-md-5">
+                        <div className="p-3 border">
+                            <h6 className="fw-bold">DELIVERY ESTIMATES</h6>
+                            <p className="text-muted">
+                                {cart.length > 0 &&
+                                    cart.map((item, index) => (
+                                        <img
+                                            key={index}
+                                            src={item.product_items?.image}
+                                            alt="Cart Item"
+                                            width="20"
+                                            height="20"
+                                            className="me-1"
+                                        />
+                                    ))}
+                                Estimated delivery by <span className="fw-bold">25 Mar 2025</span>
                             </p>
-                            <p className="text-success">-</p>
+    
+                            <h6 className="fw-bold mt-3">PRICE DETAILS ({cart.length} Items)</h6>
+                            <div className="d-flex justify-content-between">
+                                <p>Total MRP</p>
+                                <p>₹{summary.total}</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p>
+                                    Discount on MRP <span className="text-primary">Know More</span>
+                                </p>
+                                <p className="text-success">-</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p>
+                                    Platform Fee <span className="text-primary">Know More</span>
+                                </p>
+                                <p className="text-success">FREE</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p>
+                                    Shipping Fee <span className="text-primary">Know More</span>
+                                </p>
+                                <p className="text-success">FREE</p>
+                            </div>
+    
+                            <hr />
+                            <div className="d-flex justify-content-between fw-bold">
+                                <p>Total Amount</p>
+                                <p>₹{summary.total}</p>
+                            </div>
+    
+                            <button
+                                className="btn btn-success w-100 mt-2"
+                                onClick={handlePaynow}
+                                disabled={isProcessing}
+                            >
+                                {isProcessing ? "Processing..." : "Pay Now"}
+                            </button>
                         </div>
-                        <div className="d-flex justify-content-between">
-                            <p>
-                                Platform Fee <span className="text-primary">Know More</span>
-                            </p>
-                            <p className="text-success">FREE</p>
-                        </div>
-                        <div className="d-flex justify-content-between">
-                            <p>
-                                Shipping Fee <span className="text-primary">Know More</span>
-                            </p>
-                            <p className="text-success">FREE</p>
-                        </div>
-
-                        <hr />
-                        <div className="d-flex justify-content-between fw-bold">
-                            <p>Total Amount</p>
-                            <p>₹{summary.total}</p>
-                        </div>
-
-                        <button
-                            className="btn btn-success w-100 mt-2"
-                            onClick={handlePaynow}
-                            disabled={isProcessing}
-                        >
-                            {isProcessing ? "Processing..." : "Pay Now"}
-                        </button>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
-            <ToastContainer />
-        </div>
-    );
+ <Footer/>    
+</> 
+   );
 }
 
 export default Checkout;

@@ -8,7 +8,7 @@ function Banner() {
       {/* <!-- Hero Banner Start --> */}
       <section className="slider-section" style={{ height: '80vh',paddingTop:'135px' }}>
       <div className="hero-slider owl-carousel anim_class">
-          <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s1.jpg"  style={{ height: '80vh' }}>
+          <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s11.jpg"  style={{ height: '80vh' }}>
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
@@ -22,7 +22,7 @@ function Banner() {
               </div>
             </div>
           </div>
-          <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s2.jpg"  style={{ height: '80vh' }}>
+          <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s22.jpg"  style={{ height: '80vh' }}>
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
@@ -37,7 +37,7 @@ function Banner() {
               </div>
             </div>
           </div>
-          <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s3.jpg"  style={{ height: '80vh' }}>
+          <div className="single-slide bg-img d-flex align-items-center" data-bg-image="assets/images/s33.jpg"  style={{ height: '80vh' }}>
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">

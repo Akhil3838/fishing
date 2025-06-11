@@ -2893,9 +2893,9 @@ footer .widget.widget_mc4wp_form_widget{
 }
 .shop-sidebar .widget .widget-title{
     font-size: 22px;
-    line-height: 30px;
+    /* line-height: 30px; */
     color: #222F5A;
-    padding-bottom: 17px;
+    padding-bottom: 10px;
     margin: 0 0 29px;
     border-bottom: 2px solid rgba(65, 44, 197, .2)
 }
@@ -2966,7 +2966,7 @@ footer .widget.widget_mc4wp_form_widget{
 .shop-sidebar .widget ul li {
     list-style: none;
     display: inline-block;
-    line-height: 36px;
+    line-height: 20px;
     text-align: right;
     font-size: 16px;
     color: #282932;
@@ -5881,3 +5881,24 @@ blockquote:after {
   border-radius: 4px;
 }
 
+/* header usericon dropdown */
+
+/* Add this to your CSS */
+ .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background-color: #f5f5f5;
+  }
+
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      position: fixed;
+      top: auto;
+      right: 10px;
+      left: 10px;
+      bottom: 60px;
+    }
+  }

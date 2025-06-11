@@ -8,6 +8,8 @@ function CategoryHome() {
     const getCategory = async () => {
       try {
         const result = await allCategoryApi();
+        console.log(result);
+        
         setCategory(result.data.data || []);
         console.log(result);
       } catch (error) {

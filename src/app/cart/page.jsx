@@ -63,7 +63,7 @@ function Cart() {
   return (
     <>
       <Header />
-      <section className="cart-section">
+      <section className="cart-section" style={{paddingTop:'160px'}}>
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
