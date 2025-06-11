@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import Header from '../components/Header'
 import ShopSidebar from '../components/shop/ShopSidebar'
 import ShopProducts from '../components/shop/ShopProducts'
@@ -8,18 +8,16 @@ import { toast } from 'react-toastify'
 import Footer from '../components/Footer'
 import { useSearchParams } from 'next/navigation';
 
-
-function Shopping() {
+function ShoppingContent() {
   const [products, setProducts] = useState([])
   const [brands, setBrand] = useState([])
   const [totalPages, setTotalPages] = useState(1)
   const [page, setPage] = useState(1)
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedBrands, setSelectedBrands] = useState([])
-const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const slug = searchParams.get('slug');
   console.log(slug);
-  
 
   const allProducts = async (page, categories, brands) => {
     const token = sessionStorage.getItem("token")
@@ -51,13 +49,12 @@ const searchParams = useSearchParams();
     }
   }
 
-  // Handle filter changes
   useEffect(() => {
-    setPage(1) // Reset to first page when filters change
+    setPage(1)
   }, [selectedCategories, selectedBrands])
-console.log(selectedCategories);
 
-  // Fetch products when page or filters change
+  console.log(selectedCategories);
+
   useEffect(() => {
     allProducts(page, selectedCategories, selectedBrands)
   }, [page, selectedCategories, selectedBrands])
@@ -66,28 +63,21 @@ console.log(selectedCategories);
     <>
       <Header />
       <section className="shoppage-setion" style={{paddingTop:'140px'}}>
-{/* Breadcrumb Section */}
-<section className="breadcrumb-section py-2">
-  <div className="container">
-    <div className="d-flex justify-content-between align-items-center">
-      {/* <h4 className="mb-0 fw-bold">Shop</h4> */}
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb mb-0">
-          <li className="breadcrumb-item"><a href="/" className="text-decoration-none">Home</a></li>
-          <li className="breadcrumb-item active" aria-current="page">Shop</li>
-           <li className="breadcrumb-item active" aria-current="page">{slug}</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
-</section>
+        <section className="breadcrumb-section py-2">
+          <div className="container">
+            <div className="d-flex justify-content-between align-items-center">
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb mb-0">
+                  <li className="breadcrumb-item"><a href="/" className="text-decoration-none">Home</a></li>
+                  <li className="breadcrumb-item active" aria-current="page">Shop</li>
+                  <li className="breadcrumb-item active" aria-current="page">{slug}</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </section>
 
-
-
-        {/* Breadcrumb Section */}
         <div className="container">
-            
-  
           <div className="row">
             <div className="col-lg-3 col-md-6">
               <ShopSidebar 
@@ -104,7 +94,6 @@ console.log(selectedCategories);
                 totalPages={totalPages} 
                 currentPage={page} 
                 onPageChange={setPage}
-                
               />
             </div>
           </div>
@@ -112,6 +101,14 @@ console.log(selectedCategories);
       </section>
       <Footer />
     </>
+  )
+}
+
+function Shopping() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ShoppingContent />
+    </Suspense>
   )
 }
 
