@@ -6,18 +6,6 @@ function SingleProduct({ product, variants }) {
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  // Auto slide interval
-  useEffect(() => {
-    let interval;
-    if (isAutoPlaying && img?.images?.length > 1) {
-      interval = setInterval(() => {
-        setCurrentSlide(prev => (prev + 1) % img.images.length);
-      }, 3000); // Change slide every 3 seconds
-    }
-    return () => clearInterval(interval);
-  }, [img?.images, isAutoPlaying]);
 
   // add to cart
   const handleAddToCart = async (product_id, sku_id) => {
@@ -124,10 +112,8 @@ function SingleProduct({ product, variants }) {
   // Handle slide navigation
   const goToSlide = (index) => {
     setCurrentSlide(index);
-    // Pause auto-play briefly when user manually selects a slide
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
   };
+
 console.log(product);
 
   return (
@@ -188,19 +174,12 @@ console.log(product);
               </div>
             ))}
 
-            {/* <div className="quantityd clearfix">
-              <button className="qtyBtn btnMinus"><span>-</span></button>
-              <input name="qty" defaultValue="2" title="Qty" className="input-text qty text carqty" type="text" />
-              <button className="qtyBtn btnPlus"><span>+</span></button>
-            </div> */}
             <div className="listing-meta">
               <a className="add-to-cart" href="/cart"   onClick={() => handleAddToCart(product.id, product.sku_new
 [0].id)}><i className="nss-shopping-cart1"></i>Add To Cart</a>
-              {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
             </div>
             <div className="metatext"><span>Category:</span> <a href="#">{product?.category
 ?.category_name}</a></div>
-            {/* <div className="metatext"><span>Tags:</span> <a href="#">Fishing</a>,<a href="#">Net</a></div> */}
             <div className="pd-share">
               <span>Share:</span>
               <div className="product-share">

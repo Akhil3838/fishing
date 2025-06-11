@@ -3153,8 +3153,8 @@ footer .widget.widget_mc4wp_form_widget{
 }
 .sp_img img {
     width: 100%;
-    max-width: 500px;
-    height: auto;
+    max-width: auto;
+    height: 500px;
 }
 .indicator-slider {
     position: relative;
