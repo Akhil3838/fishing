@@ -62,7 +62,7 @@ function ShoppingContent() {
   return (
     <>
       <Header />
-      <section className="shoppage-setion" style={{paddingTop:'140px'}}>
+      <section className="shoppage-setion" style={{paddingTop:'160px'}}>
         <section className="breadcrumb-section py-2">
           <div className="container">
             <div className="d-flex justify-content-between align-items-center">

@@ -75,7 +75,7 @@ function Footer() {
         <div className="row">
             <div className="col-lg-12">
                 <div className="copyright text-center">
-                    <p>© 2021 <a href="https://psdtowpwork.com/">Scaless</a> All rights reserved.</p>
+                    <p>© 2025 <a href="https://psdtowpwork.com/">Scaless</a> All rights reserved.</p>
                 </div>
             </div>
         </div>

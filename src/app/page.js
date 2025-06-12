@@ -331,7 +331,7 @@ export default function Home() {
             <div className="col-md-6">
                 <h2 className="sec_titles">Hot Item</h2>
             </div>
-            <div className="col-md-6 text-right">
+            <div className="col-md-6 text-center">
                 <a href="/shopping" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
             </div>
         </div>

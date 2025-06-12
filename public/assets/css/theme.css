@@ -5264,7 +5264,7 @@ blockquote:after {
 
 .tagcloud a {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 8px 10px;
   background: #f5f5f5;
   border-radius: 3px;
   font-size: 13px;
@@ -5896,6 +5896,6 @@ blockquote:after {
   font-size: 40px;
   bottom: 0.5em;
   margin-bottom: 12px;
-   z-index:1999;
+z-index: 1999 !important;
 }
 
