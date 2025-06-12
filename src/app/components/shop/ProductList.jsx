@@ -12,7 +12,7 @@ const ProductList = ({product}) => {
   // ]
 
   return (
-    <div className="row">
+    <div className="row mt-4">
       <div className="col-md-12">
         {product.map(product => (
           <ProductListItem key={product.id} product={product} />
