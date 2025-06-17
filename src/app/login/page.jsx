@@ -112,6 +112,17 @@ function Login() {
           <p className="privacy-link">
             Dont have an account? <Link href="/register">Sign Up</Link>
           </p>
+            <p className="mt-2">
+  <Link href={'/forgotpassword'}>
+      <small
+        className="text-danger fw-bold"
+        style={{ cursor: "pointer" }}
+      >
+        Forgot Password?
+      </small>
+  </Link>
+  </p>
+
         </div>
   
       </div>

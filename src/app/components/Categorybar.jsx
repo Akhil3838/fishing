@@ -44,7 +44,7 @@ function Categorybar({ menuOpen, setMenuOpen }) {
                   {category.subcategories.map((sub, subIndex) => (
                     <Link 
                       key={subIndex} 
-                      href={`/shopping?slug=${sub.slug}`} 
+                      href={`/shop/${sub.slug}`} 
                       className="dropdown-link"
                       onClick={() => setMenuOpen(false)}
                     >
@@ -55,7 +55,7 @@ function Categorybar({ menuOpen, setMenuOpen }) {
               </div>
             ) : (
               <Link 
-                href={`/shopping?slug=${category.slug}`} 
+                href={`/shop/${category.slug}`} 
                 className="nav-link"
                 onClick={() => setMenuOpen(false)}
               >

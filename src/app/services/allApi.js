@@ -13,16 +13,16 @@ export const registerApi =async(reqBody)=>{
 //all product
 
 export const getAllProduct = async (page = 1, category, brand, reqHeader) => {
-    let url = `${serverUrl}/get-all-products?page=${page}&limit=10`;
+    let url = `${serverUrl}/get-all-products?page=${page}&limit=3`;
       console.log(category,brand);
       
     // Append category and brand only if both exist
     if (category && brand) {
-        url += `&category_id=${category}&brand=${encodeURIComponent(brand)}`;
+        url += `&category_slug=${category}&brand=${encodeURIComponent(brand)}`;
     } else {
         // Append category only if it's valid
         if (category) {
-            url += `&category_id=${category}`;
+            url += `&category_slug=${category}`;
         }
 
         // Append brand only if it's valid
