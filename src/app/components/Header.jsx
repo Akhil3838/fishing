@@ -238,12 +238,15 @@ const handleClickOutside = (event) => {
                 </div>
              
 <div className="access-btn" style={{display:'flex'}}>
-                   {token? <Link href="/profile" className="btn-cart">
-                      <i className="nss-user1"></i>
+             {token?<Link href="/profile" data-bs-toggle="modal"
+  data-bs-target="#profileModal"
+  id="profileBtn" className="btn-cart">
+                      <i className="nss-user1"  ></i>
                     </Link>:<Link href="/login" className="btn-cart">
-                      <i className="nss-user1"></i>
-                    </Link>}
-         
+                      <i className="nss-user1"  ></i>
+                    </Link>
+
+         }
                   <Link href="/cart" className="btn-cart">
                     <i className="nss-shopping-cart1"></i>
                     <span>{cartCount}</span>
@@ -351,6 +354,65 @@ const handleClickOutside = (event) => {
         {/* Categorybar - pass menuOpen state */}
         <Categorybar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </header>
+
+      {/* modal...... */}
+<div className="modal fade" id="profileModal" tabIndex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content border-0 shadow-lg" style={{
+      background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)",
+      borderRadius: "16px",
+      overflow: "hidden"
+    }}>
+      {/* Modal header with decorative element */}
+      <div className="position-relative">
+        <div style={{
+          height: "80px",
+          background: "linear-gradient(90deg,rgb(23, 40, 118) 0%, #764ba2 100%)"
+        }}></div>
+        <div className="position-absolute top-100 start-50 translate-middle">
+          <div className="bg-white p-1 rounded-circle shadow">
+            <div className="bg-light p-3 rounded-circle d-flex justify-content-center align-items-center" style={{
+              width: "80px",
+              height: "80px",
+              background: "linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%)",
+              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)"
+            }}>
+              <i className="fa-solid fa-user" style={{ fontSize: "2.5rem",color:'rgb(23, 40, 118)' }}></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Modal body */}
+      <div className="modal-body text-center pt-5 pb-4 px-4">
+        <h5 className="mb-1 fw-bold text-dark">Welcome Back!</h5>
+        <p className="text-muted mb-4">What would you like to do?</p>
+        
+        <div className="d-flex justify-content-center gap-3">
+          <Link href="/profile" className="btn btn-primary px-4 py-2 rounded-pill d-flex align-items-center" style={{
+            background: "linear-gradient(90deg,rgb(23, 40, 118) 0%, #764ba2 100%)",
+            border: "none",
+            boxShadow: "0 4px 6px rgba(102, 126, 234, 0.3)"
+          }}>
+            <i className="bi bi-person me-2"></i> Profile
+          </Link>
+          
+          <button onClick={handleLogout} className="btn btn-outline-danger px-4 py-2 rounded-pill d-flex align-items-center" style={{
+            borderWidth: "2px",
+            fontWeight: "500"
+          }}>
+           <i className="fa-solid fa-user me-2"></i> Logout
+          </button>
+        </div>
+      </div>
+      
+      {/* Decorative footer */}
+      <div className="modal-footer border-0 pt-0 justify-content-center">
+        <small className="text-muted">Have a great day!</small>
+      </div>
+    </div>
+  </div>
+</div>
     </>
   );
 }

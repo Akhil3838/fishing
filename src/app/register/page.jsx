@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerApi } from '../services/allApi';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Register() {
   const router = useRouter();
@@ -61,10 +63,13 @@ function Register() {
 
   return (
     <>
-      <div className="container">
+                <Header/>
+
+      <div className="container" style={{paddingTop:'95px'}}>
+
         <div className="login-box text-center">
 
-            <img src="assets/images/logo/log2.png" alt="Cabral Outdoors Logo" className="logo"  onClick={() => window.location.href = '/'} />
+            {/* <img src="assets/images/logo/log2.png" alt="Cabral Outdoors Logo" className="logo"  onClick={() => window.location.href = '/'} /> */}
   
      <h4 className="mb-3">Sign Up</h4>
 
@@ -93,6 +98,7 @@ function Register() {
         </div>
       </div>
       <ToastContainer />
+      <Footer/>
     </>
   );
 }

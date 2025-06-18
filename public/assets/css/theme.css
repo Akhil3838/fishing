@@ -5899,3 +5899,60 @@ blockquote:after {
 z-index: 1999 !important;
 }
 
+/* css for profile modal */
+/* Remove default backdrop */
+.modal-backdrop {
+  display: none !important;
+}
+
+/* Custom modal positioning */
+#profileModal .modal-dialog {
+  position: fixed;
+    top: -80px;
+  right: 20px;
+  margin: 0;
+  width: auto;
+  max-width: 300px; /* Adjust width as needed */
+  transform: none !important;
+}
+
+/* Responsive adjustments */
+@media (min-width: 992px) {
+  #profileModal .modal-dialog {
+    right: 5%;
+    top: -80px;
+  }
+}
+@media (min-width: 1820px) {
+  #profileModal .modal-dialog {
+    left: 73%; /* Matches your button position */
+    right: auto; /* Reset right positioning */
+    top: -90px;
+    transform: translateX(-50%) !important; /* Center relative to button */
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  #profileModal .modal-dialog {
+    right: 10px;
+    top: -80px;
+    max-width: 95%;
+  }
+}
+
+/* Add to your global CSS */
+#profileModal .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+
+#profileModal .btn-outline-danger:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  transition: all 0.3s ease;
+}
+
+.modal-content {
+  transition: transform 0.3s ease-out;
+}

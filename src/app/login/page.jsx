@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { loginApi } from '../services/allApi';
 import {  ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 
 function Login() {
@@ -72,15 +74,16 @@ function Login() {
 
   return (
 <>
-      <div className="container">
+<Header/>
+      <div className="container" style={{paddingTop:'95px'}}>
         <div className="login-box text-center">
         
-            <img
+            {/* <img
               src="assets/images/logo/log2.png"
               alt="Cabral Outdoors Logo"
               className="logo"
                onClick={() => window.location.href = '/'}
-            />
+            /> */}
           <h4 className="mb-3">Log in</h4>
           <form onSubmit={handleSubmit}>
             <div className="mb-3 text-start">
@@ -126,6 +129,7 @@ function Login() {
         </div>
   
       </div>
+      <Footer/>
       <ToastContainer />
 
 </>  );
