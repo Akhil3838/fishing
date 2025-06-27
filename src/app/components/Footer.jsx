@@ -39,10 +39,10 @@ function Footer() {
                 <aside className="widget">
                     <h3 className="widget-title">Useful Links</h3>
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/profile">User</a></li>
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/shippingPolicy">Shipping Policy</a></li>
+                        <li><a href="/refundPolicy">Refund Policy</a></li>
                         {/* <li><a href="index-2.html">News</a></li> */}
                     </ul>
                 </aside>

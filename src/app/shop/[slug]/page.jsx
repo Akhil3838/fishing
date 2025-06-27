@@ -1,62 +1,78 @@
-"use client"
-import React, { useEffect, useState, Suspense } from 'react'
-import { toast } from 'react-toastify'
-import { useParams } from 'next/navigation'
+"use client";
+import React, { useEffect, useState, Suspense } from 'react';
+import { toast } from 'react-toastify';
+import { useParams } from 'next/navigation';
 
-import Footer from '@/app/components/Footer'
-import Header from '@/app/components/Header'
-import ShopSidebar from '@/app/components/shop/ShopSidebar'
-import ShopProducts from '@/app/components/shop/ShopProducts'
-import { getAllProduct } from '@/app/services/allApi'
+import Footer from '@/app/components/Footer';
+import Header from '@/app/components/Header';
+import ShopSidebar from '@/app/components/shop/ShopSidebar';
+import ShopProducts from '@/app/components/shop/ShopProducts';
+import { getAllProduct } from '@/app/services/allApi';
 
 function ShoppingContent() {
-  const [products, setProducts] = useState([])
-  const [brands, setBrand] = useState([])
-  const [totalPages, setTotalPages] = useState(1)
-  const [page, setPage] = useState(1)
-  const [selectedBrands, setSelectedBrands] = useState([])
+  const [products, setProducts] = useState([]);
+  const [brands, setBrand] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [priceRange, setPriceRange] = useState([1000, 10000]);
+  const [sortValue, setSortValue] = useState("newtoOld");
+  const [variantSelections, setVariantSelections] = useState({
+    variant_attribute: [],
+    variant_option: [],
+  });
 
-  const params = useParams()
-  const { slug } = params
+  const params = useParams();
+  const { slug } = params;
 
-const allProducts = async (page, brands) => {
-  const token = sessionStorage.getItem("token")
+  const allProducts = async (
+    page,
+    brands,
+    minPrice = 0,
+    maxPrice = 10000,
+    sortValue = "newtoOld",
+    variants = { variant_attribute: [], variant_option: [] }
+  ) => {
+    const token = sessionStorage.getItem("token");
 
-  console.log("Fetching products with:", { slug, brands })
+    const reqHeader = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
 
-  const reqHeader = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  }
+    try {
+      const result = await getAllProduct(
+        page,
+        slug,
+        brands.join(','),
+        minPrice,
+        maxPrice,
+        sortValue,
+        variants,
+        reqHeader
+      );
 
-  try {
-    const result = await getAllProduct(
-      page,
-      slug,
-      brands.join(','),
-      reqHeader
-    )
+      setProducts(result.data.products);
+      setBrand(result.data.brands);
+      setTotalPages(parseInt(result.data.last_page) || 1);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      toast.error("Error fetching products");
+    }
+  };
 
-    console.log("Fetched Products:", result)
+  const handleVariantsChange = (selections) => {
+    console.log('Selected Variant Options:', selections);
+    setVariantSelections(selections);
+  };
 
-    setProducts(result.data.products)
-    setBrand(result.data.brands)
-
-    const totalPages = parseInt(result.data.last_page) || 1
-    setTotalPages(totalPages)
-  } catch (error) {
-    console.error("Error fetching products:", error)
-    toast.error("Error fetching products")
-  }
-}
   useEffect(() => {
-    setPage(1)
-  }, [slug, selectedBrands])
-console.log(totalPages);
+    setPage(1); // Reset to first page on filter change
+  }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
 
   useEffect(() => {
-    allProducts(page, selectedBrands)
-  }, [page, selectedBrands])
+    allProducts(page, selectedBrands, priceRange[0], priceRange[1], sortValue, variantSelections);
+  }, [page, selectedBrands, priceRange, sortValue, variantSelections]);
 
   return (
     <>
@@ -85,6 +101,9 @@ console.log(totalPages);
                 brands={brands}
                 onBrandsChange={setSelectedBrands}
                 selectedBrands={selectedBrands}
+                onPriceChange={setPriceRange}
+                slug={slug}
+                onVariantsChange={handleVariantsChange}
               />
             </div>
             <div className="col-lg-9 col-md-12">
@@ -93,6 +112,7 @@ console.log(totalPages);
                 totalPages={totalPages}
                 currentPage={page}
                 onPageChange={setPage}
+                onSortChange={setSortValue}
               />
             </div>
           </div>
@@ -100,7 +120,7 @@ console.log(totalPages);
       </section>
       <Footer />
     </>
-  )
+  );
 }
 
 function Shopping() {
@@ -108,7 +128,7 @@ function Shopping() {
     <Suspense fallback={<div>Loading...</div>}>
       <ShoppingContent />
     </Suspense>
-  )
+  );
 }
 
-export default Shopping
+export default Shopping;

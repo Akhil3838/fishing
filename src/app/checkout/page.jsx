@@ -150,6 +150,14 @@ function Checkout() {
                 email: order.notes?.email || "",
                 contact: order.notes?.phone || "",
             },
+             method: {
+    card: true,
+    netbanking: true,
+    upi: true,
+    wallet: true,
+    emi: true,        // ✅ Add this
+    paylater: true    // ✅ Add this
+  },
             theme: {
                 color: "#3399cc",
             },

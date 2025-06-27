@@ -1,3 +1,3 @@
 
 
-export const serverUrl ='https://thenextindia.com/scalesstest/api'
+export const serverUrl ='https://thenextindia.com/scaless/api'

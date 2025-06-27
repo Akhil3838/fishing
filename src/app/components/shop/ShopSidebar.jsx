@@ -1,15 +1,24 @@
 'use client';
-import { allCategoryApi } from '@/app/services/allApi';
+import { allCategoryApi, displayVarientApi } from '@/app/services/allApi';
 import React, { useEffect, useState } from 'react';
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
-const ShopSidebar = ({ 
-  brands, 
-  onCategoriesChange, 
+const ShopSidebar = ({
+  brands,
+  onCategoriesChange,
   onBrandsChange,
   selectedCategories = [],
-  selectedBrands = []
+  selectedBrands = [],
+  onVariantsChange,
+  onPriceChange,
+  slug
 }) => {
   const [categories, setCategories] = useState([]);
+  const [priceRange, setPriceRange] = useState([1000, 10000]);
+  const [selectedVariants, setSelectedVariants] = useState({});
+  const [variants, setVariants] = useState([]);
 
   const getCategory = async () => {
     try {
@@ -18,6 +27,15 @@ const ShopSidebar = ({
       setCategories(data);
     } catch (error) {
       console.error("Failed to fetch categories", error);
+    }
+  };
+
+  const getVarient = async () => {
+    try {
+      const result = await displayVarientApi({ category_slug: slug });
+      setVariants(result.data.variants || []);
+    } catch (error) {
+      console.error("Failed to fetch variants", error);
     }
   };
 
@@ -35,45 +53,50 @@ const ShopSidebar = ({
     onBrandsChange(newBrands);
   };
 
+  const handleVariantChange = (attribute, option) => {
+    setSelectedVariants(prev => {
+      const currentOptions = prev[attribute] || [];
+      const updatedOptions = currentOptions.includes(option)
+        ? currentOptions.filter(o => o !== option)
+        : [...currentOptions, option];
+
+      return { ...prev, [attribute]: updatedOptions };
+    });
+  };
+
+  useEffect(() => {
+    if (onVariantsChange) {
+      const variant_attribute = Object.keys(selectedVariants).filter(attr => selectedVariants[attr].length > 0);
+      const variant_option = variant_attribute.flatMap(attr => selectedVariants[attr]);
+
+      onVariantsChange({
+        variant_attribute,
+        variant_option
+      });
+    }
+  }, [selectedVariants]);
+
+  const handlePriceChange = (event, newValue) => {
+    setPriceRange(newValue);
+    if (onPriceChange) {
+      onPriceChange(newValue);
+    }
+  };
+
+  const formatPrice = (value) => {
+    return new Intl.NumberFormat('en-IN', {
+      maximumFractionDigits: 0
+    }).format(value);
+  };
+
   useEffect(() => {
     getCategory();
+    getVarient();
   }, []);
 
   return (
     <div className="shop-sidebar">
-      {/* Search */}
-      {/* <aside className="widget widget-search">
-        <form className="search-form" action="#" method="post">
-          <input type="search" name="s" placeholder="Enter keyword" />
-          <button type="submit" value="Search"><i className="nss-search"></i></button>
-        </form>
-      </aside> */}
-
-      {/* Categories */}
-      {/* <aside className="widget">
-        <h3 className="widget-title mt-3">Categories</h3>
-        <ul className="category-list">
-          {categories.length > 0 ? (
-            categories.map((cat) => (
-              <li key={cat.id} className="category-item" >
-                <label className="category-label">
-                  <input
-                    type="checkbox"
-                    checked={selectedCategories.includes(cat.id)}
-                    onChange={() => handleCategoryChange(cat.id)}
-                    className="category-checkbox"
-                  />
-                  <span className="category-name">{cat?.category_name}</span>
-                </label>
-              </li>
-            ))
-          ) : (
-            <li></li>
-          )}
-        </ul>
-      </aside> */}
-
-      {/* Brands */}
+      {/* Brands Widget */}
       <aside className="widget">
         <h3 className="widget-title">Brands</h3>
         <ul className="category-list">
@@ -92,72 +115,83 @@ const ShopSidebar = ({
               </li>
             ))
           ) : (
-            <li></li>
+            <li>No brands found</li>
           )}
         </ul>
       </aside>
 
-      {/* Filter */}
-      {/* <aside className="widget">
-        <h3 className="widget-title">Filter</h3>
-        <div className="price_slider_wrapper">
-          <form action="#" method="get" className="clearfix">
-            <div id="slider-range"></div>
-          </form>
-        </div>
-      </aside> */}
+      {/* Dynamic Variant Filters */}
+      {variants && variants.length > 0 && variants.map((variant, i) => (
+        <aside className="widget" key={i}>
+          <h3 className="widget-title">{variant.attribute_name}</h3>
+          <ul className="category-list">
+            {variant.options.map((option, j) => (
+              <li key={j} className="category-item">
+                <label className="category-label">
+                  <input
+                    type="checkbox"
+                    checked={(selectedVariants[variant.attribute_name] || []).includes(option)}
+                    onChange={() =>
+                      handleVariantChange(variant.attribute_name, option)
+                    }
+                    className="category-checkbox"
+                  />
+                  <span className="category-name">{option}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      ))}
 
-      {/* Best Sellers */}
-      {/* <BestSellersWidget /> */}
-
-      {/* Tags */}
+      {/* Price Range Filter */}
       <aside className="widget">
-        <h3 className="widget-title">Product tags</h3>
-        <div className="tagcloud">
-          <a href="#">Handle</a>
-          <a href="#">Fishing</a>
-          <a href="#">Reels</a>
-          <a href="#">Nets</a>
-          <a href="#">Safe</a>
-        </div>
+        <h3 className="widget-title">Price Range (₹)</h3>
+        <Box sx={{ width: '95%', padding: '0 10px', margin: '0 auto' }}>
+          <Slider
+            value={priceRange}
+            onChange={handlePriceChange}
+            valueLabelDisplay="auto"
+            min={0}
+            max={20000}
+            step={500}
+            valueLabelFormat={formatPrice}
+            sx={{
+              color: '#0d6efd',
+              height: 6,
+              '& .MuiSlider-thumb': {
+                width: 18,
+                height: 18,
+                backgroundColor: '#fff',
+                border: '2px solid #0d6efd',
+                '&:hover, &.Mui-focusVisible': {
+                  boxShadow: '0 0 0 4px rgba(13, 110, 253, 0.2)',
+                },
+              },
+              '& .MuiSlider-valueLabel': {
+                backgroundColor: '#0d6efd',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '0.75rem',
+                top: '-30px',
+                '&:before': {
+                  display: 'none'
+                }
+              },
+            }}
+          />
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3, mb: 1 }}>
+            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+              Min: ₹{formatPrice(priceRange[0])}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+              Max: ₹{formatPrice(priceRange[1])}
+            </Typography>
+          </Box>
+        </Box>
       </aside>
     </div>
   );
 };
-
-// const BestSellersWidget = () => {
-//   return (
-//     <aside className="widget">
-//       <h3 className="widget-title">Best Sellers</h3>
-//       <BestSellerItem 
-//         image="assets/images/product/b1.png" 
-//         name="Fishing Foldable" 
-//         price={35.00} 
-//       />
-//       <BestSellerItem 
-//         image="assets/images/product/b2.png" 
-//         name="Net Fishing Nets" 
-//         price={15.00} 
-//       />
-//       <BestSellerItem 
-//         image="assets/images/product/b3.png" 
-//         name="Telescoping Pole Handle" 
-//         price={32.00} 
-//       />
-//     </aside>
-//   );
-// };
-
-// const BestSellerItem = ({ image, name, price }) => {
-//   return (
-//     <div className="best-sale-item">
-//       <img src={image} alt="product" />
-//       <a href="single-product.html">{name}</a>
-//       <div className="product_price clearfix">
-//         <span className="price"><span><span>$</span>{price.toFixed(2)}</span></span>
-//       </div>
-//     </div>
-//   );
-// };
 
 export default ShopSidebar;

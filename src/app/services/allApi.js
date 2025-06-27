@@ -12,30 +12,56 @@ export const registerApi =async(reqBody)=>{
 }
 //all product
 
-export const getAllProduct = async (page = 1, category, brand, reqHeader) => {
-    let url = `${serverUrl}/get-all-products?page=${page}&limit=3`;
-      console.log(category,brand);
-      
-    // Append category and brand only if both exist
-    if (category && brand) {
-        url += `&category_slug=${category}&brand=${encodeURIComponent(brand)}`;
-    } else {
-        // Append category only if it's valid
-        if (category) {
-            url += `&category_slug=${category}`;
-        }
+export const getAllProduct = async (
+  page = 1,
+  category,
+  brand,
+  minPrice,
+  maxPrice,
+  sort,                    // ✅ sort
+  variantSelections = {},  // ✅ NEW
+  reqHeader
+) => {
+  let url = `${serverUrl}/get-all-products?page=${page}&limit=3`;
 
-        // Append brand only if it's valid
-        if (brand) {
-            url += `&brand=${encodeURIComponent(brand)}`;
-        }
-    }
+  if (category) {
+    url += `&category_slug=${category}`;
+  }
 
-    console.log("API Request URL:", url);
+  if (brand) {
+    url += `&brand=${encodeURIComponent(brand)}`;
+  }
 
-    return await commonApi('GET', url, "", reqHeader);
+  if (minPrice !== undefined && minPrice !== null) {
+    url += `&min_price=${minPrice}`;
+  }
+
+  if (maxPrice !== undefined && maxPrice !== null) {
+    url += `&max_price=${maxPrice}`;
+  }
+
+  if (sort) {
+    url += `&sort=${sort}`;
+  }
+
+  // ✅ Add variant attributes and options to URL
+  if (variantSelections.variant_attribute?.length) {
+    url += `&variant_attribute=${variantSelections.variant_attribute.join(',')}`;
+  }
+
+  if (variantSelections.variant_option?.length) {
+    url += `&variant_option=${variantSelections.variant_option.join(',')}`;
+  }
+
+  console.log("API Request URL:", url);
+
+  return await commonApi('GET', url, "", reqHeader);
 };
 
+//varient to add sidebar
+export const displayVarientApi =async(reqBody)=>{
+    return await commonApi('POST',`${serverUrl}/get-all-varients`,reqBody,"")
+}
 //add-review
 export const addReviewApi =async(reqBody,reqHeader)=>{
     console.log(reqBody);
@@ -219,6 +245,9 @@ export const NewproctApi =async(category)=>{
 export const HotproductApi =async()=>{
     return await commonApi('GET',`${serverUrl}/trending-products`,"","")
 }
+
+
+
 
 
 

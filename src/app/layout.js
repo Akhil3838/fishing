@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+         <script src="https://cdn.razorpay.com/widgets/affordability/affordability.js"></script>
       </head>
 
       <body>

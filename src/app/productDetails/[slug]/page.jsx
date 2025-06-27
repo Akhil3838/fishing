@@ -148,9 +148,58 @@ function ProductDetails() {
               <div className="tab-content">
                 {activeTab === 'description' && (
                   <div className="tab-pane fade show active">
-                    <div className="tab-description">
-                      <p>{product.description}</p>
-                    </div>
+<div className="tab-description">
+  <p className="table-description">{product.description}</p>
+
+  <div className="table-container ">
+    <table className="custom-table start">
+      <thead>
+        <tr>
+          <th>Model No.</th>
+          <th>Length</th>
+          <th>Weight (apprx)</th>
+          <th>Sections</th>
+          <th>Rod Action</th>
+          <th>P.E</th>
+          <th>Cast Weight</th>
+          <th>No. of Guides</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>IND-3M-702MH</td>
+          <td>7Ft</td>
+          <td>135g</td>
+          <td>2</td>
+          <td>Regular<br />Fast</td>
+          <td>1–2.5</td>
+          <td>5–40Gm</td>
+          <td>6+1</td>
+        </tr>
+        <tr>
+          <td>IND-802MH</td>
+          <td>8Ft</td>
+          <td>186g</td>
+          <td>2</td>
+          <td>Regular<br />Fast</td>
+          <td>1.5–3</td>
+          <td>8–60Gm</td>
+          <td>6+1</td>
+        </tr>
+        <tr>
+          <td>IND-902MH</td>
+          <td>9Ft</td>
+          <td>220g</td>
+          <td>2</td>
+          <td>Regular<br />Fast</td>
+          <td>1.5–3</td>
+          <td>10–70Gm</td>
+          <td>6+1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
                   </div>
                 )}
 

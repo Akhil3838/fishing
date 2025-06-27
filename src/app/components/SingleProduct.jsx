@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getPriceDetailsApi } from '../services/allApi';
+import RazorpayEMIWidget from './RazorpayEMIWidget'; // ✅ Add this
 
 function SingleProduct({ product, variants }) {
   const [selectedVariants, setSelectedVariants] = useState({});
@@ -52,6 +53,9 @@ function SingleProduct({ product, variants }) {
       });
     }
   };
+  
+
+
   
   // Group variant options by attribute_name
   const groupedVariants = variants.reduce((acc, curr) => {
@@ -189,6 +193,12 @@ console.log(product);
                 <a target="_blank" href="https://www.google.com/"><i className="nss-google-plus-g"></i></a>
               </div>
             </div>
+     {/* Razorpay EMI Widget placed after social icons */}
+{price && !isNaN(price) && (
+  <div className="razorpay-widget border rounded p-3 mt-4 shadow-sm">
+    <RazorpayEMIWidget amount={price * 100} />
+  </div>
+)}
           </div>
         </div>
       </div>
