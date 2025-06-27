@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { NewproctApi } from '../services/allApi';
 import Link from 'next/link';
 
 function Newproducts({ activeCategory }) {
   const [products, setProducts] = useState([]);
 
-  const categoryProduct = async () => {
+  const categoryProduct = useCallback(async () => {
     try {
       console.log("Fetching products for category:", activeCategory);
       const result = await NewproctApi(activeCategory);
@@ -22,69 +22,67 @@ function Newproducts({ activeCategory }) {
       console.error("Error fetching products:", error);
       setProducts([]);
     }
-  };
+  }, [activeCategory]);
 
   useEffect(() => {
     if (activeCategory) {
       categoryProduct();
     }
-  }, [activeCategory]);
+  }, [activeCategory, categoryProduct]);
 
   return (
-    <>
-      <div className="tab-content">
-        <div className="tab-pane fade show in active" id="all" role="tabpanel">
-          <div className="row">
-            {products.length > 0 ? (
-              products.map((product, index) => (
-                <div className="col-6 col-md-6 col-lg-3" key={index}>
-                  <div className="product-item-1 text-center">
-                    <div className="product-thumb">
-                      <img
-                        src={product.icon || "/assets/images/product/default.png"}
-                        alt={product.name}
-                      />
-                      <div className="product-meta">
-                        <Link href={`/productDetails/${product?.slug}`} className="view">
-                          <i className="nss-eye1"></i>
-                        </Link>
-                      </div>
+    <div className="tab-content">
+      <div className="tab-pane fade show in active" id="all" role="tabpanel">
+        <div className="row">
+          {products.length > 0 ? (
+            products.map((product, index) => (
+              <div className="col-6 col-md-6 col-lg-3" key={index}>
+                <div className="product-item-1 text-center">
+                  <div className="product-thumb">
+                    <img
+                      src={product.icon || "/assets/images/product/default.png"}
+                      alt={product.name}
+                    />
+                    <div className="product-meta">
+                      <Link href={`/productDetails/${product?.slug}`} className="view">
+                        <i className="nss-eye1"></i>
+                      </Link>
                     </div>
-                    <div className="product-details">
-                      <h5>
-                        <Link href={`/productDetails/${product._id}`}>
-                          {product?.product_name || "Unnamed Product"}
-                        </Link>
-                      </h5>
-                      <div className="ratings">
-                        <i className="icon_star_alt"></i>
-                        <i className="icon_star_alt"></i>
-                        <i className="icon_star_alt"></i>
-                        <i className="icon_star_alt"></i>
-                        <i className="icon_star_alt"></i>
-                        <span>({product.rating || 1})</span>
-                      </div>
-                      <div className="product_price clearfix">
-                        <span className="price">
-                          <span>
-                            ₹
-                            {product?.sku_new?.[0]?.special_price || 'N/A'}
-                          </span>
+                  </div>
+                  <div className="product-details">
+                    <h5>
+                      <Link href={`/productDetails/${product._id}`}>
+                        {product?.product_name || "Unnamed Product"}
+                      </Link>
+                    </h5>
+                    <div className="ratings">
+                      <i className="icon_star_alt"></i>
+                      <i className="icon_star_alt"></i>
+                      <i className="icon_star_alt"></i>
+                      <i className="icon_star_alt"></i>
+                      <i className="icon_star_alt"></i>
+                      <span>({product.rating || 1})</span>
+                    </div>
+                    <div className="product_price clearfix">
+                      <span className="price">
+                        <span>
+                          ₹
+                          {product?.sku_new?.[0]?.special_price || 'N/A'}
                         </span>
-                      </div>
+                      </span>
                     </div>
                   </div>
                 </div>
-              ))
-            ) : (
-              <div className="col-12 text-center">
-                <p>No products available.</p>
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className="col-12 text-center">
+              <p>No products available.</p>
+            </div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,28 +1,29 @@
+'use client';
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function PrivacyAndPolicy() {
   return (
-<>
-<Header/>
-      <div className="container" style={{paddingTop:'170px',paddingBottom:'10px'}}>
+    <>
+      <Header />
+      <div className="container" style={{ paddingTop: '170px', paddingBottom: '10px' }}>
         <div className="row justify-content-center">
           <div className="col-lg-10">
             <div className="text-center mb-5">
               <h1 className="fw-bold text-primary">Privacy Policy</h1>
               <p className="lead">Last Updated: {new Date().toLocaleDateString()}</p>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h2 className="fw-bold mb-3 text-primary">Introduction</h2>
                 <p>
-                  Scales ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or purchase our fishing scale products.
+                  Scales (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or purchase our fishing scale products.
                 </p>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Information We Collect</h3>
@@ -43,7 +44,7 @@ function PrivacyAndPolicy() {
                 </ul>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">How We Use Your Information</h3>
@@ -57,7 +58,7 @@ function PrivacyAndPolicy() {
                 </ol>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Data Sharing and Disclosure</h3>
@@ -73,7 +74,7 @@ function PrivacyAndPolicy() {
                 </p>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Data Security</h3>
@@ -91,7 +92,7 @@ function PrivacyAndPolicy() {
                 </p>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Your Rights</h3>
@@ -115,7 +116,7 @@ function PrivacyAndPolicy() {
                 </p>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Cookies and Tracking</h3>
@@ -132,25 +133,25 @@ function PrivacyAndPolicy() {
                 </p>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
-                <h3 className="fw-bold mb-3">Children's Privacy</h3>
+                <h3 className="fw-bold mb-3">Children&apos;s Privacy</h3>
                 <p className="mb-0">
                   Our services are not directed to individuals under 16. We do not knowingly collect personal information from children.
                 </p>
               </div>
             </div>
-  
+
             <div className="card mb-4 border-0 shadow-sm">
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Policy Changes</h3>
                 <p className="mb-0">
-                  We may update this policy periodically. The updated version will be posted on our website with a new "Last Updated" date.
+                  We may update this policy periodically. The updated version will be posted on our website with a new &quot;Last Updated&quot; date.
                 </p>
               </div>
             </div>
-  
+
             <div className="alert alert-info mt-4">
               <div className="d-flex align-items-center">
                 <i className="bi bi-info-circle-fill me-3 fs-4"></i>
@@ -163,11 +164,12 @@ function PrivacyAndPolicy() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
-  <Footer/>
-</>
+      <Footer />
+    </>
   );
 }
 

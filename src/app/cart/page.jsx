@@ -90,7 +90,7 @@ function Cart() {
   </svg>
 </div>
 <h3 className="mb-3">Your Cart is Empty</h3>
-<p className="text-muted">Looks like you haven't added anything to your cart yet</p>
+<p className="text-muted">Looks like you havent added anything to your cart yet</p>
 
               {/* <a href="/shopping[fishing-reels]" className="btn btn-primary mt-3">Continue Shopping</a> */}
             </div>
