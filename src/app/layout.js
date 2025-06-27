@@ -4,7 +4,6 @@ import Contextshare from "./context/Contextshare";
 export const metadata = {
   title: "Scaless",
   description: "fish is the best",
- 
 };
 
 export default function RootLayout({ children }) {
@@ -30,8 +29,11 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/lightcase.css" />
         <link rel="stylesheet" href="/assets/css/theme.css" />
         <link rel="stylesheet" href="/assets/css/responsive.css" />
-                <link rel="shortcut icon" type="image/x-icon" href="/assets/images/logo/logo01.png"/>
-
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="/assets/images/logo/logo01.png"
+        />
 
         {/* FontAwesome CDN */}
         <link
@@ -41,11 +43,16 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-         <script src="https://cdn.razorpay.com/widgets/affordability/affordability.js"></script>
       </head>
 
       <body>
         <Contextshare>{children}</Contextshare>
+
+        {/* Razorpay Script (Moved from head to use Script tag) */}
+        <Script
+          src="https://cdn.razorpay.com/widgets/affordability/affordability.js"
+          strategy="afterInteractive"
+        />
 
         {/* Bootstrap 5 JS */}
         <Script
