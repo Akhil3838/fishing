@@ -28,7 +28,7 @@ function Categorybar({ menuOpen, setMenuOpen }) {
   };
 
   return (
-    <nav className="custom-navbar pt-2">
+    <nav className="custom-navbar pt-3">
       <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
         {categories.map((category, index) => (
           <li key={index} className="nav-item">
@@ -40,7 +40,7 @@ function Categorybar({ menuOpen, setMenuOpen }) {
                 >
                   {category.category_name} ▾
                 </button>
-                <div className="dropdown-content bg-light">
+                <div className="dropdown-content bg-light py-2">
                   {category.subcategories.map((sub, subIndex) => (
                     <Link 
                       key={subIndex} 

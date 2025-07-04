@@ -64,7 +64,7 @@ function Cart() {
   return (
     <>
       <Header />
-      <section className="cart-section" style={{paddingTop:'160px'}}>
+      <section className="cart-section" style={{paddingTop:'180px'}}>
         <div className="container">
           {cart.length > 0 ? (
             <div className="row">

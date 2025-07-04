@@ -19,6 +19,8 @@ const ShopSidebar = ({
   const [priceRange, setPriceRange] = useState([1000, 10000]);
   const [selectedVariants, setSelectedVariants] = useState({});
   const [variants, setVariants] = useState([]);
+  const [visibleBrands, setVisibleBrands] = useState(4);
+  const [visibleOptions, setVisibleOptions] = useState({}); // Track visible options per variant
 
   const getCategory = async () => {
     try {
@@ -34,6 +36,13 @@ const ShopSidebar = ({
     try {
       const result = await displayVarientApi({ category_slug: slug });
       setVariants(result.data.variants || []);
+      
+      // Initialize visible options for each variant
+      const initialVisibility = {};
+      result.data.variants?.forEach(variant => {
+        initialVisibility[variant.attribute_name] = 4;
+      });
+      setVisibleOptions(initialVisibility);
     } catch (error) {
       console.error("Failed to fetch variants", error);
     }
@@ -62,6 +71,13 @@ const ShopSidebar = ({
 
       return { ...prev, [attribute]: updatedOptions };
     });
+  };
+
+  const toggleVariantOptions = (attribute) => {
+    setVisibleOptions(prev => ({
+      ...prev,
+      [attribute]: prev[attribute] === 4 ? variants.find(v => v.attribute_name === attribute)?.options.length || 4 : 4
+    }));
   };
 
   useEffect(() => {
@@ -96,54 +112,6 @@ const ShopSidebar = ({
 
   return (
     <div className="shop-sidebar">
-      {/* Brands Widget */}
-      <aside className="widget">
-        <h3 className="widget-title">Brands</h3>
-        <ul className="category-list">
-          {brands && brands.length > 0 ? (
-            brands.map((b, index) => (
-              <li key={index} className="category-item">
-                <label className="category-label">
-                  <input
-                    type="checkbox"
-                    checked={selectedBrands.includes(b)}
-                    onChange={() => handleBrandChange(b)}
-                    className="category-checkbox"
-                  />
-                  <span className="category-name">{b}</span>
-                </label>
-              </li>
-            ))
-          ) : (
-            <li>No brands found</li>
-          )}
-        </ul>
-      </aside>
-
-      {/* Dynamic Variant Filters */}
-      {variants && variants.length > 0 && variants.map((variant, i) => (
-        <aside className="widget" key={i}>
-          <h3 className="widget-title">{variant.attribute_name}</h3>
-          <ul className="category-list">
-            {variant.options.map((option, j) => (
-              <li key={j} className="category-item">
-                <label className="category-label">
-                  <input
-                    type="checkbox"
-                    checked={(selectedVariants[variant.attribute_name] || []).includes(option)}
-                    onChange={() =>
-                      handleVariantChange(variant.attribute_name, option)
-                    }
-                    className="category-checkbox"
-                  />
-                  <span className="category-name">{option}</span>
-                </label>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      ))}
-
       {/* Price Range Filter */}
       <aside className="widget">
         <h3 className="widget-title">Price Range (₹)</h3>
@@ -180,7 +148,7 @@ const ShopSidebar = ({
               },
             }}
           />
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3, mb: 1 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between',  mb: 1 }}>
             <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
               Min: ₹{formatPrice(priceRange[0])}
             </Typography>
@@ -189,7 +157,93 @@ const ShopSidebar = ({
             </Typography>
           </Box>
         </Box>
+
       </aside>
+                      <h3 className="widget-title"></h3>
+
+
+      {/* Brands Widget */}
+      <aside className="widget">
+        <h3 className="widget-title">Brands</h3>
+        <ul className="category-list">
+          {brands && brands.length > 0 ? (
+            <>
+              {/* Show first 4 brands */}
+              {brands.slice(0, visibleBrands).map((b, index) => (
+                <li key={index} className="category-item">
+                  <label className="category-label">
+                    <input
+                      type="checkbox"
+                      checked={selectedBrands.includes(b)}
+                      onChange={() => handleBrandChange(b)}
+                      className="category-checkbox"
+                    />
+                    <span className="category-name">{b}</span>
+                  </label>
+                </li>
+              ))}
+              
+              {/* Show "See more" link if there are more brands */}
+              {brands.length > 4 && (
+                <li className="category-item">
+                  <button 
+                    onClick={() => setVisibleBrands(visibleBrands === 4 ? brands.length : 4)}
+                    className="see-more-link"
+                  >
+                    {visibleBrands === 4 ? 'See more (+' + (brands.length - 4) + ')' : 'See less'}
+                  </button>
+                </li>
+              )}
+            </>
+          ) : (
+            <li>No brands found</li>
+          )}
+        </ul>
+      </aside>
+
+      {/* Dynamic Variant Filters */}
+      {variants && variants.length > 0 && variants.map((variant, i) => {
+        const currentVisible = visibleOptions[variant.attribute_name] || 4;
+        const totalOptions = variant.options.length;
+        
+        return (
+          <aside className="widget" key={i}>
+            <h3 className="widget-title">{variant.attribute_name}</h3>
+            <ul className="category-list">
+              {/* Show limited options */}
+              {variant.options.slice(0, currentVisible).map((option, j) => (
+                <li key={j} className="category-item">
+                  <label className="category-label">
+                    <input
+                      type="checkbox"
+                      checked={(selectedVariants[variant.attribute_name] || []).includes(option)}
+                      onChange={() =>
+                        handleVariantChange(variant.attribute_name, option)
+                      }
+                      className="category-checkbox"
+                    />
+                    <span className="category-name">{option}</span>
+                  </label>
+                </li>
+              ))}
+              
+              {/* Show "See more" link if there are more options */}
+              {totalOptions > 4 && (
+                <li className="category-item">
+                  <button 
+                    onClick={() => toggleVariantOptions(variant.attribute_name)}
+                    className="see-more-link"
+                  >
+                    {currentVisible === 4 
+                      ? `See more (+${totalOptions - 4})` 
+                      : 'See less'}
+                  </button>
+                </li>
+              )}
+            </ul>
+          </aside>
+        );
+      })}
     </div>
   );
 };

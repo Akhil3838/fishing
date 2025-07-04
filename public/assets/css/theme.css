@@ -5727,7 +5727,7 @@ blockquote:after {
   position: absolute;
   background-color: white;
   color: black;
-  min-width: 160px;
+  min-width: 190px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
@@ -6023,4 +6023,18 @@ z-index: 1999 !important;
   50% {
     transform: translateY(-10px);
   }
+}
+
+.see-more-link {
+  background: none;
+  border: none;
+  color: #0066cc;
+  cursor: pointer;
+  padding: 5px 0;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.see-more-link:hover {
+  color: #004499;
 }
