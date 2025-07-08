@@ -22,7 +22,7 @@ export const getAllProduct = async (
   variantSelections = {},  // ✅ NEW
   reqHeader
 ) => {
-  let url = `${serverUrl}/get-all-products?page=${page}&limit=12`;
+  let url = `${serverUrl}/get-all-products?page=${page}&limit=9`;
 
   if (category) {
     url += `&category_slug=${category}`;
@@ -120,7 +120,7 @@ export const deleteCartApi =async(reqBody,reqHeader)=>{
 export const updateCartApi =async(reqBody,reqHeader)=>{
     return await commonApi('POST',`${serverUrl}/update-cart`,reqBody,reqHeader)
 }
-
+ 
 //all category
 
 export const allCategoryApi =async()=>{

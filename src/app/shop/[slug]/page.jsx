@@ -96,7 +96,7 @@ function ShoppingContent() {
 
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 d-none d-md-block">
               <ShopSidebar
                 brands={brands}
                 onBrandsChange={setSelectedBrands}
@@ -108,6 +108,9 @@ function ShoppingContent() {
             </div>
             <div className="col-lg-9 col-md-12">
               <ShopProducts
+               brands={brands}
+                onBrandsChange={setSelectedBrands}
+                selectedBrands={selectedBrands}
                 products={products}
                 totalPages={totalPages}
                 currentPage={page}

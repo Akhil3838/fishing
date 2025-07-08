@@ -6038,3 +6038,7 @@ z-index: 1999 !important;
 .see-more-link:hover {
   color: #004499;
 }
+
+.form-select{
+  font-weight: bolder !important;
+}

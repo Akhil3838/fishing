@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Bootstrap 5.3.6 CSS via CDN */}
+        {/* Bootstrap 5.3.6 CSS */}
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -29,6 +29,8 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/lightcase.css" />
         <link rel="stylesheet" href="/assets/css/theme.css" />
         <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+        {/* Favicon */}
         <link
           rel="shortcut icon"
           type="image/x-icon"
@@ -46,21 +48,22 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
+        {/* Context Provider */}
         <Contextshare>{children}</Contextshare>
 
-        {/* Razorpay Script (Moved from head to use Script tag) */}
+        {/* Razorpay Script */}
         <Script
           src="https://cdn.razorpay.com/widgets/affordability/affordability.js"
           strategy="afterInteractive"
         />
 
-        {/* Bootstrap 5 JS */}
+        {/* ✅ Bootstrap 5 JS (ONLY ONCE) */}
         <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
           strategy="afterInteractive"
         />
 
-        {/* Additional Scripts */}
+        {/* Additional JS Files */}
         <Script src="/assets/js/jquery.js" strategy="afterInteractive" />
         <Script src="/assets/js/jquery.appear.js" strategy="afterInteractive" />
         <Script src="/assets/js/owl.carousel.min.js" strategy="afterInteractive" />

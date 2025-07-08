@@ -78,6 +78,7 @@ function SingleProduct({ product, variants }) {
       const reqBody = { variant_option_ids: variantIds };
       const response = await getPriceDetailsApi(reqBody);
       setImg(response.data);
+    
       
       
       setPrice(response.data.sku?.special_price || "N/A");
