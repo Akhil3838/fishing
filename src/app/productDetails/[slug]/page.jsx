@@ -20,6 +20,7 @@ function ProductDetails() {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
   const [viewReview, setViewReview] = useState([]);
+const [productPrice, setProductPrice] = useState("");
 
   useEffect(() => {
     async function fetchProduct() {
@@ -116,14 +117,20 @@ function ProductDetails() {
   if (!product) {
     return <div></div>;
   }
+console.log(productPrice);
 
   return (
     <>
       <Header />
 
-      <section className="singleproduct-section py-5">
+      <section className="singleproduct-section" style={{paddingTop:'80px'}}>
         <div className="container">
-          <SingleProduct product={product} variants={variants} />
+          <SingleProduct 
+  product={product} 
+  variants={variants} 
+  onPriceChange={(newPrice) => setProductPrice(newPrice)} 
+/>
+
 
           <div className="row mt-4">
             <div className="col-lg-12">
@@ -149,80 +156,43 @@ function ProductDetails() {
                 {activeTab === 'description' && (
                   <div className="tab-pane fade show active">
 <div className="tab-description">
-  <p className="table-description">{product.description}</p>
+  <p className="table-description text-start">{product.description}</p>
 
-  <div className="table-container ">
-    <table className="custom-table start">
-      <thead>
-        <tr>
-          <th>Model No.</th>
-          <th>Length</th>
-          <th>Weight (apprx)</th>
-          <th>Sections</th>
-          <th>Rod Action</th>
-          <th>P.E</th>
-          <th>Cast Weight</th>
-          <th>No. of Guides</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>IND-3M-702MH</td>
-          <td>7Ft</td>
-          <td>135g</td>
-          <td>2</td>
-          <td>Regular<br />Fast</td>
-          <td>1–2.5</td>
-          <td>5–40Gm</td>
-          <td>6+1</td>
-        </tr>
-        <tr>
-          <td>IND-802MH</td>
-          <td>8Ft</td>
-          <td>186g</td>
-          <td>2</td>
-          <td>Regular<br />Fast</td>
-          <td>1.5–3</td>
-          <td>8–60Gm</td>
-          <td>6+1</td>
-        </tr>
-        <tr>
-          <td>IND-902MH</td>
-          <td>9Ft</td>
-          <td>220g</td>
-          <td>2</td>
-          <td>Regular<br />Fast</td>
-          <td>1.5–3</td>
-          <td>10–70Gm</td>
-          <td>6+1</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
                   </div>
                 )}
 
                 {activeTab === 'additional' && (
                   <div className="tab-pane fade show active">
-                    <div className="tab-info">
-                      <table className="table">
-                        <tbody>
-                          <tr>
-                            <th>Size</th>
-                            <td>{product.size}</td>
-                          </tr>
-                          <tr>
-                            <th>Weight</th>
-                            <td>{product.weight}</td>
-                          </tr>
-                          <tr>
-                            <th>Color</th>
-                            <td>{product.color}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+  <div className="table-container my-2 ">
+    <table className="custom-table start">
+      <thead>
+        <tr>
+          <th>Model No.</th>
+          <th>Length</th>
+          <th>Weight (apprx)</th>
+          {/* <th>Sections</th> */}
+          <th>Rod Action</th>
+          <th>lure weight(LB)</th>
+          <th>line Weight(GM)</th>
+          {/* <th>No. of Guides</th> */}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>IND-3M-702MH</td>
+<td>{productPrice?.data?.sku?.combination_set ?? '--'}</td>
+          <td> {productPrice?.data?.sku?.weight??'--'}</td>
+          {/* <td>2</td> */}
+          <td>Regular<br />Fast</td>
+          <td>{productPrice?.data?.sku?.lure_weight??'--'}</td>
+          <td>{productPrice?.data?.sku?.line_weight??'--'}</td>
+          {/* <td>6+1</td> */}
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
                   </div>
                 )}
 
