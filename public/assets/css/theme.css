@@ -3144,7 +3144,7 @@ footer .widget.widget_mc4wp_form_widget{
 .productSlide{
     position: relative;
     text-align: center;
-    border: 1px solid #E2EEFF;
+    /* border: 1px solid #E2EEFF; */
     padding: 60px 30px;
 }
 .sp_img{
@@ -5277,43 +5277,50 @@ blockquote:after {
 }
 /* .......................................................................................................... */
 /* Slider specific styles */
+/* Slider specific styles */
 .productSlide {
   position: relative;
+  display: flex; /* Added to position indicators inside */
 }
 
 .sp_img {
   display: none;
+  width: 100%; /* Take full width of container */
 }
 
 .sp_img.active {
   display: block;
 }
 
-/* .sp_img img {
-  width: 100%;
-  height: 500px;
-} */
-
-.indicator-slider {
+/* Vertical indicator styles */
+.indicator-slider-vertical {
+  position: absolute;
+  left: 10px;
+  top: 10px;
   display: flex;
+  flex-direction: column;
   padding: 0;
-  margin: 15px 0 0;
+  margin: 0;
   list-style: none;
   gap: 10px;
+  z-index: 10; /* Ensure it appears above the image */
 }
 
-.indicator-slider li {
-  width: 60px;
+.indicator-slider-vertical li {
+  width: 75px;
   height: 60px;
   cursor: pointer;
   border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  padding: 2px;
 }
 
-.indicator-slider li.active {
+.indicator-slider-vertical li.active {
   border-color: #000;
+  background: rgba(255, 255, 255, 0.9); /* Less transparent when active */
 }
 
-.indicator-slider img {
+.indicator-slider-vertical img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -5321,21 +5328,16 @@ blockquote:after {
 
 /* Mobile-specific styles */
 @media (max-width: 767px) {
-  .indicator-slider li {
-    flex: 0 0 50px; /* Slightly smaller on mobile */
-    width: 50px;
-    height: 50px;
-    padding-left: 10px;
-    display: none;
+  .indicator-slider-vertical li {
+    width: 45px;
+    height: 45px;
   }
   
-  .indicator-slider li.active {
-    border: 2px solid #000; /* More visible border on mobile */
-    border-radius: 2px; /* Optional: slight rounding */
-  }
-  
-  .indicator-slider {
-    padding-bottom: 5px; /* Give space for scroll if needed */
+  .indicator-slider-vertical {
+    gap: 5px;
+    left: 5px;
+    top: 5px;
+    margin-top: 40px;
   }
 }
 /* ................................profile....................................................................................... */
@@ -6042,3 +6044,5 @@ z-index: 1999 !important;
 .form-select{
   font-weight: bolder !important;
 }
+
+/* ..........................product details .................... */

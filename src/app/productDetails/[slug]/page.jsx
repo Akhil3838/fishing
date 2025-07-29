@@ -121,7 +121,7 @@ console.log(productPrice);
 
   return (
     <>
-      <Header />
+      <Header/>
 
       <section className="singleproduct-section" style={{paddingTop:'80px'}}>
         <div className="container">
@@ -131,154 +131,160 @@ console.log(productPrice);
   onPriceChange={(newPrice) => setProductPrice(newPrice)} 
 />
 
-
-          <div className="row mt-4">
-            <div className="col-lg-12">
-              <ul className="productTabs nav nav-tabs mb-3">
-                <li className="nav-item">
-                  <a className={`nav-link ${activeTab === 'description' ? 'active' : ''}`} onClick={() => setActiveTab('description')} role="button">
-                    Description
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`} onClick={() => setActiveTab('additional')} role="button">
-                    Additional Information
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`} onClick={() => setActiveTab('reviews')} role="button">
-                    Reviews ({viewReview?.length || 0})
-                  </a>
-                </li>
-              </ul>
-
-              <div className="tab-content">
-                {activeTab === 'description' && (
-                  <div className="tab-pane fade show active">
-<div className="tab-description">
-  <p className="table-description text-start">{product.description}</p>
-
-</div>
-                  </div>
-                )}
-
-                {activeTab === 'additional' && (
-                  <div className="tab-pane fade show active">
-  <div className="table-container my-2 ">
-    <table className="custom-table start">
-      <thead>
-        <tr>
-          <th>Model No.</th>
-          <th>Length</th>
-          <th>Weight (apprx)</th>
-          {/* <th>Sections</th> */}
-          <th>Rod Action</th>
-          <th>lure weight(LB)</th>
-          <th>line Weight(GM)</th>
-          {/* <th>No. of Guides</th> */}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>IND-3M-702MH</td>
-<td>{productPrice?.data?.sku?.combination_set ?? '--'}</td>
-          <td> {productPrice?.data?.sku?.weight??'--'}</td>
-          {/* <td>2</td> */}
-          <td>Regular<br />Fast</td>
-          <td>{productPrice?.data?.sku?.lure_weight??'--'}</td>
-          <td>{productPrice?.data?.sku?.line_weight??'--'}</td>
-          {/* <td>6+1</td> */}
-        </tr>
-       
-      </tbody>
-    </table>
-  </div>
-                  </div>
-                )}
-
-{activeTab === 'reviews' && (
-  <div className="tab-pane fade show active">
-    <div className="tab-info">
-      <h5 className="mb-3">Customer Reviews</h5>
-
-      {viewReview && viewReview.length > 0 ? (
-        viewReview.map((review, index) => (
-          <div key={index} className="mb-3 p-3 border rounded shadow-sm">
-            <p className="mb-1"><strong>{review.name}</strong></p>
-            <p className="mb-1">
-              {'★'.repeat(review.rating || 0)}
-              {'☆'.repeat(5 - (review.rating || 0))}
-            </p>
-            <p className="mb-0">{review.comment}</p>
-          </div>
-        ))
-      ) : (
-        <p>No reviews yet.</p>
-      )}
-
-      <hr className="my-4" />
-
-      {product?.allow_review ? (
-        <>
-          <h6>Add Your Review</h6>
-          <form onSubmit={handleReviewSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Your Rating</label>
-              <div>
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <span
-                    key={star}
-                    style={{
-                      cursor: 'pointer',
-                      fontSize: '1.5rem',
-                      color: star <= rating ? '#ffc107' : '#e4e5e9'
-                    }}
-                    onClick={() => setRating(star)}
-                  >
-                    ★
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="reviewerName" className="form-label">Your Name</label>
-              <input
-                type="text"
-                id="reviewerName"
-                className="form-control"
-                value={reviewerName}
-                onChange={(e) => setReviewerName(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="reviewText" className="form-label">Your Review</label>
-              <textarea
-                id="reviewText"
-                className="form-control"
-                rows="3"
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" className="btn btn-primary">Submit Review</button>
-          </form>
-        </>
-      ) : (
-        <p className="text-muted">Reviews are not allowed for this product.</p>
-      )}
-    </div>
-  </div>
-)}
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+
+<div className='border-bottom' style={{backgroundColor:'rgb(247 247 247)'}}>
+  <div className='container'>
+              <div className="row mt-4 ">
+                <div className="col-lg-12">
+                  <ul className="productTabs nav nav-tabs mb-3">
+                    <li className="nav-item">
+                      <a className={`nav-link ${activeTab === 'description' ? 'active' : ''}`} onClick={() => setActiveTab('description')} role="button">
+                        Description
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`} onClick={() => setActiveTab('additional')} role="button">
+                        Additional Information
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`} onClick={() => setActiveTab('reviews')} role="button">
+                        Reviews ({viewReview?.length || 0})
+                      </a>
+                    </li>
+                  </ul>
+    
+                  <div className="tab-content">
+                    {activeTab === 'description' && (
+                      <div className="tab-pane fade show active">
+    <div className="tab-description">
+      <p className="table-description text-start">{product.description}</p>
+    
+    </div>
+                      </div>
+                    )}
+    
+                    {activeTab === 'additional' && (
+                      <div className="tab-pane fade show active">
+      <div className="table-container my-2 ">
+        <table className="custom-table start">
+          <thead>
+            <tr>
+              <th>Model No.</th>
+              <th>Length</th>
+              <th>Weight (apprx)</th>
+              {/* <th>Sections</th> */}
+              <th>Rod Action</th>
+              <th>lure weight(LB)</th>
+              <th>line Weight(GM)</th>
+              {/* <th>No. of Guides</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{productPrice?.data?.sku?.model_no ?? '--'}</td>
+    <td>{productPrice?.data?.sku?.combination_set ?? '--'}</td>
+              <td> {productPrice?.data?.sku?.weight??'--'}</td>
+              {/* <td>2</td> */}
+              <td>Regular<br />Fast</td>
+              <td>{productPrice?.data?.sku?.lure_weight??'--'}</td>
+              <td>{productPrice?.data?.sku?.line_weight??'--'}</td>
+              {/* <td>6+1</td> */}
+            </tr>
+           
+          </tbody>
+        </table>
+      </div>
+                      </div>
+                    )}
+    
+    {activeTab === 'reviews' && (
+      <div className="tab-pane fade show active">
+        <div className="tab-info">
+          <h5 className="mb-3">Customer Reviews</h5>
+    
+          {viewReview && viewReview.length > 0 ? (
+            viewReview.map((review, index) => (
+              <div key={index} className="mb-3 p-3 border rounded shadow-sm">
+                <p className="mb-1"><strong>{review.name}</strong></p>
+                <p className="mb-1">
+                  {'★'.repeat(review.rating || 0)}
+                  {'☆'.repeat(5 - (review.rating || 0))}
+                </p>
+                <p className="mb-0">{review.comment}</p>
+              </div>
+            ))
+          ) : (
+            <p>No reviews yet.</p>
+          )}
+    
+          <hr className="my-4" />
+    
+          {product?.allow_review ? (
+            <>
+              <h6>Add Your Review</h6>
+              <form onSubmit={handleReviewSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">Your Rating</label>
+                  <div>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span
+                        key={star}
+                        style={{
+                          cursor: 'pointer',
+                          fontSize: '1.5rem',
+                          color: star <= rating ? '#ffc107' : '#e4e5e9'
+                        }}
+                        onClick={() => setRating(star)}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                </div>
+    
+                <div className="mb-3">
+                  <label htmlFor="reviewerName" className="form-label">Your Name</label>
+                  <input
+                    type="text"
+                    id="reviewerName"
+                    className="form-control"
+                    value={reviewerName}
+                    onChange={(e) => setReviewerName(e.target.value)}
+                    required
+                  />
+                </div>
+    
+                <div className="mb-3">
+                  <label htmlFor="reviewText" className="form-label">Your Review</label>
+                  <textarea
+                    id="reviewText"
+                    className="form-control"
+                    rows="3"
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    required
+                  ></textarea>
+                </div>
+    
+                <button type="submit" className="btn btn-primary">Submit Review</button>
+              </form>
+            </>
+          ) : (
+            <p className="text-muted">Reviews are not allowed for this product.</p>
+          )}
+        </div>
+      </div>
+    )}
+                  </div>
+                </div>
+              </div>
+    
+  </div>     
+  
+</div>
+ </section>
 
       <Footer />
     </>

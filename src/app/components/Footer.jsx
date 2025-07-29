@@ -20,17 +20,14 @@ function Footer() {
     <a className="fa" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
         <i className="fa-brands fa-facebook-f"></i>
     </a>
-    <a className="tw" target="_blank" rel="noopener noreferrer" href="https://twitter.com/">
-        <i className="fa-brands fa-x-twitter"></i>
+    <a className="tw" target="_blank" rel="noopener noreferrer" href="https://whatsapp.com/">
+        <i className="fa-brands fa-whatsapp"></i>
     </a>
     <a className="yo" target="_blank" rel="noopener noreferrer" href="https://youtube.com/">
         <i className="fa-brands fa-youtube"></i>
     </a>
     <a className="in" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/">
         <i className="fa-brands fa-instagram"></i>
-    </a>
-    <a className="ti" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/">
-        <i className="fa-brands fa-tiktok"></i>
     </a>
 </div>                    </div>
                 </aside>
