@@ -4,16 +4,18 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import CategoryHome from "./components/CategoryHome";
 import Newproducts from "./components/Newproducts";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef } from "react";
 import {  newCategoryApi } from "./services/allApi";
 import Hotproduct from "./components/Hotproduct";
 
 
 
 export default function Home() {
- const [category, setCategory] = useState([]);
+const [category, setCategory] = useState([]);
   const [activeCategory, setActiveCategory] = useState('');
-        
+  const audioRef = useRef(null); // Reference for audio element
+  const [isPlaying, setIsPlaying] = useState(true);
+  
   useEffect(() => {
     const getCategory = async () => {
       try {
@@ -21,7 +23,6 @@ export default function Home() {
         const categories = result.data.data || [];
         setCategory(categories);
         
-        // Set first category as active after categories are loaded
         if (categories.length > 0) {
           setActiveCategory(categories[0].slug);
         }
@@ -31,19 +32,41 @@ export default function Home() {
     };
     getCategory();
   }, []);  
-  useEffect(() => {
-  if (typeof window !== 'undefined') {
-    const isReloaded = sessionStorage.getItem('hasReloaded');
-    if (!isReloaded) {
-      sessionStorage.setItem('hasReloaded', 'true');
-      window.location.reload();
-    }
-  }
-}, []);
   
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isReloaded = sessionStorage.getItem('hasReloaded');
+      if (!isReloaded) {
+        sessionStorage.setItem('hasReloaded', 'true');
+        window.location.reload();
+      }
+    }
+  }, []);
+  
+  // Audio control effect
+  useEffect(() => {
+    if (audioRef.current) {
+      // Modern browsers require interaction before playing audio
+      // So we'll try to play, but catch any errors
+      const playPromise = audioRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Autoplay prevented:", error);
+          // You might want to show a play button instead
+        });
+      }
+    }
+  }, []);
   return (
     <>
-    
+     {/* Hidden audio element */}
+      <audio 
+        ref={audioRef} 
+        loop
+        src="/assets/catch.mp3" // Replace with your audio file path
+      />
+      
     {/* <Tophead/> */}
     <Header/>
 
@@ -466,8 +489,68 @@ export default function Home() {
 </section>
 {/* <!-- Client End --> */}
 
-
-<Footer/>
+<div className="container py-5">
+  {/* Modern Background Music Controls */}
+  <div className=" music my-4 d-flex  ">
+    <div className="bg-glas p-3 rounded-pill shadow-sm border border-2" style={{
+      backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(255, 255, 255, 0.2)'
+    }}>
+      {!isPlaying ? (
+        <button
+          onClick={() => {
+            audioRef.current.play();
+            setIsPlaying(true);
+          }}
+          className="btn btn-icon rounded-circle p-3 bg-gradient-success "
+          aria-label="Play music"
+          style={{
+            transition: 'all 0.3s ease',
+            boxShadow: '0 4px 15px rgba(40, 167, 69, 0.3)'
+          }}
+        >
+          <i className="fas fa-music fa-lg" style={{
+            animation: isPlaying ? 'pulse 1.5s infinite' : 'none'
+          }}/>
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            audioRef.current.pause();
+            setIsPlaying(false);
+          }}
+          className="btn btn-icon rounded-circle p-3 bg-gradient-danger"
+          aria-label="Mute music"
+          style={{
+            transition: 'all 0.3s ease',
+            boxShadow: '0 4px 15px rgba(220, 53, 69, 0.3)'
+          }}
+        >
+          <i className="fas fa-volume-up fa-lg"/>
+        </button>
+      )}
+      
+      {/* Optional volume slider */}
+      {/* <div className="d-inline-flex align-items-center ms-3" style={{width: '100px'}}>
+        <input 
+          type="range" 
+          className="form-range" 
+          min="0" 
+          max="1" 
+          step="0.01"
+          defaultValue="0.7"
+          onChange={(e) => audioRef.current.volume = e.target.value}
+          style={{
+            accentColor: '#09ae00ff',
+            cursor: 'pointer',
+            height:'10px'
+          }}
+        />
+      </div> */}
+    </div>
+  </div>
+</div>     
+     <Footer/>
 
 
 

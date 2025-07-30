@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import SelectAddress from "../components/SelectedAddress";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useSearchParams } from 'next/navigation';
 
 function Checkout() {
     const [cart, setCart] = useState([]);
@@ -14,13 +15,15 @@ function Checkout() {
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const router = useRouter();
-
+ const searchParams = useSearchParams();
+  const cartType = searchParams?.keys().next().value;
     useEffect(() => {
         if (typeof window !== "undefined") {
             cartItem();
             loadRazorpayScript();
         }
     }, []);
+    
 
     const cartItem = async () => {
         if (typeof window === "undefined") return;
@@ -34,6 +37,9 @@ function Checkout() {
 
         const formData = new FormData();
         formData.append("session_id", browserId);
+        if (cartType) {
+        formData.append("cart_type", cartType);
+    }
 
         const token = sessionStorage.getItem("token");
         if (!token) return;
@@ -70,9 +76,17 @@ function Checkout() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         };
+                const formData = new FormData();
+                                    formData.append("address_id",selectedAddress);
+
+        if (cartType) {
+
+        formData.append("cart_type", cartType);
+    }
+
 
         try {
-            const result = await placeOrderApi({ address_id: selectedAddress }, reqHeader);
+            const result = await placeOrderApi(formData, reqHeader);
             console.log(result);
             
             if (result.data.order) {
@@ -110,9 +124,10 @@ function Checkout() {
                 };
 
                 const reqBody = {
-                    order_id: order.id,
-                    payment_id: response.razorpay_payment_id,
-                    signature: response.razorpay_signature,
+                   payment_order_id: order.id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+
                 };
 
                 try {

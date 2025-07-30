@@ -26,6 +26,8 @@ const handleAddToCart = async (product_id, sku_id) => {
   formData.append("quantity", 1);
   formData.append("sku_id", sku_id);
   formData.append("session_id", browserId);
+  formData.append("cart_type", );
+
 
 
   const reqHeader = {};

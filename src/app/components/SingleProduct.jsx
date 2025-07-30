@@ -2,16 +2,72 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getPriceDetailsApi, addToCartApi } from '../services/allApi';
 import RazorpayEMIWidget from './RazorpayEMIWidget';
+import { useRouter } from 'next/navigation';
+
 
 function SingleProduct({ product, variants, onPriceChange }) {
   const [selectedVariants, setSelectedVariants] = useState({});
   const [price, setPrice] = useState("");
     const [orgPrice, setOrgPrice] = useState("");
+const router = useRouter();
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // ✅ Convert image object to array
   const imagesArray = Object.values(product?.images || {});
+
+  // buynow
+  const [quantity, setQuantity] = useState(1);
+
+
+    const handleBuyNow = async (product_id, sku_id,qty) => {
+    const token = sessionStorage.getItem("token");
+  
+    // Generate browser_id if it doesn't exist
+  
+    const formData = new FormData();
+    formData.append("product_id", product_id);
+    formData.append("quantity",qty);
+    formData.append("sku_id", sku_id);
+    formData.append("cart_type","buy");
+
+    const reqHeader = {};
+    if (token) {
+      reqHeader.Authorization = `Bearer ${token}`;
+    }
+  
+    try {
+      
+      console.log(formData);
+      
+      const result = await addToCartApi(formData, reqHeader);
+      console.log("buy Response:", result);
+      if (result.status === 200) {
+        const cartType=result?.data?.cartType
+router.push(`/checkout?${cartType}`);
+        // toast.success("Item added successfully!", {
+        //   position: "top-center",
+        //   autoClose: 3000,
+        //   theme: "colored",
+        // });
+                // setTimeout(() => router.push('/cart'), 2000);
+  
+  
+       
+      }
+       
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart!", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "colored",
+      });
+    }
+  };
+
+
+  // buy end
 
   const handleAddToCart = async (product_id, sku_id) => {
     const token = sessionStorage.getItem("token");
@@ -66,15 +122,15 @@ function SingleProduct({ product, variants, onPriceChange }) {
   }, {});
 
   // buynow
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
 
-const handleBuyNow = (productId, skuId, qty) => {
+// const handleBuyNow = (productId, skuId, qty) => {
   // Example: Save to session or redirect to checkout
-  console.log("Buying:", productId, skuId, qty);
+  // console.log("Buying:", productId, skuId, qty);
   // Redirect to checkout or open payment modal
   // Example:
   // router.push(`/checkout?product=${productId}&sku=${skuId}&qty=${qty}`);
-};
+// };
 
 
 const fetchPrice = async (selected) => {

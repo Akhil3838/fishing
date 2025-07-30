@@ -6045,4 +6045,35 @@ z-index: 1999 !important;
   font-weight: bolder !important;
 }
 
-/* ..........................product details .................... */
+/* ...................music................... */
+ @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  .bg-gradient-success {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    border: none;
+  }
+  .bg-gradient-danger {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    border: none;
+  }
+  .btn-icon:hover {
+    transform: translateY(-2px);
+  }
+  .bg-glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+
+
+  }
+  .music{
+  position: fixed;
+  left: .5em;
+  bottom: 0.10em;
+  /* margin-bottom: 12px; */
+z-index: 1999 !important;
+
+  }
