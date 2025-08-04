@@ -16,11 +16,11 @@ const ShopSidebar = ({
   slug
 }) => {
   const [categories, setCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([1000, 10000]);
+  const [priceRange, setPriceRange] = useState([0, 10000]);
   const [selectedVariants, setSelectedVariants] = useState({});
   const [variants, setVariants] = useState([]);
   const [visibleBrands, setVisibleBrands] = useState(4);
-  const [visibleOptions, setVisibleOptions] = useState({}); // Track visible options per variant
+  const [visibleOptions, setVisibleOptions] = useState({});
 
   const getCategory = async () => {
     try {
@@ -36,8 +36,6 @@ const ShopSidebar = ({
     try {
       const result = await displayVarientApi({ category_slug: slug });
       setVariants(result.data.variants || []);
-      
-      // Initialize visible options for each variant
       const initialVisibility = {};
       result.data.variants?.forEach(variant => {
         initialVisibility[variant.attribute_name] = 4;
@@ -110,6 +108,13 @@ const ShopSidebar = ({
     getVarient();
   }, []);
 
+  // Send initial price range on mount
+  useEffect(() => {
+    if (onPriceChange) {
+      onPriceChange(priceRange);
+    }
+  }, []);
+
   return (
     <div className="shop-sidebar">
       {/* Price Range Filter */}
@@ -148,7 +153,7 @@ const ShopSidebar = ({
               },
             }}
           />
-          <Box sx={{ display: 'flex', justifyContent: 'space-between',  mb: 1 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
               Min: ₹{formatPrice(priceRange[0])}
             </Typography>
@@ -157,10 +162,7 @@ const ShopSidebar = ({
             </Typography>
           </Box>
         </Box>
-
       </aside>
-                      <h3 className="widget-title"></h3>
-
 
       {/* Brands Widget */}
       <aside className="widget">
@@ -168,7 +170,6 @@ const ShopSidebar = ({
         <ul className="category-list">
           {brands && brands.length > 0 ? (
             <>
-              {/* Show first 4 brands */}
               {brands.slice(0, visibleBrands).map((b, index) => (
                 <li key={index} className="category-item">
                   <label className="category-label">
@@ -182,11 +183,9 @@ const ShopSidebar = ({
                   </label>
                 </li>
               ))}
-              
-              {/* Show "See more" link if there are more brands */}
               {brands.length > 4 && (
                 <li className="category-item">
-                  <button 
+                  <button
                     onClick={() => setVisibleBrands(visibleBrands === 4 ? brands.length : 4)}
                     className="see-more-link"
                   >
@@ -205,12 +204,11 @@ const ShopSidebar = ({
       {variants && variants.length > 0 && variants.map((variant, i) => {
         const currentVisible = visibleOptions[variant.attribute_name] || 4;
         const totalOptions = variant.options.length;
-        
+
         return (
           <aside className="widget" key={i}>
             <h3 className="widget-title">{variant.attribute_name}</h3>
             <ul className="category-list">
-              {/* Show limited options */}
               {variant.options.slice(0, currentVisible).map((option, j) => (
                 <li key={j} className="category-item">
                   <label className="category-label">
@@ -226,16 +224,14 @@ const ShopSidebar = ({
                   </label>
                 </li>
               ))}
-              
-              {/* Show "See more" link if there are more options */}
               {totalOptions > 4 && (
                 <li className="category-item">
-                  <button 
+                  <button
                     onClick={() => toggleVariantOptions(variant.attribute_name)}
                     className="see-more-link"
                   >
-                    {currentVisible === 4 
-                      ? `See more (+${totalOptions - 4})` 
+                    {currentVisible === 4
+                      ? `See more (+${totalOptions - 4})`
                       : 'See less'}
                   </button>
                 </li>

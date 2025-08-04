@@ -230,8 +230,8 @@ export const ContactApi =async(reqBody)=>{
 
 //banner image
 
-export const imageApi =async()=>{
-    return await commonApi('GET',`${serverUrl}/banner-list`,"","")
+export const bannerApi =async()=>{
+    return await commonApi('GET',`${serverUrl}/get-all`,"","")
 }
 
 // new products categorywise (home)

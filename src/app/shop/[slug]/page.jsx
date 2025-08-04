@@ -15,15 +15,17 @@ function ShoppingContent() {
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const [priceRange, setPriceRange] = useState([1000, 10000]);
+  const [priceRange, setPriceRange] = useState([0, 10000]);
   const [sortValue, setSortValue] = useState("newtoOld");
   const [variantSelections, setVariantSelections] = useState({
     variant_attribute: [],
     variant_option: [],
   });
 
-  const params = useParams();
-  const { slug } = params;
+const params = useParams();
+let { slug } = params;
+    slug = slug === 'all' ? '' : slug; 
+
 
   const allProducts = async (
     page,
@@ -40,7 +42,12 @@ function ShoppingContent() {
       Authorization: `Bearer ${token}`,
     };
 
+      // let categorySlug = slug === 'all' ? '' : slug;
+
+
     try {
+      console.log(slug);
+      
       const result = await getAllProduct(
         page,
         slug,
@@ -51,7 +58,8 @@ function ShoppingContent() {
         variants,
         reqHeader
       );
-
+   console.log(result);
+   
       setProducts(result.data.products);
       setBrand(result.data.brands);
       setTotalPages(parseInt(result.data.last_page) || 1);
@@ -67,6 +75,7 @@ function ShoppingContent() {
   };
 
   useEffect(() => {
+
     setPage(1); // Reset to first page on filter change
   }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
 
@@ -87,7 +96,9 @@ function ShoppingContent() {
                     <a href="/" className="text-decoration-none">Home</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">Shop</li>
-                  <li className="breadcrumb-item active" aria-current="page">{slug}</li>
+<li className="breadcrumb-item active" aria-current="page">
+  {slug ?? 'All Products'}
+</li>
                 </ol>
               </nav>
             </div>

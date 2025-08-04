@@ -6,7 +6,6 @@ import CartItem from '../components/cartitem/CartItem';
 import CartSidebar from '../components/cartitem/CartSidebar';
 import { getCartApi } from '../services/allApi';
 import { deleteCartResponseContext, updateResponseContext } from '../context/Contextshare';
-import Image from 'next/image';
 
 function Cart() {
   const { deleteCartResponse } = useContext(deleteCartResponseContext);
@@ -37,9 +36,7 @@ function Cart() {
       formData.append('session_id', browserId);
 
       const token = isClient ? sessionStorage.getItem('token') : null;
-      const reqHeader = token ? {
-        Authorization: `Bearer ${token}`,
-      } : {};
+      const reqHeader = token ? { Authorization: `Bearer ${token}` } : {};
 
       try {
         const result = await getCartApi(formData, reqHeader);
@@ -64,12 +61,12 @@ function Cart() {
   return (
     <>
       <Header />
-      <section className="cart-section" style={{paddingTop:'180px'}}>
+      <section className="cart-section" style={{ paddingTop: '180px' }}>
         <div className="container">
           {cart.length > 0 ? (
             <div className="row">
               <div className="col-lg-8">
-                <CartItem cart={cart} />
+                <CartItem cart={cart} setCart={setCart} />
               </div>
               <div className="col-lg-4">
                 <CartSidebar summary={summary} />
@@ -77,22 +74,13 @@ function Cart() {
             </div>
           ) : (
             <div className="text-center py-5">
-             <div className="animated-cart mb-4">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 576 512"
-    width="120"
-    height="120"
-    className="cart-bounce"
-    fill="#ccc"
-  >
-    <path d="M528.12 301.319l47.273-208A16 16 0 0 0 560 80H128l-9.4-32H24A24 24 0 0 0 0 72v16a24 24 0 0 0 24 24h66.6l61.2 204.319a63.994 63.994 0 1 0 77.2 84.681h143.2a63.994 63.994 0 1 0 77.2-84.681zM172 416a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm256 0a32 32 0 1 1 32-32 32 32 0 0 1-32 32z" />
-  </svg>
-</div>
-<h3 className="mb-3">Your Cart is Empty</h3>
-<p className="text-muted">Looks like you havent added anything to your cart yet</p>
-
-              {/* <a href="/shopping[fishing-reels]" className="btn btn-primary mt-3">Continue Shopping</a> */}
+              <div className="animated-cart mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="120" height="120" fill="#ccc">
+                  <path d="M528.12 301.319l47.273-208A16 16 0 0 0 560 80H128l-9.4-32H24A24 24 0 0 0 0 72v16a24 24 0 0 0 24 24h66.6l61.2 204.319a63.994 63.994 0 1 0 77.2 84.681h143.2a63.994 63.994 0 1 0 77.2-84.681zM172 416a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm256 0a32 32 0 1 1 32-32 32 32 0 0 1-32 32z" />
+                </svg>
+              </div>
+              <h3 className="mb-3">Your Cart is Empty</h3>
+              <p className="text-muted">Looks like you haven't added anything to your cart yet</p>
             </div>
           )}
         </div>

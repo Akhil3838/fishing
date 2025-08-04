@@ -26,7 +26,8 @@ function Categorybar({ menuOpen, setMenuOpen }) {
   const toggleDropdown = (index) => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
-
+ console.log(categories);
+ 
   return (
     <nav className="custom-navbar pt-3">
       <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
@@ -64,6 +65,16 @@ function Categorybar({ menuOpen, setMenuOpen }) {
             )}
           </li>
         ))}
+<li className="nav-item">
+  <Link
+    href="/shop/all"
+    onClick={() => setMenuOpen(false)}
+    className="nav-link"
+  >
+    <span className="dropbtn">ALL PRODUCTS</span>
+  </Link>
+</li>
+
       </ul>
     </nav>
   );

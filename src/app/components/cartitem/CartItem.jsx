@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { deleteCartApi, updateCartApi } from '@/app/services/allApi';
 import { deleteCartResponseContext, updateResponseContext } from '@/app/context/Contextshare';
+import Link from 'next/link';
 
 function CartItem({ cart, setCart }) {
   const [quantities, setQuantities] = useState({});
@@ -20,6 +21,7 @@ function CartItem({ cart, setCart }) {
       }
     }
   }, []);
+console.log(cart);
 
   // Update quantities from cart when cart changes
   useEffect(() => {
@@ -136,10 +138,10 @@ function CartItem({ cart, setCart }) {
                   <button type="button" className='btn' onClick={() => removeItem(item.id)}>X</button>
                 </td>
                 <td className="product-thumbnail-title">
-                  <a href="#" className="pd-img">
+                  <Link href={`/productDetails/${item?.product_items?.slug}`} className="pd-img">
                     <img src={item.product_items?.image || "assets/images/product/c1.jpg"} alt="product" />
-                  </a>
-                  <a className="product-name" href="#">{item.product_name || "Product Name"}</a>
+                  </Link>
+                  <Link className="product-name" href={`/productDetails/${item?.product_items?.slug}`}>{item.product_name || "Product Name"}</Link>
                 </td>
                 <td className="product-unit-price">
                   <div className="product_price clearfix">

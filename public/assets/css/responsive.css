@@ -839,3 +839,42 @@
 /* .small_search{
      background-color: green;
 } */
+
+
+@media screen and (max-width: 768px) {
+    .cardres{
+        padding: 2px;
+        margin-bottom: 2px;
+    }
+    .product-item-1{
+        margin: 0px;
+    }
+     .add-to-cart-text {
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 50px;
+  }
+  .share-text{
+    display: none;
+  }
+}
+
+/* Extra small screens <= 480px */
+@media screen and (max-width: 480px) {
+     .cardres{
+        padding: 2px;
+         margin-bottom: 12px;
+    }
+     .product-item-1{
+        margin: 0px;
+    }
+     .add-to-cart-text {
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 50px;
+  }
+  .share-text{
+    display: none;
+  }
+
+}

@@ -7,7 +7,7 @@ const ProductGrid = ({ product = [] }) => {
   return (
     <div className="row">
       {product.map(product => (
-        <div key={product.id} className="col-6 col-lg-4 col-md-6 mb-4">
+        <div key={product.id} className="col-6 col-lg-4 col-md-6  cardres">
           <ProductCard product={product} />
         </div>
       ))}

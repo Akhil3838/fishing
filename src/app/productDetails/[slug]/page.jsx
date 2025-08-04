@@ -12,7 +12,6 @@ import { toast } from 'react-toastify';
 function ProductDetails() {
   const params = useParams();
   const { slug } = params;
-
   const [product, setProduct] = useState(null);
   const [variants, setVariants] = useState([]);
   const [activeTab, setActiveTab] = useState('description');
@@ -159,7 +158,10 @@ console.log(productPrice);
                     {activeTab === 'description' && (
                       <div className="tab-pane fade show active">
     <div className="tab-description">
-      <p className="table-description text-start">{product.description}</p>
+<p
+  className="table-description text-start"
+  dangerouslySetInnerHTML={{ __html: product.description }}
+></p>
     
     </div>
                       </div>
@@ -168,33 +170,26 @@ console.log(productPrice);
                     {activeTab === 'additional' && (
                       <div className="tab-pane fade show active">
       <div className="table-container my-2 ">
-        <table className="custom-table start">
-          <thead>
-            <tr>
-              <th>Model No.</th>
-              <th>Length</th>
-              <th>Weight (apprx)</th>
-              {/* <th>Sections</th> */}
-              <th>Rod Action</th>
-              <th>lure weight(LB)</th>
-              <th>line Weight(GM)</th>
-              {/* <th>No. of Guides</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{productPrice?.data?.sku?.model_no ?? '--'}</td>
-    <td>{productPrice?.data?.sku?.combination_set ?? '--'}</td>
-              <td> {productPrice?.data?.sku?.weight??'--'}</td>
-              {/* <td>2</td> */}
-              <td>Regular<br />Fast</td>
-              <td>{productPrice?.data?.sku?.lure_weight??'--'}</td>
-              <td>{productPrice?.data?.sku?.line_weight??'--'}</td>
-              {/* <td>6+1</td> */}
-            </tr>
-           
-          </tbody>
-        </table>
+<table className="custom-table start table-bordered">
+  <thead>
+    <tr >
+       <th>Model No</th>
+      {productPrice?.data?.details?.map((item, index) => (
+        
+        <th key={index}>{item.title}</th>
+      ))}
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr >
+       <th>{productPrice?.data?.sku?.model_no}</th>
+      {productPrice?.data?.details?.map((item, index) => (
+        <td key={index}>{item.value ?? '--'}</td>
+      ))}
+    </tr>
+  </tbody>
+</table>
       </div>
                       </div>
                     )}

@@ -77,7 +77,7 @@ const [category, setCategory] = useState([]);
 {/* <!-- Banner End --> */}
 
 <section className="discount-section-2">
-  <div className="container">
+  {/* <div className="container">
     <div className="row">
       <div className="col-lg-8">
         <div className="discount-product overlay-anim">
@@ -117,17 +117,17 @@ const [category, setCategory] = useState([]);
         </div>
       </div>
     </div>
-  </div>
+  </div> */}
 </section>
 
 
 {/* Category Start */}
-{/* <section className="category-section-2">
-  <div className="container">
+<section className="category-section-2">
+  {/* <div className="container">
 
     <CategoryHome/>
-  </div>
-</section> */}
+  </div> */}
+</section>
 {/* Category End */}
 
 {/* <!-- new Product Start --> */}
@@ -354,7 +354,7 @@ const [category, setCategory] = useState([]);
             <div className="col-md-6">
                 <h2 className="sec_titles">Hot Item</h2>
             </div>
-            <div className="col-md-6 text-center">
+            <div className="col-md-6 text-end">
                 <a href="/shopping" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
             </div>
         </div>
@@ -379,31 +379,31 @@ const [category, setCategory] = useState([]);
             <div className="gallery-slider owl-carousel">
                 <div className="gallery-item">
                     <img src="assets/images/g22.jpg" alt="image" />
-                    <div className="gall-content">
+                    {/* <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
                         <a className="popup" href="assets/images/g22.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="gallery-item">
                     <img src="assets/images/g11.jpg" alt="image" />
-                    <div className="gall-content">
+                    {/* <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
                         <a className="popup" href="assets/images/g11.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="gallery-item">
                     <img src="assets/images/g33.jpg" alt="image" />
-                    <div className="gall-content">
+                    {/* <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
                         <a className="popup" href="assets/images/g33.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="gallery-item">
                     <img src="assets/images/g4.jpg" alt="image" />
-                    <div className="gall-content">
+                    {/* <div className="gall-content">
                         <h4>Redcap Oranda<br /> Goldfis</h4>
                         <a className="popup" href="assets/images/g4.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
@@ -413,7 +413,7 @@ const [category, setCategory] = useState([]);
 
 {/* <!-- Blog Start --> */}
 <section className="post-section">
-    <div className="container">
+    {/* <div className="container">
         <div className="row">
             <div className="col-md-12">
                 <h2 className="sec_titles">Latest Posts</h2>
@@ -466,7 +466,7 @@ const [category, setCategory] = useState([]);
                 </div>
             </div>
         </div>
-    </div>
+    </div> */}
 </section>
 {/* <!-- Blog End --> */}
 

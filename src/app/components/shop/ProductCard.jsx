@@ -26,7 +26,7 @@ const handleAddToCart = async (product_id, sku_id) => {
   formData.append("quantity", 1);
   formData.append("sku_id", sku_id);
   formData.append("session_id", browserId);
-  formData.append("cart_type", );
+  formData.append("cart_type","" );
 
 
 
@@ -82,7 +82,7 @@ const handleAddToCart = async (product_id, sku_id) => {
 [0].id)}
 
         >
-          <i className="nss-shopping-cart1"></i>Add To Cart
+          <i className="nss-shopping-cart1"></i><span className='add-to-cart-text'>Add To Cart</span>
         </a>
       </div>
       <div className="product-details">
