@@ -64,6 +64,7 @@ const handleAddToCart = async (product_id, sku_id) => {
     });
   }
 };
+console.log(product);
 
 
   return (
@@ -97,9 +98,16 @@ const handleAddToCart = async (product_id, sku_id) => {
           ))}
           <span>( 1 )</span>
         </div>
-        <div className="product_price clearfix">
-          <span className="price"><span><span>₹</span>{product?.sku_new[0].special_price.toFixed(2)}</span></span>
-        </div>
+<div className="product_price clearfix">
+  <span className="price">
+    <span>
+      <span>₹</span>
+      {product?.sku_new?.length > 0 && product?.sku_new[0]?.special_price != null
+        ? Number(product.sku_new[0].special_price).toFixed(2)
+        : "N/A"}
+    </span>
+  </span>
+</div>
       </div>
        <ToastContainer/>
 

@@ -82,6 +82,7 @@ let { slug } = params;
   useEffect(() => {
     allProducts(page, selectedBrands, priceRange[0], priceRange[1], sortValue, variantSelections);
   }, [page, selectedBrands, priceRange, sortValue, variantSelections]);
+console.log(products);
 
   return (
     <>

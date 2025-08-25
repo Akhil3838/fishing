@@ -18,9 +18,13 @@ function ForgotPassword() {
     try {
       const response = await sendEmailApi({ email });
       if (response.status === 200) {
-        setMessage("Password reset link sent successfully.");
+        setMessage("OTP sent successfully.");
+        console.log(response);
+        // Encode the email for URL safety
+        const encodedEmail = encodeURIComponent(email);
+        router.push(`/resetpassword?email=${encodedEmail}`);
       } else {
-        setMessage("Failed to send reset link. Try again.");
+        setMessage("Failed to send OTP. Try again.");
       }
     } catch (error) {
       setMessage("Error sending email. Please try again.");
@@ -32,7 +36,7 @@ function ForgotPassword() {
       <div className="card shadow-lg p-4 d-flex justify-content-center align-items-center" style={{ width: "400px", borderRadius: "10px" }}>
         <Link href="/">
           <img
-           style={{height:'100px',width:'170px'}}
+            style={{height:'100px',width:'170px'}}
             src="assets/images/logo/log2.png"
             alt="Logo"
             className="img-fluid mb-3"

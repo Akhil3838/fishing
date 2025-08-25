@@ -7,35 +7,114 @@ function about() {
     <>
     <Header/>
     {/* About Start */}
-<section className="about-section-2 pad_top">
-  <div className="container">
-    <div className="row">
-      <div className="col-lg-7">
-        <div className="ab-thumb">
-          <img src="assets/images/about2.png" alt="about" />
+  <section className="about-section-2 pad_top">
+        <div className="container" style={{ paddingTop: '100px' }}>
+          <div className="row">
+            <div className="col-lg-7">
+              <div className="ab-thumb">
+                <img src="assets/images/about2.png" alt="about" />
+              </div>
+            </div>
+            <div className="col-lg-5">
+              <div className="sub_title">About Us <span></span></div>
+              <h2 className="sec_titles">Welcome to SCALESS</h2>
+              <p className="sec_desc">
+                SCALESS is a leading Indian manufacturer and distributor of fishing equipment, established in 2020. 
+                We specialize in supplying premium-quality fishing gear across India, catering to both professionals and enthusiasts.
+              </p>
+              <p className="sec_desc">
+                Our manufacturing unit in Pune, Maharashtra produces world-class fishing products that are highly demanded across the globe. 
+                We also operate a retail outlet in Kerala to serve our valued customers directly.
+              </p>
+              <p className="sec_desc">
+                Alongside our in-house products, we import internationally recognized fishing equipment to meet the diverse requirements of Indian anglers. 
+                By dealing with some of the best brands worldwide, we provide complete fishing solutions under one roof.
+              </p>
+              <p className="sec_desc">
+                Our mission is simple: to deliver the finest fishing gear and ensure our customers enjoy the best possible fishing experience.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="col-lg-5">
-        <div className="sub_title">About Us <span></span></div>
-        <h2 className="sec_titles">Heard of betta fish before</h2>
-        <p className="sec_desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
-        </p>
-        <ul className="listing-item">
-          <li><i className="nss-check1"></i>Best Quality Product</li>
-          <li><i className="nss-check1"></i>Vestibulum libero</li>
-          <li><i className="nss-check1"></i>Quis velit adipiscing</li>
-          <li><i className="nss-check1"></i>Integer posuere pulvinar</li>
+      </section>
+
+      {/* Contact Section */}
+<section 
+  className="contact-section pad_top" 
+  style={{ 
+    background: "linear-gradient(to right, #e8f9e9, #ffffff)", 
+    padding: "80px 0" 
+  }}
+>
+  <div className="container" style={{ paddingBottom: "50px" }}>
+    <div className="row justify-content-center">
+      <div 
+        className="col-lg-8 text-center p-4 shadow rounded" 
+        style={{ backgroundColor: "#fff", border: "1px solid #e0e0e0" }}
+      >
+        {/* <div 
+          className="sub_title mb-2 fw-bold text-success" 
+          style={{ fontSize: "20px", letterSpacing: "1px" }}
+        >
+          Contact Us <span></span>
+        </div> */}
+        
+        <h2 
+          className="sec_titles mb-4" 
+          style={{ fontSize: "36px", fontWeight: "700", color: "#333" }}
+        >
+          Get in Touch
+        </h2>
+
+        <ul className="list-unstyled text-start mx-auto" style={{ maxWidth: "500px" }}>
+          <li 
+            className="mb-3 d-flex align-items-center" 
+            style={{ fontSize: "18px" }}
+          >
+            <i className="fas fa-envelope text-success me-2"></i>
+            <span>Email: <a href="mailto:scalessindia12@gmail.com" className="text-dark fw-semibold">scalessindia12@gmail.com</a></span>
+          </li>
+          
+          <li 
+            className="mb-3 d-flex align-items-center" 
+            style={{ fontSize: "18px" }}
+          >
+            <i className="fas fa-phone text-success me-2"></i>
+            <span>Phone: <a href="tel:+918848873343" className="text-dark fw-semibold">8848873343</a></span>
+          </li>
+          
+          <li 
+            className="mb-3 d-flex align-items-start" 
+            style={{ fontSize: "18px" }}
+          >
+            <i className="fas fa-map-marker-alt text-success me-2 mt-1"></i>
+            <span>
+              Address: First floor, KHRA BHAWAN, opp. biolab, Near old bustand Payyanur, Kannur [dist.], Kerala, PIN-670307
+            </span>
+          </li>
+          
+          <li className="mb-3 d-flex align-items-center" style={{ fontSize: "18px" }}>
+            <i className="fas fa-map text-success me-2"></i>
+            <a 
+              href="https://share.google/rVykviD8V5DSnaLDm" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="fw-semibold text-decoration-none text-primary"
+              style={{ transition: "0.3s" }}
+              
+            >
+              View Location on Map
+            </a>
+          </li>
         </ul>
-        <a href="about.html" className="fishto-btn">Learn More</a>
       </div>
     </div>
   </div>
 </section>
-{/* About End */}
+      {/* About End */}
 
 {/* Why Choose Us Start */}
-<section className="choose-us-section" style={{ backgroundImage: "url(assets/images/1.png)" }}>
+{/* <section className="choose-us-section" style={{ backgroundImage: "url(assets/images/1.png)" }}>
   <div className="container">
     <div className="row">
       <div className="col-md-12 text-center">
@@ -72,11 +151,11 @@ function about() {
       </div>
     </div>
   </div>
-</section>
+</section> */}
 {/* Why Choose Us End */}
 
 {/* Mailchimp Start */}
-<section className="mailchimp-section">
+{/* <section className="mailchimp-section">
   <div className="container">
     <div className="row">
       <div className="col-md-12">
@@ -103,11 +182,11 @@ function about() {
       </div>
     </div>
   </div>
-</section>
+</section> */}
 {/* Mailchimp End */}
 
 {/* Gallery Start */}
-<section className="gallery-section marg-gal">
+{/* <section className="gallery-section marg-gal">
   <div className="container-fluid">
     <div className="row">
       <div className="col-md-12 text-center">
@@ -171,27 +250,9 @@ function about() {
       </div>
     </div>
   </div>
-</section>
+</section> */}
 {/* Gallery End */}
 
-{/* Client Start */}
-<section className="client-section cs-2">
-  <div className="container">
-    <div className="row">
-      <div className="col-md-12">
-        <div className="client-slider owl-carousel">
-          <a href="#"><img src="assets/images/logo/1.png" alt="logo" /></a>
-          <a href="#"><img src="assets/images/logo/2.png" alt="logo" /></a>
-          <a href="#"><img src="assets/images/logo/3.png" alt="logo" /></a>
-          <a href="#"><img src="assets/images/logo/4.png" alt="logo" /></a>
-          <a href="#"><img src="assets/images/logo/5.png" alt="logo" /></a>
-          <a href="#"><img src="assets/images/logo/6.png" alt="logo" /></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{/* Client End */}
 <Footer/>
     </>
   )

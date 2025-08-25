@@ -29,6 +29,7 @@ const ShopProducts = ({
     setSortOption(selectedOption);
     onSortChange?.(selectedOption);
   };
+console.log(products);
 
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
