@@ -9,7 +9,7 @@ function Footer() {
   <h6 className='mt-3 text-light'>Track Order</h6>
 </a>
 
-     <a href="https://wa.me/+919946901506" target="_blank">
+     <a href="https://wa.me/+918848873343" target="_blank">
             <img className="whatsapp-float" src="/assets/images/msg.png"/>
        </a>
     <div className="container">

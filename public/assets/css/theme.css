@@ -986,9 +986,10 @@ header .container-fluid{
 }
 .product-thumb img {
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
+    height: 265px;
     width: auto;
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     right: 0;
     bottom: 0;
@@ -6061,7 +6062,7 @@ z-index: 1999 !important;
   cursor: pointer;
   padding: 5px 0;
   text-decoration: underline;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .see-more-link:hover {
@@ -6098,8 +6099,8 @@ z-index: 1999 !important;
   }
   .music{
   position: fixed;
-  left: .5em;
-  bottom: 0.10em;
+  left: 2.5em;
+  bottom: 4.2em;
   /* margin-bottom: 12px; */
 z-index: 1999 !important;
 
