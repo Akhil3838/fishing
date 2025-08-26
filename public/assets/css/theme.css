@@ -5903,6 +5903,24 @@ blockquote:after {
 z-index: 1999 !important;
 }
 
+@media screen and (max-width: 768px) {
+  .whatsapp-float {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;  /* smaller icon */
+    right: 0.3em;
+    bottom: 0.3em;
+  }
+
+  .track-float {
+    /* width: 40px; */
+    height: 40px;
+    font-size: 28px;  /* smaller icon */
+    left: 0.3em;
+    bottom: 0.3em;
+  }
+}
+
 .track-float {
   position: fixed;
   left: 1em;
@@ -6102,9 +6120,21 @@ z-index: 1999 !important;
   left: 2.5em;
   bottom: 4.2em;
   /* margin-bottom: 12px; */
-z-index: 1999 !important;
+  z-index: 1999 !important;
 
   }
+/* Hide music icon on mobile screens (up to 768px) */
+@media screen and (max-width: 768px) {
+  .music {
+    display: none !important;
+  }
+  .thd{
+    display: none !important;
+  }
+  .cart-item {
+    margin-top: 50px;
+  }
+}
 
   /* ................ */
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -6117,4 +6147,9 @@ z-index: 1999 !important;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
+
+
+
+
+
 

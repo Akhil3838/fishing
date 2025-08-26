@@ -246,6 +246,12 @@ export const HotproductApi =async()=>{
     return await commonApi('GET',`${serverUrl}/trending-products`,"","")
 }
 
+// Hot product(home)
+
+export const OfferproductApi =async()=>{
+    return await commonApi('GET',`${serverUrl}/offer-products`,"","")
+}
+
 
 
 

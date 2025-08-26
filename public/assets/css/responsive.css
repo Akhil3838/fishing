@@ -666,9 +666,9 @@
     }
     .fishto-pagination a, .fishto-pagination span{
         margin-bottom: 10px;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         font-size: 18px;
     }
     .toolbar-btn{
@@ -877,4 +877,27 @@
     display: none;
   }
 
+}
+
+h5 a {
+  word-wrap: break-word;
+  white-space: normal;
+  display: block;
+}
+h5 a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%; /* important for ellipsis */
+}
+
+
+.two-line-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }

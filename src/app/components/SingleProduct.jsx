@@ -333,11 +333,11 @@ const handleBuyNow = async (product_id, sku_id, qty) => {
                 Guaranteed Safe Checkout
               </h6>
               <div className="d-flex justify-content-center gap-3 flex-wrap align-items-center">
-                <img src="https://furnistage.toscroll.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Famex.be442ffc.png&w=2048&q=75" alt="Amex" height="30" />
-                <img src="https://furnistage.toscroll.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmastercard.a33e053d.png&w=2048&q=75" alt="MasterCard" height="30" />
-                <img src="https://furnistage.toscroll.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Frupay.2b439649.png&w=2048&q=75" alt="RuPay" height="30" />
-                <img src="https://furnistage.toscroll.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvisa.21ba85e2.png&w=2048&q=75" alt="Visa" height="30" />
-                <img src="https://furnistage.toscroll.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdiscover.b14ae41f.png&w=1080&q=75" alt="Discover" height="30" />
+                <img src="/assets/images/amex.webp" alt="Amex" height="30" />
+                <img src="/assets/images/card2.webp" alt="MasterCard" height="30" />
+                <img src="/assets/images/card3.webp" alt="RuPay" height="30" />
+                <img src="/assets/images/card4.webp" alt="Visa" height="30" />
+                <img src="/assets/images/card5.webp" alt="Discover" height="30" />
               </div>
             </div>
           </div>

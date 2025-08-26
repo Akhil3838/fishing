@@ -121,7 +121,7 @@ console.log(cart);
   return (
     <form className="woocommerce-cart-form" action="#">
       <table className="cart-table">
-        <thead>
+        <thead className='thd'>
           <tr>
             <th className="product-remove">&nbsp;</th>
             <th className="product-name-thumbnail">Product</th>
@@ -133,7 +133,7 @@ console.log(cart);
         <tbody>
           {cart && cart.length > 0 ? (
             cart.map((item) => (
-              <tr className="cart-item" key={item.id}>
+              <tr className="cart-item " key={item.id}>
                 <td className="product-remove">
                   <button type="button" className='btn' onClick={() => removeItem(item.id)}>X</button>
                 </td>

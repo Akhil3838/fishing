@@ -42,8 +42,6 @@ let { slug } = params;
       Authorization: `Bearer ${token}`,
     };
 
-      // let categorySlug = slug === 'all' ? '' : slug;
-
 
     try {
       console.log(slug);

@@ -8,6 +8,7 @@ import { useEffect, useState , useRef } from "react";
 import {  newCategoryApi } from "./services/allApi";
 import Hotproduct from "./components/Hotproduct";
 import VideoBanner from "./components/VideoBanner";
+import Offer from "./components/Offer";
 
 
 
@@ -16,7 +17,25 @@ const [category, setCategory] = useState([]);
   const [activeCategory, setActiveCategory] = useState('');
   const audioRef = useRef(null); // Reference for audio element
   const [isPlaying, setIsPlaying] = useState(true);
-  
+   const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+    useEffect(() => {
+    if (isMobile) {
+      // pause music automatically on mobile
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      setIsPlaying(false);
+    }
+  }, [isMobile]);
+
   useEffect(() => {
     const getCategory = async () => {
       try {
@@ -228,125 +247,7 @@ const [category, setCategory] = useState([]);
   className="discount-section-3"
   style={{ backgroundImage: 'url(assets/images/1.png)' }}
 >
-  <div className="container">
-    <div className="row">
-      <div className="col-md-12 text-center">
-        <h2 className="sec_titles">Deals & Offer</h2>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-lg-6 col-md-12">
-        <div className="discount-product overlay-anim">
-          <div className="content-ds">
-            <h3>
-              <span>Hurry Up</span>
-              Deal of the Day
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet, onsectetur
-              <br /> adipiscing elituis leo luctus
-            </p>
-            <div className="product_price clearfix">
-              <span className="price">
-                <del>
-                  <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">₹</span>340.00
-                  </span>
-                </del>
-                <ins>
-                  <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">₹</span>230.00
-                  </span>
-                </ins>
-              </span>
-            </div>
-            <a className="fishto-btn" href="single-product.html">Buy Now</a>
-          </div>
-          <div className="ds-thumb">
-            <img src="assets/images/d4.png" alt="image" />
-          </div>
-        </div>
-      </div>
-
-      {/* Product Item 1 */}
-      <div className="col-lg-3 col-md-6 ">
-        <div className="product-item-2 text-center">
-          <div className="product-thumb">
-            <img src="assets/images/d5.png" alt="image" />
-          </div>
-          <div className="product-details">
-            <h5><a href="single-product.html">Redcap Oranda Goldfis</a></h5>
-            <div className="ratings">
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <span>( 1 )</span>
-            </div>
-            <div className="product_price clearfix">
-              <span className="price">
-                <del>
-                  <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">₹</span>240.00
-                  </span>
-                </del>
-                <ins>
-                  <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">₹</span>330.00
-                  </span>
-                </ins>
-              </span>
-            </div>
-            <div className="product-meta">
-              <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-              {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-              <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Product Item 2 */}
-      <div className="col-lg-3 col-md-6">
-        <div className="product-item-2 text-center">
-          <div className="product-thumb">
-            <img src="assets/images/d6.png" alt="image" />
-          </div>
-          <div className="product-details">
-            <h5><a href="single-product.html">Calico Gold Fish</a></h5>
-            <div className="ratings">
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <i className="icon_star_alt"></i>
-              <span>( 1 )</span>
-            </div>
-            <div className="product_price clearfix">
-              <span className="price">
-                <del>
-                  <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">₹</span>230.00
-                  </span>
-                </del>
-                <ins>
-                  <span className="woocommerce-Price-amount amount">
-                    <span className="woocommerce-Price-currencySymbol">₹</span>130.00
-                  </span>
-                </ins>
-              </span>
-            </div>
-            <div className="product-meta">
-              <a href="single-product.html" className="view"><i className="nss-eye1"></i></a>
-              {/* <a href="wishlist.html" className="whishlist"><i className="nss-heart1"></i></a> */}
-              <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <Offer/>
 </section>
 {/* <!-- Discount End --> */}
 
@@ -511,7 +412,7 @@ const [category, setCategory] = useState([]);
 
 <div className="container py-5">
   {/* Modern Background Music Controls */}
-  <div className=" music my-4 d-flex  ">
+  <div className=" music my-4 d-flex">
     <div className="bg-glas p-3 rounded-pill shadow-sm border border-2" style={{
       backdropFilter: 'blur(10px)',
       backgroundColor: 'rgba(255, 255, 255, 0.2)'
@@ -572,12 +473,8 @@ const [category, setCategory] = useState([]);
     </div>
   </div>
 </div>     
-     <Footer/>
 
-
-
-
-
+ <Footer/>
     </>
   );
 }
