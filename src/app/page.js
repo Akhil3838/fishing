@@ -194,7 +194,7 @@ const [category, setCategory] = useState([]);
    </div>
 
         {/* <!-- About Start --> */}
-<section className="about-section mt-4">
+<section className="about-section" style={{marginTop:'70px'}}>
     <div className="container">
         <div className="row">
             <div className="col-lg-6 col-md-6">
