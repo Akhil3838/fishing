@@ -11,6 +11,7 @@ function CartItem({ cart, setCart }) {
   const { setUpdateCartResponse } = useContext(updateResponseContext);
   const [disabledItems, setDisabledItems] = useState([]);
   const [loadingItems, setLoadingItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Load from localStorage on client only
   useEffect(() => {
@@ -21,11 +22,10 @@ function CartItem({ cart, setCart }) {
       }
     }
   }, []);
-console.log(cart);
 
   // Update quantities from cart when cart changes
   useEffect(() => {
-    if (cart?.length > 0) {
+    if (cart && cart.length > 0) {
       const initialQuantities = {};
       cart.forEach(item => {
         initialQuantities[item.id] = item.quantity || 1;
@@ -33,6 +33,7 @@ console.log(cart);
       setQuantities(initialQuantities);
       localStorage.setItem("quantities", JSON.stringify(initialQuantities));
     }
+    setIsLoading(false);
   }, [cart]);
 
   const updateCartQuantity = async (id, quantity) => {
@@ -118,6 +119,15 @@ console.log(cart);
     }
   };
 
+  // Show loading state while data is being fetched
+  if (isLoading) {
+    return (
+      <div className="text-center py-5">
+        <p>Loading cart items...</p>
+      </div>
+    );
+  }
+
   return (
     <form className="woocommerce-cart-form" action="#">
       <table className="cart-table">
@@ -141,11 +151,13 @@ console.log(cart);
                   <Link href={`/productDetails/${item?.product_items?.slug}`} className="pd-img">
                     <img src={item.product_items?.image || "assets/images/product/c1.jpg"} alt="product" />
                   </Link>
-                  <Link className="product-name" href={`/productDetails/${item?.product_items?.slug}`}>{item.product_name || "Product Name"}</Link>
+                  <Link className="product-name" href={`/productDetails/${item?.product_items?.slug}`}>
+                    {item.product_name || "Product Name"}
+                  </Link>
                 </td>
                 <td className="product-unit-price">
                   <div className="product_price clearfix">
-                    <span className="price">₹{item.price.toFixed(2)}</span>
+                    <span className="price">₹{item.price?.toFixed(2) || '0.00'}</span>
                   </div>
                 </td>
                 <td className="product-quantity clearfix">
@@ -153,7 +165,7 @@ console.log(cart);
                     <button className="qtyBtn btnMinus" onClick={() => decreaseQuantity(item.id)} disabled={loadingItems.includes(item.id)}>-</button>
                     <input
                       name="qty"
-                      value={quantities[item.id] || item.quantity}
+                      value={quantities[item.id] || item.quantity || 1}
                       title="Qty"
                       className="input-text qty text carqty"
                       type="text"
@@ -164,7 +176,9 @@ console.log(cart);
                 </td>
                 <td className="product-total">
                   <div className="product_price clearfix">
-                    <span className="price">₹{(item.price * (quantities[item.id] || item.quantity)).toFixed(2)}</span>
+                    <span className="price">
+                      ₹{((item.price || 0) * (quantities[item.id] || item.quantity || 1)).toFixed(2)}
+                    </span>
                   </div>
                 </td>
               </tr>

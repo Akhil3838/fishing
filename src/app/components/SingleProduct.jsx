@@ -26,7 +26,7 @@ function SingleProduct({ product, variants, onPriceChange }) {
     }));
   };
 
-const handleBuyNow = async (product_id, sku_id, qty) => {
+const handleBuyNow = async (product_id,sku_id, qty) => {
   const token = sessionStorage.getItem('token');
   
   // Redirect to login if no token
@@ -80,7 +80,7 @@ const handleBuyNow = async (product_id, sku_id, qty) => {
     });
   }
 };
-  const handleAddToCart = async (product_id, sku_id,qty) => {
+  const handleAddToCart = async (product_id,sku_id,qty) => {
     const token = sessionStorage.getItem('token');
 
     if (!localStorage.getItem('browser_id')) {
