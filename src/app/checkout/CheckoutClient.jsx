@@ -184,7 +184,7 @@ function CheckoutClient() {
     return (
         <>
             <Header />
-            <div className="container" style={{ paddingTop: '160px' }}>
+            <div className="container" style={{ paddingTop: '200px',paddingBottom: '60px' }}>
                 <div className="row">
                     <div className="col-md-7">
                         <SelectAddress onSelectAddress={setSelectedAddress} />
@@ -204,7 +204,7 @@ function CheckoutClient() {
                                             className="me-1"
                                         />
                                     ))}
-                                Estimated delivery by <span className="fw-bold">25 Mar 2025</span>
+                                {/* Estimated delivery by <span className="fw-bold">25 Mar 2025</span> */}
                             </p>
 
                             <h6 className="fw-bold mt-3">PRICE DETAILS ({cart.length} Items)</h6>

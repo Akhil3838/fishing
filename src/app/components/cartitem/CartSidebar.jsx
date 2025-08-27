@@ -17,7 +17,7 @@ function CartSidebar({summary}) {
               </tr>
               <tr className="woocommerce-shipping-totals shipping">
                 <th>Shipping</th>
-                <td><p>Free</p></td>
+                <td><p></p></td>
               </tr>
               <tr className="order-total">
                 <th>Total</th>

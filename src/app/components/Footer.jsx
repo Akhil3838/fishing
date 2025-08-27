@@ -21,16 +21,16 @@ function Footer() {
                         </a>
                         <p>Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit. Duis at<br /> est id leo luctus gravida a in ipsum.</p>
 <div className="ab-social">
-    <a className="fa" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
+    <a className="fa" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/profile.php?id=61577220032117&rdid=15NsuVd0hjHZXVGF&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1GMLnqMaui%2F#">
         <i className="fa-brands fa-facebook-f"></i>
     </a>
-    <a className="tw" target="_blank" rel="noopener noreferrer" href="https://whatsapp.com/">
+    <a className="tw" target="_blank" rel="noopener noreferrer" href="https://wa.me/+918848873343">
         <i className="fa-brands fa-whatsapp"></i>
     </a>
     <a className="yo" target="_blank" rel="noopener noreferrer" href="https://youtube.com/">
         <i className="fa-brands fa-youtube"></i>
     </a>
-    <a className="in" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/">
+    <a className="in" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/scalesstackle?igsh=cmM1M">
         <i className="fa-brands fa-instagram"></i>
     </a>
 </div>                    </div>
@@ -42,6 +42,8 @@ function Footer() {
                     <ul>
                         <li><a href="/privacy">Privacy Policy</a></li>
                         <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/about">About us</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
                         <li><a href="/shippingPolicy">Shipping Policy</a></li>
                         <li><a href="/refundPolicy">Refund Policy</a></li>
                         {/* <li><a href="index-2.html">News</a></li> */}
@@ -54,8 +56,7 @@ function Footer() {
                     <ul>
                         <li><a href="/shopping">Shipping & Delivery</a></li>
                         {/* <li><a href="index-2.html">Secure Payment</a></li> */}
-                        <li><a href="/">Support</a></li>
-                        <li><a href="/shopping">Stores</a></li>
+                        
                         <li><a href="/">Services</a></li>
                         {/* <li><a href="index-2.html">Returns</a></li> */}
                     </ul>

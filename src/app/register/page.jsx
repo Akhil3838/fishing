@@ -65,7 +65,7 @@ function Register() {
     <>
                 <Header/>
 
-      <div className="container" style={{paddingTop:'95px'}}>
+      <div className="container" style={{paddingTop:'150px'}}>
 
         <div className="login-box text-center">
 

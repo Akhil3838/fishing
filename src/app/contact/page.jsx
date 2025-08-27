@@ -19,42 +19,41 @@ function contact() {
         <div className="contact-box">
           <i className="nss-phone1"></i>
           <h5>Phone</h5>
-          <p>212-333-4633</p>
+          <p>8848873343</p>
         </div>
       </div>
       <div className="col-md-6 col-lg-4">
         <div className="contact-box cb2">
           <i className="nss-envelope-open1"></i>
           <h5>Email</h5>
-          <p>Yourname@gmail.com</p>
+          <p>scalessindia12@gmail.com</p>
         </div>
       </div>
       <div className="col-md-6 col-lg-4">
         <div className="contact-box cb3">
           <i className="nss-map-marker-alt1"></i>
           <h5>Address</h5>
-          <p>Ultrices tristique</p>
+          <small>First floor, KHRA BHAWAN, opp. biolab, Near old bustand Payyanur, Kannur [dist.], Kerala, PIN-670307</small>
         </div>
       </div>
     </div>
 
     <div className="row mt-60">
       <div className="col-md-6">
-        <div className="ci-info">
-          <div className="sub_title">Get In Touch</div>
-          <h2 className="sec_titles">
-            We love to hear from you feel free to get in touch
-          </h2>
-          <p className="sec_desc">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat
-          </p>
-        </div>
+<div className="ci-info">
+  <div className="sub_title">Get In Touch</div>
+  <h2 className="sec_titles">
+    We love to hear from you  connect with Scaless today
+  </h2>
+  <p className="sec_desc">
+    At <strong>Scaless</strong>, we are passionate about bringing you the best 
+    fishing gear and accessories to make every catch a memorable one. 
+    Whether you are an experienced angler or just starting out, our team is 
+    here to help you find the right equipment for your adventures.  
+    Have questions, feedback, or special requests? Reach out to us and we are 
+    always ready to assist fellow fishing enthusiasts.  
+  </p>
+</div>
       </div>
 
       <div className="col-md-6">
