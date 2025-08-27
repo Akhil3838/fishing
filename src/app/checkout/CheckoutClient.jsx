@@ -184,7 +184,7 @@ function CheckoutClient() {
     return (
         <>
             <Header />
-            <div className="container" style={{ paddingTop: '200px',paddingBottom: '60px' }}>
+            <div className="container checkout" style={{ paddingTop: '200px',paddingBottom: '60px' }}>
                 <div className="row">
                     <div className="col-md-7">
                         <SelectAddress onSelectAddress={setSelectedAddress} />

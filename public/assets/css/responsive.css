@@ -857,6 +857,12 @@
   .share-text{
     display: none;
   }
+  .checkout{
+    margin-top: 30px;
+  }
+  .about-section-2{
+    margin-top: 40px;
+  }
 }
 
 /* Extra small screens <= 480px */
