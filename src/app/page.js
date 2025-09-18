@@ -241,6 +241,43 @@ const [category, setCategory] = useState([]);
 </section>
 {/* <!-- About End --> */}
 
+{/* <!-- Client Start --> */}
+{/* Client Start */}
+<section className="client-section cs-2">
+  <div className="container">
+    <div className="row">
+      <div className="col-md-12">
+        <div className="client-slider owl-carousel">
+          <a href="#"><img src="assets/images/logo/LOGO/6TH SENSE.png" alt="logo"  style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/ABU GARCIA.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/berkley.png" alt="logo"style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/DAIWA.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/decoy.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          {/* <a href="#"><img src="assets/images/logo/LOGO/helco.png" alt="logo" /></a> */}
+          <a href="#"><img src="assets/images/logo/LOGO/lucana.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/lucky john.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/major craft.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/OKUMA.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          {/* <a href="#"><img src="assets/images/logo/LOGO/poineer.png" alt="logo" /></a> */}
+          <a href="#"><img src="assets/images/logo/LOGO/SAVAGE GEAR.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/scaless.jpg" alt="logo"style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/shakespeare.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/shimano.webp" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/SUNLINE.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/yo-zuri.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+          <a href="#"><img src="assets/images/logo/LOGO/zerek.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
+          <a href="#"><img src="assets/images/logo/LOGO/zman.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/* Client End */}
+{/* <!-- Client End --> */}
+
+
+
 
 {/* <!-- Discount Start --> */}
 <section
@@ -374,41 +411,6 @@ const [category, setCategory] = useState([]);
     </div> */}
 </section>
 {/* <!-- Blog End --> */}
-
-{/* <!-- Client Start --> */}
-{/* Client Start */}
-<section className="client-section cs-2">
-  <div className="container">
-    <div className="row">
-      <div className="col-md-12">
-        <div className="client-slider owl-carousel">
-          <a href="#"><img src="assets/images/logo/LOGO/6TH SENSE.png" alt="logo"  style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/ABU GARCIA.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/berkley.png" alt="logo"style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/DAIWA.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/decoy.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          {/* <a href="#"><img src="assets/images/logo/LOGO/helco.png" alt="logo" /></a> */}
-          <a href="#"><img src="assets/images/logo/LOGO/lucana.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/lucky john.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/major craft.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/OKUMA.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          {/* <a href="#"><img src="assets/images/logo/LOGO/poineer.png" alt="logo" /></a> */}
-          <a href="#"><img src="assets/images/logo/LOGO/SAVAGE GEAR.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/scaless.jpg" alt="logo"style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/shakespeare.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/shimano.webp" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/SUNLINE.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/yo-zuri.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/zerek.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/zman.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{/* Client End */}
-{/* <!-- Client End --> */}
 
 <div className="container py-5">
   {/* Modern Background Music Controls */}

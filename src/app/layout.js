@@ -48,8 +48,11 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
+        
         {/* Context Provider */}
         <Contextshare>{children}</Contextshare>
+
+
 
         {/* Razorpay Script */}
         <Script

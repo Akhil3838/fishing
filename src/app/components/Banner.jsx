@@ -26,28 +26,36 @@ function Banner() {
         <div className="hero-slider owl-carousel anim_class">
 
           {/* Slide 1 */}
-          <div className="single-slide bg-img d-flex align-items-center" style={{
-            height: '80vh',
-            backgroundImage: `url(${banner?.[0]?.image_url})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}>
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="slider-content">
-                    <h5 className="sub-title animated">{banner?.[0]?.sub_text}<span></span></h5>
-                    <h2 className="animated">{banner?.[0]?.main_text}</h2>
-                    <a href="shop-1.html" className="fishto-btn sb2 animated">Shop Now <i className="nss-long-arrow-right1"></i></a>
-                  </div>
-                </div>
-              </div>
+    <div
+      className="single-slide bg-img d-flex align-items-center"
+      style={{
+        height: '80vh',
+        backgroundImage: `url(${banner?.[0]?.image_url})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="slider-content">
+              <h5 className="sub-title animated">
+                {banner?.[0]?.sub_text}
+                <span></span>
+              </h5>
+              <h2 className="animated">{banner?.[0]?.main_text}</h2>
+              <a href="shop-1.html" className="fishto-btn sb2 animated">
+                Shop Now <i className="nss-long-arrow-right1"></i>
+              </a>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
           {/* Slide 2 */}
-          <div className="single-slide bg-img d-flex align-items-center" style={{
+          {/* <div className="single-slide bg-img d-flex align-items-center" style={{
             height: '80vh',
             backgroundImage: `url(${banner?.[1]?.image_url})`,
             backgroundSize: 'cover',
@@ -66,9 +74,9 @@ function Banner() {
               </div>
             </div>
           </div>
-
+ */}
           {/* Slide 3 */}
-          <div className="single-slide bg-img d-flex align-items-center" style={{
+          {/* <div className="single-slide bg-img d-flex align-items-center" style={{
             height: '80vh',
             backgroundImage: `url(${banner?.[2]?.image_url})`,
             backgroundSize: 'cover',
@@ -86,7 +94,7 @@ function Banner() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </section>
