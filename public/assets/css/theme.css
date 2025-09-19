@@ -6147,6 +6147,10 @@ z-index: 1999 !important;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
+.owl-nav {
+  display: none !important;
+}
+
 
 
 

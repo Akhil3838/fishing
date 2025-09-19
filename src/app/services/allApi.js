@@ -252,6 +252,16 @@ export const OfferproductApi =async()=>{
     return await commonApi('GET',`${serverUrl}/offer-products`,"","")
 }
 
+export const galleryApi =async()=>{
+    return await commonApi('GET',`${serverUrl}/get-gallery`,"","")
+}
+
+export const brandsApi =async()=>{
+    return await commonApi('GET',`${serverUrl}/get-brands`,"","")
+}
+
+
+
 
 
 

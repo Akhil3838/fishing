@@ -9,6 +9,8 @@ import {  newCategoryApi } from "./services/allApi";
 import Hotproduct from "./components/Hotproduct";
 import VideoBanner from "./components/VideoBanner";
 import Offer from "./components/Offer";
+import Gallery from "./components/Gallery";
+import Brands from "./components/Brands";
 
 
 
@@ -245,32 +247,7 @@ const [category, setCategory] = useState([]);
 {/* Client Start */}
 <section className="client-section cs-2">
   <div className="container">
-    <div className="row">
-      <div className="col-md-12">
-        <div className="client-slider owl-carousel">
-          <a href="#"><img src="assets/images/logo/LOGO/6TH SENSE.png" alt="logo"  style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/ABU GARCIA.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/berkley.png" alt="logo"style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/DAIWA.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/decoy.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          {/* <a href="#"><img src="assets/images/logo/LOGO/helco.png" alt="logo" /></a> */}
-          <a href="#"><img src="assets/images/logo/LOGO/lucana.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/lucky john.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/major craft.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/OKUMA.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          {/* <a href="#"><img src="assets/images/logo/LOGO/poineer.png" alt="logo" /></a> */}
-          <a href="#"><img src="assets/images/logo/LOGO/SAVAGE GEAR.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/scaless.jpg" alt="logo"style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/shakespeare.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/shimano.webp" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/SUNLINE.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/yo-zuri.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-          <a href="#"><img src="assets/images/logo/LOGO/zerek.png" alt="logo" style={{width:"100px",height:"100px"}}/></a>
-          <a href="#"><img src="assets/images/logo/LOGO/zman.png" alt="logo" style={{width:"100px",height:"100px"}} /></a>
-
-        </div>
-      </div>
-    </div>
+    <Brands/>
   </div>
 </section>
 {/* Client End */}
@@ -317,38 +294,7 @@ const [category, setCategory] = useState([]);
                 <h2 className="sec_titles">Our Gallery</h2>
             </div>
         </div>
-        <div className="row">
-            <div className="gallery-slider owl-carousel">
-                <div className="gallery-item">
-                    <img src="assets/images/g22.jpg" alt="image" />
-                    {/* <div className="gall-content">
-                        <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g22.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div> */}
-                </div>
-                <div className="gallery-item">
-                    <img src="assets/images/g11.jpg" alt="image" />
-                    {/* <div className="gall-content">
-                        <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g11.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div> */}
-                </div>
-                <div className="gallery-item">
-                    <img src="assets/images/g33.jpg" alt="image" />
-                    {/* <div className="gall-content">
-                        <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g33.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div> */}
-                </div>
-                <div className="gallery-item">
-                    <img src="assets/images/g4.jpg" alt="image" />
-                    {/* <div className="gall-content">
-                        <h4>Redcap Oranda<br /> Goldfis</h4>
-                        <a className="popup" href="assets/images/g4.jpg" data-rel="lightcase:myCollection:slideshow">+</a>
-                    </div> */}
-                </div>
-            </div>
-        </div>
+        <Gallery/>
     </div>
 </section>
 {/* <!-- Gallery End --> */}
