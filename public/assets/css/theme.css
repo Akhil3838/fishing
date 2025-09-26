@@ -5672,7 +5672,7 @@ blockquote:after {
   color: white;
 /* padding:  1.5rem 0.75rem; */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
   flex-wrap: wrap;
@@ -5707,7 +5707,7 @@ blockquote:after {
   display: flex;
   gap: 1rem;
   list-style: none;
-  padding-left: 90px;
+  /* padding-left: 90px; */
 }
 
 .nav-item {

@@ -21,11 +21,11 @@ function ShoppingContent() {
     variant_attribute: [],
     variant_option: [],
   });
+  const [loading, setLoading] = useState(false); // <-- loader state
 
-const params = useParams();
-let { slug } = params;
-    slug = slug === 'all' ? '' : slug; 
-
+  const params = useParams();
+  let { slug } = params;
+  slug = slug === 'all' ? '' : slug; 
 
   const allProducts = async (
     page,
@@ -42,8 +42,8 @@ let { slug } = params;
       Authorization: `Bearer ${token}`,
     };
 
-
     try {
+      setLoading(true); // <-- start loader
       console.log(slug);
       
       const result = await getAllProduct(
@@ -56,7 +56,7 @@ let { slug } = params;
         variants,
         reqHeader
       );
-   console.log(result);
+      console.log(result);
    
       setProducts(result.data.products);
       setBrand(result.data.brands);
@@ -64,6 +64,8 @@ let { slug } = params;
     } catch (error) {
       console.error("Error fetching products:", error);
       toast.error("Error fetching products");
+    } finally {
+      setLoading(false); // <-- stop loader
     }
   };
 
@@ -73,14 +75,12 @@ let { slug } = params;
   };
 
   useEffect(() => {
-
     setPage(1); // Reset to first page on filter change
   }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
 
   useEffect(() => {
     allProducts(page, selectedBrands, priceRange[0], priceRange[1], sortValue, variantSelections);
   }, [page, selectedBrands, priceRange, sortValue, variantSelections]);
-console.log(products);
 
   return (
     <>
@@ -95,9 +95,9 @@ console.log(products);
                     <a href="/" className="text-decoration-none">Home</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">Shop</li>
-<li className="breadcrumb-item active" aria-current="page">
-  {slug ?? 'All Products'}
-</li>
+                  <li className="breadcrumb-item active" aria-current="page">
+                    {slug ?? 'All Products'}
+                  </li>
                 </ol>
               </nav>
             </div>
@@ -117,16 +117,24 @@ console.log(products);
               />
             </div>
             <div className="col-lg-9 col-md-12">
-              <ShopProducts
-               brands={brands}
-                onBrandsChange={setSelectedBrands}
-                selectedBrands={selectedBrands}
-                products={products}
-                totalPages={totalPages}
-                currentPage={page}
-                onPageChange={setPage}
-                onSortChange={setSortValue}
-              />
+              {loading ? (
+                <div className="text-center my-5">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <ShopProducts
+                  brands={brands}
+                  onBrandsChange={setSelectedBrands}
+                  selectedBrands={selectedBrands}
+                  products={products}
+                  totalPages={totalPages}
+                  currentPage={page}
+                  onPageChange={setPage}
+                  onSortChange={setSortValue}
+                />
+              )}
             </div>
           </div>
         </div>
