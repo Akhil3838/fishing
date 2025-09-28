@@ -1,8 +1,33 @@
-import React from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
+
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import { bannerApi } from '../services/allApi'
 
 function about() {
+    const [link, setLink] = useState([])
+  
+    const handleLink = async () => {
+      try {
+        const res = await bannerApi()
+        console.log(res.data.settings)
+        setLink(res.data.settings)
+      } catch (error) {
+        console.error("Error fetching footer links:", error)
+      }
+    }
+  
+    useEffect(() => {
+      handleLink()
+    }, [])
+  
+    // helper function to get value by label
+    const getValue = (label) => {
+      const item = link.find((i) => i.label === label)
+      return item ? item.value : ""
+    }
+  
   return (
     <>
     <Header/>
@@ -18,7 +43,7 @@ function about() {
             <div className="col-lg-5">
               <div className="sub_title">About Us <span></span></div>
               <h2 className="sec_titles">Welcome to SCALESS</h2>
-              <p className="sec_desc">
+              {/* <p className="sec_desc">
                 SCALESS is a leading Indian manufacturer and distributor of fishing equipment, established in 2020. 
                 We specialize in supplying premium-quality fishing gear across India, catering to both professionals and enthusiasts.
               </p>
@@ -32,7 +57,8 @@ function about() {
               </p>
               <p className="sec_desc">
                 Our mission is simple: to deliver the finest fishing gear and ensure our customers enjoy the best possible fishing experience.
-              </p>
+              </p> */}
+              <p>{getValue("about_content")}</p>
             </div>
           </div>
         </div>
