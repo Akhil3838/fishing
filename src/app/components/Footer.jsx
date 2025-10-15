@@ -50,7 +50,7 @@ function Footer() {
               <aside className="widget">
                 <div className="about-widget">
                   <a href="/">
-                    <img src="assets/images/logo/log2.png" alt="Scaless Logo" />
+                    <img src="/assets/images/logo/log2.png" alt="Scaless Logo" />
                   </a>
                  <p>Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit. Duis at<br /> est id leo luctus gravida a in ipsum.</p>
                   <div className="ab-social">

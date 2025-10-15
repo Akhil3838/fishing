@@ -142,11 +142,11 @@ console.log(productPrice);
                         Description
                       </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`} onClick={() => setActiveTab('additional')} role="button">
                         Additional Information
                       </a>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                       <a className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`} onClick={() => setActiveTab('reviews')} role="button">
                         Reviews ({viewReview?.length || 0})
@@ -162,13 +162,7 @@ console.log(productPrice);
   className="table-description text-start"
   dangerouslySetInnerHTML={{ __html: product.description }}
 ></p>
-    
-    </div>
-                      </div>
-                    )}
-    
-                    {activeTab === 'additional' && (
-                      <div className="tab-pane fade show active">
+                          <div className="tab-pane fade show active">
       <div className="table-container my-2 ">
 <table className="custom-table start table-bordered">
   <thead>
@@ -192,7 +186,13 @@ console.log(productPrice);
 </table>
       </div>
                       </div>
+
+    </div>
+                      </div>
                     )}
+    
+                    {/* {activeTab === 'additional' && (
+                    )} */}
     
     {activeTab === 'reviews' && (
       <div className="tab-pane fade show active">
