@@ -47,7 +47,7 @@ export default function AboutSection() {
           <div className="col-lg-6 col-md-6">
             <div className="ab-thumb">
               <img
-                src="assets/images/about/about2.jpg"
+                src="assets/images/about/abouts.jpg"
                 alt="about"
                 style={{ borderRadius: '15px', width: '100%', height: 'auto' }}
               />
