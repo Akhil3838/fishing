@@ -22,7 +22,7 @@ export const getAllProduct = async (
   variantSelections = {},  // ✅ NEW
   reqHeader
 ) => {
-  let url = `${serverUrl}/get-all-products?page=${page}&limit=9`;
+  let url = `${serverUrl}/get-all-products?page=${page}&limit=12`;
 
   if (category) {
     url += `&category_slug=${category}`;

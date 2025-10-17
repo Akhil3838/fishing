@@ -982,7 +982,7 @@ header .container-fluid{
     position: relative;
     z-index: 3;
     text-align: center;
-    min-height: 265px;
+    /* min-height: 265px; */
 }
 .product-thumb img {
     max-width: 100%;
@@ -990,6 +990,7 @@ header .container-fluid{
     height: 265px;
     width: auto;
     /* position: absolute; */
+    object-fit: cover;
     left: 0;
     right: 0;
     bottom: 0;
@@ -5718,7 +5719,7 @@ blockquote:after {
 .dropbtn {
   color: white;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 14px;
   padding: 0.5rem 0.75rem;
   background: none;
   border: none;

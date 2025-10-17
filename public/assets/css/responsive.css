@@ -260,6 +260,9 @@
         right: 20px;
     }
 
+
+
+
 }
 /*------------------------------------------------------------------------------------
 / 4. Responsive For Mobile & Tab
@@ -523,6 +526,32 @@
 /*------------------------------------------------------------------------------------
 / 5. Responsive For Mobile Device
 --------------------------------------------------------------------------------------*/
+
+@media (max-width: 768px) {
+  .product-thumb img {
+    height: 180px; /* adjust as needed */
+  }
+  .product-item-1:hover .add-to-cart{
+    visibility: visible;
+    opacity: 1;
+    bottom: -24px;
+}
+
+}
+
+/* On very small screens (up to 480px) */
+@media (max-width: 480px) {
+  .product-thumb img {
+    height: 150px; /* smaller for tiny screens */
+  }
+  .product-item-1:hover .add-to-cart{
+    visibility: visible;
+    opacity: 1;
+    bottom: -24px;
+}
+
+}
+
 @media (max-width: 767px){
     .cart-table .quantityd{
         margin: 0;
