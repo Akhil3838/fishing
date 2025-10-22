@@ -3147,7 +3147,7 @@ footer .widget.widget_mc4wp_form_widget{
     position: relative;
     text-align: center;
     /* border: 1px solid #E2EEFF; */
-    padding: 60px 30px;
+    /* padding: 60px 30px; */
 }
 .sp_img{
     position: relative;
@@ -3156,7 +3156,8 @@ footer .widget.widget_mc4wp_form_widget{
 .sp_img img {
     width: 100%;
     max-width: auto;
-    height: 500px;
+    /* height: 500px; */
+    object-fit: cover;
 }
 .indicator-slider {
     position: relative;
