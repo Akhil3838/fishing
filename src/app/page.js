@@ -44,6 +44,8 @@ const [category, setCategory] = useState([]);
       try {
         const result = await newCategoryApi();
         const categories = result.data.data || [];
+        console.log(result);
+        
         setCategory(categories);
         
         if (categories.length > 0) {
@@ -154,43 +156,45 @@ const [category, setCategory] = useState([]);
 {/* Category End */}
 
 {/* <!-- new Product Start --> */}
-  <section className="product-section-2 mt-4">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 text-center">
-              <h2 className="sec_titles">New Products</h2>
+<section className="product-section-2 mt-4">
+  <div className="container">
+    <div className="row">
+      <div className="col-md-12 text-center">
+        <h2 className="sec_titles">New Products</h2>
+      </div>
+    </div>
+
+    <div className="row category-scroll d-flex justify-content-center text-center mt-4 overflow-mx-auto">
+      {category.length > 0 ? (
+        category.map((item) => (
+          <div
+            key={item.id || item.slug}
+            className="col-3 col-sm-4 col-md-2 mb-4 "
+          >
+            <div
+              className={`category-circle ${
+                activeCategory === item.slug ? "active" : ""
+              }`}
+              onClick={() => setActiveCategory(item.slug)}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={item.icon || "/default-category.jpg"} // fallback image
+                alt={item.category_name}
+                className="img-fluid rounded-circle shadow-lg p-3 border border-2"
+              />
             </div>
+            <h5 className="mt-2">{item.category_name}</h5>
           </div>
-          <div className="row">
-            <div className="col-md-12">
-              <div className="product-tab-area">
-                <ul className="product-tab-title nav nav-tabs text-center">
-                  {category.length > 0 ? (
-                    category.map((item) => (
-                      <li key={item.id || item.slug}>
-                        <a 
-                          className={activeCategory === item.slug ? "active" : ""} 
-                          href={`#${item.slug}`} 
-                          data-toggle="tab"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setActiveCategory(item.slug);
-                          }}
-                        >
-                          {item.category_name}
-                        </a>
-                      </li>
-                    ))
-                  ) : (
-                    <li><a href="/" data-toggle="tab">home</a></li>
-                  )}
-                </ul>
-                <Newproducts activeCategory={activeCategory} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        ))
+      ) : (
+        <p>No categories found</p>
+      )}
+    </div>
+
+    <Newproducts activeCategory={activeCategory} />
+  </div>
+</section>
    {/* <!-- Product End --> */}
    <div>
     <VideoBanner/>

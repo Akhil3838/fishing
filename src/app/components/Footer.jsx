@@ -52,7 +52,9 @@ function Footer() {
                   <a href="/">
                     <img src="/assets/images/logo/log2.png" alt="Scaless Logo" />
                   </a>
-                 <p>Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit. Duis at<br /> est id leo luctus gravida a in ipsum.</p>
+                 <p>
+
+SCALESS is a leading Indian manufacturer and distributor of fishing equipment, established in 2020. We specialize in supplying premium-quality fishing gear across India, catering to both professionals and enthusiasts.</p>
                   <div className="ab-social">
                     <a className="fa" target="_blank" rel="noopener noreferrer" href={getValue("facebook")}>
                       <i className="fa-brands fa-facebook-f"></i>
