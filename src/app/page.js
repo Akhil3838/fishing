@@ -164,33 +164,33 @@ const [category, setCategory] = useState([]);
       </div>
     </div>
 
-    <div className="row category-scroll d-flex justify-content-center text-center mt-4 overflow-mx-auto">
-      {category.length > 0 ? (
-        category.map((item) => (
-          <div
-            key={item.id || item.slug}
-            className="col-3 col-sm-4 col-md-2 mb-4 "
-          >
-            <div
-              className={`category-circle ${
-                activeCategory === item.slug ? "active" : ""
-              }`}
-              onClick={() => setActiveCategory(item.slug)}
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                src={item.icon || "/default-category.jpg"} // fallback image
-                alt={item.category_name}
-                className="img-fluid rounded-circle shadow-lg p-3 border border-2"
-              />
-            </div>
-            <h5 className="mt-2">{item.category_name}</h5>
-          </div>
-        ))
-      ) : (
-        <p>No categories found</p>
-      )}
-    </div>
+<div className="row category-scroll d-flex justify-content-center text-center mt-4 mx-auto">
+  {category.length > 0 ? (
+    category.map((item) => (
+      <div
+        key={item.id || item.slug}
+        className="col-4 col-sm-3 col-md-2 mb-4 d-flex flex-column align-items-center"
+      >
+        <div
+          className={`category-circle ${
+            activeCategory === item.slug ? "active" : ""
+          }`}
+          onClick={() => setActiveCategory(item.slug)}
+          style={{ cursor: "pointer" }}
+        >
+          <img
+            src={item.icon || "/default-category.jpg"} // fallback image
+            alt={item.category_name}
+            className="img-fluid rounded-circle shadow-lg p-3 border border-2"
+          />
+        </div>
+        <h5 className="mt-2 text-center text-wrap">{item.category_name}</h5>
+      </div>
+    ))
+  ) : (
+    <p>No categories found</p>
+  )}
+</div>
 
     <Newproducts activeCategory={activeCategory} />
   </div>
