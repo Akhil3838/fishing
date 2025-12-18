@@ -56,7 +56,7 @@ function ShoppingContent() {
         variants,
         reqHeader
       );
-      console.log(result);
+      console.log('all product',result);
    
       setProducts(result.data.products);
       setBrand(result.data.brands);

@@ -11,6 +11,7 @@ function SingleProduct({ product, variants, onPriceChange }) {
   const [selectedVariants, setSelectedVariants] = useState({});
   const [price, setPrice] = useState('');
   const [orgPrice, setOrgPrice] = useState('');
+  const [stockStatus, setStockStatus] = useState('');
   const [colorImg, setColorImg] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -133,11 +134,15 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
       const reqBody = { variant_option_ids: variantIds };
 
       const response = await getPriceDetailsApi(reqBody);
+      console.log('price status',response);
+      
       const fetchedPrice = response.data.sku?.special_price || 'N/A';
       const originalPrice = response.data.sku?.price || 'N/A';
+      const stock_status=response.data.sku?.stock_status || 'N/A';
 
       setPrice(fetchedPrice);
       setOrgPrice(originalPrice);
+      setStockStatus(stock_status);
 
       const hasColor = Object.keys(selected).some(attr => attr.toLowerCase() === 'color');
       if (hasColor && response.data.images && response.data.images.length > 0) {
@@ -154,6 +159,12 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
       if (onPriceChange) onPriceChange('N/A');
     }
   };
+
+  const sendRemainder = async (product_id,sku_id,qty) => {
+    const token = sessionStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('sku_id', sku_id);
+  }
 
   useEffect(() => {
     const defaultSelection = {};
@@ -239,6 +250,49 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
             <div className="excerpt mb-3">
               <p>{product?.short_description}</p>
               <hr />
+{stockStatus === 'out-of-stock' && <div
+  style={{
+    backgroundColor: '#ffdecdff',
+    border: '1px solid #ffeeba',
+    color: '#856404',
+    padding: '12px 16px',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    fontSize: '14px',
+    marginTop: '10px',
+  }}
+>
+  <i
+    className="fa-solid fa-box-open"
+    style={{ fontSize: '18px' }}
+  ></i>
+
+  <p style={{ margin: 0 }}>
+    This product is currently <strong>out of stock</strong>
+  </p>
+
+  {/* Right side button */}
+  <button
+    style={{
+      marginLeft: 'auto',
+      backgroundColor: '#341b86ff',
+      border: 'none',
+      color: '#fff',
+      padding: '6px 14px',
+      borderRadius: '20px',
+      fontSize: '13px',
+      cursor: 'pointer',
+      whiteSpace: 'nowrap',
+    }}
+    onClick={() => alert('You will be notified when the product is back in stock')}
+  >
+     Notify Me 🔔
+  </button>
+</div>
+
+}
             </div>
 
             {Object.entries(groupedVariants).map(([attribute, options], index) => {
@@ -259,6 +313,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
                       >
                         {option.name}
                       </button>
+                      
                     ))}
                     {hasMoreOptions && (
                       <button

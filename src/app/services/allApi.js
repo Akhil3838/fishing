@@ -259,7 +259,10 @@ export const galleryApi =async()=>{
 export const brandsApi =async()=>{
     return await commonApi('GET',`${serverUrl}/get-brands`,"","")
 }
-
+// remainder api
+export const remainderApi =async(reqBody)=>{
+    return await commonApi('POST',`${serverUrl}/remainder`,reqBody,"")
+}
 
 
 

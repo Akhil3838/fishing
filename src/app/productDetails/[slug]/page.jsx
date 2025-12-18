@@ -32,7 +32,7 @@ const [productPrice, setProductPrice] = useState("");
       try {
         const fetchedProduct = await getSignleProduct(slug, reqHeader);
         const productData = fetchedProduct.data.product;
-  console.log(fetchedProduct);
+  console.log('single product',fetchedProduct);
   
         setProduct(productData);
         setVariants(productData.variants || []);

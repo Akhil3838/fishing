@@ -6240,10 +6240,13 @@ z-index: 1999 !important;
 }
 
 
-
-
-
-
-
+/* Active category name – underlined */
+.active-name {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #222f5a; /* your theme color */
+  font-weight: 600;
+}
 
 
