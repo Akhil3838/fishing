@@ -5823,11 +5823,11 @@ blockquote:after {
     content: " ▸";
     float: right;
   } */
-
+/* 
   .dropdown .dropbtn:focus + .dropdown-content,
   .dropdown .dropbtn:hover + .dropdown-content {
     display: block;
-  }
+  } */
 }
 
 @media (min-width: 1200px) {
