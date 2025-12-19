@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { getPriceDetailsApi, addToCartApi } from '../services/allApi';
+import { getPriceDetailsApi, addToCartApi, remainderApi } from '../services/allApi';
 import { useRouter } from 'next/navigation';
 import {  ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ function SingleProduct({ product, variants, onPriceChange }) {
   const [price, setPrice] = useState('');
   const [orgPrice, setOrgPrice] = useState('');
   const [stockStatus, setStockStatus] = useState('');
+  const [skuId, setSkuId] = useState('');
   const [colorImg, setColorImg] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -139,10 +140,12 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
       const fetchedPrice = response.data.sku?.special_price || 'N/A';
       const originalPrice = response.data.sku?.price || 'N/A';
       const stock_status=response.data.sku?.stock_status || 'N/A';
+      const sku_id=response.data.sku?.sku_id || 'N/A';
 
       setPrice(fetchedPrice);
       setOrgPrice(originalPrice);
       setStockStatus(stock_status);
+      setSkuId(sku_id);
 
       const hasColor = Object.keys(selected).some(attr => attr.toLowerCase() === 'color');
       if (hasColor && response.data.images && response.data.images.length > 0) {
@@ -160,11 +163,46 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
     }
   };
 
-  const sendRemainder = async (product_id,sku_id,qty) => {
-    const token = sessionStorage.getItem('token');
-    const formData = new FormData();
-    formData.append('sku_id', sku_id);
+
+  const [showModal, setShowModal] = useState(false);
+  const [mobile, setMobile] = useState('');
+
+const handleSubmit = async () => {
+  if (!mobile || mobile.length < 10) {
+    toast.warning('Please enter a valid mobile number', {
+      position: 'bottom-center',
+      autoClose: 2000,
+    });
+    return;
   }
+
+  try {
+
+    const formData = new FormData();
+    formData.append('sku_id', skuId);
+    formData.append('phone', mobile);
+
+
+   const result = await remainderApi(formData);
+   console.log(result);
+   
+
+    toast.success('You will be notified when product is back in stock 🔔', {
+      position: 'bottom-center',
+      autoClose: 2000,
+    });
+
+    setMobile('');
+    setShowModal(false);
+  } catch (error) {
+    console.error('Remainder error:', error);
+
+    toast.error('Failed to register reminder. Please try again.', {
+      position: 'bottom-center',
+      autoClose: 2000,
+    });
+  }
+};
 
   useEffect(() => {
     const defaultSelection = {};
@@ -274,23 +312,109 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
   </p>
 
   {/* Right side button */}
-  <button
-    style={{
-      marginLeft: 'auto',
-      backgroundColor: '#341b86ff',
-      border: 'none',
-      color: '#fff',
-      padding: '6px 14px',
-      borderRadius: '20px',
-      fontSize: '13px',
-      cursor: 'pointer',
-      whiteSpace: 'nowrap',
-    }}
-    onClick={() => alert('You will be notified when the product is back in stock')}
-  >
-     Notify Me 🔔
-  </button>
-</div>
+  {/* Notify Button */}
+      <button
+        onClick={() => setShowModal(true)}
+        style={{
+          marginLeft: 'auto',
+          backgroundColor: '#341b86ff',
+          border: 'none',
+          color: '#fff',
+          padding: '6px 14px',
+          borderRadius: '20px',
+          fontSize: '13px',
+          cursor: 'pointer',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        Notify Me 🔔
+      </button>
+
+      {/* Modal */}
+      {showModal && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: '#fff',
+              borderRadius: '12px',
+              padding: '20px',
+              width: '320px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+            }}
+          >
+            <h4 style={{ marginBottom: '10px' }}>
+              Get Notified 🔔
+            </h4>
+
+            <p style={{ fontSize: '14px', color: '#666' }}>
+              Enter your mobile number and we’ll notify you when it’s back in stock.
+            </p>
+
+            <input
+              type="tel"
+              placeholder="Enter mobile number"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '8px 10px',
+                marginTop: '10px',
+                borderRadius: '6px',
+                border: '1px solid #ccc',
+                fontSize: '14px',
+              }}
+            />
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                marginTop: '15px',
+                gap: '10px',
+              }}
+            >
+              <button
+                onClick={() => setShowModal(false)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: '#666',
+                  cursor: 'pointer',
+                }}
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: '#341b86ff',
+                  border: 'none',
+                  color: '#fff',
+                  padding: '6px 16px',
+                  borderRadius: '20px',
+                  cursor: 'pointer',
+                }}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}</div>
 
 }
             </div>

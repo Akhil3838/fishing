@@ -5705,6 +5705,15 @@ blockquote:after {
   }
 }
 
+/* Disable hover dropdown on mobile */
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+
+  /* Enable dropdown only when active (clicked) */
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
 .nav-menu {
   display: flex;
   gap: 1rem;
