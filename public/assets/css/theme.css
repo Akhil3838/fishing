@@ -5753,6 +5753,19 @@ blockquote:after {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+@media (max-width: 991px) {
+
+  /* Disable hover effect on mobile */
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+
+  /* Open dropdown only via click (JS adds .active) */
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+}
+
 
 /* Responsive behavior */
 @media (max-width: 768px) {
@@ -5773,15 +5786,7 @@ blockquote:after {
   top: -150px;
   left: 320px;
 }
- /* Disable hover completely on mobile */
-  .dropdown:hover .dropdown-content {
-    display: none;
-  }
 
-  /* Open ONLY via React state */
-  .dropdown.active .dropdown-content {
-    display: block;
-  }
 .dropdown-link{
     font-size: 12px;
 }
