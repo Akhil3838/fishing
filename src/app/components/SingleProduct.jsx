@@ -140,7 +140,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
       const fetchedPrice = response.data.sku?.special_price || 'N/A';
       const originalPrice = response.data.sku?.price || 'N/A';
       const stock_status=response.data.sku?.stock_status || 'N/A';
-      const sku_id=response.data.sku?.sku_id || 'N/A';
+      const sku_id=response.data.sku?.id || 'N/A';
 
       setPrice(fetchedPrice);
       setOrgPrice(originalPrice);
@@ -167,6 +167,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
   const [showModal, setShowModal] = useState(false);
   const [mobile, setMobile] = useState('');
 
+
 const handleSubmit = async () => {
   if (!mobile || mobile.length < 10) {
     toast.warning('Please enter a valid mobile number', {
@@ -175,6 +176,8 @@ const handleSubmit = async () => {
     });
     return;
   }
+
+
 
   try {
 

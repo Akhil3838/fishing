@@ -261,7 +261,7 @@ export const brandsApi =async()=>{
 }
 // remainder api
 export const remainderApi =async(reqBody)=>{
-    return await commonApi('POST',`${serverUrl}/remainder`,reqBody,"")
+    return await commonApi('POST',`${serverUrl}/save-reminder`,reqBody,"")
 }
 
 
