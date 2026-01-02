@@ -99,10 +99,10 @@ const ResetPassword = () => {
         </Link>
 
         <h5 className="text-center mb-3">Reset Password</h5>
-        <p className="text-muted text-center mb-4">Enter your new password and the OTP sent to your email</p>
+        <p className="text-muted text-center mb-4">Enter your new password and the OTP sent to your mobile number</p>
         
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <input 
               type="email"         
               className="form-control" 
@@ -110,7 +110,7 @@ const ResetPassword = () => {
               readOnly 
               disabled
             />
-          </div>
+          </div> */}
           
           <div className="mb-3">
             <input

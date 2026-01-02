@@ -16,7 +16,7 @@ const ShopSidebar = ({
   slug
 }) => {
   const [categories, setCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [priceRange, setPriceRange] = useState([0, 50000]);
   const [selectedVariants, setSelectedVariants] = useState({});
   const [variants, setVariants] = useState([]);
   const [visibleBrands, setVisibleBrands] = useState(4);
@@ -126,7 +126,7 @@ const ShopSidebar = ({
             onChange={handlePriceChange}
             valueLabelDisplay="auto"
             min={0}
-            max={20000}
+            max={50000}
             step={500}
             valueLabelFormat={formatPrice}
             sx={{

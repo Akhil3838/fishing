@@ -6260,7 +6260,7 @@ z-index: 1999 !important;
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
   text-decoration-color: #222f5a; /* your theme color */
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 
 

@@ -185,7 +185,7 @@ const [category, setCategory] = useState([]);
               />
             </div>
             <h5
-              className={`mt-2 text-center text-wrap ${
+              className={`mt-2 text-center text-wrap fs-6 ${
                 activeCategory === item.slug ? "active-name" : ""
               }`}
             >

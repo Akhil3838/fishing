@@ -52,7 +52,7 @@ function Login() {
         });
 
         setTimeout(() => {
-          window.location.href = '/'; // force full reload
+          window.location.href = '/'; 
         }, 2000);
       } else {
         toast.error('Invalid phone number or password!', {

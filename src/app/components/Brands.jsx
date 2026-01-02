@@ -66,8 +66,8 @@ function Brands() {
                 src={item.logo_url}
                 alt={item.title || "logo"}
                 style={{
-                  width: "100px",
-                  height: "100px",
+                  width: "160px",
+                  height: "160px",
                   objectFit: "contain",
                 }}
               />

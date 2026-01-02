@@ -9,22 +9,22 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function ForgotPassword() {
-  const [formData, setFormData] = useState({ email: "" });
+  const [formData, setFormData] = useState({ phone: "" });
   const [message, setMessage] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email } = formData;
+    const { phone } = formData;
 
     try {
-      const response = await sendEmailApi({ email });
+      const response = await sendEmailApi({ phone });
       if (response.status === 200) {
         setMessage("OTP sent successfully.");
         console.log(response);
         // Encode the email for URL safety
-        const encodedEmail = encodeURIComponent(email);
-        router.push(`/resetpassword?email=${encodedEmail}`);
+        // const encodedEmail = encodeURIComponent(email);
+        router.push(`/resetpassword`);
       } else {
         setMessage("Failed to send OTP. Try again.");
       }
@@ -48,19 +48,19 @@ function ForgotPassword() {
           </Link>
   
           <h4 className="text-center mb-3">Forgot Password</h4>
-          <p className="text-muted text-center">Enter your email to receive a password reset link</p>
+          <p className="text-muted text-center">Enter your mobile number to receive a OTP</p>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <input
-                type="email"
+                type="number"
                 className="form-control"
-                placeholder="Enter your email"
+                placeholder="Enter your Mobile Number"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required
               />
             </div>
-            <button type="submit" className="btn btn-danger w-100">Send Reset Link</button>
+            <button type="submit" className="btn btn-danger w-100">Send OTP</button>
           </form>
           {message && <p className="mt-3 text-center text-success">{message}</p>}
         </div>

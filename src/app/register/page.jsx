@@ -77,8 +77,11 @@ function Register() {
             <div className="mb-3 text-start">
               <input type="text" className="form-control" placeholder="Name" name="name" value={formData.name} onChange={handleChange} required />
             </div>
-            <div className="mb-3 text-start">
+            {/* <div className="mb-3 text-start">
               <input type="email" className="form-control" placeholder="Email" name="email" value={formData.email} onChange={handleChange} required />
+            </div> */}
+             <div className="mb-3 text-start">
+              <input type="tel" className="form-control" placeholder="Phone Number" name="phone" value={formData.phone} onChange={handleChange} required />
             </div>
             <div className="mb-3 text-start">
               <input type="password" className="form-control" placeholder="Password" name="password" value={formData.password} onChange={handleChange} required />
@@ -86,9 +89,7 @@ function Register() {
             <div className="mb-3 text-start">
               <input type="password" className="form-control" placeholder="Re-enter Password" name="c_password" value={formData.c_password} onChange={handleChange} required />
             </div>
-            <div className="mb-3 text-start">
-              <input type="tel" className="form-control" placeholder="Phone Number" name="phone" value={formData.phone} onChange={handleChange} required />
-            </div>
+           
             <button type="submit" className="btn btn-custom w-100">Register</button>
           </form>
 
