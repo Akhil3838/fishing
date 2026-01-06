@@ -5721,7 +5721,7 @@ blockquote:after {
 .dropbtn {
   color: white;
   text-decoration: none;
-  /* font-size: 14px; */
+  font-size: 11px;
   padding: 0.5rem 0.75rem;
   background: none;
   border: none;
