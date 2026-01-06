@@ -1,181 +1,104 @@
 'use client'
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { registerApi } from '../services/allApi';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-import { useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { resetPasswordApi } from "../services/allApi";
-
-const ResetPasswordWrapper = () => {
-  return (
-    <Suspense fallback={<div className="text-center p-5">Loading...</div>}>
-      <ResetPassword />
-    </Suspense>
-  );
-};
-
-const ResetPassword = () => {
+function Register() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email");
 
   const [formData, setFormData] = useState({
-    password: "",
-    confirmPassword: "",
-    otp: ""
+    phone: "",
   });
-  const [message, setMessage] = useState({ text: "", type: "" });
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const validatePassword = () => {
-    if (formData.password.length < 8) {
-      setMessage({ text: "Password must be at least 8 characters", type: "error" });
-      return false;
-    }
-    if (formData.password !== formData.confirmPassword) {
-      setMessage({ text: "Passwords don't match", type: "error" });
-      return false;
-    }
-    if (!formData.otp || formData.otp.length < 6) {
-      setMessage({ text: "Please enter a valid 6-digit OTP", type: "error" });
-      return false;
-    }
-    return true;
+    setFormData({ ...formData, phone: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setMessage({ text: "", type: "" });
 
-    if (!validatePassword()) {
-      setIsLoading(false);
+    if (!formData.phone) {
+      toast.warning("Please enter phone number!", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "colored",
+      });
       return;
     }
 
     try {
-      const result = await resetPasswordApi({
-        email,
-        password: formData.password,
-        password_confirmation: formData.confirmPassword,
-        otp: formData.otp
-      });
+      const result = await registerApi(formData);
+console.log(result);
 
       if (result.status === 200) {
-        setMessage({ text: result.message || "Password reset successfully!", type: "success" });
-        setTimeout(() => router.push("/login"), 3000);
+       localStorage.setItem('user_id', result.data.user_id);
+
+        toast.success("OTP sent successful!", {
+          position: "top-center",
+          autoClose: 1000,
+          theme: "colored",
+        });
+
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       } else {
-        setMessage({ text: result.error || "Failed to reset password", type: "error" });
+        toast.error(result.data?.error || "Something went wrong!", {
+          position: "top-center",
+          autoClose: 3000,
+          theme: "colored",
+        });
       }
     } catch (error) {
-      setMessage({ 
-        text: error.response?.data?.message || "An error occurred. Please try again.", 
-        type: "error" 
+      toast.error("Network error! Please try again later.", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "colored",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow-lg p-4" style={{ width: "400px", borderRadius: "10px" }}>
-        <Link href="/" className="d-flex justify-content-center mb-3">
-          <Image
-            src="/assets/images/logo/log2.png"
-            alt="Company Logo"
-            width={170}
-            height={100}
-            priority
-          />
-        </Link>
+    <>
+      <Header />
 
-        <h5 className="text-center mb-3">Reset Password</h5>
-        <p className="text-muted text-center mb-4">Enter your new password and the OTP sent to your mobile number</p>
-        
-        <form onSubmit={handleSubmit}>
-          {/* <div className="mb-3">
-            <input 
-              type="email"         
-              className="form-control" 
-              value={email || ""} 
-              readOnly 
-              disabled
-            />
-          </div> */}
-          
-          <div className="mb-3">
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="New Password (min 8 characters)"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              minLength={8}
-            />
-          </div>
-          
-          <div className="mb-3">
-            <input
-              type="password"
-              name="confirmPassword"
-              className="form-control"
-              placeholder="Confirm Password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              minLength={8}
-            />
-          </div>
-          
-          <div className="mb-3">
-            <input
-              type="text"
-              name="otp"
-              className="form-control"
-              placeholder="Enter 6-digit OTP"
-              value={formData.otp}
-              onChange={handleChange}
-              required
-              pattern="\d{6}"
-              maxLength={6}
-            />
-          </div>
+      <div className="container" style={{ paddingTop: '150px' }}>
+        <div className="login-box text-center">
+          <h4 className="mb-3">Sign Up</h4>
 
-          <button 
-            type="submit" 
-            className="btn btn-danger w-100"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                Processing...
-              </>
-            ) : (
-              "Reset Password"
-            )}
-          </button>
-        </form>
-        
-        {message.text && (
-          <div className={`mt-3 alert alert-${message.type === "error" ? "danger" : "success"}`}>
-            {message.text}
-          </div>
-        )}
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3 text-start">
+              <input
+                type="tel"
+                className="form-control"
+                placeholder="Phone Number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn btn-custom w-100">
+              Continue
+            </button>
+          </form>
+
+          <p className="privacy-link mt-3">
+            Already have an account? <Link href="/login">Login</Link>
+          </p>
+        </div>
       </div>
-    </div>
-  );
-};
 
-export default ResetPasswordWrapper;
+      <ToastContainer />
+      <Footer />
+    </>
+  );
+}
+
+export default Register;

@@ -3,12 +3,12 @@ import { serverUrl } from "./serverUrl"
 
 //login
 export const loginApi =async(reqBody)=>{
-    return await commonApi('POST',`${serverUrl}/login`,reqBody,"")
+    return await commonApi('POST',`${serverUrl}/verify-otp`,reqBody,"")
 }
 
 //sign up
 export const registerApi =async(reqBody)=>{
-    return await commonApi('POST',`${serverUrl}/sign-up`,reqBody,"")
+    return await commonApi('POST',`${serverUrl}/login`,reqBody,"")
 }
 //all product
 

@@ -1,107 +1,124 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';
+import { loginApi } from '../services/allApi';
 import 'react-toastify/dist/ReactToastify.css';
-import { registerApi } from '../services/allApi';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Register() {
+function Login() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    c_password: "",
-    phone: "",
-  });
+  const [formData, setFormData] = useState({ otp: '' });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ otp: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.c_password) {
-      toast.warning("Passwords do not match!", {
-        position: "top-center",
+    let { otp } = formData;
+    otp = otp.trim();
+
+    if (!otp) {
+      toast.error('Please enter OTP.', {
+        position: 'top-center',
         autoClose: 1000,
-        theme: "colored",
+        theme: 'colored',
       });
       return;
     }
 
+    // session id (unchanged)
+    if (!localStorage.getItem('browser_id')) {
+      const browserId =
+        Date.now() + Math.random().toString(36).substr(2, 10);
+      localStorage.setItem('browser_id', browserId);
+    }
+     
+    const session_id = localStorage.getItem('browser_id');
+        const user_id = localStorage.getItem('user_id');
+
+
     try {
-      const result = await registerApi(formData);
+      const result = await loginApi({ otp, session_id, user_id });
+      console.log(result);
+      
+
       if (result.status === 200) {
-        toast.success("Registration successful!", {
-          position: "top-center",
+        sessionStorage.setItem('token', result.data.token);
+
+        toast.success('Login successful!', {
+          position: 'top-center',
           autoClose: 1000,
-          theme: "colored",
+          theme: 'colored',
         });
+
         setTimeout(() => {
-          router.push("/login");
+          window.location.href = '/';
         }, 2000);
       } else {
-        toast.error(result.data?.error || "Something went wrong!", {
-          position: "top-center",
-          autoClose: 3000,
-          theme: "colored",
+        toast.error('Invalid OTP!', {
+          position: 'top-center',
+          autoClose: 1000,
+          theme: 'colored',
         });
       }
     } catch (error) {
-      toast.error("Network error! Please try again later.", {
-        position: "top-center",
-        autoClose: 3000,
-        theme: "colored",
+      toast.error('Something went wrong', {
+        position: 'top-center',
+        autoClose: 1000,
+        theme: 'colored',
       });
     }
   };
 
   return (
     <>
-                <Header/>
+      <Header />
 
-      <div className="container" style={{paddingTop:'150px'}}>
-
+      <div className="container" style={{ paddingTop: '150px' }}>
         <div className="login-box text-center">
-
-            {/* <img src="assets/images/logo/log2.png" alt="Cabral Outdoors Logo" className="logo"  onClick={() => window.location.href = '/'} /> */}
-  
-     <h4 className="mb-3">Sign Up</h4>
+           <Link href="/">
+            <img
+              style={{height:'100px',width:'170px'}}
+              src="assets/images/logo/log2.png"
+              alt="Logo"
+              className="img-fluid mb-3"
+            />
+          </Link>
+          <h4 className="mb-3">Log in</h4>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3 text-start">
-              <input type="text" className="form-control" placeholder="Name" name="name" value={formData.name} onChange={handleChange} required />
+              <input
+                type="number"
+                name="otp"
+                value={formData.otp}
+                onChange={handleChange}
+                className="form-control"
+                placeholder="Enter OTP"
+                required
+              />
             </div>
-            {/* <div className="mb-3 text-start">
-              <input type="email" className="form-control" placeholder="Email" name="email" value={formData.email} onChange={handleChange} required />
-            </div> */}
-             <div className="mb-3 text-start">
-              <input type="tel" className="form-control" placeholder="Phone Number" name="phone" value={formData.phone} onChange={handleChange} required />
-            </div>
-            <div className="mb-3 text-start">
-              <input type="password" className="form-control" placeholder="Password" name="password" value={formData.password} onChange={handleChange} required />
-            </div>
-            <div className="mb-3 text-start">
-              <input type="password" className="form-control" placeholder="Re-enter Password" name="c_password" value={formData.c_password} onChange={handleChange} required />
-            </div>
-           
-            <button type="submit" className="btn btn-custom w-100">Register</button>
+
+            <button type="submit" className="btn btn-custom w-100">
+              Login
+            </button>
           </form>
 
-          <p className="privacy-link mt-3">
-            Already have an account? <Link href="/login">Login</Link>
-          </p>
+          {/* <p className="privacy-link">
+            Don&apos;t have an account? <Link href="/register">Sign Up</Link>
+          </p> */}
         </div>
       </div>
+
+      <Footer />
       <ToastContainer />
-      <Footer/>
     </>
   );
 }
 
-export default Register;
+export default Login;
