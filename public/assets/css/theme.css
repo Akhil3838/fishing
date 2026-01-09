@@ -6329,4 +6329,13 @@ z-index: 1999 !important;
     padding: 4px 10px;
     font-size: 12px;
   }
+  
+
+
+.google-translate-wrapper {
+    display: flex;
+    /* align-items: center; */
+  margin-top: -40px;
+    width: 1px;
+}
 }
