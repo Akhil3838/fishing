@@ -124,7 +124,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
   const groupedVariants = variants.reduce((acc, curr) => {
     if (!acc[curr.attribute_name]) acc[curr.attribute_name] = [];
     curr.variant_options.forEach(option => {
-      acc[curr.attribute_name].push({ id: option.id, name: option.option_name });
+      acc[curr.attribute_name].push({ id: option.id, name: option.option_name ,stock:option.stock_status });
     });
     return acc;
   }, {});
@@ -167,6 +167,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
   const [showModal, setShowModal] = useState(false);
   const [mobile, setMobile] = useState('');
 
+console.log(stockStatus);
 
 const handleSubmit = async () => {
   if (!mobile || mobile.length < 10) {
@@ -426,6 +427,9 @@ const handleSubmit = async () => {
               const isExpanded = expandedVariants[attribute];
               const displayOptions = isExpanded ? options : options.slice(0, 6);
               const hasMoreOptions = options.length > 6;
+console.log(displayOptions);
+console.log(groupedVariants);
+
 
               return (
                 <div className="product-variant mb-3" key={index}>

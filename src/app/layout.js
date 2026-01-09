@@ -48,6 +48,27 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
+          {/* Google Translate Script */}
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+
+        {/* Init Script */}
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                {
+                  pageLanguage: 'en',
+                  includedLanguages: 'en,hi,ml,ta,te,kn,ar',
+                  autoDisplay: false
+                },
+                'google_translate_element'
+              );
+            }
+          `}
+        </Script>
         
         {/* Context Provider */}
         <Contextshare>{children}</Contextshare>

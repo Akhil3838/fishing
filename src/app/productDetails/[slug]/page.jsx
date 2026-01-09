@@ -46,6 +46,7 @@ const [productPrice, setProductPrice] = useState("");
       fetchProduct();
     }
   }, [slug]);
+console.log(variants);
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();

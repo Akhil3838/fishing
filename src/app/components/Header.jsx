@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { getCartApi, logoutApi, searchProductApi } from '../services/allApi';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { addResponseContext, deleteCartResponseContext } from '../context/Contextshare';
 import Categorybar from './Categorybar';
@@ -21,7 +21,7 @@ function Header() {
   const [suggestion, setSuggestion] = useState([]);
   const searchTimeout = useRef(null);
   const searchDropdownRef = useRef(null);
-
+const pathname = usePathname();
   const cartItem = async () => {
     let browserId = localStorage.getItem("browser_id");
   
@@ -120,9 +120,64 @@ const handleClickOutside = (event) => {
 };    document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
 
-  return (
+const resetGoogleTranslate = () => {
+  // remove iframe
+  const iframe = document.querySelector("iframe.goog-te-banner-frame");
+  if (iframe) iframe.remove();
+
+  // remove google translate artifacts
+  document.body.classList.remove("translated-ltr");
+  document.body.classList.remove("translated-rtl");
+
+  // clear cookies (important!)
+  document.cookie = "googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+};
+
+
+const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
+
+
+useEffect(() => {
+  if (!mounted) return;
+  if (typeof window === "undefined") return;
+
+  const el = document.getElementById("google_translate_element");
+  if (!el) return;
+
+  // ✅ FULL RESET (THIS FIXES /product/[slug])
+  resetGoogleTranslate();
+  el.innerHTML = "";
+
+  let attempts = 0;
+
+  const initGoogleTranslate = () => {
+    if (window.google && window.google.translate) {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          includedLanguages: "en,hi,ml,ta,te,kn,ar",
+          autoDisplay: false,
+        },
+        "google_translate_element"
+      );
+      return;
+    }
+
+    attempts++;
+    if (attempts < 30) {
+      setTimeout(initGoogleTranslate, 200);
+    }
+  };
+
+  initGoogleTranslate();
+}, [pathname, mounted]);
+
+return (
     <>
       <header className="header-01 h2 head-sticky">
         <div className="container py-2">
@@ -238,6 +293,15 @@ const handleClickOutside = (event) => {
                 </div>
              
 <div className="access-btn" style={{display:'flex'}}>
+<div className="google-translate-wrapper">
+  {mounted && (
+    <div
+      id="google_translate_element"
+      suppressHydrationWarning
+    ></div>
+  )}
+</div>
+
              {token?<Link href="/profile" data-bs-toggle="modal"
   data-bs-target="#profileModal"
   id="profileBtn" className="btn-cart">
