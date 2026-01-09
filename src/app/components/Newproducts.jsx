@@ -51,7 +51,7 @@ function Newproducts({ activeCategory }) {
                   </div>
                   <div className="product-details">
                     <h5>
-                      <Link href={`/productDetails/${product._id}`}>
+                      <Link href={`/productDetails/${product?.slug}`}>
                         {product?.product_name || "Unnamed Product"}
                       </Link>
                     </h5>
