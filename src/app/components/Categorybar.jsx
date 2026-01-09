@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { allCategoryApi } from '../services/allApi';
 
@@ -26,54 +25,61 @@ function Categorybar({ menuOpen, setMenuOpen }) {
   const toggleDropdown = (index) => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
- console.log(categories);
- 
+
   return (
     <nav className="custom-navbar pt-lg-3">
       <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
+
         {categories.map((category, index) => (
           <li key={index} className="nav-item">
+
+            {/* CATEGORY WITH SUBCATEGORIES */}
             {category.subcategories && category.subcategories.length > 0 ? (
               <div className={`dropdown ${activeDropdown === index ? 'active' : ''}`}>
-                <button 
-                  className="dropbtn" 
+                <button
+                  className="dropbtn"
                   onClick={() => toggleDropdown(index)}
                 >
                   {category.category_name} ▾
                 </button>
+
                 <div className="dropdown-content bg-light py-2">
                   {category.subcategories.map((sub, subIndex) => (
-                    <Link 
-                      key={subIndex} 
-                      href={`/shop/${sub.slug}`} 
+                    <a
+                      key={subIndex}
+                      href={`/shop/${sub.slug}`}
                       className="dropdown-link"
                       onClick={() => setMenuOpen(false)}
                     >
                       {sub.category_name}
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>
             ) : (
-              <Link 
-                href={`/shop/${category.slug}`} 
+              /* CATEGORY WITHOUT SUBCATEGORIES */
+              <a
+                href={`/shop/${category.slug}`}
                 className="nav-link"
                 onClick={() => setMenuOpen(false)}
               >
                 {category.category_name}
-              </Link>
+              </a>
             )}
+
           </li>
         ))}
-<li className="nav-item">
-  <Link
-    href="/shop/all"
-    onClick={() => setMenuOpen(false)}
-    className="nav-link"
-  >
-    <span className="dropbtn">ALL PRODUCTS</span>
-  </Link>
-</li>
+
+        {/* ALL PRODUCTS */}
+        <li className="nav-item">
+          <a
+            href="/shop/all"
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="dropbtn">ALL PRODUCTS</span>
+          </a>
+        </li>
 
       </ul>
     </nav>

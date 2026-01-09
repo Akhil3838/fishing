@@ -48,32 +48,14 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
-          {/* Google Translate Script */}
+        {/* ✅ Google Translate Script (LOAD ONLY – NO INIT HERE) */}
         <Script
-          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          src="//translate.google.com/translate_a/element.js"
           strategy="afterInteractive"
         />
 
-        {/* Init Script */}
-        <Script id="google-translate-init" strategy="afterInteractive">
-          {`
-            function googleTranslateElementInit() {
-              new google.translate.TranslateElement(
-                {
-                  pageLanguage: 'en',
-                  includedLanguages: 'en,hi,ml,ta,te,kn,ar',
-                  autoDisplay: false
-                },
-                'google_translate_element'
-              );
-            }
-          `}
-        </Script>
-        
-        {/* Context Provider */}
+        {/* ✅ Context Provider */}
         <Contextshare>{children}</Contextshare>
-
-
 
         {/* Razorpay Script */}
         <Script
@@ -81,7 +63,7 @@ export default function RootLayout({ children }) {
           strategy="afterInteractive"
         />
 
-        {/* ✅ Bootstrap 5 JS (ONLY ONCE) */}
+        {/* Bootstrap 5 JS */}
         <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
           strategy="afterInteractive"

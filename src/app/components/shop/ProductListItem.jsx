@@ -76,9 +76,9 @@ const ProductListItem = ({ product }) => {
         </div>
         <div className="col-lg-8 col-md-7">
           <div className="product-details">
-            <h5> <Link href={`/productDetails/${product?.slug}`}>
+            <h5> <a href={`/productDetails/${product?.slug}`}>
             {product?.product_name}
-          </Link></h5>
+          </a></h5>
             <div className="ratings">
               {[...Array(5)].map((_, i) => (
                 <i key={i} className="icon_star_alt"></i>
@@ -93,9 +93,9 @@ const ProductListItem = ({ product }) => {
               <a className="add-to-cart" href=""  onClick={() => handleAddToCart(product.id, product.sku_new
 [0].id)}
 ><i className="nss-shopping-cart1"></i>Add To Cart</a>
-               <Link  className="view" href={`/productDetails/${product?.slug}`}>
+               <a  className="view" href={`/productDetails/${product?.slug}`}>
           <i className="nss-eye1"></i>
-          </Link>
+          </a>
               {/* <a href="single-product.html" className="view"></a> */}
             </div>
           </div>

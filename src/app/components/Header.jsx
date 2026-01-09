@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { addResponseContext, deleteCartResponseContext } from '../context/Contextshare';
 import Categorybar from './Categorybar';
+import GoogleTranslate from './GoogleTranslate';
 
 function Header() {
   const [token, setToken] = useState(null);

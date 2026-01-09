@@ -72,9 +72,17 @@ console.log(product);
       <div className="product-thumb">
         <img src={product?.icon} alt="product" />
         <div className="product-meta">
-          <Link href={`/productDetails/${product?.slug}`} className="view">
-            <i className="nss-eye1"></i>
-          </Link>
+          <a
+  href={`/productDetails/${product?.slug}`}
+  className="view"
+  onClick={(e) => {
+    e.preventDefault();
+    window.location.href = `/productDetails/${product?.slug}`;
+  }}
+>
+  <i className="nss-eye1"></i>
+</a>
+
         </div>
         <a
           className="add-to-cart"
@@ -88,9 +96,10 @@ console.log(product);
       </div>
       <div className="product-details">
         <h5>
-          <Link href={`/productDetails/${product?.slug}`}>
-            {product?.product_name}
-          </Link>
+         <a href={`/productDetails/${product?.slug}`}>
+  {product?.product_name}
+</a>
+
         </h5>
         <div className="ratings">
           {[...Array(5)].map((_, i) => (

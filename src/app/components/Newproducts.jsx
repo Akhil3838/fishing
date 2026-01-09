@@ -44,16 +44,16 @@ function Newproducts({ activeCategory }) {
                       alt={product.name}
                     />
                     <div className="product-meta">
-                      <Link href={`/productDetails/${product?.slug}`} className="view">
+                      <a href={`/productDetails/${product?.slug}`} className="view">
                         <i className="nss-eye1"></i>
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="product-details">
                     <h5>
-                      <Link href={`/productDetails/${product?.slug}`}>
+                      <a href={`/productDetails/${product?.slug}`}>
                         {product?.product_name || "Unnamed Product"}
-                      </Link>
+                      </a>
                     </h5>
                     <div className="ratings">
                       <i className="icon_star_alt"></i>

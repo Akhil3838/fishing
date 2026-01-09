@@ -2,15 +2,16 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'next/navigation';
-
 import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import ShopSidebar from '@/app/components/shop/ShopSidebar';
 import ShopProducts from '@/app/components/shop/ShopProducts';
 import { getAllProduct } from '@/app/services/allApi';
 
+
 function ShoppingContent() {
   const [products, setProducts] = useState([]);
+  
   const [brands, setBrand] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
