@@ -44,11 +44,13 @@ function Login() {
 
     try {
       const result = await loginApi({ otp, session_id, user_id });
-      console.log(result);
-      
+              sessionStorage.setItem('token', result.data.token);
+
+
+            console.log(result);
 
       if (result.status === 200) {
-        sessionStorage.setItem('token', result.data.token);
+
 
         toast.success('Login successful!', {
           position: 'top-center',

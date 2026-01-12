@@ -49,10 +49,12 @@ export default function RootLayout({ children }) {
 
       <body>
         {/* ✅ Google Translate Script (LOAD ONLY – NO INIT HERE) */}
-        <Script
-          src="//translate.google.com/translate_a/element.js"
-          strategy="afterInteractive"
-        />
+       {/* ✅ Google Translate Script */}
+<Script
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+  strategy="afterInteractive"
+/>
+
 
         {/* ✅ Context Provider */}
         <Contextshare>{children}</Contextshare>
