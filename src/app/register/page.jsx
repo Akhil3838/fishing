@@ -44,6 +44,8 @@ function Login() {
 
     try {
       const result = await loginApi({ otp, session_id, user_id });
+      console.log(result);
+      
               sessionStorage.setItem('token', result.data.token);
 
 

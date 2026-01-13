@@ -122,61 +122,6 @@ const handleClickOutside = (event) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-const resetGoogleTranslate = () => {
-  // remove iframe
-  const iframe = document.querySelector("iframe.goog-te-banner-frame");
-  if (iframe) iframe.remove();
-
-  // remove google translate artifacts
-  document.body.classList.remove("translated-ltr");
-  document.body.classList.remove("translated-rtl");
-
-  // clear cookies (important!)
-  document.cookie = "googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-};
-
-
-const [mounted, setMounted] = useState(false);
-
-useEffect(() => {
-  setMounted(true);
-}, []);
-
-
-useEffect(() => {
-  if (!mounted) return;
-  if (typeof window === "undefined") return;
-
-  const el = document.getElementById("google_translate_element");
-  if (!el) return;
-
-  // ✅ FULL RESET (THIS FIXES /product/[slug])
-  resetGoogleTranslate();
-  el.innerHTML = "";
-
-  let attempts = 0;
-
-  const initGoogleTranslate = () => {
-    if (window.google && window.google.translate) {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "en",
-          includedLanguages: "en,hi,ml,ta,te,kn,ar",
-          autoDisplay: false,
-        },
-        "google_translate_element"
-      );
-      return;
-    }
-
-    attempts++;
-    if (attempts < 30) {
-      setTimeout(initGoogleTranslate, 200);
-    }
-  };
-
-  initGoogleTranslate();
-}, [pathname, mounted]);
 
 return (
     <>
@@ -294,14 +239,15 @@ return (
                 </div>
              
 <div className="access-btn" style={{display:'flex'}}>
-<div className="google-translate-wrapper">
+{/* <div className="google-translate-wrapper">
   {mounted && (
     <div
       id="google_translate_element"
       suppressHydrationWarning
     ></div>
   )}
-</div>
+</div> */}
+<GoogleTranslate/>
 
              {token?<Link href="/profile" data-bs-toggle="modal"
   data-bs-target="#profileModal"

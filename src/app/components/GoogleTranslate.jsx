@@ -19,8 +19,9 @@ export default function GoogleTranslate() {
     if (!el) return;
 
     // 🔥 FULL RESET (safe for dynamic routes)
-    const iframe = document.querySelector('iframe.goog-te-banner-frame');
-    if (iframe) iframe.remove();
+    document
+      .querySelectorAll('iframe.goog-te-banner-frame')
+      .forEach(i => i.remove());
 
     document.body.classList.remove('translated-ltr', 'translated-rtl');
     document.cookie =
@@ -31,7 +32,11 @@ export default function GoogleTranslate() {
     let attempts = 0;
 
     const init = () => {
-      if (window.google && window.google.translate) {
+      if (
+        window.google &&
+        window.google.translate &&
+        window.google.translate.TranslateElement
+      ) {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
@@ -44,7 +49,7 @@ export default function GoogleTranslate() {
       }
 
       attempts++;
-      if (attempts < 30) {
+      if (attempts < 40) {
         setTimeout(init, 200);
       }
     };
@@ -54,10 +59,11 @@ export default function GoogleTranslate() {
 
   if (!mounted) return null;
 
-  return (
+  return  <div className="google-translate-wrapper">
+ 
     <div
       id="google_translate_element"
       suppressHydrationWarning
-    />
-  );
+    ></div>
+</div> ;
 }
