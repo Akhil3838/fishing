@@ -5708,7 +5708,7 @@ blockquote:after {
 
 .nav-menu {
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   list-style: none;
   /* padding-left: 90px; */
 }
@@ -5721,8 +5721,9 @@ blockquote:after {
 .dropbtn {
   color: white;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 13px;
   padding: 0.5rem 0.75rem;
+  padding-right: 0.6rem;
   background: none;
   border: none;
   cursor: pointer;
