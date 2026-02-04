@@ -61,6 +61,8 @@ function Categorybar({ menuOpen, setMenuOpen }) {
               <a
                 href={`/shop/${category.slug}`}
                 className="nav-link"
+                style={{fontWeight:'normal'}}
+
                 onClick={() => setMenuOpen(false)}
               >
                 {category.category_name}
@@ -72,13 +74,14 @@ function Categorybar({ menuOpen, setMenuOpen }) {
 
         {/* ALL PRODUCTS */}
         <li className="nav-item">
-          <a
-            href="/shop/all"
-            className="nav-link"
-            onClick={() => setMenuOpen(false)}
-          >
-            <span className="dropbtn">ALL PRODUCTS</span>
-          </a>
+            <a
+              href="/shop/all"
+              style={{fontWeight:'normal'}}
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="dropbtn">ALL PRODUCTS</span>
+            </a>
         </li>
 
       </ul>
