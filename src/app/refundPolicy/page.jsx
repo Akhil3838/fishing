@@ -40,7 +40,7 @@ function RefundPolicy() {
                 <ol>
                   <li><strong>Change of Mind:</strong> If the correct product as ordered is delivered and the buyer later wishes to exchange it for another product or variant.</li>
                   <li><strong>Minor Variations:</strong> Slight differences in colour shade, finish quality, machining, weight, length, model updates, or minor rust/discoloration are not valid reasons for return.</li>
-                  <li><strong>Manufacturer Updates:</strong> Changes made by brands or manufacturers (design, parts, specifications, or production facility) without prior notice are not valid grounds for return. Buyers are advised to verify specifications on the brand’s official website before placing an order.</li>
+                  <li><strong>Manufacturer Updates:</strong> Changes made by brands or manufacturers (design, parts, specifications, or production facility) without prior notice are not valid grounds for return. Buyers are advised to verify specifications on the brand&apos;s official website before placing an order.</li>
                   <li><strong>Packaging or Accessories:</strong> Damage to outer packaging, missing manuals, covers, or carry bags does not qualify for returns or refunds.</li>
                 </ol>
               </div>
@@ -94,8 +94,8 @@ function RefundPolicy() {
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Important Notes</h3>
                 <ul>
-                  <li>No Refund/Replacement Without Video: If you don’t provide an unboxing video as per the guidelines or did not opt for shipping insurance, the return may not be approved.</li>
-                  <li>No Claims Without Insurance: In case you didn't opt for shipping insurance and the package is damaged or lost in transit, no claim will be accepted.</li>
+                  <li>No Refund/Replacement Without Video: If you don&apos;t provide an unboxing video as per the guidelines or did not opt for shipping insurance, the return may not be approved.</li>
+                  <li>No Claims Without Insurance: In case you didn&apos;t opt for shipping insurance and the package is damaged or lost in transit, no claim will be accepted.</li>
                 </ul>
 
                 <h5 className="fw-bold mt-3">In Transit Damage</h5>
@@ -110,26 +110,23 @@ function RefundPolicy() {
               <div className="card-body">
                 <h3 className="fw-bold mb-3">Things to Note</h3>
                 <ol>
-                  <li>For any claim to be processed, a clear video of both unpacking/unboxing and repacking is mandatory. Claims may not be accepted if the video is not recorded as per the above guidelines.</li>
-                  <li>If shipping insurance was not selected at the time of placing the order, refunds, exchanges, replacements, or store credits may not be available for damaged products.</li>
-                  <li>Customers are required to record an unpacking/unboxing video for all packages and follow the claim procedure as outlined above to ensure smooth processing.</li>
-                  <li>Claim requests must be reported within 24 hours of receiving the package. Requests submitted after this period may not be entertained.</li>
+                  <li>For any claim to be processed, a clear video of both unpacking/unboxing and repacking is mandatory.</li>
+                  <li>If shipping insurance was not selected at the time of placing the order, refunds, exchanges, replacements, or store credits may not be available.</li>
+                  <li>Customers are required to record an unpacking/unboxing video for all packages.</li>
+                  <li>Claim requests must be reported within 24 hours of receiving the package.</li>
                 </ol>
               </div>
             </div>
 
             <div className="alert alert-info mt-4">
               <div className="d-flex align-items-center">
-                <i className="bi bi-info-circle-fill me-3 fs-4"></i>
                 <div>
                   <h4 className="alert-heading">General Rules</h4>
                   <ul className="mb-2">
-                    <li><strong>Final Decision:</strong> Scaless tackles reserves the final right to approve or reject any return/refund claim. By placing an order, you agree to all the terms above.</li>
+                    <li><strong>Final Decision:</strong> Scaless tackles reserves the final right to approve or reject any return/refund claim.</li>
                   </ul>
                   <p className="mb-0">
                     For assistance, please email us at <strong>mail@scalessindia12@gmail.com</strong> or WhatsApp <strong>+91 8848873343</strong>.
-                    <br />
-                    Please refer to the detailed Claim / Refund / Return process below to understand the steps to be followed and the timelines.
                   </p>
                 </div>
               </div>
