@@ -131,7 +131,7 @@ console.log(products);
               </button>   
                      </div>
           <div className="ds-thumb">
-           <a href={`/productDetails/${products[0]?.slug}`}> <img src={products[0]?.icon} alt="image" /></a>
+           <a href={`/productDetails/${products[0]?.slug}`}> <img src={products[0]?.icon} alt="image"  className="offer-img" /></a>
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ console.log(products);
       <div className="col-lg-3 col-md-6 ">
         <div className="product-item-2 text-center">
           <div className="product-thumb">
-           <a href={`/productDetails/${products[1]?.slug}`}> <img src={products[1]?.icon} alt="image" /></a>
+           <a href={`/productDetails/${products[1]?.slug}`}> <img src={products[1]?.icon} alt="image"  className="offer-img" /></a>
           </div>
           <div className="product-details">
             <h5><a href={`/productDetails/${products[1]?.slug}`}>{products[1]?.product_name}</a></h5>
@@ -190,7 +190,7 @@ console.log(products);
       <div className="col-lg-3 col-md-6">
         <div className="product-item-2 text-center">
           <div className="product-thumb">
-           <a href={`/productDetails/${products[2]?.slug}`}> <img src={products[2]?.icon} alt="image" /></a>
+           <a href={`/productDetails/${products[2]?.slug}`}> <img src={products[2]?.icon} alt="image"  className="offer-img" /></a>
           </div>
           <div className="product-details">
             <h5><a  href={`/productDetails/${products[2]?.slug}`}>{products[2]?.product_name}</a></h5>

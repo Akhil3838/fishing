@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/navigation'
 import { Autoplay } from 'swiper/modules'
 import { galleryApi } from '../services/allApi'
 
@@ -11,8 +10,12 @@ function Gallery() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const result = await galleryApi()
-      setImages(result.data.images || [])
+      try {
+        const result = await galleryApi()
+        setImages(result?.data?.images || [])
+      } catch (error) {
+        console.error('Gallery fetch error:', error)
+      }
     }
     fetchImages()
   }, [])
@@ -22,19 +25,35 @@ function Gallery() {
       <Swiper
         modules={[Autoplay]}
         spaceBetween={10}
-        slidesPerView={3}
-        autoplay={{ delay: 2000 }}
+        slidesPerView={3}               // ✅ DESKTOP UNCHANGED
         loop={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+
+        /* 🔑 RESPONSIVE FIX (ONLY MOBILE & TABLET) */
+        breakpoints={{
+          0: {
+            slidesPerView: 1,           // 📱 mobile
+          },
+          768: {
+            slidesPerView: 2,           // 📱 tablet
+          },
+          992: {
+            slidesPerView: 3,           // 💻 desktop (same as before)
+          },
+        }}
       >
-        {images.map(img => (
+        {images.map((img) => (
           <SwiperSlide key={img.id}>
-           <div className='gallery-item'>
-                <img
-                  src={img.image_url}
-                  alt={img.title}
-                  style={{ width: '100%', height: 'auto' }}
-                />
-           </div>
+            <div className="gallery-item">
+              <img
+                src={img.image_url}
+                alt={img.title || 'gallery image'}
+                className="img-fluid"
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

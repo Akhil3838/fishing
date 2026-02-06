@@ -442,7 +442,7 @@ console.log(groupedVariants);
                         className={`btn btn-outline-dark mt-1 btn-sm ${selectedVariants[attribute] === option.id ? 'active' : ''}`}
                         style={{ marginRight: '10px', marginBottom: '5px' }}
                       >
-                        {option.name}
+                          {option.name.toUpperCase()}
                       </button>
                       
                     ))}

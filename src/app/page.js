@@ -314,7 +314,7 @@ It has consistently landed huge Mangrove jacks, groupers and massive snappers. B
 {/* <!-- Gallery End --> */}
 
 {/* <!-- Blog Start --> */}
-<section className="post-section">
+{/* <section className="post-section"> */}
     {/* <div className="container">
         <div className="row">
             <div className="col-md-12">
@@ -369,7 +369,7 @@ It has consistently landed huge Mangrove jacks, groupers and massive snappers. B
             </div>
         </div>
     </div> */}
-</section>
+{/* </section> */}
 {/* <!-- Blog End --> */}
 
 <div className="container py-5">

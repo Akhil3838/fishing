@@ -1974,7 +1974,7 @@ footer .widget.widget_mc4wp_form_widget{
 /*---- Category Section ---*/
 .category-section-2{
     position: relative;
-    padding: 100px 0 67px;
+    padding: 40px 0 67px;
 }
 .cate-item-icon{
     position: relative;
@@ -2114,9 +2114,9 @@ footer .widget.widget_mc4wp_form_widget{
     background: #fff;
     border-color: #fff;
 }
-.discount-section-3 .product-thumb{
+/* .discount-section-3 .product-thumb{
     min-height: 236px;
-}
+} */
 .hot-product-section{
     position: relative;
     padding: 92px 0 70px;
@@ -6227,13 +6227,15 @@ z-index: 1999 !important;
 
 
 @media (max-width: 768px) {
-  .category-scroll {
-    flex-wrap: nowrap;
+  .category-scroll h5{
+    font-size: 10px !important;
+    margin-left: 2px;
+    /* flex-wrap: nowrap;
     overflow-x: auto;
     gap: 1rem;
     padding: 0 10px;
     justify-content: flex-start;
-    -webkit-overflow-scrolling: touch; /* smooth scroll */
+    -webkit-overflow-scrolling: touch;  */
   }
 
   .category-item {

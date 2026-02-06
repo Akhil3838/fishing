@@ -527,7 +527,64 @@
 / 5. Responsive For Mobile Device
 --------------------------------------------------------------------------------------*/
 
+/* Common offer image styling */
+.offer-img {
+  width: 100%;
+  height: 220px;        /* Desktop default */
+  object-fit: contain;
+  padding: 10px;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  .offer-img {
+    height: 200px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .offer-img {
+    height: 160px;
+  }
+}
+.gallery-section {
+    position: relative;
+    background: #F2F7FF;
+    padding: 42px 0 0;
+}
+
 @media (max-width: 768px) {
+    .hot-product-section {
+    position: relative;
+    padding: 10px 0 10px;
+}
+
+    .discount-section-3 {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-color: #F5F5FF;
+    padding: 42px 0 1px !important
+}
+    .client-section {
+    position: relative;
+    padding: 0 0 10px;
+}
+
+    .about-section{
+    position: relative;
+    padding: 0 0 0px  !important;
+}
+
+    .product-decp h4{
+    font-size: 17px !important;
+    color: #222f5a;
+    font-weight: 700;
+    margin: 0 0 17px;
+}
+
   .product-thumb img {
     height: 180px; /* adjust as needed */
   }
@@ -553,6 +610,9 @@
 }
 
 @media (max-width: 767px){
+      
+    
+
     .cart-table .quantityd{
         margin: 0;
     }
