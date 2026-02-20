@@ -1,17 +1,30 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { bannerApi } from '../services/allApi'
 
 function Footer() {
+
   const [link, setLink] = useState([])
 
+  // Fetch settings
   const handleLink = async () => {
     try {
       const res = await bannerApi()
-      console.log(res.data.settings)
-      setLink(res.data.settings)
+
+      console.log("Footer settings:", res?.data)
+
+      const settings = res?.data?.settings
+
+      // ensure always array
+      if (Array.isArray(settings)) {
+        setLink(settings)
+      } else {
+        setLink([])
+      }
+
     } catch (error) {
       console.error("Error fetching footer links:", error)
+      setLink([])
     }
   }
 
@@ -19,16 +32,21 @@ function Footer() {
     handleLink()
   }, [])
 
-  // helper function to get value by label
-  const getValue = (label) => {
-    const item = link.find((i) => i.label === label)
-    return item ? item.value : ""
-  }
+  // Convert array → object map (PERFORMANCE OPTIMIZED)
+  const settingsMap = useMemo(() => {
+    if (!Array.isArray(link)) return {}
+
+    return Object.fromEntries(
+      link.map(item => [item?.label, item?.value])
+    )
+  }, [link])
 
   return (
     <>
-      {/* <!-- Footer Start --> */}
+      {/* Footer Start */}
       <footer className="footer">
+
+        {/* Track Order Floating */}
         <a
           href="https://www.shiprocket.in/shipment-tracking/"
           target="_blank"
@@ -39,36 +57,50 @@ function Footer() {
         </a>
 
         {/* WhatsApp Floating Button */}
-        <a href={`https://wa.me/${getValue("whatsapp_no")}`} target="_blank" rel="noopener noreferrer">
+        <a
+          href={`https://wa.me/${settingsMap.whatsapp_no || ""}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img className="whatsapp-float" src="/assets/images/msg.png" alt="whatsapp" />
         </a>
 
         <div className="container">
           <div className="row">
+
             {/* About Section */}
             <div className="col-lg-4 col-md-6">
               <aside className="widget">
                 <div className="about-widget">
+
                   <a href="/">
                     <img src="/assets/images/logo/log2.png" alt="Scaless Logo" />
                   </a>
-                 <p>
 
-SCALESS is a leading Indian manufacturer and distributor of fishing equipment, established in 2020. We specialize in supplying premium-quality fishing gear across India, catering to both professionals and enthusiasts.</p>
+                  <p>
+                    SCALESS is a leading Indian manufacturer and distributor of fishing equipment,
+                    established in 2020. We specialize in supplying premium-quality fishing gear
+                    across India, catering to both professionals and enthusiasts.
+                  </p>
+
                   <div className="ab-social">
-                    <a className="fa" target="_blank" rel="noopener noreferrer" href={getValue("facebook")}>
+                    <a className="fa" target="_blank" rel="noopener noreferrer" href={settingsMap.facebook || "#"}>
                       <i className="fa-brands fa-facebook-f"></i>
                     </a>
-                    <a className="tw" target="_blank" rel="noopener noreferrer" href={`https://wa.me/${getValue("whatsapp_no")}`}>
+
+                    <a className="tw" target="_blank" rel="noopener noreferrer" href={`https://wa.me/${settingsMap.whatsapp_no || ""}`}>
                       <i className="fa-brands fa-whatsapp"></i>
                     </a>
-                    <a className="yo" target="_blank" rel="noopener noreferrer" href={getValue("youtube")}>
+
+                    <a className="yo" target="_blank" rel="noopener noreferrer" href={settingsMap.youtube || "#"}>
                       <i className="fa-brands fa-youtube"></i>
                     </a>
-                    <a className="in" target="_blank" rel="noopener noreferrer" href={getValue("instagram1")}>
+
+                    <a className="in" target="_blank" rel="noopener noreferrer" href={settingsMap.instagram1 || "#"}>
                       <i className="fa-brands fa-instagram"></i>
                     </a>
                   </div>
+
                 </div>
               </aside>
             </div>
@@ -103,13 +135,16 @@ SCALESS is a leading Indian manufacturer and distributor of fishing equipment, e
             <div className="col-lg-3 col-md-6">
               <aside className="widget widget_mc4wp_form_widget">
                 <h3 className="widget-title">Subscribe</h3>
+
                 <form className="mc4wp-form" method="post">
                   <input type="email" name="EMAIL" placeholder="Email" required />
                   <input type="submit" value="Subscribe" />
                 </form>
+
               </aside>
               <p>Get the latest updates via email. Any time you may unsubscribe</p>
             </div>
+
           </div>
 
           {/* Copyright */}
@@ -120,9 +155,10 @@ SCALESS is a leading Indian manufacturer and distributor of fishing equipment, e
               </div>
             </div>
           </div>
+
         </div>
       </footer>
-      {/* <!-- Footer End --> */}
+      {/* Footer End */}
     </>
   )
 }
