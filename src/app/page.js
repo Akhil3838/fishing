@@ -21,6 +21,7 @@ const [category, setCategory] = useState([]);
   const audioRef = useRef(null); // Reference for audio element
   const [isPlaying, setIsPlaying] = useState(true);
    const [isMobile, setIsMobile] = useState(false);
+    const productsRef = useRef(null); // Reference for products section
 
     useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -83,6 +84,26 @@ const [category, setCategory] = useState([]);
       }
     }
   }, []);
+
+   // Handle category click with scroll
+  const handleCategoryClick = (slug) => {
+    setActiveCategory(slug);
+    
+    // Scroll to products section after state update
+    setTimeout(() => {
+      if (productsRef.current) {
+        const headerOffset = 100; // Adjust based on your header height
+        const elementPosition = productsRef.current.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  };
+
   return (
     <>
      {/* Hidden audio element */}
@@ -155,54 +176,57 @@ const [category, setCategory] = useState([]);
 </section>
 {/* Category End */}
 
-{/* <!-- new Product Start --> */}
-<section className="product-section-2 mt-4">
-  <div className="container">
-    <div className="row">
-      <div className="col-md-12 text-center">
-        <h2 className="sec_titles">New Products</h2>
-      </div>
-    </div>
-
-    <div className="row category-scroll d-flex justify-content-center text-center mt-4 mx-auto">
-      {category.length > 0 ? (
-        category.map((item) => (
-          <div
-            key={item.id || item.slug}
-            className="col-4 col-sm-3 col-md-2 mb-4 d-flex flex-column align-items-center"
-          >
-            <div
-              className={`category-circle ${
-                activeCategory === item.slug ? "active" : ""
-              }`}
-              onClick={() => setActiveCategory(item.slug)}
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                src={item.icon || "/default-category.jpg"} // fallback image
-                alt={item.category_name}
-                className="img-fluid rounded-circle shadow-lg p-3 border border-2"
-              />
+   {/* <!-- new Product Start --> */}
+      <section className="product-section-2 mt-4">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 text-center">
+              <h2 className="sec_titles">New Products</h2>
             </div>
-            <h5
-              className={`mt-2 text-center text-wrap fs-6 ${
-                activeCategory === item.slug ? "active-name" : ""
-              }`}
-            >
-              {item.category_name}
-            </h5>
           </div>
-        ))
-      ) : (
-        <p>No categories found</p>
-      )}
-    </div>
 
-    <Newproducts activeCategory={activeCategory} />
-  </div>
-</section>
-   {/* <!-- Product End --> */}
-   <div>
+          <div className="row category-scroll d-flex justify-content-center text-center mt-4 mx-auto">
+            {category.length > 0 ? (
+              category.map((item) => (
+                <div
+                  key={item.id || item.slug}
+                  className="col-4 col-sm-3 col-md-2 mb-4 d-flex flex-column align-items-center"
+                >
+                  <div
+                    className={`category-circle ${
+                      activeCategory === item.slug ? "active" : ""
+                    }`}
+                    onClick={() => handleCategoryClick(item.slug)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img
+                      src={item.icon || "/default-category.jpg"}
+                      alt={item.category_name}
+                      className="img-fluid rounded-circle shadow-lg p-3 border border-2"
+                    />
+                  </div>
+                  <h5
+                    className={`mt-2 text-center text-wrap fs-6 ${
+                      activeCategory === item.slug ? "active-name" : ""
+                    }`}
+                  >
+                    {item.category_name}
+                  </h5>
+                </div>
+              ))
+            ) : (
+              <p>No categories found</p>
+            )}
+          </div>
+
+          {/* Add ref to Newproducts section for scrolling */}
+          <div ref={productsRef}>
+            <Newproducts activeCategory={activeCategory} />
+          </div>
+        </div>
+      </section>
+      {/* <!-- Product End --> */}
+         <div>
     <VideoBanner/>
    </div>
 

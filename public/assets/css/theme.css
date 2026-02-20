@@ -6342,3 +6342,8 @@ z-index: 1999 !important;
     width: 1px;
 }
 }
+
+.dropbtn i {
+  font-size: 18px;
+  cursor: pointer;
+}

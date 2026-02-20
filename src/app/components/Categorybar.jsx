@@ -30,6 +30,20 @@ function Categorybar({ menuOpen, setMenuOpen }) {
     <nav className="custom-navbar pt-lg-3">
       <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
 
+        {/* HOME */}
+<li className="nav-item">
+  <a
+    href="/"
+    style={{ fontWeight: "normal" }}
+    className="nav-link"
+    onClick={() => setMenuOpen(false)}
+  >
+    <span className="dropbtn">
+      <i className="fa-solid fs-6 fa-house"></i>
+    </span>
+  </a>
+</li>
+
         {categories.map((category, index) => (
           <li key={index} className="nav-item">
 
