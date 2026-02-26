@@ -234,7 +234,6 @@ const handleSubmit = async () => {
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
-
   const imagesToShow = colorImg ? [colorImg] : imagesArray;
 
   return (
@@ -418,7 +417,8 @@ const handleSubmit = async () => {
             </div>
           </div>
         </div>
-      )}</div>
+      )}
+      </div>
 
 }
             </div>
@@ -460,35 +460,37 @@ console.log(groupedVariants);
               );
             })}
 
-            <div className="d-flex flex-row align-items-center gap-3 flex-wrap">
-              <div className="listing-meta my-3 d-flex align-items-center border rounded px-2 py-2">
-                <button className="btn btn-sm" onClick={() => setQuantity(prev => Math.max(1, prev - 1))}>−</button>
-                <span className="mx-3 fw-bold">{quantity}</span>
-                <button className="btn btn-sm" onClick={() => setQuantity(prev => prev + 1)}>+</button>
+{stockStatus === 'in-stock' &&<>
+              <div className="d-flex flex-row align-items-center gap-3 flex-wrap">
+                <div className="listing-meta my-3 d-flex align-items-center border rounded px-2 py-2">
+                  <button className="btn btn-sm" onClick={() => setQuantity(prev => Math.max(1, prev - 1))}>−</button>
+                  <span className="mx-3 fw-bold">{quantity}</span>
+                  <button className="btn btn-sm" onClick={() => setQuantity(prev => prev + 1)}>+</button>
+                </div>
+  
+                <div className="listing-meta my-3">
+                  <a
+                    className="add-to-cart rounded-1"
+                    href="/cart"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToCart(product.id, product.sku_new[0].id,quantity);
+                    }}
+                  >
+                    Add To Cart
+                  </a>
+                </div>
               </div>
-
-              <div className="listing-meta my-3">
-                <a
-                  className="add-to-cart rounded-1"
-                  href="/cart"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleAddToCart(product.id, product.sku_new[0].id,quantity);
-                  }}
-                >
-                  Add To Cart
-                </a>
-              </div>
-            </div>
-
-            <button
-              className="btn btn-dark w-100 btn-lg mb-3"
-              onClick={() => handleBuyNow(product.id, product.sku_new[0].id, quantity)}
-            >
-              <i className="fas fa-bolt me-2"></i>Buy Now
-            </button>
-
-<div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
+  
+              <button
+                className="btn btn-dark w-100 btn-lg mb-3"
+                onClick={() => handleBuyNow(product.id, product.sku_new[0].id, quantity)}
+              >
+                <i className="fas fa-bolt me-2"></i>Buy Now
+              </button>
+  
+</>
+}<div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
   {/* Left Side: Category */}
   <div className="metatext d-flex align-items-center gap-2">
     <span>Category:</span>
