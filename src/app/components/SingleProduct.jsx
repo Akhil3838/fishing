@@ -13,13 +13,15 @@ function SingleProduct({ product, variants, onPriceChange }) {
   const [orgPrice, setOrgPrice] = useState('');
   const [stockStatus, setStockStatus] = useState('');
   const [skuId, setSkuId] = useState('');
-  const [colorImg, setColorImg] = useState('');
+  // const [colorImg, setColorImg] = useState('');
+  const [variantImages, setVariantImages] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [expandedVariants, setExpandedVariants] = useState({});
   const router = useRouter();
 
   const imagesArray = Object.values(product?.images || {});
+console.log(product);
 
   const toggleExpandVariant = (attribute) => {
     setExpandedVariants(prev => ({
@@ -147,14 +149,15 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
       setStockStatus(stock_status);
       setSkuId(sku_id);
 
-      const hasColor = Object.keys(selected).some(attr => attr.toLowerCase() === 'color');
-      if (hasColor && response.data.images && response.data.images.length > 0) {
-        setColorImg(response.data.images[0].image);
-        setCurrentSlide(0);
-      } else {
-        setColorImg('');
-      }
+const hasColor = Object.keys(selected).some(attr => attr.toLowerCase() === 'color');
 
+if (hasColor && response.data.images && response.data.images.length > 0) {
+  const imgs = response.data.images.map(img => img.image);
+  setVariantImages(imgs);        // ✅ store all images
+  setCurrentSlide(0);
+} else {
+  setVariantImages([]);
+}
       if (onPriceChange) onPriceChange(response);
     } catch (error) {
       console.error('Error fetching price details:', error);
@@ -234,8 +237,7 @@ const handleSubmit = async () => {
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
-  const imagesToShow = colorImg ? [colorImg] : imagesArray;
-
+const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
   return (
     <>
       <div className="row" style={{ paddingTop: '100px' }}>
