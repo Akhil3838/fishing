@@ -231,65 +231,22 @@ const [category, setCategory] = useState([]);
    </div>
 
         {/* <!-- About Start --> */}
-{/* <section className="about-section" style={{marginTop:'70px'}}>
-    <div className="container">
-        <div className="row">
-            <div className="col-lg-6 col-md-6">
-                <div className="ab-thumb ">
-                    <img src="assets/images/about/about2.jpg" alt="about" style={{borderRadius:'15px'}} />
-                </div>
-            </div>
-            <div className="col-lg-6 col-md-6">
-                <div className="sub_title">About Us <span></span></div>
-                <h2 className="sec_titles">Know About Scaless products and collections</h2>
-                <div className="row">
-                    <div className="col-lg-6 col-md-12">
-                        <div className="icon-box-1">
-                            <i className="fishto-diving-gogglesfishto"></i>
-                            <h4>Jhinga Shrimp</h4>
-                            <p>Jhinga is a proven shrimp lure, known for delivering exceptional results with monster catches.
-It has consistently landed huge Mangrove jacks, groupers and massive snappers. Built with high performance elasticity and tough construction, this shrimp is engineered to perfection for extreme performance in Indian waters.</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-12">
-                        <div className="icon-box-1">
-                            <i className="fishto-swordfishfishto"></i>
-                            <h4>Scaless Bags</h4>
-                            <p>Keep your fishing gear organized and protected with Scaless Fishing’s premium range of accessories. Safely store your lures and hooks in the Scaless fishing lure box, featuring 16 spacious compartments and 6 dedicated hook boxes. Secure your rods with the Scaless fishing rod strap, available in blue or white, and protect your reels with the economy fishing reel pouch.</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-12">
-                        <div className="icon-box-1">
-                            <i className="fishto-reel1fishto"></i>
-                            <h4>Scaless Gal Hooks</h4>
-                            <p>The Scaless worm hook jighead delivers exceptional action for your shads, boosting your hook-up ratio. Built with extra-sharp high-strength hooks, it’s ideal for both freshwater and saltwater fishing. Perfect for anglers using soft plastics or shrimp, this jighead combines durability, precision, and performance to exceed expectations on every cast.</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-12">
-                        <div className="icon-box-1">
-                            <i className="fishto-earthwormfishto"></i>
-                            <h4>Scaless Accessories</h4>
-                            <p>Designed to prevent damage by securely strapping rod pieces together. Protect your gear effortlessly with our rod piece straps. Meet the ultimate necessity of preventing line release from the spool. Keep your fishing experience seamless and hassle-free with our innovative solution.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- */}
+
 <AboutSection/>
 {/* <!-- About End --> */}
 
-{/* <!-- Client Start --> */}
-{/* Client Start */}
-<section className="client-section cs-2">
-  <div className="container">
-    <Brands/>
-  </div>
+{/* <!-- Gallery Start --> */}
+<section className="gallery-section">
+    <div className="container-fluid">
+        <div className="row">
+            <div className="col-md-12 text-center">
+                <h2 className="sec_titles">Our Gallery</h2>
+            </div>
+        </div>
+        <Gallery/>
+    </div>
 </section>
-{/* Client End */}
-{/* <!-- Client End --> */}
+{/* <!-- Gallery End --> */}
 
 
 
@@ -324,18 +281,17 @@ It has consistently landed huge Mangrove jacks, groupers and massive snappers. B
 </section>
 {/* <!-- Hot End --> */}
 
-{/* <!-- Gallery Start --> */}
-<section className="gallery-section">
-    <div className="container-fluid">
-        <div className="row">
-            <div className="col-md-12 text-center">
-                <h2 className="sec_titles">Our Gallery</h2>
-            </div>
-        </div>
-        <Gallery/>
-    </div>
+{/* <!-- Client Start --> */}
+{/* Client Start */}
+<section className="client-section cs-2">
+  <div className="container">
+    <Brands/>
+  </div>
 </section>
-{/* <!-- Gallery End --> */}
+{/* Client End */}
+{/* <!-- Client End --> */}
+
+
 
 {/* <!-- Blog Start --> */}
 {/* <section className="post-section"> */}
