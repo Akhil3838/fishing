@@ -39,10 +39,13 @@ function Newproducts({ activeCategory }) {
               <div className="col-6 col-md-6 col-lg-3 cardres" key={index}>
                 <div className="product-item-1 text-center">
                   <div className="product-thumb">
-                    <img
-                      src={product.icon || "/assets/images/product/default.png"}
-                      alt={product.name}
-                    />
+                     
+  { product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>}            
+          <img     
+           src={product.icon || "/assets/images/product/default.png"}
+           alt={product.name}
+           />
+                    
                     <div className="product-meta">
                       <a href={`/productDetails/${product?.slug}`} className="view">
                         <i className="nss-eye1"></i>

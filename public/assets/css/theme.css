@@ -1314,6 +1314,10 @@ header .container-fluid{
 .product-item-2 .product-thumb{
     overflow: hidden;
 }
+.product-item-1 .product-thumb {
+    overflow: hidden;
+}
+
 .product-thumb img{
     -webkit-transition: all .4s ease;
     -o-transition: all .4s ease;
@@ -6346,4 +6350,25 @@ z-index: 1999 !important;
 .dropbtn i {
   font-size: 18px;
   cursor: pointer;
+}
+
+/* banner  */
+
+.stock-ribbon {
+  position: absolute;
+  top: clamp(8px, 2vw, 16px);
+  left: clamp(-60px, -8vw, -52px);
+
+  background: linear-gradient(45deg, #ff3b3b, #ff0000);
+  color: #fff;
+
+  padding: clamp(4px, 1vw, 6px) clamp(28px, 6vw, 45px);
+  font-size: clamp(8px, 1.5vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  z-index: 2;
+  white-space: nowrap;
 }
