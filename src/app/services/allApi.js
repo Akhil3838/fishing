@@ -265,6 +265,10 @@ export const remainderApi =async(reqBody)=>{
 }
 
 
+// get offerimages api
+export const getOfferImagesApi =async(reqHeader)=>{
+    return await commonApi('GET',`${serverUrl}/get-offers`,"",reqHeader)
+}
 
 
 
