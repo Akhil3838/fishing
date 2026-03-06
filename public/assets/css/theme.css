@@ -6378,3 +6378,9 @@ z-index: 1999 !important;
     padding: 4px 30px;
   }
 }
+
+.variant-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

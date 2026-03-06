@@ -126,7 +126,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
   const groupedVariants = variants.reduce((acc, curr) => {
     if (!acc[curr.attribute_name]) acc[curr.attribute_name] = [];
     curr.variant_options.forEach(option => {
-      acc[curr.attribute_name].push({ id: option.id, name: option.option_name ,stock:option.stock_status });
+      acc[curr.attribute_name].push({ id: option.id, name: option.option_name ,stock:option.stock_status, image: option.images[0] });
     });
     return acc;
   }, {});
@@ -442,17 +442,58 @@ console.log(groupedVariants);
                 <div className="product-variant mb-3" key={index}>
                   <label className="mb-3"><strong>{attribute.charAt(0).toUpperCase() + attribute.slice(1)}:</strong></label>
                   <div className="variant-options">
-                    {displayOptions.map(option => (
-                      <button
-                        key={option.id}
-                        onClick={() => handleVariantSelect(attribute, option.id)}
-                        className={`btn btn-outline-dark mt-1 btn-sm ${selectedVariants[attribute] === option.id ? 'active' : ''}`}
-                        style={{ marginRight: '10px', marginBottom: '5px' }}
-                      >
-                          {option.name.toUpperCase()}
-                      </button>
-                      
-                    ))}
+                  {displayOptions.map(option => {
+
+  // COLOR VARIANT
+  if (attribute.toLowerCase() === "color" && option.image) {
+    return (
+      <div
+        key={option.id}
+        onClick={() => handleVariantSelect(attribute, option.id)}
+        style={{
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          overflow: "hidden",
+          cursor: "pointer",
+          border:
+            selectedVariants[attribute] === option.id
+              ? "2px solid black"
+              : "1px solid #ddd",
+          marginRight: "10px",
+          marginBottom: "10px",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={option.image}
+          alt={option.name}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
+      </div>
+    );
+  }
+
+  // OTHER VARIANTS
+  return (
+    <button
+      key={option.id}
+      onClick={() => handleVariantSelect(attribute, option.id)}
+      className={`btn btn-outline-dark mt-1 btn-sm ${
+        selectedVariants[attribute] === option.id ? "active" : ""
+      }`}
+      style={{ marginRight: "10px", marginBottom: "5px" }}
+    >
+      {option.name.toUpperCase()}
+    </button>
+  );
+})}
                     {hasMoreOptions && (
                       <button
                         onClick={() => toggleExpandVariant(attribute)}
