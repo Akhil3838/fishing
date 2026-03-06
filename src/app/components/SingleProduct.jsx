@@ -228,6 +228,11 @@ const handleSubmit = async () => {
   const handleVariantSelect = (attribute, optionId) => {
     const updatedSelection = { ...selectedVariants, [attribute]: optionId };
     setSelectedVariants(updatedSelection);
+      // Auto scroll to top
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 
     if (Object.keys(groupedVariants).every(attr => updatedSelection[attr])) {
       fetchPrice(updatedSelection);
