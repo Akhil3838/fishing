@@ -13,6 +13,8 @@ function SingleProduct({ product, variants, onPriceChange }) {
   const [orgPrice, setOrgPrice] = useState('');
   const [stockStatus, setStockStatus] = useState('');
   const [skuId, setSkuId] = useState('');
+  const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 });
+const [zoomActive, setZoomActive] = useState(false);
   // const [colorImg, setColorImg] = useState('');
   const [variantImages, setVariantImages] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -238,7 +240,32 @@ const handleSubmit = async () => {
       fetchPrice(updatedSelection);
     }
   };
+const handleMouseMove = (e) => {
+  const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
 
+  const x = ((e.clientX - left) / width) * 100;
+  const y = ((e.clientY - top) / height) * 100;
+
+  setZoomPosition({ x, y });
+  setZoomActive(true);
+};
+
+const handleMouseLeave = () => {
+  setZoomActive(false);
+};
+
+const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+useEffect(() => {
+  const checkScreen = () => {
+    setIsLargeScreen(window.innerWidth >= 992); // lg breakpoint
+  };
+
+  checkScreen();
+  window.addEventListener("resize", checkScreen);
+
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -254,7 +281,22 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
                 key={index}
                 style={{ display: index === currentSlide ? 'block' : 'none' }}
               >
-                <img src={imageUrl} alt={`product-${index}`} />
+ <div
+    className="image-zoom-container"
+    onMouseMove={isLargeScreen ? handleMouseMove : undefined}
+    onMouseLeave={isLargeScreen ? handleMouseLeave : undefined}
+  >
+    <img
+      src={imageUrl}
+      alt={`product-${index}`}
+      style={{
+        transformOrigin: isLargeScreen
+          ? `${zoomPosition.x}% ${zoomPosition.y}%`
+          : "center",
+        transform: isLargeScreen && zoomActive ? "scale(2)" : "scale(1)",
+      }}
+    />
+  </div>  
               </div>
             ))}
             <ul className="indicator-slider-vertical">
@@ -272,7 +314,7 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
           </div>
         </div>
 
-        <div className="col-lg-6 col-md-6">
+        <div className="col-lg-6 col-md-6" >
           <div className="product-decp">
             <h4>{product?.product_name}</h4>
             <div className="product_price clearfix d-flex align-items-center">
