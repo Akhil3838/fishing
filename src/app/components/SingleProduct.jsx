@@ -465,6 +465,7 @@ console.log(groupedVariants);
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
+           position: "relative",
         }}
       >
         <img
@@ -476,6 +477,35 @@ console.log(groupedVariants);
             objectFit: "cover",
           }}
         />
+
+          {/* OUT OF STOCK CROSS SVG */}
+  {option.stock === "out-of-stock" && (
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "rgba(255,255,255,0.6)",
+      }}
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke="black"
+        strokeWidth="3"
+        strokeLinecap="round"
+      >
+        <line x1="5" y1="5" x2="19" y2="19" />
+        <line x1="19" y1="5" x2="5" y2="19" />
+      </svg>
+    </div>
+  )}
       </div>
     );
   }
