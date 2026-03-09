@@ -20,8 +20,8 @@ function Hotproduct() {
 <div className="col-6 col-md-3 mb-4 cardres" key={index}>
             <div className="product-item-2 text-center">
               <div className="product-thumb">
-  {
-                    product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>}
+  {/* {
+                    product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>} */}
                 <img src={product?.icon} alt="product" className="img-fluid" />
               </div>
               <div className="product-details">

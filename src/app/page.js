@@ -269,7 +269,7 @@ const [category, setCategory] = useState([]);
                 <h2 className="sec_titles">Hot Item</h2>
             </div>
             <div className="col-md-6 text-end">
-                <a href="/shopping" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
+                <a href="/shop/all" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
             </div>
         </div>
 

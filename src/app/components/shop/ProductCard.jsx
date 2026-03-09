@@ -60,9 +60,9 @@ const ProductCard = ({ product }) => {
   return (
     <div className="product-item-1 text-center">
       <div className="product-thumb">
-        {product?.product_stock_out === "yes" && (
+        {/* {product?.product_stock_out === "yes" && (
           <span className="stock-ribbon">OUT OF STOCK</span>
-        )}
+        )} */}
         <img src={product?.icon} alt="product" />
         <div className="product-meta">
           <a
@@ -76,7 +76,7 @@ const ProductCard = ({ product }) => {
             <i className="nss-eye1"></i>
           </a>
         </div>
-        {product?.product_stock_out === "no" && (
+        {/* {product?.product_stock_out === "no" && ( */}
           <a
             className="add-to-cart"
             href="/cart"
@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
             <i className="nss-shopping-cart1"></i>
             <span className="add-to-cart-text">Add To Cart</span>
           </a>
-        )}
+        {/* )} */}
       </div>
       <div className="product-details">
         <h5>

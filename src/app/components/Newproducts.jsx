@@ -40,7 +40,7 @@ function Newproducts({ activeCategory }) {
                 <div className="product-item-1 text-center">
                   <div className="product-thumb">
                      
-  { product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>}            
+  {/* { product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>}             */}
           <img     
            src={product.icon || "/assets/images/product/default.png"}
            alt={product.name}
