@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getPriceDetailsApi, addToCartApi, remainderApi } from '../services/allApi';
@@ -268,29 +268,24 @@ useEffect(() => {
 
   return () => window.removeEventListener("resize", checkScreen);
 }, []);
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-  const goToSlide = (index) => {
+const goToSlide = (index) => {
   setCurrentSlide(index);
 };
 
-// ⬅ previous image
 const prevSlide = () => {
   setCurrentSlide((prev) =>
     prev === 0 ? imagesToShow.length - 1 : prev - 1
   );
 };
 
-// ➡ next image
 const nextSlide = () => {
   setCurrentSlide((prev) =>
     prev === imagesToShow.length - 1 ? 0 : prev + 1
   );
 };
 
-// const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
 const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
+// const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
 
   return (
     <>
@@ -300,14 +295,15 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
 
 <button
   onClick={prevSlide}
+  className="d-none d-lg-flex"
   style={{
     position: "absolute",
-    left: "10px",
+    left: "-36px",
     top: "50%",
     transform: "translateY(-50%)",
     zIndex: 10,
     border: "none",
-    background: "rgba(0,0,0,0.5)",
+    background: "#0cafff",
     color: "#fff",
     padding: "8px 12px",
     cursor: "pointer",
@@ -316,7 +312,6 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
 >
   <i className="fa-solid fa-chevron-left"></i>
 </button>
-
 <button
   onClick={nextSlide}
   style={{
@@ -324,11 +319,13 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
     right: "10px",
     top: "50%",
     transform: "translateY(-50%)",
+      // className:"d-none d-lg-flex",
+
     zIndex: 10,
     border: "none",
-    background: "rgba(0,0,0,0.5)",
+    background: "#0cafff",
     color: "#fff",
-    padding: "8px 12px",
+    padding: "3px 12px",
     cursor: "pointer",
     borderRadius: "50%"
   }}
