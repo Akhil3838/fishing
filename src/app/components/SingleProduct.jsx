@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getPriceDetailsApi, addToCartApi, remainderApi } from '../services/allApi';
@@ -213,6 +214,7 @@ const handleSubmit = async () => {
   }
 };
 
+
   useEffect(() => {
     const defaultSelection = {};
     for (const [attribute, options] of Object.entries(groupedVariants)) {
@@ -269,12 +271,70 @@ useEffect(() => {
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
+  const goToSlide = (index) => {
+  setCurrentSlide(index);
+};
+
+// ⬅ previous image
+const prevSlide = () => {
+  setCurrentSlide((prev) =>
+    prev === 0 ? imagesToShow.length - 1 : prev - 1
+  );
+};
+
+// ➡ next image
+const nextSlide = () => {
+  setCurrentSlide((prev) =>
+    prev === imagesToShow.length - 1 ? 0 : prev + 1
+  );
+};
+
+// const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
 const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
+
   return (
     <>
       <div className="row" style={{ paddingTop: '100px' }}>
         <div className="col-lg-6 col-md-6">
-          <div className="productSlide" style={{ paddingLeft: '75px' }}>
+<div className="productSlide" style={{ paddingLeft: '75px', position: "relative" }}>
+
+<button
+  onClick={prevSlide}
+  style={{
+    position: "absolute",
+    left: "10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 10,
+    border: "none",
+    background: "rgba(0,0,0,0.5)",
+    color: "#fff",
+    padding: "8px 12px",
+    cursor: "pointer",
+    borderRadius: "50%"
+  }}
+>
+  <i className="fa-solid fa-chevron-left"></i>
+</button>
+
+<button
+  onClick={nextSlide}
+  style={{
+    position: "absolute",
+    right: "10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 10,
+    border: "none",
+    background: "rgba(0,0,0,0.5)",
+    color: "#fff",
+    padding: "8px 12px",
+    cursor: "pointer",
+    borderRadius: "50%"
+  }}
+>
+  <i className="fa-solid fa-chevron-right"></i>
+</button>            
             {imagesToShow.map((imageUrl, index) => (
               <div
                 className={`sp_img ${index === currentSlide ? 'active' : ''}`}
