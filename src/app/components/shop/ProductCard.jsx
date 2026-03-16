@@ -76,7 +76,7 @@ const ProductCard = ({ product }) => {
             <i className="nss-eye1"></i>
           </a>
         </div>
-        {/* {product?.product_stock_out === "no" && ( */}
+        {product?.product_stock_out === "no" && (
           <a
             className="add-to-cart"
             href="/cart"
@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
             <i className="nss-shopping-cart1"></i>
             <span className="add-to-cart-text">Add To Cart</span>
           </a>
-        {/* )} */}
+        )}
       </div>
       <div className="product-details">
         <h5>
