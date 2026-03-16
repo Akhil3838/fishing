@@ -23,31 +23,34 @@ function Header() {
   const searchTimeout = useRef(null);
   const searchDropdownRef = useRef(null);
 const pathname = usePathname();
-  const cartItem = async () => {
-    let browserId = localStorage.getItem("browser_id");
-  
-    if (!browserId) {
-      browserId = Date.now() + Math.random().toString(36).substr(2, 10);
-      localStorage.setItem("browser_id", browserId);
-    }
+const cartItem = async () => {
+  let browserId = localStorage.getItem("browser_id");
 
-    const formData = new FormData();
-    formData.append("session_id", browserId);
+  if (!browserId) {
+    browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("browser_id", browserId);
+  }
 
-    const token = sessionStorage.getItem("token");
-    const reqHeader = {
-      Authorization: `Bearer ${token}`,
-    };
+  const formData = new FormData();
+  formData.append("session_id", browserId);
 
-    try {
-      const result = await getCartApi(formData, reqHeader);
-      console.log("API Response:", result.data);
-      setCartCount(result.data.cartItems.length);
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
+  const token = sessionStorage.getItem("token");
+
+  const reqHeader = {
+    Authorization: `Bearer ${token}`,
   };
 
+  try {
+    const result = await getCartApi(formData, reqHeader);
+    console.log("API Response:", result.data);
+
+    setCartCount(result?.data?.cartItems?.length || 0);
+
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    setCartCount(0);
+  }
+};
   useEffect(() => {
     const storedToken = sessionStorage.getItem('token');
     setToken(storedToken);

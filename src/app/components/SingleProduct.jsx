@@ -576,7 +576,7 @@ if (attribute.toLowerCase() === "color" && option.image) {
       className={`btn btn-outline-dark mt-1 btn-sm ${
         selectedVariants[attribute] === option.id ? "active" : ""
       }`}
-      style={{ marginRight: "10px", marginBottom: "5px" }}
+      style={{ marginRight: "10px", marginBottom: "5px", opacity: option.stock === "out-of-stock" ? "0.4" : "1", }}
     >
       {option.name.toUpperCase()}
     </button>
