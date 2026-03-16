@@ -374,20 +374,19 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
         <div className="col-lg-6 col-md-6" >
           <div className="product-decp">
             <h4>{product?.product_name}</h4>
-            <div className="product_price clearfix d-flex align-items-center">
-              {price ? (
-                <>
-                  <span className="price text-dark fw-bold me-3">₹{price}</span>
-                  <span className="border-start mx-2" style={{ height: '19px' }}></span>
-                  <small className="ms-3">
-                    <del className="text-muted">₹{orgPrice}</del>
-                  </small>
-                </>
-              ) : (
-                <span className="price text-dark fw-bold">₹{price}</span>
-              )}
-            </div>
-
+<div className="product_price clearfix d-flex align-items-center">
+  {price && orgPrice && price !== orgPrice ? (
+    <>
+      <span className="price text-dark fw-bold me-3">₹{price}</span>
+      <span className="border-start mx-2" style={{ height: "19px" }}></span>
+      <small className="ms-3">
+        <del className="text-muted">₹{orgPrice}</del>
+      </small>
+    </>
+  ) : (
+    <span className="price text-dark fw-bold">₹{price}</span>
+  )}
+</div>
             <div className="ratings">
               <i className="icon_star_alt"></i><i className="icon_star_alt"></i>
               <i className="icon_star_alt"></i><i className="icon_star_alt"></i>
