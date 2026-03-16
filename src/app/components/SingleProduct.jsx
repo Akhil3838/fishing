@@ -384,7 +384,7 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
                   </small>
                 </>
               ) : (
-                <span className="price text-dark fw-bold">₹{orgPrice}</span>
+                <span className="price text-dark fw-bold">₹{price}</span>
               )}
             </div>
 
