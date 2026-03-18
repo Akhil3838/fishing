@@ -64,19 +64,18 @@ const ProductCard = ({ product }) => {
           <span className="stock-ribbon">OUT OF STOCK</span>
         )} */}
         <img src={product?.icon} alt="product" />
-        <div className="product-meta">
-          <a
-            href={`/productDetails/${product?.slug}`}
-            className="view"
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href = `/productDetails/${product?.slug}`;
-            }}
-          >
-            <i className="nss-eye1"></i>
-          </a>
-        </div>
-        {product?.product_stock_out === "no" && (
+<div className="product-meta">
+  <a
+    href={`/productDetails/${product?.slug}`}
+    className="view"
+    onClick={(e) => {
+      e.preventDefault();
+      window.open(`/productDetails/${product?.slug}`, "_blank");
+    }}
+  >
+    <i className="nss-eye1"></i>
+  </a>
+</div>        {product?.product_stock_out === "no" && (
           <a
             className="add-to-cart"
             href="/cart"
@@ -89,7 +88,8 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="product-details">
         <h5>
-          <a href={`/productDetails/${product?.slug}`}>
+          <a href={`/productDetails/${product?.slug}`}  target="_blank" 
+    rel="noopener noreferrer">
             {product?.product_name}
           </a>
         </h5>

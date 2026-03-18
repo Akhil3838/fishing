@@ -47,14 +47,16 @@ function Newproducts({ activeCategory }) {
            />
                     
                     <div className="product-meta">
-                      <a href={`/productDetails/${product?.slug}`} className="view">
+                      <a href={`/productDetails/${product?.slug}`} className="view"  target="_blank" 
+    rel="noopener noreferrer">
                         <i className="nss-eye1"></i>
                       </a>
                     </div>
                   </div>
                   <div className="product-details">
                     <h5>
-                      <a href={`/productDetails/${product?.slug}`}>
+                      <a href={`/productDetails/${product?.slug}`}  target="_blank" 
+    rel="noopener noreferrer">
                         {product?.product_name || "Unnamed Product"}
                       </a>
                     </h5>

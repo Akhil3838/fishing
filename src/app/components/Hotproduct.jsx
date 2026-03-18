@@ -25,7 +25,8 @@ function Hotproduct() {
                 <img src={product?.icon} alt="product" className="img-fluid" />
               </div>
               <div className="product-details">
-                <h5><a  href={`/productDetails/${product?.slug}`}>{product?.product_name}</a></h5>
+                <h5><a  href={`/productDetails/${product?.slug}`}  target="_blank" 
+    rel="noopener noreferrer">{product?.product_name}</a></h5>
                 <div className="ratings">
                   <i className="icon_star_alt"></i>
                   <i className="icon_star_alt"></i>
@@ -38,7 +39,8 @@ function Hotproduct() {
                   <span className="price"><span> ₹</span>{product?.sku_new[0].price}</span>
                 </div>
                 <div className="product-meta">
-                  <a  href={`/productDetails/${product?.slug}`} className="view"><i className="nss-eye1"></i></a>
+                  <a  href={`/productDetails/${product?.slug}`} className="view"  target="_blank" 
+    rel="noopener noreferrer"><i className="nss-eye1"></i></a>
                   {/* <a href="cart.html" className="cart"><i className="nss-shopping-cart1"></i></a> */}
                 </div>
               </div>

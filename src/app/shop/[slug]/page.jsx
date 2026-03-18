@@ -75,27 +75,27 @@ function ShoppingContent() {
     setVariantSelections(selections);
   };
 
+//   useEffect(() => {
+//   setPage(1);
+// }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
+
+// useEffect(() => {
+//   allProducts(
+//     page,
+//     selectedBrands,
+//     priceRange[0],
+//     priceRange[1],
+//     sortValue,
+//     variantSelections
+//   );
+// }, [page]);
   useEffect(() => {
-  setPage(1);
-}, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
+    setPage(1); 
+  }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
 
-useEffect(() => {
-  allProducts(
-    page,
-    selectedBrands,
-    priceRange[0],
-    priceRange[1],
-    sortValue,
-    variantSelections
-  );
-}, [page]);
-  // useEffect(() => {
-  //   setPage(1); 
-  // }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
-
-  // useEffect(() => {
-  //   allProducts(page, selectedBrands, priceRange[0], priceRange[1], sortValue, variantSelections);
-  // }, [page, selectedBrands, priceRange, sortValue, variantSelections]);
+  useEffect(() => {
+    allProducts(page, selectedBrands, priceRange[0], priceRange[1], sortValue, variantSelections);
+  }, [page, selectedBrands, priceRange, sortValue, variantSelections]);
 
   return (
     <>
