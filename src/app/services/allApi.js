@@ -270,6 +270,10 @@ export const getOfferImagesApi =async(reqHeader)=>{
     return await commonApi('GET',`${serverUrl}/get-offers`,"",reqHeader)
 }
 
+export const applyCouponApi =async(reqBody,reqHeader)=>{
+    return await commonApi('POST',`${serverUrl}/apply-coupon`,reqBody,reqHeader)
+}
+
 
 
 

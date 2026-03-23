@@ -47,6 +47,7 @@ const handleBuyNow = async (product_id,sku_id, qty) => {
   formData.append('quantity', qty);
   formData.append('sku_id', sku_id);
   formData.append('cart_type', 'buy');
+  
 
   const reqHeader = {
     ...(token && { Authorization: `Bearer ${token}` }) // Conditional header
@@ -392,6 +393,130 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
               <i className="icon_star_alt"></i><i className="icon_star_alt"></i>
               <i className="icon_star_alt"></i><span>( 1 )</span>
             </div>
+                        {Object.entries(groupedVariants).map(([attribute, options], index) => {
+              const isExpanded = expandedVariants[attribute];
+              const displayOptions = isExpanded ? options : options.slice(0, 6);
+              const hasMoreOptions = options.length > 6;
+console.log(displayOptions);
+console.log(groupedVariants);
+
+
+              return (
+                <div className="product-variant mb-3" key={index}>
+                  <label className="mb-3"><strong>{attribute.charAt(0).toUpperCase() + attribute.slice(1)}:</strong></label>
+                  <div className="variant-options">
+                  {displayOptions.map(option => {
+
+  // COLOR VARIANT
+if (attribute.toLowerCase() === "color" && option.image) {
+  return (
+    <div
+      key={option.id}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginRight: "10px",
+        marginBottom: "10px",
+        cursor: "pointer",
+      }}
+      onClick={() => handleVariantSelect(attribute, option.id)}
+    >
+      {/* Image Circle */}
+      <div
+        style={{
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          overflow: "hidden",
+          border:
+            selectedVariants[attribute] === option.id
+              ? "2px solid black"
+              : "1px solid #ddd",
+          position: "relative",
+        }}
+      >
+        <img
+          src={option.image}
+          alt={option.name}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
+
+        {/* OUT OF STOCK CROSS */}
+        {option.stock === "out-of-stock" && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "rgba(255,255,255,0.6)",
+            }}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke="red"
+              strokeWidth="3"
+              strokeLinecap="round"
+            >
+              <line x1="5" y1="5" x2="19" y2="19" />
+              <line x1="19" y1="5" x2="5" y2="19" />
+            </svg>
+          </div>
+        )}
+      </div>
+
+      {/* Option Name */}
+      <span
+        style={{
+          fontSize: "12px",
+          marginTop: "5px",
+          textAlign: "center",
+        }}
+      >
+        {option.name}
+      </span>
+    </div>
+  );
+}
+  // OTHER VARIANTS
+  return (
+    <button
+      key={option.id}
+      onClick={() => handleVariantSelect(attribute, option.id)}
+      className={`btn btn-outline-dark mt-1 btn-sm ${
+        selectedVariants[attribute] === option.id ? "active" : ""
+      }`}
+      style={{ marginRight: "10px", marginBottom: "5px", opacity: option.stock === "out-of-stock" ? "0.4" : "1", }}
+    >
+      {option.name.toUpperCase()}
+    </button>
+  );
+})}
+                    {hasMoreOptions && (
+                      <button
+                        onClick={() => toggleExpandVariant(attribute)}
+                        className="btn btn-link btn-sm mt-1"
+                        style={{ textDecoration: 'none', color: '#0e5acdff' }}
+                      >
+                        {isExpanded ? 'See Less' : 'See More...'}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+
 
             <div className="excerpt mb-3">
               <p>{product?.short_description}</p>
@@ -528,129 +653,6 @@ const imagesToShow = variantImages.length > 0 ? variantImages : imagesArray;
 }
             </div>
 
-            {Object.entries(groupedVariants).map(([attribute, options], index) => {
-              const isExpanded = expandedVariants[attribute];
-              const displayOptions = isExpanded ? options : options.slice(0, 6);
-              const hasMoreOptions = options.length > 6;
-console.log(displayOptions);
-console.log(groupedVariants);
-
-
-              return (
-                <div className="product-variant mb-3" key={index}>
-                  <label className="mb-3"><strong>{attribute.charAt(0).toUpperCase() + attribute.slice(1)}:</strong></label>
-                  <div className="variant-options">
-                  {displayOptions.map(option => {
-
-  // COLOR VARIANT
-if (attribute.toLowerCase() === "color" && option.image) {
-  return (
-    <div
-      key={option.id}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginRight: "10px",
-        marginBottom: "10px",
-        cursor: "pointer",
-      }}
-      onClick={() => handleVariantSelect(attribute, option.id)}
-    >
-      {/* Image Circle */}
-      <div
-        style={{
-          width: "60px",
-          height: "60px",
-          borderRadius: "50%",
-          overflow: "hidden",
-          border:
-            selectedVariants[attribute] === option.id
-              ? "2px solid black"
-              : "1px solid #ddd",
-          position: "relative",
-        }}
-      >
-        <img
-          src={option.image}
-          alt={option.name}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-
-        {/* OUT OF STOCK CROSS */}
-        {option.stock === "out-of-stock" && (
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "rgba(255,255,255,0.6)",
-            }}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke="red"
-              strokeWidth="3"
-              strokeLinecap="round"
-            >
-              <line x1="5" y1="5" x2="19" y2="19" />
-              <line x1="19" y1="5" x2="5" y2="19" />
-            </svg>
-          </div>
-        )}
-      </div>
-
-      {/* Option Name */}
-      <span
-        style={{
-          fontSize: "12px",
-          marginTop: "5px",
-          textAlign: "center",
-        }}
-      >
-        {option.name}
-      </span>
-    </div>
-  );
-}
-  // OTHER VARIANTS
-  return (
-    <button
-      key={option.id}
-      onClick={() => handleVariantSelect(attribute, option.id)}
-      className={`btn btn-outline-dark mt-1 btn-sm ${
-        selectedVariants[attribute] === option.id ? "active" : ""
-      }`}
-      style={{ marginRight: "10px", marginBottom: "5px", opacity: option.stock === "out-of-stock" ? "0.4" : "1", }}
-    >
-      {option.name.toUpperCase()}
-    </button>
-  );
-})}
-                    {hasMoreOptions && (
-                      <button
-                        onClick={() => toggleExpandVariant(attribute)}
-                        className="btn btn-link btn-sm mt-1"
-                        style={{ textDecoration: 'none', color: '#0e5acdff' }}
-                      >
-                        {isExpanded ? 'See Less' : 'See More...'}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
 
 {stockStatus === 'in-stock' &&<>
               <div className="d-flex flex-row align-items-center gap-3 flex-wrap">
@@ -682,7 +684,8 @@ if (attribute.toLowerCase() === "color" && option.image) {
               </button>
   
 </>
-}<div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
+}
+<div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
   {/* Left Side: Category */}
   <div className="metatext d-flex align-items-center gap-2">
     <span>Category:</span>

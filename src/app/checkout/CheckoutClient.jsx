@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { getCartApi, placeOrderApi, paymentResponseApi } from "../services/allApi";
+import { getCartApi, placeOrderApi, paymentResponseApi, applyCouponApi } from "../services/allApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,11 +11,17 @@ import Footer from "../components/Footer";
 function CheckoutClient() {
     const [cart, setCart] = useState([]);
     const [summary, setSummary] = useState({ subTotal: "", total: "" });
+        const [CouponSummary, setCouponSummary] = useState({ subTotal: "", total: "", discount: "" });
+
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
     const cartType = searchParams?.keys().next().value;
+       
+      const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
+
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -47,6 +53,8 @@ function CheckoutClient() {
 
         try {
             const result = await getCartApi(formData, reqHeader);
+            console.log(result);
+            
             setCart(result.data.cartItems || []);
             setSummary({
                 subTotal: result.data.subTotal,
@@ -90,6 +98,50 @@ function CheckoutClient() {
             setIsProcessing(false);
         }
     };
+const handleApplyCoupon = async () => {
+  if (!coupon) {
+    toast.error("Please enter a coupon code");
+    return;
+  }
+
+  if (typeof window === "undefined") return;
+
+  let browserId = localStorage.getItem("browser_id");
+  if (!browserId) {
+    browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("browser_id", browserId);
+  }
+
+  const formData = new FormData();
+  formData.append("session_id", browserId);
+  formData.append("coupon_code", coupon); // ✅ IMPORTANT
+  if (cartType) formData.append("cart_type", cartType);
+
+  const token = sessionStorage.getItem("token");
+  if (!token) return;
+
+  const reqHeader = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  try {
+    const result = await applyCouponApi(formData, reqHeader);
+console.log(result);
+
+    // setCart(result.data.cartItems || []);
+    setCouponSummary({
+      subTotal: result.data.final_amount,
+      total: result.data.total_amount,
+      discount: result.data.discount_amount || 0, // ✅ Capture discount from response
+    });
+
+    toast.success("Coupon applied successfully!");
+  } catch (error) {
+    console.error("Error applying coupon:", error);
+    toast.error("Invalid or expired coupon");
+  }
+};
+console.log(CouponSummary);
 
     const openRazorpay = (order) => {
         if (!order) {
@@ -210,11 +262,27 @@ function CheckoutClient() {
                             <h6 className="fw-bold mt-3">PRICE DETAILS ({cart.length} Items)</h6>
                             <div className="d-flex justify-content-between">
                                 <p>Total MRP</p>
-                                <p>₹{summary.total}</p>
+                                <p> ₹{CouponSummary.total ? CouponSummary.total : summary.total}</p>
                             </div>
+                                  <div className="coupon-box mb-3 d-flex ">
+        <input
+          type="text"
+          placeholder="Enter coupon code"
+          className="form-control mb-2"
+          value={coupon}
+          onChange={(e) => setCoupon(e.target.value)}
+        />
+        <button
+          className="btn btn-sm btn-success w-50  ms-2 mb-2"
+          onClick={handleApplyCoupon}
+        >
+          Apply Coupon
+        </button>
+      </div>
+
                             <div className="d-flex justify-content-between">
                                 <p>Discount on MRP <span className="text-primary">Know More</span></p>
-                                <p className="text-success">-</p>
+                                <p className="text-success">₹{CouponSummary.discount}</p>
                             </div>
                             <div className="d-flex justify-content-between">
                                 <p>Platform Fee <span className="text-primary">Know More</span></p>
@@ -228,7 +296,7 @@ function CheckoutClient() {
                             <hr />
                             <div className="d-flex justify-content-between fw-bold">
                                 <p>Total Amount</p>
-                                <p>₹{summary.total}</p>
+                                <p>₹{CouponSummary.subTotal ? CouponSummary.subTotal : summary.total}</p>
                             </div>
 
                             <button

@@ -18,22 +18,6 @@ function CartSidebar({ summary }) {
   return (
     <div className="cart-totals">
       <h4>Cart Totals</h4>
-        {/* ✅ Coupon Section */}
-      <div className="coupon-box mb-3">
-        <input
-          type="text"
-          placeholder="Enter coupon code"
-          className="form-control mb-2"
-          // value={coupon}
-          // onChange={(e) => setCoupon(e.target.value)}
-        />
-        <button
-          className="btn btn-dark w-100"
-          // onClick={handleApplyCoupon}
-        >
-          Apply Coupon
-        </button>
-      </div>
       <table className="shop_table shop_table_responsive">
         <tbody>
           <tr className="cart-subtotal">
