@@ -21,6 +21,7 @@ function CheckoutClient() {
        
       const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
+      const [coupon_id, setCouponId] = useState("");
 
 
     useEffect(() => {
@@ -84,9 +85,14 @@ function CheckoutClient() {
         const formData = new FormData();
         formData.append("address_id", selectedAddress);
         if (cartType) formData.append("cart_type", cartType);
-
+            // if (coupon) formData.append("coupon_code", coupon_id); // ✅ Include coupon code if applied
+            if (coupon_id) formData.append("coupon_id", coupon_id); // ✅ Include coupon ID if applied
+            console.log(coupon);
+            
         try {
             const result = await placeOrderApi(formData, reqHeader);
+            console.log(result);
+            
             if (result.data.order) {
                 openRazorpay(result.data.order);
             } else {
@@ -127,7 +133,7 @@ const handleApplyCoupon = async () => {
   try {
     const result = await applyCouponApi(formData, reqHeader);
 console.log(result);
-
+   setCouponId(result.data.coupon_id); // ✅ Store coupon ID for order placement
     // setCart(result.data.cartItems || []);
     setCouponSummary({
       subTotal: result.data.final_amount,
@@ -168,9 +174,12 @@ console.log(CouponSummary);
                     payment_order_id: order.id,
                     razorpay_payment_id: response.razorpay_payment_id,
                     razorpay_signature: response.razorpay_signature,
+                    coupon_id: coupon_id // ✅ Include coupon ID if applied
                 };
 
                 try {
+                    console.log(reqBody);
+                    
                     const res = await paymentResponseApi(reqBody, reqHeader);
                     if (res.status === 200) {
                         toast.success("Order placed successfully!", {
