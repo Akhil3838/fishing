@@ -1,12 +1,12 @@
-'use client'
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { registerApi } from '../services/allApi';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { registerApi } from "../services/allApi";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Register() {
   const router = useRouter();
@@ -33,10 +33,10 @@ function Register() {
 
     try {
       const result = await registerApi(formData);
-console.log(result);
+      console.log(result);
 
       if (result.status === 200) {
-       localStorage.setItem('user_id', result.data.user_id);
+        localStorage.setItem("user_id", result.data.user_id);
 
         toast.success("OTP sent successful!", {
           position: "top-center",
@@ -67,7 +67,7 @@ console.log(result);
     <>
       <Header />
 
-      <div className="container" style={{ paddingTop: '150px' }}>
+      <div className="container" style={{ paddingTop: "150px" }}>
         <div className="login-box text-center">
           <h4 className="mb-3">Sign Up</h4>
 

@@ -1,13 +1,12 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 import { bannerApi, getOfferImagesApi } from "../services/allApi"; // adjust path if needed
 
 export default function FishingStoreHero({
   autoPlay = true,
   interval = 4000,
-  className = ""
+  className = "",
 }) {
-
   const [banner, setBanner] = useState([]);
   const [current, setCurrent] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -32,7 +31,7 @@ export default function FishingStoreHero({
     if (!autoPlay || !playing || banner.length === 0) return;
 
     const timer = setInterval(() => {
-      setCurrent(prev => (prev + 1) % banner.length);
+      setCurrent((prev) => (prev + 1) % banner.length);
     }, interval);
 
     return () => clearInterval(timer);
@@ -52,7 +51,7 @@ export default function FishingStoreHero({
     <section
       className={`position-relative overflow-hidden ${className}`}
       style={{
-        height: "clamp(420px, 65vh, 700px)"
+        height: "clamp(420px, 65vh, 700px)",
       }}
     >
       {/* ✅ Slides from API */}
@@ -63,11 +62,11 @@ export default function FishingStoreHero({
           style={{
             opacity: current === index ? 1 : 0,
             transition: "opacity 1s ease-in-out",
-            zIndex: current === index ? 1 : 0
+            zIndex: current === index ? 1 : 0,
           }}
         >
           <img
-            src={item.image_url}   // ⚡ Make sure backend sends image field
+            src={item.image_url} // ⚡ Make sure backend sends image field
             alt={item.title || "banner"}
             className="w-100 h-100"
             style={{ objectFit: "cover" }}

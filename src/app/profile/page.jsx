@@ -12,42 +12,40 @@ import Footer from "../components/Footer";
 
 function Profile() {
   const [activeSection, setActiveSection] = useState("overview");
- const [user,setUser]=useState({})
-//  const{updateUserResponse}=useContext(profileUpdateResponseContext)
- 
-  const getUser =async()=>{
-    const token =sessionStorage.getItem("token")
+  const [user, setUser] = useState({});
+  //  const{updateUserResponse}=useContext(profileUpdateResponseContext)
+
+  const getUser = async () => {
+    const token = sessionStorage.getItem("token");
     const reqHeader = {
-      "Content-Type":"application/json",
-    "Authorization":`Bearer ${token}`
-    }
-    const result = await getProfileApi(reqHeader)
-   setUser(result.data.data)
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    const result = await getProfileApi(reqHeader);
+    setUser(result.data.data);
+  };
 
-  }
-  
-//   const showSection = (section) => {
-//     setActiveSection(section);
-//   };
-//     useEffect(() => {
-//         getUser();
-//     }, [updateUserResponse]);
+  //   const showSection = (section) => {
+  //     setActiveSection(section);
+  //   };
+  //     useEffect(() => {
+  //         getUser();
+  //     }, [updateUserResponse]);
 
-// console.log(user);
+  // console.log(user);
   const showSection = (section) => {
     setActiveSection(section);
   };
-    useEffect(() => {
-        getUser();
-    }, []);
+  useEffect(() => {
+    getUser();
+  }, []);
 
-console.log(user);
-
+  console.log(user);
 
   return (
     <>
-    <Header/>
-      <div className="container" style={{paddingTop:'160px'}}>
+      <Header />
+      <div className="container" style={{ paddingTop: "160px" }}>
         <div className="row">
           {/* Sidebar */}
           <div className="col-md-3 order-md-1 order-2">
@@ -55,10 +53,30 @@ console.log(user);
             <p className="mb-3">{user?.name}</p>
             <hr />
             <nav className="nav flex-column">
-              <button className={`nav-link btn btn-0 text-dark  ${activeSection === "overview" ? "active" : ""}`} onClick={() => showSection("overview")}>Overview</button>
-              <button className={`nav-link btn btn-0 text-dark ${activeSection === "orders" ? "active" : ""}`} onClick={() => showSection("orders")}>Orders</button>
-              <button className={`nav-link btn btn-0 text-dark ${activeSection === "profile" ? "active" : ""}`} onClick={() => showSection("profile")}>Profile</button>
-              <button className={`nav-link btn btn-0 text-dark ${activeSection === "addresses" ? "active" : ""}`} onClick={() => showSection("addresses")}>Addresses</button>
+              <button
+                className={`nav-link btn btn-0 text-dark  ${activeSection === "overview" ? "active" : ""}`}
+                onClick={() => showSection("overview")}
+              >
+                Overview
+              </button>
+              <button
+                className={`nav-link btn btn-0 text-dark ${activeSection === "orders" ? "active" : ""}`}
+                onClick={() => showSection("orders")}
+              >
+                Orders
+              </button>
+              <button
+                className={`nav-link btn btn-0 text-dark ${activeSection === "profile" ? "active" : ""}`}
+                onClick={() => showSection("profile")}
+              >
+                Profile
+              </button>
+              <button
+                className={`nav-link btn btn-0 text-dark ${activeSection === "addresses" ? "active" : ""}`}
+                onClick={() => showSection("addresses")}
+              >
+                Addresses
+              </button>
               {/* <button className="nav-link text-danger" onClick={() => showSection("delete")}>Delete Account</button> */}
             </nav>
           </div>
@@ -72,9 +90,12 @@ console.log(user);
                 <hr />
                 <div className="row">
                   <div className="col-md-4 mb-3">
-                    <div className="overview-card" onClick={() => showSection("orders")}>
+                    <div
+                      className="overview-card"
+                      onClick={() => showSection("orders")}
+                    >
                       <i className="bi bi-box"></i>
-                      <h6 >Orders</h6>
+                      <h6>Orders</h6>
                       <p>Check your order status</p>
                     </div>
                   </div>
@@ -86,14 +107,20 @@ console.log(user);
                     </div>
                   </div> */}
                   <div className="col-md-4 mb-3">
-                    <div className="overview-card" onClick={() => showSection("addresses")}>
+                    <div
+                      className="overview-card"
+                      onClick={() => showSection("addresses")}
+                    >
                       <i className="bi bi-geo-alt"></i>
                       <h6>Addresses</h6>
                       <p>Manage your saved addresses</p>
                     </div>
                   </div>
                   <div className="col-md-4 mb-3">
-                    <div className="overview-card" onClick={() => showSection("profile")}>
+                    <div
+                      className="overview-card"
+                      onClick={() => showSection("profile")}
+                    >
                       <i className="bi bi-person"></i>
                       <h6>Edit Profile</h6>
                       <p>Update your personal details</p>
@@ -111,21 +138,15 @@ console.log(user);
             )}
 
             {/* Profile Details Section */}
-            {activeSection === "profile" && (
-                <Editprofile user={user}/>
-            )}
+            {activeSection === "profile" && <Editprofile user={user} />}
 
             {/* Addresses Section */}
-            {activeSection === "addresses" && (
-                <Editaddress/>
-            )}
-             {activeSection === "orders" && (
-                <Order/>
-            )}
+            {activeSection === "addresses" && <Editaddress />}
+            {activeSection === "orders" && <Order />}
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

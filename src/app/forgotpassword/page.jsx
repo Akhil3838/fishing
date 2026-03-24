@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -34,21 +34,26 @@ function ForgotPassword() {
   };
 
   return (
-  <>
-  <Header/>
+    <>
+      <Header />
       <div className="d-flex justify-content-center align-items-center vh-100 bg-light pt-5">
-        <div className="card shadow-lg p-4 d-flex justify-content-center align-items-center" style={{ width: "400px", borderRadius: "10px" }}>
+        <div
+          className="card shadow-lg p-4 d-flex justify-content-center align-items-center"
+          style={{ width: "400px", borderRadius: "10px" }}
+        >
           <Link href="/">
             <img
-              style={{height:'100px',width:'170px'}}
+              style={{ height: "100px", width: "170px" }}
               src="assets/images/logo/log2.png"
               alt="Logo"
               className="img-fluid mb-3"
             />
           </Link>
-  
+
           <h4 className="text-center mb-3">Forgot Password</h4>
-          <p className="text-muted text-center">Enter your mobile number to receive a OTP</p>
+          <p className="text-muted text-center">
+            Enter your mobile number to receive a OTP
+          </p>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <input
@@ -56,17 +61,23 @@ function ForgotPassword() {
                 className="form-control"
                 placeholder="Enter your Mobile Number"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 required
               />
             </div>
-            <button type="submit" className="btn btn-danger w-100">Send OTP</button>
+            <button type="submit" className="btn btn-danger w-100">
+              Send OTP
+            </button>
           </form>
-          {message && <p className="mt-3 text-center text-success">{message}</p>}
+          {message && (
+            <p className="mt-3 text-center text-success">{message}</p>
+          )}
         </div>
       </div>
-      <Footer/>
-  </>
+      <Footer />
+    </>
   );
 }
 

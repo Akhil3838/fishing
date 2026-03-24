@@ -1,51 +1,46 @@
-'use client';
-import React, { useEffect, useState, useMemo } from 'react'
-import { bannerApi } from '../services/allApi'
+"use client";
+import React, { useEffect, useState, useMemo } from "react";
+import { bannerApi } from "../services/allApi";
 
 function Footer() {
-
-  const [link, setLink] = useState([])
+  const [link, setLink] = useState([]);
 
   // Fetch settings
   const handleLink = async () => {
     try {
-      const res = await bannerApi()
+      const res = await bannerApi();
 
-      console.log("Footer settings:", res?.data)
+      console.log("Footer settings:", res?.data);
 
-      const settings = res?.data?.settings
+      const settings = res?.data?.settings;
 
       // ensure always array
       if (Array.isArray(settings)) {
-        setLink(settings)
+        setLink(settings);
       } else {
-        setLink([])
+        setLink([]);
       }
-
     } catch (error) {
-      console.error("Error fetching footer links:", error)
-      setLink([])
+      console.error("Error fetching footer links:", error);
+      setLink([]);
     }
-  }
+  };
 
   useEffect(() => {
-    handleLink()
-  }, [])
+    handleLink();
+  }, []);
 
   // Convert array → object map (PERFORMANCE OPTIMIZED)
   const settingsMap = useMemo(() => {
-    if (!Array.isArray(link)) return {}
+    if (!Array.isArray(link)) return {};
 
-    return Object.fromEntries(
-      link.map(item => [item?.label, item?.value])
-    )
-  }, [link])
+    return Object.fromEntries(link.map((item) => [item?.label, item?.value]));
+  }, [link]);
 
   return (
     <>
       {/* Footer Start */}
       <footer className="footer">
-
         {/* Track Order Floating */}
         <a
           href="https://www.shiprocket.in/shipment-tracking/"
@@ -62,45 +57,70 @@ function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img className="whatsapp-float" src="/assets/images/msg.png" alt="whatsapp" />
+          <img
+            className="whatsapp-float"
+            src="/assets/images/msg.png"
+            alt="whatsapp"
+          />
         </a>
 
         <div className="container">
           <div className="row">
-
             {/* About Section */}
             <div className="col-lg-4 col-md-6">
               <aside className="widget">
                 <div className="about-widget">
-
                   <a href="/">
-                    <img src="/assets/images/logo/log2.png" alt="Scaless Logo" />
+                    <img
+                      src="/assets/images/logo/log2.png"
+                      alt="Scaless Logo"
+                    />
                   </a>
 
                   <p>
-                    SCALESS is a leading Indian manufacturer and distributor of fishing equipment,
-                    established in 2020. We specialize in supplying premium-quality fishing gear
-                    across India, catering to both professionals and enthusiasts.
+                    SCALESS is a leading Indian manufacturer and distributor of
+                    fishing equipment, established in 2020. We specialize in
+                    supplying premium-quality fishing gear across India,
+                    catering to both professionals and enthusiasts.
                   </p>
 
                   <div className="ab-social">
-                    <a className="fa" target="_blank" rel="noopener noreferrer" href={settingsMap.facebook || "#"}>
+                    <a
+                      className="fa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={settingsMap.facebook || "#"}
+                    >
                       <i className="fa-brands fa-facebook-f"></i>
                     </a>
 
-                    <a className="tw" target="_blank" rel="noopener noreferrer" href={`https://wa.me/${settingsMap.whatsapp_no || ""}`}>
+                    <a
+                      className="tw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={`https://wa.me/${settingsMap.whatsapp_no || ""}`}
+                    >
                       <i className="fa-brands fa-whatsapp"></i>
                     </a>
 
-                    <a className="yo" target="_blank" rel="noopener noreferrer" href={settingsMap.youtube || "#"}>
+                    <a
+                      className="yo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={settingsMap.youtube || "#"}
+                    >
                       <i className="fa-brands fa-youtube"></i>
                     </a>
 
-                    <a className="in" target="_blank" rel="noopener noreferrer" href={settingsMap.instagram1 || "#"}>
+                    <a
+                      className="in"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={settingsMap.instagram1 || "#"}
+                    >
                       <i className="fa-brands fa-instagram"></i>
                     </a>
                   </div>
-
                 </div>
               </aside>
             </div>
@@ -110,12 +130,24 @@ function Footer() {
               <aside className="widget">
                 <h3 className="widget-title">Useful Links</h3>
                 <ul>
-                  <li><a href="/privacy">Privacy Policy</a></li>
-                  <li><a href="/terms">Terms of Service</a></li>
-                  <li><a href="/about">About us</a></li>
-                  <li><a href="/contact">Contact Us</a></li>
-                  <li><a href="/shippingPolicy">Shipping Policy</a></li>
-                  <li><a href="/refundPolicy">Refund Policy</a></li>
+                  <li>
+                    <a href="/privacy">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a href="/terms">Terms of Service</a>
+                  </li>
+                  <li>
+                    <a href="/about">About us</a>
+                  </li>
+                  <li>
+                    <a href="/contact">Contact Us</a>
+                  </li>
+                  <li>
+                    <a href="/shippingPolicy">Shipping Policy</a>
+                  </li>
+                  <li>
+                    <a href="/refundPolicy">Refund Policy</a>
+                  </li>
                 </ul>
               </aside>
             </div>
@@ -125,8 +157,12 @@ function Footer() {
               <aside className="widget">
                 <h3 className="widget-title">Why Buy From Us</h3>
                 <ul>
-                  <li><a href="/shopping">Shipping & Delivery</a></li>
-                  <li><a href="/">Services</a></li>
+                  <li>
+                    <a href="/shopping">Shipping & Delivery</a>
+                  </li>
+                  <li>
+                    <a href="/">Services</a>
+                  </li>
                 </ul>
               </aside>
             </div>
@@ -137,30 +173,36 @@ function Footer() {
                 <h3 className="widget-title">Subscribe</h3>
 
                 <form className="mc4wp-form" method="post">
-                  <input type="email" name="EMAIL" placeholder="Email" required />
+                  <input
+                    type="email"
+                    name="EMAIL"
+                    placeholder="Email"
+                    required
+                  />
                   <input type="submit" value="Subscribe" />
                 </form>
-
               </aside>
-              <p>Get the latest updates via email. Any time you may unsubscribe</p>
+              <p>
+                Get the latest updates via email. Any time you may unsubscribe
+              </p>
             </div>
-
           </div>
 
           {/* Copyright */}
           <div className="row">
             <div className="col-lg-12">
               <div className="copyright text-center">
-                <p>© 2025 <a href="/">Scaless</a> All rights reserved.</p>
+                <p>
+                  © 2025 <a href="/">Scaless</a> All rights reserved.
+                </p>
               </div>
             </div>
           </div>
-
         </div>
       </footer>
       {/* Footer End */}
     </>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import SingleProduct from '../../components/SingleProduct';
-import { getSignleProduct, addReviewApi } from '@/app/services/allApi';
-import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SingleProduct from "../../components/SingleProduct";
+import { getSignleProduct, addReviewApi } from "@/app/services/allApi";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 function ProductDetails() {
   const params = useParams();
   const { slug } = params;
   const [product, setProduct] = useState(null);
   const [variants, setVariants] = useState([]);
-  const [activeTab, setActiveTab] = useState('description');
-  const [reviewerName, setReviewerName] = useState('');
-  const [reviewText, setReviewText] = useState('');
+  const [activeTab, setActiveTab] = useState("description");
+  const [reviewerName, setReviewerName] = useState("");
+  const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [viewReview, setViewReview] = useState([]);
-const [productPrice, setProductPrice] = useState("");
+  const [productPrice, setProductPrice] = useState("");
 
   useEffect(() => {
     async function fetchProduct() {
@@ -32,13 +32,13 @@ const [productPrice, setProductPrice] = useState("");
       try {
         const fetchedProduct = await getSignleProduct(slug, reqHeader);
         const productData = fetchedProduct.data.product;
-  console.log('single product',fetchedProduct);
-  
+        console.log("single product", fetchedProduct);
+
         setProduct(productData);
         setVariants(productData.variants || []);
         setViewReview(fetchedProduct?.data?.product?.reviews || []);
       } catch (error) {
-        console.error('Failed to fetch product', error);
+        console.error("Failed to fetch product", error);
       }
     }
 
@@ -46,12 +46,12 @@ const [productPrice, setProductPrice] = useState("");
       fetchProduct();
     }
   }, [slug]);
-console.log(variants);
+  console.log(variants);
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
 
-    if (reviewerName.trim() === '' || reviewText.trim() === '' || !rating) {
+    if (reviewerName.trim() === "" || reviewText.trim() === "" || !rating) {
       toast.error("Please fill in all fields.", {
         position: "top-center",
         autoClose: 1000,
@@ -62,8 +62,8 @@ console.log(variants);
 
     const token = sessionStorage.getItem("token");
     const reqHeader = {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     };
 
     const newReview = {
@@ -77,31 +77,37 @@ console.log(variants);
       const response = await addReviewApi(newReview, reqHeader);
       if (response.status === 200 || response.status === 201) {
         Swal.fire({
-          icon: 'success',
-          title: 'Review submitted successfully!',
+          icon: "success",
+          title: "Review submitted successfully!",
           showConfirmButton: false,
           timer: 1000,
-          position: 'top',
-          toast: true
+          position: "top",
+          toast: true,
         });
 
-        setProduct(prev => ({
+        setProduct((prev) => ({
           ...prev,
-          reviews: [...(prev.reviews || []), {
-            author: newReview.name,
-            rating: newReview.rating,
-            comment: newReview.comment
-          }]
+          reviews: [
+            ...(prev.reviews || []),
+            {
+              author: newReview.name,
+              rating: newReview.rating,
+              comment: newReview.comment,
+            },
+          ],
         }));
 
-        setViewReview(prev => [...prev, {
-          author: newReview.name,
-          rating: newReview.rating,
-          comment: newReview.comment
-        }]);
+        setViewReview((prev) => [
+          ...prev,
+          {
+            author: newReview.name,
+            rating: newReview.rating,
+            comment: newReview.comment,
+          },
+        ]);
 
-        setReviewerName('');
-        setReviewText('');
+        setReviewerName("");
+        setReviewText("");
         setRating(0);
       }
     } catch (error) {
@@ -117,170 +123,209 @@ console.log(variants);
   if (!product) {
     return <div></div>;
   }
-console.log(productPrice);
+  console.log(productPrice);
 
   return (
     <>
-      <Header/>
+      <Header />
 
-      <section className="singleproduct-section" style={{paddingTop:'80px'}}>
+      <section className="singleproduct-section" style={{ paddingTop: "80px" }}>
         <div className="container">
-          <SingleProduct 
-  product={product} 
-  variants={variants} 
-  onPriceChange={(newPrice) => setProductPrice(newPrice)} 
-/>
-
+          <SingleProduct
+            product={product}
+            variants={variants}
+            onPriceChange={(newPrice) => setProductPrice(newPrice)}
+          />
         </div>
 
-<div className='border-bottom' style={{backgroundColor:'rgb(247 247 247)'}}>
-  <div className='container'>
-              <div className="row mt-4 ">
-                <div className="col-lg-12">
-                  <ul className="productTabs nav nav-tabs mb-3">
-                    <li className="nav-item">
-                      <a className={`nav-link ${activeTab === 'description' ? 'active' : ''}`} onClick={() => setActiveTab('description')} role="button">
-                        Description
-                      </a>
-                    </li>
-                    {/* <li className="nav-item">
+        <div
+          className="border-bottom"
+          style={{ backgroundColor: "rgb(247 247 247)" }}
+        >
+          <div className="container">
+            <div className="row mt-4 ">
+              <div className="col-lg-12">
+                <ul className="productTabs nav nav-tabs mb-3">
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeTab === "description" ? "active" : ""}`}
+                      onClick={() => setActiveTab("description")}
+                      role="button"
+                    >
+                      Description
+                    </a>
+                  </li>
+                  {/* <li className="nav-item">
                       <a className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`} onClick={() => setActiveTab('additional')} role="button">
                         Additional Information
                       </a>
                     </li> */}
-                    <li className="nav-item">
-                      <a className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`} onClick={() => setActiveTab('reviews')} role="button">
-                        Reviews ({viewReview?.length || 0})
-                      </a>
-                    </li>
-                  </ul>
-    
-                  <div className="tab-content">
-                    {activeTab === 'description' && (
-                      <div className="tab-pane fade show active">
-    <div className="tab-description">
-<p
-  className="table-description text-start"
-  dangerouslySetInnerHTML={{ __html: product.description }}
-></p>
-                          <div className="tab-pane fade show active">
-      <div className="table-container my-2 ">
-<table className="custom-table start table-bordered">
-  <thead>
-    <tr >
-       <th>Model No</th>
-      {productPrice?.data?.details?.map((item, index) => (
-        
-        <th key={index}>{item.title}</th>
-      ))}
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeTab === "reviews" ? "active" : ""}`}
+                      onClick={() => setActiveTab("reviews")}
+                      role="button"
+                    >
+                      Reviews ({viewReview?.length || 0})
+                    </a>
+                  </li>
+                </ul>
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr >
-       <th>{productPrice?.data?.sku?.model_no}</th>
-      {productPrice?.data?.details?.map((item, index) => (
-        <td key={index}>{item.value ?? '--'}</td>
-      ))}
-    </tr>
-  </tbody>
-</table>
-      </div>
+                <div className="tab-content">
+                  {activeTab === "description" && (
+                    <div className="tab-pane fade show active">
+                      <div className="tab-description">
+                        <p
+                          className="table-description text-start"
+                          dangerouslySetInnerHTML={{
+                            __html: product.description,
+                          }}
+                        ></p>
+                        <div className="tab-pane fade show active">
+                          <div className="table-container my-2 ">
+                            <table className="custom-table start table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Model No</th>
+                                  {productPrice?.data?.details?.map(
+                                    (item, index) => (
+                                      <th key={index}>{item.title}</th>
+                                    ),
+                                  )}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th>{productPrice?.data?.sku?.model_no}</th>
+                                  {productPrice?.data?.details?.map(
+                                    (item, index) => (
+                                      <td key={index}>{item.value ?? "--"}</td>
+                                    ),
+                                  )}
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                  )}
 
-    </div>
-                      </div>
-                    )}
-    
-                    {/* {activeTab === 'additional' && (
+                  {/* {activeTab === 'additional' && (
                     )} */}
-    
-    {activeTab === 'reviews' && (
-      <div className="tab-pane fade show active">
-        <div className="tab-info">
-          <h5 className="mb-3">Customer Reviews</h5>
-    
-          {viewReview && viewReview.length > 0 ? (
-            viewReview.map((review, index) => (
-              <div key={index} className="mb-3 p-3 border rounded shadow-sm">
-                <p className="mb-1"><strong>{review.name}</strong></p>
-                <p className="mb-1">
-                  {'★'.repeat(review.rating || 0)}
-                  {'☆'.repeat(5 - (review.rating || 0))}
-                </p>
-                <p className="mb-0">{review.comment}</p>
+
+                  {activeTab === "reviews" && (
+                    <div className="tab-pane fade show active">
+                      <div className="tab-info">
+                        <h5 className="mb-3">Customer Reviews</h5>
+
+                        {viewReview && viewReview.length > 0 ? (
+                          viewReview.map((review, index) => (
+                            <div
+                              key={index}
+                              className="mb-3 p-3 border rounded shadow-sm"
+                            >
+                              <p className="mb-1">
+                                <strong>{review.name}</strong>
+                              </p>
+                              <p className="mb-1">
+                                {"★".repeat(review.rating || 0)}
+                                {"☆".repeat(5 - (review.rating || 0))}
+                              </p>
+                              <p className="mb-0">{review.comment}</p>
+                            </div>
+                          ))
+                        ) : (
+                          <p>No reviews yet.</p>
+                        )}
+
+                        <hr className="my-4" />
+
+                        {product?.allow_review ? (
+                          <>
+                            <h6>Add Your Review</h6>
+                            <form onSubmit={handleReviewSubmit}>
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Your Rating
+                                </label>
+                                <div>
+                                  {[1, 2, 3, 4, 5].map((star) => (
+                                    <span
+                                      key={star}
+                                      style={{
+                                        cursor: "pointer",
+                                        fontSize: "1.5rem",
+                                        color:
+                                          star <= rating
+                                            ? "#ffc107"
+                                            : "#e4e5e9",
+                                      }}
+                                      onClick={() => setRating(star)}
+                                    >
+                                      ★
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="reviewerName"
+                                  className="form-label"
+                                >
+                                  Your Name
+                                </label>
+                                <input
+                                  type="text"
+                                  id="reviewerName"
+                                  className="form-control"
+                                  value={reviewerName}
+                                  onChange={(e) =>
+                                    setReviewerName(e.target.value)
+                                  }
+                                  required
+                                />
+                              </div>
+
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="reviewText"
+                                  className="form-label"
+                                >
+                                  Your Review
+                                </label>
+                                <textarea
+                                  id="reviewText"
+                                  className="form-control"
+                                  rows="3"
+                                  value={reviewText}
+                                  onChange={(e) =>
+                                    setReviewText(e.target.value)
+                                  }
+                                  required
+                                ></textarea>
+                              </div>
+
+                              <button type="submit" className="btn btn-primary">
+                                Submit Review
+                              </button>
+                            </form>
+                          </>
+                        ) : (
+                          <p className="text-muted">
+                            Reviews are not allowed for this product.
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            ))
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-    
-          <hr className="my-4" />
-    
-          {product?.allow_review ? (
-            <>
-              <h6>Add Your Review</h6>
-              <form onSubmit={handleReviewSubmit}>
-                <div className="mb-3">
-                  <label className="form-label">Your Rating</label>
-                  <div>
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <span
-                        key={star}
-                        style={{
-                          cursor: 'pointer',
-                          fontSize: '1.5rem',
-                          color: star <= rating ? '#ffc107' : '#e4e5e9'
-                        }}
-                        onClick={() => setRating(star)}
-                      >
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                </div>
-    
-                <div className="mb-3">
-                  <label htmlFor="reviewerName" className="form-label">Your Name</label>
-                  <input
-                    type="text"
-                    id="reviewerName"
-                    className="form-control"
-                    value={reviewerName}
-                    onChange={(e) => setReviewerName(e.target.value)}
-                    required
-                  />
-                </div>
-    
-                <div className="mb-3">
-                  <label htmlFor="reviewText" className="form-label">Your Review</label>
-                  <textarea
-                    id="reviewText"
-                    className="form-control"
-                    rows="3"
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
-                    required
-                  ></textarea>
-                </div>
-    
-                <button type="submit" className="btn btn-primary">Submit Review</button>
-              </form>
-            </>
-          ) : (
-            <p className="text-muted">Reviews are not allowed for this product.</p>
-          )}
+            </div>
+          </div>
         </div>
-      </div>
-    )}
-                  </div>
-                </div>
-              </div>
-    
-  </div>     
-  
-</div>
- </section>
+      </section>
 
       <Footer />
     </>

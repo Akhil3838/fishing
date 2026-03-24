@@ -69,6 +69,10 @@ const ShopSidebar = ({
 
       return { ...prev, [attribute]: updatedOptions };
     });
+     window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   };
 
   const toggleVariantOptions = (attribute) => {

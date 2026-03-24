@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function GoogleTranslate() {
   const pathname = usePathname();
@@ -13,21 +13,20 @@ export default function GoogleTranslate() {
 
   useEffect(() => {
     if (!mounted) return;
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const el = document.getElementById('google_translate_element');
+    const el = document.getElementById("google_translate_element");
     if (!el) return;
 
     // 🔥 FULL RESET (safe for dynamic routes)
     document
-      .querySelectorAll('iframe.goog-te-banner-frame')
-      .forEach(i => i.remove());
+      .querySelectorAll("iframe.goog-te-banner-frame")
+      .forEach((i) => i.remove());
 
-    document.body.classList.remove('translated-ltr', 'translated-rtl');
-    document.cookie =
-      'googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.body.classList.remove("translated-ltr", "translated-rtl");
+    document.cookie = "googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
-    el.innerHTML = '';
+    el.innerHTML = "";
 
     let attempts = 0;
 
@@ -39,11 +38,11 @@ export default function GoogleTranslate() {
       ) {
         new window.google.translate.TranslateElement(
           {
-            pageLanguage: 'en',
-            includedLanguages: 'en,hi,ml,ta,te,kn,ar',
+            pageLanguage: "en",
+            includedLanguages: "en,hi,ml,ta,te,kn,ar",
             autoDisplay: false,
           },
-          'google_translate_element'
+          "google_translate_element",
         );
         return;
       }
@@ -59,11 +58,9 @@ export default function GoogleTranslate() {
 
   if (!mounted) return null;
 
-  return  <div className="google-translate-wrapper">
- 
-    <div
-      id="google_translate_element"
-      suppressHydrationWarning
-    ></div>
-</div> ;
+  return (
+    <div className="google-translate-wrapper">
+      <div id="google_translate_element" suppressHydrationWarning></div>
+    </div>
+  );
 }

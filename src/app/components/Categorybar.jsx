@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { allCategoryApi } from '../services/allApi';
+import React, { useEffect, useState } from "react";
+import { allCategoryApi } from "../services/allApi";
 
 function Categorybar({ menuOpen, setMenuOpen }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -15,7 +15,7 @@ function Categorybar({ menuOpen, setMenuOpen }) {
           setCategories(result.data.data);
         }
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories:", error);
       }
     };
 
@@ -28,28 +28,28 @@ function Categorybar({ menuOpen, setMenuOpen }) {
 
   return (
     <nav className="custom-navbar pt-lg-3">
-      <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
-
+      <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
         {/* HOME */}
-<li className="nav-item">
-  <a
-    href="/"
-    style={{ fontWeight: "normal" }}
-    className="nav-link"
-    onClick={() => setMenuOpen(false)}
-  >
-    <span className="dropbtn">
-      <i className="fa-solid fs-6 fa-house"></i>
-    </span>
-  </a>
-</li>
+        <li className="nav-item">
+          <a
+            href="/"
+            style={{ fontWeight: "normal" }}
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="dropbtn">
+              <i className="fa-solid fs-6 fa-house"></i>
+            </span>
+          </a>
+        </li>
 
         {categories.map((category, index) => (
           <li key={index} className="nav-item">
-
             {/* CATEGORY WITH SUBCATEGORIES */}
             {category.subcategories && category.subcategories.length > 0 ? (
-              <div className={`dropdown ${activeDropdown === index ? 'active' : ''}`}>
+              <div
+                className={`dropdown ${activeDropdown === index ? "active" : ""}`}
+              >
                 <button
                   className="dropbtn"
                   onClick={() => toggleDropdown(index)}
@@ -75,29 +75,26 @@ function Categorybar({ menuOpen, setMenuOpen }) {
               <a
                 href={`/shop/${category.slug}`}
                 className="nav-link"
-                style={{fontWeight:'normal'}}
-
+                style={{ fontWeight: "normal" }}
                 onClick={() => setMenuOpen(false)}
               >
                 {category.category_name}
               </a>
             )}
-
           </li>
         ))}
 
         {/* ALL PRODUCTS */}
         <li className="nav-item">
-            <a
-              href="/shop/all"
-              style={{fontWeight:'normal'}}
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              <span className="dropbtn">ALL PRODUCTS</span>
-            </a>
+          <a
+            href="/shop/all"
+            style={{ fontWeight: "normal" }}
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="dropbtn">ALL PRODUCTS</span>
+          </a>
         </li>
-
       </ul>
     </nav>
   );

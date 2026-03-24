@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
-import { deleteCartApi, updateCartApi } from '@/app/services/allApi';
-import { deleteCartResponseContext, updateResponseContext } from '@/app/context/Contextshare';
-import Link from 'next/link';
+import React, { useState, useEffect, useContext } from "react";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { deleteCartApi, updateCartApi } from "@/app/services/allApi";
+import {
+  deleteCartResponseContext,
+  updateResponseContext,
+} from "@/app/context/Contextshare";
+import Link from "next/link";
 
 function CartItem({ cart, setCart }) {
   const [quantities, setQuantities] = useState({});
@@ -27,7 +30,7 @@ function CartItem({ cart, setCart }) {
   useEffect(() => {
     if (cart && cart.length > 0) {
       const initialQuantities = {};
-      cart.forEach(item => {
+      cart.forEach((item) => {
         initialQuantities[item.id] = item.quantity || 1;
       });
       setQuantities(initialQuantities);
@@ -37,7 +40,7 @@ function CartItem({ cart, setCart }) {
   }, [cart]);
 
   const updateCartQuantity = async (id, quantity) => {
-    setLoadingItems(prev => [...new Set([...prev, id])]);
+    setLoadingItems((prev) => [...new Set([...prev, id])]);
     const token = sessionStorage.getItem("token");
     const formData = new FormData();
     formData.append("cart_item_id", id);
@@ -48,10 +51,10 @@ function CartItem({ cart, setCart }) {
       const result = await updateCartApi(formData, reqHeader);
       setUpdateCartResponse(result.data);
       if (result.status === 200) {
-        setDisabledItems(prev => prev.filter(itemId => itemId !== id));
+        setDisabledItems((prev) => prev.filter((itemId) => itemId !== id));
         return true;
       } else if (result.status === 400) {
-        setDisabledItems(prev => [...new Set([...prev, id])]);
+        setDisabledItems((prev) => [...new Set([...prev, id])]);
         toast.warning("Quantity limit exceeded!", {
           position: "bottom-center",
           autoClose: 1500,
@@ -63,7 +66,7 @@ function CartItem({ cart, setCart }) {
       return false;
     } finally {
       setTimeout(() => {
-        setLoadingItems(prev => prev.filter(itemId => itemId !== id));
+        setLoadingItems((prev) => prev.filter((itemId) => itemId !== id));
       }, 1000);
     }
   };
@@ -71,10 +74,10 @@ function CartItem({ cart, setCart }) {
   const increaseQuantity = async (id) => {
     if (disabledItems.includes(id)) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Oops!',
-        text: 'Maximum quantity reached!',
-        confirmButtonColor: '#3085d6'
+        icon: "warning",
+        title: "Oops!",
+        text: "Maximum quantity reached!",
+        confirmButtonColor: "#3085d6",
       });
       return;
     }
@@ -107,12 +110,15 @@ function CartItem({ cart, setCart }) {
       const result = await deleteCartApi(formData, reqHeader);
       if (result.status === 200) {
         setDeleteCartResponse(result.data);
-        toast.error("Deleted Successfully!", { position: "top-center", autoClose: 1000 });
+        toast.error("Deleted Successfully!", {
+          position: "top-center",
+          autoClose: 1000,
+        });
         const updatedQuantities = { ...quantities };
         delete updatedQuantities[id];
         localStorage.setItem("quantities", JSON.stringify(updatedQuantities));
         setQuantities(updatedQuantities);
-        setCart(prev => prev.filter(item => item.id !== id));
+        setCart((prev) => prev.filter((item) => item.id !== id));
       }
     } catch (error) {
       console.error("Error deleting item:", error);
@@ -131,7 +137,7 @@ function CartItem({ cart, setCart }) {
   return (
     <form className="woocommerce-cart-form" action="#">
       <table className="cart-table">
-        <thead className='thd'>
+        <thead className="thd">
           <tr>
             <th className="product-remove">&nbsp;</th>
             <th className="product-name-thumbnail">Product</th>
@@ -145,24 +151,50 @@ function CartItem({ cart, setCart }) {
             cart.map((item) => (
               <tr className="cart-item " key={item.id}>
                 <td className="product-remove">
-                  <button type="button" className='btn' onClick={() => removeItem(item.id)}>X</button>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    X
+                  </button>
                 </td>
                 <td className="product-thumbnail-title">
-                  <Link href={`/productDetails/${item?.product_items?.slug}`} className="pd-img">
-                    <img src={item.product_items?.image || "assets/images/product/c1.jpg"} alt="product" />
+                  <Link
+                    href={`/productDetails/${item?.product_items?.slug}`}
+                    className="pd-img"
+                  >
+                    <img
+                      src={
+                        item.product_items?.image ||
+                        "assets/images/product/c1.jpg"
+                      }
+                      alt="product"
+                    />
                   </Link>
-                  <Link className="product-name" href={`/productDetails/${item?.product_items?.slug}`}>
+                  <Link
+                    className="product-name"
+                    href={`/productDetails/${item?.product_items?.slug}`}
+                  >
                     {item.product_name || "Product Name"}
                   </Link>
                 </td>
                 <td className="product-unit-price">
                   <div className="product_price clearfix">
-                    <span className="price">₹{item.price?.toFixed(2) || '0.00'}</span>
+                    <span className="price">
+                      ₹{item.price?.toFixed(2) || "0.00"}
+                    </span>
                   </div>
                 </td>
                 <td className="product-quantity clearfix">
                   <div className="quantityd clearfix">
-                    <button className="qtyBtn btnMinus" onClick={() => decreaseQuantity(item.id)} disabled={loadingItems.includes(item.id)}>-</button>
+                    <button
+                      className="qtyBtn btnMinus"
+                      onClick={() => decreaseQuantity(item.id)}
+                      disabled={loadingItems.includes(item.id)}
+                    >
+                      -
+                    </button>
                     <input
                       name="qty"
                       value={quantities[item.id] || item.quantity || 1}
@@ -171,13 +203,23 @@ function CartItem({ cart, setCart }) {
                       type="text"
                       readOnly
                     />
-                    <button className="qtyBtn btnPlus" onClick={() => increaseQuantity(item.id)} disabled={loadingItems.includes(item.id)}>+</button>
+                    <button
+                      className="qtyBtn btnPlus"
+                      onClick={() => increaseQuantity(item.id)}
+                      disabled={loadingItems.includes(item.id)}
+                    >
+                      +
+                    </button>
                   </div>
                 </td>
                 <td className="product-total">
                   <div className="product_price clearfix">
                     <span className="price">
-                      ₹{((item.price || 0) * (quantities[item.id] || item.quantity || 1)).toFixed(2)}
+                      ₹
+                      {(
+                        (item.price || 0) *
+                        (quantities[item.id] || item.quantity || 1)
+                      ).toFixed(2)}
                     </span>
                   </div>
                 </td>
@@ -185,7 +227,9 @@ function CartItem({ cart, setCart }) {
             ))
           ) : (
             <tr>
-              <td colSpan="5" className="text-center">Your cart is empty.</td>
+              <td colSpan="5" className="text-center">
+                Your cart is empty.
+              </td>
             </tr>
           )}
         </tbody>

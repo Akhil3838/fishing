@@ -1,16 +1,16 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { toast, ToastContainer } from 'react-toastify';
-import { loginApi } from '../services/allApi';
-import 'react-toastify/dist/ReactToastify.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import { loginApi } from "../services/allApi";
+import "react-toastify/dist/ReactToastify.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Login() {
   const router = useRouter();
-  const [formData, setFormData] = useState({ otp: '' });
+  const [formData, setFormData] = useState({ otp: "" });
 
   const handleChange = (e) => {
     setFormData({ otp: e.target.value });
@@ -23,58 +23,53 @@ function Login() {
     otp = otp.trim();
 
     if (!otp) {
-      toast.error('Please enter OTP.', {
-        position: 'top-center',
+      toast.error("Please enter OTP.", {
+        position: "top-center",
         autoClose: 1000,
-        theme: 'colored',
+        theme: "colored",
       });
       return;
     }
 
     // session id (unchanged)
-    if (!localStorage.getItem('browser_id')) {
-      const browserId =
-        Date.now() + Math.random().toString(36).substr(2, 10);
-      localStorage.setItem('browser_id', browserId);
+    if (!localStorage.getItem("browser_id")) {
+      const browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+      localStorage.setItem("browser_id", browserId);
     }
-     
-    const session_id = localStorage.getItem('browser_id');
-        const user_id = localStorage.getItem('user_id');
 
+    const session_id = localStorage.getItem("browser_id");
+    const user_id = localStorage.getItem("user_id");
 
     try {
       const result = await loginApi({ otp, session_id, user_id });
+      console.log("otp response", result);
+
+      sessionStorage.setItem("token", result.data.token);
+
       console.log(result);
-      
-              sessionStorage.setItem('token', result.data.token);
-
-
-            console.log(result);
 
       if (result.status === 200) {
-
-
-        toast.success('Login successful!', {
-          position: 'top-center',
+        toast.success("Login successful!", {
+          position: "top-center",
           autoClose: 1000,
-          theme: 'colored',
+          theme: "colored",
         });
 
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = "/";
         }, 2000);
       } else {
-        toast.error('Invalid OTP!', {
-          position: 'top-center',
+        toast.error("Invalid OTP!", {
+          position: "top-center",
           autoClose: 1000,
-          theme: 'colored',
+          theme: "colored",
         });
       }
     } catch (error) {
-      toast.error('Something went wrong', {
-        position: 'top-center',
+      toast.error("Something went wrong", {
+        position: "top-center",
         autoClose: 1000,
-        theme: 'colored',
+        theme: "colored",
       });
     }
   };
@@ -83,11 +78,11 @@ function Login() {
     <>
       <Header />
 
-      <div className="container" style={{ paddingTop: '150px' }}>
+      <div className="container" style={{ paddingTop: "150px" }}>
         <div className="login-box text-center">
-           <Link href="/">
+          <Link href="/">
             <img
-              style={{height:'100px',width:'170px'}}
+              style={{ height: "100px", width: "170px" }}
               src="assets/images/logo/log2.png"
               alt="Logo"
               className="img-fluid mb-3"

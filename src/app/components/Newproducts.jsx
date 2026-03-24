@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useState, useCallback } from 'react';
-import { NewproctApi } from '../services/allApi';
-import Link from 'next/link';
+import React, { useEffect, useState, useCallback } from "react";
+import { NewproctApi } from "../services/allApi";
+import Link from "next/link";
 
 function Newproducts({ activeCategory }) {
   const [products, setProducts] = useState([]);
@@ -39,24 +39,30 @@ function Newproducts({ activeCategory }) {
               <div className="col-6 col-md-6 col-lg-3 cardres" key={index}>
                 <div className="product-item-1 text-center">
                   <div className="product-thumb">
-                     
-  {/* { product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>}             */}
-          <img     
-           src={product.icon || "/assets/images/product/default.png"}
-           alt={product.name}
-           />
-                    
+                    {/* { product?.product_stock_out === "yes" && <span className="stock-ribbon">OUT OF STOCK</span>}             */}
+                    <img
+                      src={product.icon || "/assets/images/product/default.png"}
+                      alt={product.name}
+                    />
+
                     <div className="product-meta">
-                      <a href={`/productDetails/${product?.slug}`} className="view"  target="_blank" 
-    rel="noopener noreferrer">
+                      <a
+                        href={`/productDetails/${product?.slug}`}
+                        className="view"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <i className="nss-eye1"></i>
                       </a>
                     </div>
                   </div>
                   <div className="product-details">
                     <h5>
-                      <a href={`/productDetails/${product?.slug}`}  target="_blank" 
-    rel="noopener noreferrer">
+                      <a
+                        href={`/productDetails/${product?.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {product?.product_name || "Unnamed Product"}
                       </a>
                     </h5>
@@ -71,8 +77,7 @@ function Newproducts({ activeCategory }) {
                     <div className="product_price clearfix">
                       <span className="price">
                         <span>
-                          ₹
-                          {product?.sku_new?.[0]?.special_price || 'N/A'}
+                          ₹{product?.sku_new?.[0]?.special_price || "N/A"}
                         </span>
                       </span>
                     </div>
