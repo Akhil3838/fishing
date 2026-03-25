@@ -44,14 +44,14 @@ function Banner() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="slider-content">
-                    <h5 className="sub-title animated">
+                    {/* <h5 className="sub-title animated">
                       {banner?.[0]?.sub_text}
                       <span></span>
                     </h5>
                     <h2 className="animated">{banner?.[0]?.main_text}</h2>
                     <a href="/shop/all" className="fishto-btn sb2 animated">
                       Shop Now <i className="nss-long-arrow-right1"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -73,13 +73,13 @@ function Banner() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="slider-content">
-                    <h5 className="sub-title animated">
+                    {/* <h5 className="sub-title animated">
                       {banner?.[1]?.sub_text} <span></span>
                     </h5>
                     <h2 className="animated">{banner?.[1]?.main_text}</h2>
                     <a href="/shop/all" className="fishto-btn sb2 animated">
                       Shop Now <i className="nss-long-arrow-right1"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -101,14 +101,14 @@ function Banner() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="slider-content">
-                    <h5 className="sub-title animated">
+                    {/* <h5 className="sub-title animated">
                       {banner?.[2]?.sub_text}
                       <span></span>
                     </h5>
                     <h2 className="animated">{banner?.[2]?.main_text}</h2>
                     <a href="/shop/all" className="fishto-btn sb2 animated">
                       Shop Now <i className="nss-long-arrow-right1"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -129,14 +129,14 @@ function Banner() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="slider-content">
-                    <h5 className="sub-title animated">
+                    {/* <h5 className="sub-title animated">
                       {banner?.[3]?.sub_text}
                       <span></span>
                     </h5>
                     <h2 className="animated">{banner?.[3]?.main_text}</h2>
                     <a href="/shop/all" className="fishto-btn sb2 animated">
                       Shop Now <i className="nss-long-arrow-right1"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -159,14 +159,14 @@ function Banner() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="slider-content">
-                    <h5 className="sub-title animated">
+                    {/* <h5 className="sub-title animated">
                       {banner?.[4]?.sub_text}
                       <span></span>
                     </h5>
                     <h2 className="animated">{banner?.[4]?.main_text}</h2>
                     <a href="/shop/all" className="fishto-btn sb2 animated">
                       Shop Now <i className="nss-long-arrow-right1"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -188,14 +188,14 @@ function Banner() {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="slider-content">
-                      <h5 className="sub-title animated">
+                      {/* <h5 className="sub-title animated">
                         {banner?.[4]?.sub_text}
                         <span></span>
                       </h5>
                       <h2 className="animated">{banner?.[4]?.main_text}</h2>
                       <a href="/shop/all" className="fishto-btn sb2 animated">
                         Shop Now <i className="nss-long-arrow-right1"></i>
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
