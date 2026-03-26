@@ -75,7 +75,7 @@ export default function FishingStoreHero({
           {/* Overlay */}
           <div
             className="position-absolute top-0 start-0 w-100 h-100"
-            style={{ background: "rgba(0,0,0,0.45)" }}
+            // style={{ background: "rgba(0,0,0,0.45)" }}
           />
 
           {/* Content */}
