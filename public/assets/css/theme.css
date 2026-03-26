@@ -5727,6 +5727,16 @@ blockquote:after {
 }
 
 @media (max-width: 768px) {
+    @media (max-width: 768px) {
+  .owl-dots {
+    display: none !important;
+  }
+}
+    .discount-section-2 {
+    position: relative;
+    margin-top: -240px;
+    z-index: 2;
+}
   .single-slide {
     height: 60vh !important;
     background-size: contain !important;
