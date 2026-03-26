@@ -35,6 +35,7 @@ function SingleProduct({ product, variants, onPriceChange }) {
       [attribute]: !prev[attribute],
     }));
   };
+console.log(variants);
 
   const handleBuyNow = async (product_id, sku_id, qty) => {
     const token = sessionStorage.getItem("token");

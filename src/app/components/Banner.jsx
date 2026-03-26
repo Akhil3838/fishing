@@ -33,11 +33,11 @@ function Banner() {
           <div
             className="single-slide bg-img d-flex align-items-center"
             style={{
-              height: "80vh",
+              // height: "80vh",
               backgroundImage: `url(${banner?.[0]?.image_url})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              // backgroundSize: "cover",
+              // backgroundPosition: "center",
+              // backgroundRepeat: "no-repeat",
             }}
           >
             <div className="container">
