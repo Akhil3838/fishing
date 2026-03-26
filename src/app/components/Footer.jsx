@@ -193,7 +193,7 @@ function Footer() {
             <div className="col-lg-12">
               <div className="copyright text-center">
                 <p>
-                  © 2025 <a href="/">Scaless</a> All rights reserved.
+                  © 2026 <a href="/">Scaless</a> All rights reserved.
                 </p>
               </div>
             </div>

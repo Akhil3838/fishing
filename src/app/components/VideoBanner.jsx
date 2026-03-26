@@ -49,9 +49,9 @@ export default function FishingStoreHero({
 
   return (
     <section
-      className={`position-relative overflow-hidden ${className}`}
+      className={`position-relative overflow-hidden hero-section ${className}`}
       style={{
-        height: "clamp(420px, 65vh, 700px)",
+        // height: "clamp(420px, 65vh, 700px)",
       }}
     >
       {/* ✅ Slides from API */}
@@ -68,8 +68,7 @@ export default function FishingStoreHero({
           <img
             src={item.image_url} // ⚡ Make sure backend sends image field
             alt={item.title || "banner"}
-            className="w-100 h-100"
-            style={{ objectFit: "cover" }}
+            className="w-100 h-100 hero-img"
           />
 
           {/* Overlay */}
