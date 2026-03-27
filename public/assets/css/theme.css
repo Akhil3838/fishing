@@ -6264,7 +6264,7 @@ z-index: 1999 !important;
   object-fit: cover;
 }
 .hero-section{
-    height: "clamp(420px, 65vh, 700px)"
+    height: clamp(420px, 65vh, 700px);
 
 } 
 

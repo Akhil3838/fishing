@@ -12,6 +12,7 @@ import Offer from "./components/Offer";
 import Gallery from "./components/Gallery";
 import Brands from "./components/Brands";
 import AboutSection from "./components/AboutSection";
+import TopBanner from "./components/TopBanner";
 
 
 
@@ -120,6 +121,7 @@ const [category, setCategory] = useState([]);
 
 {/* {/* <!-- Hero Banner Start --> */}
 <Banner/>
+{/* <TopBanner/> */}
 {/* <!-- Banner End --> */}
 
 <section className="discount-section-2">
