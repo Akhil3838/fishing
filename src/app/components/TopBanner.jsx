@@ -31,7 +31,8 @@ function TopBanner() {
   }, [banner]);
 
   return (
-    <section className="slider-section hero-section">
+    <section className="slider-section hero-section "
+>
       {banner.map((item, index) => (
         <div
           key={index}

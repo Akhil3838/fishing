@@ -118,10 +118,12 @@ const [category, setCategory] = useState([]);
     <Header/>
 
 
+<div className="space" style={{paddingTop:'9rem'}}>
 
+</div>
 {/* {/* <!-- Hero Banner Start --> */}
-<Banner/>
-{/* <TopBanner/> */}
+{/* <Banner/> */}
+<TopBanner/>
 {/* <!-- Banner End --> */}
 
 <section className="discount-section-2">
