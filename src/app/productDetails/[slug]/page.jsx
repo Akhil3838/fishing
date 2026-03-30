@@ -20,6 +20,10 @@ function ProductDetails() {
   const [rating, setRating] = useState(0);
   const [viewReview, setViewReview] = useState([]);
   const [productPrice, setProductPrice] = useState("");
+const [reqBody, setReqBody] = useState({
+  slug: "",
+  selected_options: []
+});
 
   useEffect(() => {
     async function fetchProduct() {
@@ -30,10 +34,18 @@ function ProductDetails() {
       };
 
       try {
-        const fetchedProduct = await getSignleProduct(slug, reqHeader);
+
+         const body = {
+        ...reqBody,
+        slug: slug // override slug from URL
+      };
+
+        const fetchedProduct = await getSignleProduct(body, reqHeader);
+        console.log(body);
+        
         const productData = fetchedProduct.data.product;
         console.log("single product", fetchedProduct);
-
+         
         setProduct(productData);
         setVariants(productData.variants || []);
         setViewReview(fetchedProduct?.data?.product?.reviews || []);
@@ -45,7 +57,7 @@ function ProductDetails() {
     if (slug) {
       fetchProduct();
     }
-  }, [slug]);
+  }, [slug,reqBody.selected_options]);
   console.log(variants);
 
   const handleReviewSubmit = async (e) => {
@@ -131,11 +143,27 @@ function ProductDetails() {
 
       <section className="singleproduct-section" style={{ paddingTop: "80px" }}>
         <div className="container">
-          <SingleProduct
-            product={product}
-            variants={variants}
-            onPriceChange={(newPrice) => setProductPrice(newPrice)}
-          />
+         <SingleProduct
+  product={product}
+  variants={variants}
+  onPriceChange={(newPrice) => setProductPrice(newPrice)}
+onVariantChange={(data) => {
+  const allIds = Object.values(data); // ✅ get all selected ids
+
+  setReqBody((prev) => {
+    // prevent unnecessary re-render
+    if (
+      JSON.stringify(prev.selected_options) === JSON.stringify(allIds)
+    ) {
+      return prev;
+    }
+
+    return {
+      ...prev,
+      selected_options: allIds, // ✅ store ALL ids
+    };
+  });
+}}/>
         </div>
 
         <div

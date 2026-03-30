@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 
-function SingleProduct({ product, variants, onPriceChange }) {
+function SingleProduct({ product, variants, onPriceChange,onVariantChange }) {
   const [selectedVariants, setSelectedVariants] = useState({});
   const [price, setPrice] = useState("");
   const [orgPrice, setOrgPrice] = useState("");
@@ -217,34 +217,51 @@ console.log(variants);
     }
   };
 
-  useEffect(() => {
-    const defaultSelection = {};
-    for (const [attribute, options] of Object.entries(groupedVariants)) {
-      if (options.length > 0) {
-        defaultSelection[attribute] = options[0].id;
-      }
-    }
-    setSelectedVariants(defaultSelection);
+useEffect(() => {
+  // ✅ don't override if already selected
+  if (Object.keys(selectedVariants).length > 0) return;
 
-    if (Object.keys(groupedVariants).every((attr) => defaultSelection[attr])) {
-      fetchPrice(defaultSelection);
+  const defaultSelection = {};
+  for (const [attribute, options] of Object.entries(groupedVariants)) {
+    if (options.length > 0) {
+      defaultSelection[attribute] = options[0].id;
     }
-  }, [variants]);
+  }
 
-  const handleVariantSelect = (attribute, optionId) => {
-    const updatedSelection = { ...selectedVariants, [attribute]: optionId };
-    setSelectedVariants(updatedSelection);
-    // Auto scroll to top
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  setSelectedVariants(defaultSelection);
 
-    if (Object.keys(groupedVariants).every((attr) => updatedSelection[attr])) {
-      fetchPrice(updatedSelection);
-    }
+  if (Object.keys(groupedVariants).every((attr) => defaultSelection[attr])) {
+    fetchPrice(defaultSelection);
+  }
+}, [variants]);
+const handleVariantSelect = (attribute, optionId) => {
+  const updatedSelection = {
+    ...selectedVariants,
+    [attribute]: optionId,
   };
-  const handleMouseMove = (e) => {
+
+  // ✅ 1. update state
+  setSelectedVariants(updatedSelection);
+
+  // ✅ 2. call parent AFTER state update
+  if (onVariantChange) {
+    onVariantChange(updatedSelection);
+  }
+
+  // ✅ 3. price API
+  if (
+    Object.keys(groupedVariants).every(
+      (attr) => updatedSelection[attr]
+    )
+  ) {
+    fetchPrice(updatedSelection);
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};  const handleMouseMove = (e) => {
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
 

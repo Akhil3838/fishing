@@ -73,8 +73,10 @@ export const addReviewApi =async(reqBody,reqHeader)=>{
 
 //get -single -product
 
-export const getSignleProduct=async(id,reqHeader)=>{
-    return await commonApi('GET',`${serverUrl}/single-product/${id}`,"",reqHeader)
+export const getSignleProduct=async(reqBody,reqHeader)=>{
+    console.log(reqBody);
+    
+    return await commonApi('POST',`${serverUrl}/single-product`,reqBody,reqHeader)
 }
 //get - price -of - single - product
 export const getPriceDetailsApi=async(reqBody)=>{
