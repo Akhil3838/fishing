@@ -127,7 +127,7 @@ function SelectAddress({ onSelectAddress }) {
       state: address.state,
       country: address.country,
     });
-
+handleAddressSelection(address.id)
     setIsEditing(true);
     new bootstrap.Modal(document.getElementById("addressModal")).show();
   };
@@ -210,7 +210,6 @@ function SelectAddress({ onSelectAddress }) {
         )}
 
         {/* ADD ADDRESS (ONLY WHEN EMPTY) */}
-        {addresses.length === 0 && (
           <div
             className="mt-3 p-3 border rounded text-danger text-center"
             role="button"
@@ -231,7 +230,6 @@ function SelectAddress({ onSelectAddress }) {
           >
             <strong>+ Add New Address</strong>
           </div>
-        )}
       </div>
 
       {/* MODAL */}

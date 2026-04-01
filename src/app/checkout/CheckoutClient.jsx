@@ -203,7 +203,7 @@ formData.append("shipping_charge", shippingCharge);
     }
 
     const options = {
-      key: "rzp_live_SYDawg1mhVxNd5",
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
       amount: order.amount,
       currency: order.currency,
       name: "Your Company Name",
