@@ -5,13 +5,29 @@ import { bannerApi } from "../services/allApi";
 function TopBanner() {
   const [banner, setBanner] = useState([]);
   const [current, setCurrent] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false); // ✅ NEW
 
   const getBanner = async () => {
     try {
       const result = await bannerApi();
-      setBanner(result.data.banner || []);
+      const banners = result.data.banner || [];
+      setBanner(banners);
+
+      // ✅ Preload images
+      const promises = banners.map((item) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = item.image_url;
+          img.onload = resolve;
+          img.onerror = resolve; // avoid blocking if error
+        });
+      });
+
+      await Promise.all(promises);
+      setImagesLoaded(true); // ✅ All images loaded
     } catch (error) {
       console.log(error);
+      setImagesLoaded(true); // fallback
     }
   };
 
@@ -30,9 +46,27 @@ function TopBanner() {
     return () => clearInterval(timer);
   }, [banner]);
 
+  // ✅ SHOW LOADER UNTIL IMAGES READY
+  if (!imagesLoaded) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh", background: "#edf2f5" }}
+      >
+        <img
+          src="/assets/images/logo/log2.png" // your logo
+          alt="Loading..."
+          style={{
+            width: "120px",
+            // animation: "pulse 1.5s infinite",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
-    <section className="slider-section hero-section "
->
+    <section className="slider-section hero-section">
       {banner.map((item, index) => (
         <div
           key={index}

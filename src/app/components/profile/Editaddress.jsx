@@ -62,6 +62,8 @@ function Editaddress() {
         response = await updateAddressApi(requestData, reqHeader);
       } else {
         response = await addAddressApi(requestData, reqHeader);
+        console.log(response);
+        
       }
   
       if (response.status === 200) {

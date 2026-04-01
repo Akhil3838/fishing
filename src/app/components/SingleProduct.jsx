@@ -261,7 +261,8 @@ const handleVariantSelect = (attribute, optionId) => {
     top: 0,
     behavior: "smooth",
   });
-};  const handleMouseMove = (e) => {
+}; 
+ const handleMouseMove = (e) => {
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
 

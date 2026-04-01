@@ -5,6 +5,7 @@ import {
   placeOrderApi,
   paymentResponseApi,
   applyCouponApi,
+  ShippingChargeApi,
 } from "../services/allApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,18 +28,25 @@ function CheckoutClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const cartType = searchParams?.keys().next().value;
-
+const [shippingCharge, setShippingCharge] = useState(0);
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const [coupon_id, setCouponId] = useState("");
+  const [isDeliverable, setIsDeliverable] = useState(true);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       cartItem();
+      //  handleShipping();
       loadRazorpayScript();
     }
   }, []);
 
+useEffect(() => {
+  if (selectedAddress) {
+    handleShipping(selectedAddress);
+  }
+}, [selectedAddress]);
   const cartItem = async () => {
     if (typeof window === "undefined") return;
 
@@ -65,10 +73,10 @@ function CheckoutClient() {
       console.log(result);
 
       setCart(result.data.cartItems || []);
-      setSummary({
-        subTotal: result.data.subTotal,
-        total: result.data.total,
-      });
+      // setSummary({
+      //   subTotal: result.data.subTotal,
+      //   total: result.data.total,
+      // });
     } catch (error) {
       console.error("Error fetching cart:", error);
       setCart([]);
@@ -91,13 +99,14 @@ function CheckoutClient() {
       Authorization: `Bearer ${token}`,
     };
 
-    const formData = new FormData();
-    formData.append("address_id", selectedAddress);
-    if (cartType) formData.append("cart_type", cartType);
-    // if (coupon) formData.append("coupon_code", coupon_id); // ✅ Include coupon code if applied
-    if (coupon_id) formData.append("coupon_id", coupon_id); // ✅ Include coupon ID if applied
-    console.log(coupon);
+const formData = new FormData();
+formData.append("address_id", selectedAddress);
 
+if (cartType) formData.append("cart_type", cartType);
+if (coupon_id) formData.append("coupon_id", coupon_id);
+
+// ✅ ADD THIS
+formData.append("shipping_charge", shippingCharge);
     try {
       const result = await placeOrderApi(formData, reqHeader);
       console.log(result);
@@ -131,6 +140,8 @@ function CheckoutClient() {
     formData.append("session_id", browserId);
     formData.append("coupon_code", coupon);
     if (cartType) formData.append("cart_type", cartType);
+    formData.append("shipping_charge", shippingCharge);
+
 
     const token = sessionStorage.getItem("token");
     if (!token) {
@@ -182,6 +193,8 @@ function CheckoutClient() {
   };
   console.log(CouponSummary);
 
+  
+
   const openRazorpay = (order) => {
     if (!order) {
       console.error("No order details found for Razorpay.");
@@ -190,7 +203,7 @@ function CheckoutClient() {
     }
 
     const options = {
-      key: "rzp_test_GDuAFX1SCW9H20",
+      key: "rzp_live_SYDawg1mhVxNd5",
       amount: order.amount,
       currency: order.currency,
       name: "Your Company Name",
@@ -211,6 +224,7 @@ function CheckoutClient() {
           razorpay_payment_id: response.razorpay_payment_id,
           razorpay_signature: response.razorpay_signature,
           coupon_id: coupon_id, // ✅ Include coupon ID if applied
+          address_id:selectedAddress
         };
 
         try {
@@ -278,6 +292,51 @@ function CheckoutClient() {
     }
   };
 
+const handleShipping = async () => {
+  const token = sessionStorage.getItem("token");
+
+  const reqHeader = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  const formData = new FormData();
+  if (cartType) formData.append("cart_type", cartType);
+   formData.append("address_id", selectedAddress); // ✅ Pass selected address ID
+
+  try {
+    const result = await ShippingChargeApi(formData, reqHeader);
+    console.log("Shipping:", result);
+
+          setSummary({
+        subTotal: result.data.total_amount,
+        total: result.data.final_amount
+,
+      });
+ // 🚨 DELIVERY NOT AVAILABLE
+    if (result.data.is_shipping === "no") {
+      toast.error("❌ Delivery not available in this pincode");
+
+      setShippingCharge(0);        // ✅ set 0
+      setIsDeliverable(false);     // ❌ disable button
+      return;
+    }
+
+    // ✅ DELIVERY AVAILABLE
+    if (result.data.status) {
+      setShippingCharge(result.data.shipping_charge);
+      setIsDeliverable(true);      // ✅ enable button
+    }
+
+    if (result.data.status) {
+      setShippingCharge(result.data.shipping_charge); // ✅ STORE
+    }
+  } catch (error) {
+    console.error("Error fetching shipping:", error);
+  }
+};
+
+
   return (
     <>
       <Header />
@@ -314,7 +373,7 @@ function CheckoutClient() {
                 <p>Total MRP</p>
                 <p>
                   {" "}
-                  ₹{CouponSummary.total ? CouponSummary.total : summary.total}
+                  ₹{CouponSummary.total ? CouponSummary.total : summary.subTotal}
                 </p>
               </div>
               <div className="coupon-box mb-3 d-flex ">
@@ -338,19 +397,19 @@ function CheckoutClient() {
                   Discount on MRP{" "}
                   <span className="text-primary">Know More</span>
                 </p>
-                <p className="text-success">₹{CouponSummary.discount}</p>
+                <p className="text-success">-₹{CouponSummary.discount}</p>
               </div>
-              <div className="d-flex justify-content-between">
+              {/* <div className="d-flex justify-content-between">
                 <p>
                   Platform Fee <span className="text-primary">Know More</span>
                 </p>
                 <p className="text-success">FREE</p>
-              </div>
+              </div> */}
               <div className="d-flex justify-content-between">
                 <p>
                   Shipping Fee <span className="text-primary">Know More</span>
                 </p>
-                <p className="text-success">FREE</p>
+                <p className="text-success">+₹{shippingCharge}</p>
               </div>
 
               <hr />
@@ -360,17 +419,21 @@ function CheckoutClient() {
                   ₹
                   {CouponSummary.subTotal
                     ? CouponSummary.subTotal
-                    : summary.total}
+                    :  summary.subTotal}
                 </p>
               </div>
 
               <button
-                className="btn btn-success w-100 mt-2"
-                onClick={handlePaynow}
-                disabled={isProcessing}
-              >
-                {isProcessing ? "Processing..." : "Pay Now"}
-              </button>
+  className="btn btn-success w-100 mt-2"
+  onClick={handlePaynow}
+  disabled={isProcessing || !isDeliverable}
+>
+  {!isDeliverable
+    ? "Delivery Not Available"
+    : isProcessing
+    ? "Processing..."
+    : "Pay Now"}
+</button>
             </div>
           </div>
         </div>

@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 function Pagination({ totalPages, currentPage, onPageChange }) {
   const [loading, setLoading] = useState(false);
 
+  // ✅ hide pagination if only 1 page
+  if (totalPages <= 1) return null;
+
   const getPageNumbers = () => {
     const pages = [];
     if (totalPages <= 7) {
@@ -20,31 +23,37 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
   };
 
   const handlePageClick = async (page) => {
-    if (page !== currentPage && page !== '...') {
-      setLoading(true);
-      // 👇 Smoothly scroll to top when page changes
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      try {
-        await onPageChange(page); // call parent handler (can be async)
-      } finally {
-        setTimeout(() => setLoading(false), 500); // hide loader after short delay
-      }
+    if (
+      page === currentPage ||
+      page === '...' ||
+      page < 1 ||
+      page > totalPages
+    ) return;
+
+    setLoading(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    try {
+      await onPageChange(page);
+    } finally {
+      setTimeout(() => setLoading(false), 500);
     }
   };
 
   return (
     <div className="row">
       <div className="col-lg-12 fishto-pagination text-center">
-        {/* Prev Button */}
+
+        {/* Prev */}
         <a
           className={`next ${currentPage === 1 ? 'disabled' : ''}`}
-          onClick={() => handlePageClick(currentPage - 1)}
+          onClick={() => currentPage > 1 && handlePageClick(currentPage - 1)}
           style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}
         >
           <i className="nss-chevron-left1"></i>
         </a>
 
-        {/* Page Numbers */}
+        {/* Pages */}
         {getPageNumbers().map((number, index) => (
           <span
             key={index}
@@ -60,18 +69,21 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
           </span>
         ))}
 
-        {/* Next Button */}
+        {/* Next */}
         <a
           className={`next ${currentPage === totalPages ? 'disabled' : ''}`}
-          onClick={() => handlePageClick(currentPage + 1)}
+          onClick={() =>
+            currentPage < totalPages && handlePageClick(currentPage + 1)
+          }
           style={{
-            cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+            cursor:
+              currentPage === totalPages ? 'not-allowed' : 'pointer',
           }}
         >
           <i className="nss-chevron-right1"></i>
         </a>
 
-        {/* Loading Spinner */}
+        {/* Loader */}
         {loading && (
           <div className="mt-3">
             <div

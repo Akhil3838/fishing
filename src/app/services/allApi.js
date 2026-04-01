@@ -276,6 +276,11 @@ export const applyCouponApi =async(reqBody,reqHeader)=>{
     return await commonApi('POST',`${serverUrl}/apply-coupon`,reqBody,reqHeader)
 }
 
+export const ShippingChargeApi =async(reqBody,reqHeader)=>{
+    return await commonApi('POST',`${serverUrl}/calculate-shipping`,reqBody,reqHeader)
+}
+
+
 
 
 
