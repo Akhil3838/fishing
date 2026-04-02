@@ -419,7 +419,7 @@ const handleShipping = async () => {
                   ₹
                   {CouponSummary.subTotal
                     ? CouponSummary.subTotal
-                    :  summary.subTotal}
+                    :  summary.total}
                 </p>
               </div>
 
