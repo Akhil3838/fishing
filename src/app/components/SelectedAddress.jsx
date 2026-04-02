@@ -8,7 +8,6 @@ import {
 } from "../services/allApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 function SelectAddress({ onSelectAddress }) {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -278,8 +277,15 @@ handleAddressSelection(address.id)
         </div>
       </div>
 
-      <ToastContainer />
-    </>
+{/* <ToastContainer
+  position="top-right"
+  autoClose={2000}
+  pauseOnHover={false}
+  pauseOnFocusLoss={false}
+  closeOnClick={true}
+  draggable={false}
+/>    */}
+ </>
   );
 }
 

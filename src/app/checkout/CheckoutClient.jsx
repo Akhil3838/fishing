@@ -437,7 +437,14 @@ const handleShipping = async () => {
             </div>
           </div>
         </div>
-        <ToastContainer position="top-right" autoClose={2500} />
+{/* <ToastContainer
+  position="top-right"
+  autoClose={2000}
+  pauseOnHover={false}
+  pauseOnFocusLoss={false}
+  closeOnClick={true}
+  draggable={false}
+/>  */}
       </div>
       <Footer />
     </>
