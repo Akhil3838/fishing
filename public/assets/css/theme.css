@@ -83,6 +83,28 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.fisht-btn{
+    display: inline-block;
+    height: 55px;
+    font-size: 15px;
+    line-height: .8;
+    font-family: 'Nunito', sans-serif;
+    color: #000000;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 700;
+    /* background: #412CC5; */
+    padding: 18px 44px;
+    border-radius: 5px;
+    z-index: 1;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
 
 /*---- fishto Btn ----*/
 .fishto-btn{
@@ -2017,7 +2039,7 @@ footer .widget.widget_mc4wp_form_widget{
 }
 .product-section-2{
     position: relative;
-    padding: 0 0 70px;
+    /* padding: 0 0 70px; */
 }
 
 /*---- About Section ---*/
@@ -6271,11 +6293,15 @@ z-index: 1999 !important;
 /* 📱 Mobile Fix */
 @media (max-width: 768px) {
   .hero-img {
-    object-fit: contain !important;
+    object-fit: cover !important;
+    padding: 8px;
+   border-radius: 13px;
   }
 
   .hero-section {
     height: 25vh !important;
+    margin-top: 45px !important;
+    margin-bottom: 30px !important;
   }
 }  
 

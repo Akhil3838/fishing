@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   getCartApi,
   placeOrderApi,
@@ -13,6 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import SelectAddress from "../components/SelectedAddress";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { updateAddressResponseContext } from "../context/Contextshare";
 
 function CheckoutClient() {
   const [cart, setCart] = useState([]);
@@ -33,7 +34,7 @@ const [shippingCharge, setShippingCharge] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [coupon_id, setCouponId] = useState("");
   const [isDeliverable, setIsDeliverable] = useState(true);
-
+ const{ updateAddressResponse } = useContext(updateAddressResponseContext);
   useEffect(() => {
     if (typeof window !== "undefined") {
       cartItem();
@@ -46,7 +47,7 @@ useEffect(() => {
   if (selectedAddress) {
     handleShipping(selectedAddress);
   }
-}, [selectedAddress]);
+}, [selectedAddress, updateAddressResponse]);
   const cartItem = async () => {
     if (typeof window === "undefined") return;
 

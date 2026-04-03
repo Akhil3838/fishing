@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   addAddressApi,
   DeleteAddressApi,
@@ -8,10 +8,13 @@ import {
 } from "../services/allApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { updateAddressResponseContext } from "../context/Contextshare";
 function SelectAddress({ onSelectAddress }) {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+    const { setUpdateAddressResponse } = useContext(updateAddressResponseContext);
+
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -24,6 +27,7 @@ function SelectAddress({ onSelectAddress }) {
   });
   const [token, setToken] = useState(null);
 
+
   /* ------------------ GET TOKEN ------------------ */
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -31,6 +35,7 @@ function SelectAddress({ onSelectAddress }) {
     }
   }, []);
 
+  
   /* ------------------ FETCH ADDRESSES ------------------ */
   useEffect(() => {
     if (token) fetchAddresses();
@@ -76,6 +81,7 @@ function SelectAddress({ onSelectAddress }) {
         : await addAddressApi(requestData, reqHeader);
 
       if (response.status === 200) {
+        setUpdateAddressResponse(response.data);
         toast.success(
           isEditing ? "Address updated successfully!" : "Address saved successfully!",
           { position: "top-center", autoClose: 1000, theme: "colored" }

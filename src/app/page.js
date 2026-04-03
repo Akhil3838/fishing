@@ -228,6 +228,18 @@ const [category, setCategory] = useState([]);
             <Newproducts activeCategory={activeCategory} />
           </div>
         </div>
+<div className="container">
+                  <div className="row">
+              <div className="col-md-6">
+                  {/* <h2 className="sec_titles">Hot Item</h2> */}
+              </div>
+              <div className="col-md-6 text-end">
+  <a href={`/shop/${activeCategory || "all"}`} className="fisht-btn">
+    View all products <i className="nss-long-arrow-right1"></i>
+  </a>            </div>
+          </div>
+  
+</div>
       </section>
       {/* <!-- Product End --> */}
          <div>
