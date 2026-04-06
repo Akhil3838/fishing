@@ -7,6 +7,7 @@ import Header from "@/app/components/Header";
 import ShopSidebar from "@/app/components/shop/ShopSidebar";
 import ShopProducts from "@/app/components/shop/ShopProducts";
 import { getAllProduct } from "@/app/services/allApi";
+import Cookies from "js-cookie";
 
 function ShoppingContent() {
   const [products, setProducts] = useState([]);
@@ -35,7 +36,7 @@ function ShoppingContent() {
     sortValue = "newtoOld",
     variants = { variant_attribute: [], variant_option: [] },
   ) => {
-    const token = sessionStorage.getItem("token");
+    const token = Cookies.get("token");
 
     const reqHeader = {
       "Content-Type": "application/json",

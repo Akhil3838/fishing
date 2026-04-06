@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { addAddressApi, DeleteAddressApi, getAlladdressApi, updateAddressApi } from "../services/allApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 function Editaddress() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ function Editaddress() {
 
   const [addresses, setAddresses] = useState([]);
   const [isEditing, setIsEditing] = useState(false); // Track if updating or adding new
-  const token = sessionStorage.getItem("token");
+  const token = Cookies.get("token");;
 
   useEffect(() => {
     fetchAddresses();

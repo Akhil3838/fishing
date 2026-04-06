@@ -1,6 +1,7 @@
 import { orderDetailsApi } from "@/app/services/allApi";
 import React, { useEffect, useState } from "react";
 // import { orderDetailsApi } from "../services/allApi";
+import Cookies from "js-cookie";
 
 function Order() {
   const [orders, setOrders] = useState([]);
@@ -8,8 +9,7 @@ function Order() {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const token = sessionStorage.getItem("token");
-
+      const token =  Cookies.get("token");
       const reqHeader = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

@@ -7,6 +7,7 @@ import {
   updateResponseContext,
 } from "@/app/context/Contextshare";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 function CartItem({ cart, setCart }) {
   const [quantities, setQuantities] = useState({});
@@ -41,7 +42,7 @@ function CartItem({ cart, setCart }) {
 
   const updateCartQuantity = async (id, quantity) => {
     setLoadingItems((prev) => [...new Set([...prev, id])]);
-    const token = sessionStorage.getItem("token");
+    const token = Cookies.get("token");
     const formData = new FormData();
     formData.append("cart_item_id", id);
     formData.append("quantity", quantity);

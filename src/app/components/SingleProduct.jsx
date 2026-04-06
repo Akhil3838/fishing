@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 function SingleProduct({ product, variants, onPriceChange,onVariantChange }) {
   const [selectedVariants, setSelectedVariants] = useState({});
@@ -38,14 +39,14 @@ function SingleProduct({ product, variants, onPriceChange,onVariantChange }) {
 console.log(variants);
 
   const handleBuyNow = async (product_id, sku_id, qty) => {
-    const token = sessionStorage.getItem("token");
+    const token = Cookies.get("token");
 
     // Redirect to login if no token
-    if (!token) {
-      router.push("/login");
-      return; // Early return to avoid nesting
-    }
-
+if (!token) {
+  localStorage.setItem("redirectAfterLogin", window.location.href);
+  router.push("/login");
+  return;
+}
     const formData = new FormData();
     formData.append("product_id", product_id);
     formData.append("quantity", qty);

@@ -7,6 +7,7 @@ import { loginApi } from "../services/allApi";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Cookies from "js-cookie";
 
 function Login() {
   const router = useRouter();
@@ -44,8 +45,7 @@ function Login() {
       const result = await loginApi({ otp, session_id, user_id });
       console.log("otp response", result);
 
-      sessionStorage.setItem("token", result.data.token);
-
+  Cookies.set("token", result.data.token, { expires: 2 });
       console.log(result);
 
       if (result.status === 200) {
@@ -55,9 +55,16 @@ function Login() {
           theme: "colored",
         });
 
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
+       setTimeout(() => {
+  const redirectUrl = localStorage.getItem("redirectAfterLogin");
+
+  if (redirectUrl) {
+    localStorage.removeItem("redirectAfterLogin");
+    router.push(redirectUrl);
+  } else {
+window.location.href = "/"; 
+ }
+}, 2000);
       } else {
         toast.error("Invalid OTP!", {
           position: "top-center",

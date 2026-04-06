@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 function CartSidebar({ summary }) {
-  const token = sessionStorage.getItem("token");
+  const token = Cookies.get("token");
   const router = useRouter();
 
   const handleCheckout = (e) => {
@@ -11,7 +12,9 @@ function CartSidebar({ summary }) {
     if (token) {
       router.push("/checkout");
     } else {
-      router.push("/login");
+     localStorage.setItem("redirectAfterLogin", "/checkout");
+
+    router.push("/login");
     }
   };
 

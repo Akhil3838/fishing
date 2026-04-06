@@ -8,6 +8,7 @@ import Editaddress from "../components/profile/Editaddress";
 import Order from "../components/profile/Order";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Cookies from "js-cookie";
 // import Order from ".../components/Order";
 
 function Profile() {
@@ -16,7 +17,9 @@ function Profile() {
   //  const{updateUserResponse}=useContext(profileUpdateResponseContext)
 
   const getUser = async () => {
-    const token = sessionStorage.getItem("token");
+  const token = Cookies.get("token");
+  console.log(token);
+  
     const reqHeader = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

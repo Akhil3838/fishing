@@ -9,6 +9,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateAddressResponseContext } from "../context/Contextshare";
+import Cookies from "js-cookie";
+
 function SelectAddress({ onSelectAddress }) {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -31,7 +33,7 @@ function SelectAddress({ onSelectAddress }) {
   /* ------------------ GET TOKEN ------------------ */
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setToken(sessionStorage.getItem("token"));
+      setToken(Cookies.get("token"));
     }
   }, []);
 

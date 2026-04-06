@@ -10,6 +10,7 @@ import {
 } from "../context/Contextshare";
 import Categorybar from "./Categorybar";
 import GoogleTranslate from "./GoogleTranslate";
+import Cookies from "js-cookie";
 
 function Header() {
   const [token, setToken] = useState(null);
@@ -37,7 +38,8 @@ function Header() {
     const formData = new FormData();
     formData.append("session_id", browserId);
 
-    const token = sessionStorage.getItem("token");
+const token = Cookies.get("token");
+console.log(token);
 
     const reqHeader = {
       Authorization: `Bearer ${token}`,
@@ -54,9 +56,8 @@ function Header() {
     }
   };
   useEffect(() => {
-    const storedToken = sessionStorage.getItem("token");
-    setToken(storedToken);
-    cartItem();
+const storedToken = Cookies.get("token");
+setToken(storedToken);    cartItem();
   }, [deleteCartResponse, addCartResponse]);
 
   const handleLogout = async (e) => {
@@ -73,7 +74,7 @@ function Header() {
       console.error("Error during logout:", error);
     }
 
-    sessionStorage.removeItem("token");
+Cookies.remove("token");
     setToken(null);
     router.push("/login");
   };

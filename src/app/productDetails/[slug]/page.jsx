@@ -8,6 +8,8 @@ import SingleProduct from "../../components/SingleProduct";
 import { getSignleProduct, addReviewApi } from "@/app/services/allApi";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+
 
 function ProductDetails() {
   const params = useParams();
@@ -27,7 +29,7 @@ const [reqBody, setReqBody] = useState({
 
   useEffect(() => {
     async function fetchProduct() {
-      const token = sessionStorage.getItem("token");
+      const token = Cookies.get("token");
       const reqHeader = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -72,7 +74,7 @@ const [reqBody, setReqBody] = useState({
       return;
     }
 
-    const token = sessionStorage.getItem("token");
+    const token =  Cookies.get("token");
     const reqHeader = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",

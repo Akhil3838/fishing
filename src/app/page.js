@@ -180,6 +180,60 @@ const [category, setCategory] = useState([]);
 </section>
 {/* Category End */}
 
+{/* <!-- Discount Start --> */}
+<section
+  className="discount-section-3"
+  style={{ backgroundImage: 'url(assets/images/1.png)' }}
+>
+  <Offer/>
+</section>
+{/* <!-- Discount End --> */}
+
+
+{/* <!-- Hot Start --> */}
+<section className="hot-product-section">
+    <div className="container">
+        <div className="row">
+            <div className="col-md-6">
+                <h2 className="sec_titles">Hot Item</h2>
+            </div>
+            <div className="col-md-6 text-end">
+                <a href="/shop/all" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
+            </div>
+        </div>
+
+
+<Hotproduct/>
+
+
+    </div>
+</section>
+{/* <!-- Hot End --> */}
+
+
+         <div>
+    <VideoBanner/>
+   </div>
+
+        {/* <!-- About Start --> */}
+
+<AboutSection/>
+{/* <!-- About End --> */}
+
+{/* <!-- Gallery Start --> */}
+<section className="gallery-section">
+    <div className="container-fluid">
+        <div className="row">
+            <div className="col-md-12 text-center">
+                <h2 className="sec_titles">Our Gallery</h2>
+            </div>
+        </div>
+        <Gallery/>
+    </div>
+</section>
+{/* <!-- Gallery End --> */}
+
+
    {/* <!-- new Product Start --> */}
       <section className="product-section-2 mt-4">
         <div className="container">
@@ -242,60 +296,8 @@ const [category, setCategory] = useState([]);
 </div>
       </section>
       {/* <!-- Product End --> */}
-         <div>
-    <VideoBanner/>
-   </div>
-
-        {/* <!-- About Start --> */}
-
-<AboutSection/>
-{/* <!-- About End --> */}
-
-{/* <!-- Gallery Start --> */}
-<section className="gallery-section">
-    <div className="container-fluid">
-        <div className="row">
-            <div className="col-md-12 text-center">
-                <h2 className="sec_titles">Our Gallery</h2>
-            </div>
-        </div>
-        <Gallery/>
-    </div>
-</section>
-{/* <!-- Gallery End --> */}
 
 
-
-
-{/* <!-- Discount Start --> */}
-<section
-  className="discount-section-3"
-  style={{ backgroundImage: 'url(assets/images/1.png)' }}
->
-  <Offer/>
-</section>
-{/* <!-- Discount End --> */}
-
-
-{/* <!-- Hot Start --> */}
-<section className="hot-product-section">
-    <div className="container">
-        <div className="row">
-            <div className="col-md-6">
-                <h2 className="sec_titles">Hot Item</h2>
-            </div>
-            <div className="col-md-6 text-end">
-                <a href="/shop/all" className="fishto-btn">View all products <i className="nss-long-arrow-right1"></i></a>
-            </div>
-        </div>
-
-
-<Hotproduct/>
-
-
-    </div>
-</section>
-{/* <!-- Hot End --> */}
 
 {/* <!-- Client Start --> */}
 {/* Client Start */}

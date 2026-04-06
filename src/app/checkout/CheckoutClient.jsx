@@ -14,6 +14,7 @@ import SelectAddress from "../components/SelectedAddress";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { updateAddressResponseContext } from "../context/Contextshare";
+import Cookies from "js-cookie";
 
 function CheckoutClient() {
   const [cart, setCart] = useState([]);
@@ -61,7 +62,7 @@ useEffect(() => {
     formData.append("session_id", browserId);
     if (cartType) formData.append("cart_type", cartType);
 
-    const token = sessionStorage.getItem("token");
+   const token = Cookies.get("token");
     if (!token) return;
 
     const reqHeader = {
@@ -94,7 +95,7 @@ useEffect(() => {
     setIsProcessing(true);
 
     const token =
-      typeof window !== "undefined" ? sessionStorage.getItem("token") : null;
+      typeof window !== "undefined" ?  Cookies.get("token") : null;
     const reqHeader = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -144,7 +145,7 @@ formData.append("shipping_charge", shippingCharge);
     formData.append("shipping_charge", shippingCharge);
 
 
-    const token = sessionStorage.getItem("token");
+    const token =  Cookies.get("token");
     if (!token) {
       toast.error("⚠️ Please login to apply coupon");
       return;
@@ -213,7 +214,7 @@ formData.append("shipping_charge", shippingCharge);
       handler: async function (response) {
         const token =
           typeof window !== "undefined"
-            ? sessionStorage.getItem("token")
+            ?  Cookies.get("token")
             : null;
         const reqHeader = {
           "Content-Type": "application/json",
@@ -294,7 +295,7 @@ formData.append("shipping_charge", shippingCharge);
   };
 
 const handleShipping = async () => {
-  const token = sessionStorage.getItem("token");
+  const token =  Cookies.get("token");
 
   const reqHeader = {
     "Content-Type": "application/json",

@@ -6,6 +6,7 @@ import CartItem from '../components/cartitem/CartItem';
 import CartSidebar from '../components/cartitem/CartSidebar';
 import { getCartApi } from '../services/allApi';
 import { deleteCartResponseContext, updateResponseContext } from '../context/Contextshare';
+import Cookies from "js-cookie";
 
 function Cart() {
   const { deleteCartResponse } = useContext(deleteCartResponseContext);
@@ -35,7 +36,8 @@ function Cart() {
       const formData = new FormData();
       formData.append('session_id', browserId);
 
-      const token = isClient ? sessionStorage.getItem('token') : null;
+// ✅ get token from cookies
+const token = isClient ? Cookies.get("token") : null;
       const reqHeader = token ? { Authorization: `Bearer ${token}` } : {};
 
       try {

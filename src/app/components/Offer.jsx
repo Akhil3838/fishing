@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { OfferproductApi } from "../services/allApi";
 import { useRouter } from "next/navigation"; // for navigation
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 // Import your functions here (or define them inside this component)
 import { addToCartApi } from "../services/allApi";
@@ -24,7 +25,7 @@ function Offer() {
 
   // ✅ Buy Now Function
   const handleBuyNow = async (product_id, sku_id, qty) => {
-    const token = sessionStorage.getItem("token");
+    const token = Cookies.get("token");
 
     if (!token) {
       router.push("/login");
@@ -71,7 +72,7 @@ function Offer() {
 
   // ✅ Add To Cart Function
   const handleAddToCart = async (product_id, sku_id, qty) => {
-    const token = sessionStorage.getItem("token");
+    const token = Cookies.get("token");
 
     if (!localStorage.getItem("browser_id")) {
       const browserId = Date.now() + Math.random().toString(36).substr(2, 10);

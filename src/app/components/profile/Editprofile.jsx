@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 // import { profileUpdateResponseContext } from '../context/Contextshare';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 function Editprofile({ user }) {
   const [showModal, setShowModal] = useState(false);
@@ -25,7 +26,7 @@ function Editprofile({ user }) {
 
   // Handle save changes (You can modify this function to update data in your backend)
   const handleSave = async () => {
-    const token = sessionStorage.getItem("token");
+    const token =  Cookies.get("token");
     const reqHeader = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
