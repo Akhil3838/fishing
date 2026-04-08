@@ -1,7 +1,7 @@
 import Script from "next/script";
 import Contextshare from "./context/Contextshare";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 
 export const metadata = {
@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
 
         {/* ✅ Context Provider */}
         <Contextshare>{children}</Contextshare>
- <ToastContainer
+ {/* <ToastContainer
           position="top-right"
           autoClose={2000}
           pauseOnHover={false}
@@ -70,7 +70,7 @@ export default function RootLayout({ children }) {
           closeOnClick
           draggable
           theme="colored"
-        />
+        /> */}
         {/* Razorpay Script */}
         <Script
           src="https://cdn.razorpay.com/widgets/affordability/affordability.js"

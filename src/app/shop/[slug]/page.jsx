@@ -32,7 +32,7 @@ function ShoppingContent() {
     page,
     brands,
     minPrice = 0,
-    maxPrice = 10000,
+    maxPrice = 50000,
     sortValue = "newtoOld",
     variants = { variant_attribute: [], variant_option: [] },
   ) => {
@@ -89,21 +89,22 @@ function ShoppingContent() {
   //     variantSelections
   //   );
   // }, [page]);
-  useEffect(() => {
-    setPage(1);
-  }, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
+useEffect(() => {
+  setPage(1);
 
-  useEffect(() => {
+  const delayDebounce = setTimeout(() => {
     allProducts(
-      page,
+      1,
       selectedBrands,
       priceRange[0],
       priceRange[1],
       sortValue,
-      variantSelections,
+      variantSelections
     );
-  }, [page, selectedBrands, priceRange, sortValue, variantSelections]);
+  }, 700);
 
+  return () => clearTimeout(delayDebounce);
+}, [slug, selectedBrands, priceRange, sortValue, variantSelections]);
   return (
     <>
       <Header />
@@ -166,6 +167,7 @@ function ShoppingContent() {
         </div>
       </section>
       <Footer />
+      
     </>
   );
 }

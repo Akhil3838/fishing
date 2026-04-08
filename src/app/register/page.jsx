@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
-import { loginApi } from "../services/allApi";
 import "react-toastify/dist/ReactToastify.css";
+import { loginApi } from "../services/allApi";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Cookies from "js-cookie";
@@ -55,16 +55,19 @@ function Login() {
           theme: "colored",
         });
 
-       setTimeout(() => {
+setTimeout(() => {
   const redirectUrl = localStorage.getItem("redirectAfterLogin");
 
   if (redirectUrl) {
     localStorage.removeItem("redirectAfterLogin");
-    router.push(redirectUrl);
+    router.replace(redirectUrl);
   } else {
-window.location.href = "/"; 
+router.replace("/");
+setTimeout(() => {
+ window.location.href = "/";
+}, 100); 
  }
-}, 2000);
+}, 1500);
       } else {
         toast.error("Invalid OTP!", {
           position: "top-center",

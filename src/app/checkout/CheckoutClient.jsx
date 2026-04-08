@@ -397,10 +397,13 @@ const handleShipping = async () => {
               <div className="d-flex justify-content-between">
                 <p>
                   Discount on MRP{" "}
-                  <span className="text-primary">Know More</span>
+                  {/* <span className="text-primary">Know More</span> */}
                 </p>
-                <p className="text-success">-₹{CouponSummary.discount}</p>
-              </div>
+<p className="text-success">
+  {CouponSummary.discount > 0
+    ? `-₹${CouponSummary.discount}`
+    : `₹0`}
+</p>              </div>
               {/* <div className="d-flex justify-content-between">
                 <p>
                   Platform Fee <span className="text-primary">Know More</span>
@@ -409,7 +412,8 @@ const handleShipping = async () => {
               </div> */}
               <div className="d-flex justify-content-between">
                 <p>
-                  Shipping Fee <span className="text-primary">Know More</span>
+                  Shipping Fee 
+                  {/* <span className="text-primary">Know More</span> */}
                 </p>
                 <p className="text-success">+₹{shippingCharge}</p>
               </div>

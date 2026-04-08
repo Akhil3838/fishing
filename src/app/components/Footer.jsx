@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
 import { bannerApi } from "../services/allApi";
+import Subscribe from "./footer/Subscribe";
 
 function Footer() {
   const [link, setLink] = useState([]);
@@ -168,7 +169,8 @@ function Footer() {
             </div>
 
             {/* Subscribe Section */}
-            <div className="col-lg-3 col-md-6">
+            <Subscribe />
+            {/* <div className="col-lg-3 col-md-6">
               <aside className="widget widget_mc4wp_form_widget">
                 <h3 className="widget-title">Subscribe</h3>
 
@@ -185,7 +187,7 @@ function Footer() {
               <p>
                 Get the latest updates via email. Any time you may unsubscribe
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Copyright */}

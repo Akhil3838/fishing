@@ -45,7 +45,7 @@ function Register() {
         });
 
         setTimeout(() => {
-          router.push("/register");
+router.replace("/register");
         }, 2000);
       } else {
         toast.error(result.data?.error || "Something went wrong!", {

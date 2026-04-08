@@ -59,11 +59,11 @@ function Brands() {
   return (
     <div className="row">
       <div className="col-md-12">
-        <div className="client-slider owl-carousel">
-          {brands.map((item) => (
-            <a href="#" key={item.id} title={item.title}>
-              <img
-                src={item.logo_url}
+<div className="client-slider owl-carousel">
+              {brands.map((item) => (
+<a key={item.id} title={item.title}>             
+   <img 
+           src={item.logo_url}
                 alt={item.title || "logo"}
                 style={{
                   width: "160px",

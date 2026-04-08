@@ -1,5 +1,5 @@
-// 'use client';
-import React, { useState, useEffect } from "react";
+'use client';
+import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import {
   getPriceDetailsApi,
@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { addResponseContext } from "../context/Contextshare";
 
 function SingleProduct({ product, variants, onPriceChange,onVariantChange }) {
   const [selectedVariants, setSelectedVariants] = useState({});
@@ -26,6 +27,8 @@ function SingleProduct({ product, variants, onPriceChange,onVariantChange }) {
   const [quantity, setQuantity] = useState(1);
   const [expandedVariants, setExpandedVariants] = useState({});
   const router = useRouter();
+    const { setAddcartResponse } = useContext(addResponseContext);
+  
 
   const imagesArray = Object.values(product?.images || {});
   console.log(product);
@@ -42,16 +45,25 @@ console.log(variants);
     const token = Cookies.get("token");
 
     // Redirect to login if no token
-if (!token) {
-  localStorage.setItem("redirectAfterLogin", window.location.href);
-  router.push("/login");
-  return;
-}
+     if (!localStorage.getItem("browser_id")) {
+      const browserId = Date.now() + Math.random().toString(36).substr(2, 10);
+      localStorage.setItem("browser_id", browserId);
+    }
+    const browserId = localStorage.getItem("browser_id");
+// if (!token) {
+// localStorage.setItem(
+//   "redirectAfterLogin",
+//   `/checkout?buy=true&product_id=${product_id}&sku_id=${sku_id}&qty=${qty}cart_type=buy`
+// );  router.push("/login");
+//   return;
+// }
     const formData = new FormData();
     formData.append("product_id", product_id);
     formData.append("quantity", qty);
     formData.append("sku_id", sku_id);
     formData.append("cart_type", "buy");
+    formData.append("session_id", browserId);
+
 
     const reqHeader = {
       ...(token && { Authorization: `Bearer ${token}` }), // Conditional header
@@ -60,6 +72,14 @@ if (!token) {
     try {
       const result = await addToCartApi(formData, reqHeader);
       console.log("cart response", result);
+      if (!token) {
+localStorage.setItem(
+  "redirectAfterLogin",
+  `/checkout?buy=true&product_id=${product_id}&sku_id=${sku_id}&qty=${qty}cart_type=buy`
+);  router.push("/login");
+  return;
+}
+
 
       if (result.status === 200) {
         const cartType = result?.data?.cartType || "default"; // Fallback value
@@ -92,7 +112,7 @@ if (!token) {
     }
   };
   const handleAddToCart = async (product_id, sku_id, qty) => {
-    const token = sessionStorage.getItem("token");
+    const token = Cookies.get("token");
 
     if (!localStorage.getItem("browser_id")) {
       const browserId = Date.now() + Math.random().toString(36).substr(2, 10);
@@ -111,15 +131,25 @@ if (!token) {
 
     try {
       const result = await addToCartApi(formData, reqHeader);
-      if (result.status === 200) {
-        // toast.success('Item added to cart!', {
-        //   position: 'top-center',
-        //   autoClose: 3000,
-        //   theme: 'colored',
-        // });
-        router.push("/cart");
-      }
-    } catch (error) {
+      console.log(result);
+      
+if (result.status === 200) {
+  if (result.data.status === true) {
+    // ✅ success case
+    toast.success(result.data.message || "Item added to cart!", {
+      position: "top-center",
+      autoClose: 1000,
+      theme: "colored",
+    });
+  } else {
+    // ⚠️ already in cart or other warning
+    toast.warning(result.data.message || "Already in cart!", {
+      position: "top-center",
+      autoClose: 1500,
+      theme: "colored",
+    });
+  }
+}    } catch (error) {
       console.error("Error adding to cart:", error);
       toast.error("Failed to add item to cart!", {
         position: "top-center",
@@ -799,8 +829,14 @@ const handleVariantSelect = (attribute, optionId) => {
           </div>
         </div>
       </div>
-      <ToastContainer />
-    </>
+<ToastContainer 
+  position="top-center"
+  autoClose={1000}   // 🔥 auto close in 1 second
+  hideProgressBar={false}
+  newestOnTop
+  closeOnClick
+  pauseOnHover
+/>    </>
   );
 }
 
